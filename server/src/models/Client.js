@@ -14,12 +14,26 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       adress: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       city: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      country: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "Argentina",
+      },
+      status: {
+        type: DataTypes.ENUM("active", "inactive"),
+        defaultValue: "active",
         allowNull: false,
       },
     },

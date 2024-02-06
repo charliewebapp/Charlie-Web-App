@@ -8,16 +8,8 @@ module.exports = (sequelize) => {
       autoincrement: true,
       allowNull: false,
       primaryKey: true
-    },
-    productId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    price: {
+    },   
+    totalPrice: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
