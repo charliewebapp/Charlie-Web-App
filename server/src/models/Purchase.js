@@ -21,6 +21,14 @@ module.exports = (sequelize) => {
     transaction: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-    }
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 };
