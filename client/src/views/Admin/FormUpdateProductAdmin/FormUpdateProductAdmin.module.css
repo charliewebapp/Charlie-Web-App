@@ -1,0 +1,54 @@
+/* colores::
+    oscuro: #2e2e2e
+    oscuro rgb: rgb(46, 46, 46)
+    oro: #e7b76e
+    marron: #876f50
+    celeste: #44ede6
+ */
+
+/* .divContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #2e2e2e;
+} */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    background-color: rgba(88, 87, 87, 0.3);
+    padding: 20px;
+    border-radius: 10%;
+}
+
+.container label {
+    display: inline;
+    margin-top: 15px;
+    margin-bottom: 2px;
+}
+
+.container input {
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid rgba(88, 87, 87, 0.3);
+    height: 25px;
+    width: 300px;
+}
+
+
+.container button {
+    margin-top: 10px;
+}
+
+.container select {
+    height: 25px;
+    width: 300px;
+}
+
+.container p {
+    margin: 5px;
+    color: #f5402c;
+    font-size: small;
+}
