@@ -1,6 +1,17 @@
-const { Client } = require("../../db");
+const { Client, Product } = require("../../db");
+const { Op } = require("sequelize");
 
-const deleteProducs = async function () {
+const deleteProducts = async (client, product) => {
+  const clientSearched = await Client.findOne({ where: { name: client } });
+  if (!clientSearched) throw new Error("El cliente no existe.");
+  const clientId = clientSearched.dataValues.id;
 
+  const deletedProduct = await Product.destroy({
+    where: {
+      ClientId: clientId,
+      name: product,
+    },
+  });
+  return deletedProduct;
 };
-module.exports = deleteProducs;
+module.exports = deleteProducts;

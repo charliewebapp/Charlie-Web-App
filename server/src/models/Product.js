@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
       },
       brand: {
         type: DataTypes.STRING,
@@ -21,7 +20,7 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: DataTypes.STRING,
