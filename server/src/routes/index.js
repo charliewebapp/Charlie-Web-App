@@ -6,9 +6,9 @@ const getProductsHandler = require("../handlers/Products/getProductsHandler");
 const router = Router();
 
 //products
-router.get("/product", getProductsHandler);
+router.get("/:client/product", getProductsHandler);
 // router.get("/product/:category", getProductCategoryHandler);
-router.post("/product", postProductsHanlder);
+router.post("/:client/product", postProductsHanlder);
 // router.put("/product", putProductHandler);
 // router.delete("/product", deleteProductHandler);
 // router.get("/category", getProductHandler);

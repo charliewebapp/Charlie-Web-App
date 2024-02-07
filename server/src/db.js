@@ -8,7 +8,6 @@ const { DB_RENDER } = process.env;
 const AdministratorModel = require("./models/administrator");
 const ClientModel = require("./models/Client");
 const ProductModel = require("./models/Product");
-const CategoryModel = require("./models/Category");
 const PurchaseModel = require("./models/Purchase");
 const PurchaseHistoryModel = require("./models/PurchaseHistory");
 const CollaboratorModel = require("./models/Collaborator");
@@ -49,7 +48,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 AdministratorModel(sequelize);
 ClientModel(sequelize);
 ProductModel(sequelize);
-CategoryModel(sequelize);
 PurchaseModel(sequelize);
 PurchaseHistoryModel(sequelize);
 CollaboratorModel(sequelize);
@@ -58,7 +56,6 @@ const {
   Administrator,
   Client,
   Product,
-  Category,
   Purchase,
   PurchaseHistory,
   Collaborator,
@@ -69,7 +66,7 @@ const {
 
 Administrator.belongsTo(Client);
 Product.belongsTo(Client);
-Product.belongsTo(Category);
+// Product.belongsTo(Category);
 Collaborator.belongsTo(Client);
 
 //purchase (falta modelo consumidor de emi)
