@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    justify-content: left;
+    padding: 10px;
+    margin: 10px;
+    width: 100%; /* Opcional: para ocupar todo el ancho del contenedor padre */
+    box-sizing: border-box;
+    background-color: beige;
+    border-radius: 10px;
+}
+
+.button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.DataGrid {
+    display: flex;
+    justify-content: space-around;
+    height: 300px; /* Asegúrate de incluir la unidad de medida (px en este caso) */
+    width: 100%; /* El DataGrid ocupará el 100% del ancho del contenedor */
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(212, 255, 255)
+}

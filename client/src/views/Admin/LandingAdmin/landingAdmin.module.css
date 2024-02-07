@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .formContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .formContainer form div {
+    margin-bottom: 10px;
+  }
+
+  
