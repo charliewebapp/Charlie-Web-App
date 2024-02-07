@@ -1,4 +1,4 @@
-const postClients = require("../controllers/postClients");
+const postClients = require("../../controllers/Clients/postClients");
 
 const postClientsHandler = async function (req, res) {
   try {
