@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       brand: {
         type: DataTypes.STRING,
@@ -33,6 +34,17 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
+        allowNull: false,
+      },
+      category: {
+        type: DataTypes.ENUM(
+          "Tragos",
+          "Cervezas",
+          "Botellas",
+          "Vinos",
+          "Shots",
+          "Sin Alcohol"
+        ),
         allowNull: false,
       },
     },
