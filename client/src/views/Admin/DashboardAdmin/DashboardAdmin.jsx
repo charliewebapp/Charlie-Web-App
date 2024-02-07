@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { DataGrid } from "@mui/x-data-grid";
 
 function DashboardAdmin() {
-    return (
-        <div>DashboardAdmin</div>
-    )
+  return (
+    <>
+      <h1> ADMIN </h1>
+
+      <div>
+        <button> Stock </button>
+        <button> Ventas </button>
+        <button> Empleados </button>
+      </div>
+    </>
+  );
 }
 
-export default DashboardAdmin
+export default DashboardAdmin;
