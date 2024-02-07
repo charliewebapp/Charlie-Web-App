@@ -3,6 +3,8 @@ import style from "./formpostproductAdmin.module.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmin"
+import { postProduct } from '../../../redux/actions'
+
 
 
 
@@ -18,7 +20,7 @@ const categories = [
 
 
 function FormPostProductAdmin() {
-  //! const dispatch = useDispatch() -> para el post del product
+  const dispatch = useDispatch()
   //! const productsState = useSelector(state => state.products) para consultar nombres no repetidos
 
   //local state for input
@@ -71,7 +73,7 @@ function FormPostProductAdmin() {
   const handleSubmit = (event) => {
     event.preventDefault()
     try {
-      // dispatch(postProduct(productData))
+      dispatch(postProduct(productData))
       window.alert("Producto agregado")
       setProductData({
         name: "",
