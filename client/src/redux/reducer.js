@@ -3,6 +3,7 @@ import {
   GET_PRODUCTS,
   POST_PRODUCT,
   UPDATE_PRODUCT,
+  DELETE_PRODUCT,
 } from "./actions-types";
 
 const initialState = {
@@ -29,6 +30,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: [...state.allProducts, payload],
       };
+
+    case DELETE_PRODUCT:
+      const noDeletedProducts = state.allProducts.filter(
+        (product) => product.id !== payload
+      );
+
+      return {
+        ...state,
+        allProducts: noDeletedProducts,
+      };
+
     //! ///////////////CREAR BOLICHE////////////////////
     case POST_BOLICHE:
       return {

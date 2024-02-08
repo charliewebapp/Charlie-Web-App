@@ -4,6 +4,7 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   POST_BOLICHE,
+  DELETE_PRODUCT,
 } from "./actions-types";
 
 export const getProducts = () => {
@@ -60,6 +61,26 @@ export const updateProduct = (productData, idProduct) => {
       }
     } catch (error) {
       window.alert("No se ha actualizado el producto. " + error.message);
+    }
+  };
+};
+
+export const deleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3001/testnati/${id}`
+      );
+      if (data) {
+        dispatch({
+          type: DELETE_PRODUCT,
+          payload: id,
+        });
+      } else {
+        throw new Error("No se ha eliminado el producto");
+      }
+    } catch (error) {
+      window.alert("No se ha eliminado el producto. " + error.message);
     }
   };
 };
