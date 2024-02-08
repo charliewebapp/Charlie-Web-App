@@ -10,6 +10,7 @@ import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmplo
 
 import DashboardSuperA from "./views/SuperAdmin/DashboardSuperA/DashboardSuperA";
 import FormPostClubSuperA from "./views/SuperAdmin/FormPostClubSuperA/FormPostClubSuperA";
+import Profile from "./views/Users/Profile/Profile";
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
         <Route
           path="/superadmin"
-          // element={<LandingSuperA />} // aca va form login //Descomentar al crear
+        // element={<LandingSuperA />} // aca va form login //Descomentar al crear
         />
 
         <Route
@@ -45,7 +46,7 @@ const App = () => {
           element={<FormPostProductAdmin />}
         />
         <Route
-          path="/admin/:clubName/editproduct"
+          path="/admin/:clubName/editproduct/:idProduct"
           element={<FormUpdateProductAdmin />}
         />
 
@@ -64,12 +65,14 @@ const App = () => {
           element={<FormClubProfile />}
         />
 
+        {/* ruta creada para brian test */}
+        <Route
+          path='/:clubName/profile'
+          element={<Profile />}
+        />
         {/*//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USUARIOS -> los componentes no dicen user*/}
         {/* FALTAN IMPORTAR
-        <Route
-          path='/:clubName/landing'
-          element={<Landing />}
-        /> 
+        
         <Route
           path='/:clubName/home'
           element={<Home />}

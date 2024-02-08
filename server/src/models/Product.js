@@ -31,8 +31,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       stock: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        type: DataTypes.ENUM("available", "notavailable"),
+        defaultValue: "available",
         allowNull: false,
       },
       category: {

@@ -1,6 +1,6 @@
 const { Client, Product } = require("../../db");
 
-const putProducts = async (client, product, newData) => {
+const putProducts = async (client, id, newData) => {
   const clientSearched = await Client.findOne({ where: { name: client } });
   if (!clientSearched) throw new Error("El cliente no existe.");
   const clientId = clientSearched.dataValues.id;
@@ -8,19 +8,19 @@ const putProducts = async (client, product, newData) => {
   const updatedProduct = await Product.update(newData, {
     where: {
       ClientId: clientId,
-      name: product,
+      id: id,
     },
   });
 
-  const updatededProduct = await Product.findOne( {
+  const updatededProduct = await Product.findOne({
     where: {
       ClientId: clientId,
-      name: product,
+      id: id,
     },
   });
 
 
-  return  updatededProduct
+  return updatededProduct
 
 };
 
