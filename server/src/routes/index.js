@@ -20,6 +20,8 @@ const deleteControllerHandler = require("../handlers/Collaborators/deleteCollabo
 const getCollaboratorNameHandler = require("../handlers/Collaborators/getCollaboratorNameHandler");
 const putCollaboratorsHandler = require("../handlers/Collaborators/putCollaboratorHandler");
 const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
+const postAdminsHandler = require("../handlers/Administrator/postAdminsHandler");
+const getAllAdminsHandler = require("../handlers/Administrator/getAllAdminsHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
@@ -61,6 +63,9 @@ router.get("/client", postClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
 router.put("/:client", putProductHandler); //pendiente cambiar esta ruta
 //admins
+
+router.get("/administrator", getAllAdminsHandler);
+router.post("/:client/administrator", postAdminsHandler);
 
 //-----------------cliente(boliche)
 //products
