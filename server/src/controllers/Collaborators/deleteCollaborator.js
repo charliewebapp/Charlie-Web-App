@@ -1,11 +1,11 @@
-const { Client, Collaborator } = require("../../db");
+const { Client, Administrator } = require("../../db");
 
-const deleteCollaborator = async (client, user) => {
+const deleteAdmins = async (client, user) => {
   const clientSearched = await Client.findOne({ where: { name: client } });
   if (!clientSearched) throw new Error("El colaborador no existe.");
   const clientId = clientSearched.dataValues.id;
 
-  const deletedProduct = await Collaborator.destroy({
+  const deletedProduct = await Administrator.destroy({
     where: {
       ClientId: clientId,
       id: user,
@@ -14,4 +14,4 @@ const deleteCollaborator = async (client, user) => {
   return deletedProduct;
 };
 
-module.exports = deleteCollaborator;
+module.exports = deleteAdmins;
