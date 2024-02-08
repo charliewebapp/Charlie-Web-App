@@ -20,6 +20,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
+        allProducts: [...state.allProducts, payload]
       }
     default: {
       return { ...state };

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from "./FormUpdateProductAdmin.module.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,12 +24,16 @@ const categories = [
 function FormUpdateProductAdmin() {
     const dispatch = useDispatch()
 
-    //hago un get products acá para ver repetidos, eliminarlo si ya se hace antes
-    // dispatch(getProducts())
-    // const allProductsState = useSelector(state => state.allProducts)
-    // console.log(allProductsState)
 
-    //! activar luego de request al back
+
+
+    //!cuando redux venga cargado solo dejar esto: y activar nombres repetidos - las actions y rutas funcionan (primero crear client)
+    // useEffect(() => {
+    //     dispatch(getProducts())
+    // }, [])
+
+    // const allProductsState = useSelector(state => state.allProducts)
+
     // const { idProduct } = useParams()
     // const productToUpdate = allProductsState.find((product) => product.id === idProduct)
     // const [productData, setProductData] = useState({
@@ -41,6 +45,7 @@ function FormUpdateProductAdmin() {
     //     stock: productToUpdate.stock,
     //     category: productToUpdate.category,
     // })
+
     //!eliminar esto que sigue al conectar con back -> GET PRODUCTS:
     const [productData, setProductData] = useState({
         name: "",
@@ -91,7 +96,7 @@ function FormUpdateProductAdmin() {
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            dispatch(updateProduct(productData))
+            dispatch(updateProduct(productData, idProduct))
             window.alert("Se ha actualizado el producto. ")
             setProductData({
                 name: "",
