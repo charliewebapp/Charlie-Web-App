@@ -12,18 +12,34 @@ function LandingAdmin() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
+  const validation = (userData) => {
+    const errors = {};
+
+    if (!/\S+@\S+/.test(userData.email)) {
+      errors.email = "Debe ser un email válido";
+    }
+    if (userData.email === "") {
+      errors.email = "El email no puede estar vacio";
+    }
+
+    if (userData.password.length < 6 || userData.password.length > 10) {
+      errors.password = "La contraseña debe tener de 6 a 10 caracteres";
+    }
+    return errors;
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserData({
       ...userData,
       [name]: value,
     });
-    // setErrors(
-    //   validation({
-    //     ...userData,
-    //     [name]: value,
-    //   })
-    // );
+    setErrors(
+      validation({
+        ...userData,
+        [name]: value,
+      })
+    );
   };
 
   const togglePasswordVisibility = () => {
@@ -50,6 +66,7 @@ function LandingAdmin() {
               onChange={handleChange}
               required
             />
+            {errors.email && <p className={style.error}>{errors.email}</p>}
           </div>
           <div>
             <label htmlFor="password">Contraseña:</label>
@@ -67,6 +84,7 @@ function LandingAdmin() {
                 className={style.togglePasswordVisibility}
                 onClick={togglePasswordVisibility}
               />
+              {errors.email && <p className={style.error}>{errors.password}</p>}
             </div>
           </div>
           <button type="submit">Iniciar Sesión</button>

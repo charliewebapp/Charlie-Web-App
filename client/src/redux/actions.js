@@ -26,7 +26,7 @@ export const postProduct = (productData) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/testNati/product",
+        "http://localhost:3001/testnati/product",
         productData
       );
       if (data) {
@@ -47,7 +47,7 @@ export const updateProduct = (productData, idProduct) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/testNati/${idProduct}`,
+        `http://localhost:3001/testnati/${idProduct}`,
         productData
       );
       if (data) {
