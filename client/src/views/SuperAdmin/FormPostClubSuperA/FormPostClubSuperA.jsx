@@ -1,9 +1,7 @@
-////////////////form
-
 import React, { useState } from "react";
 import { postBoliche } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
-// import style from "./formpostclubsupera.module.css";
+import style from "./formpostclubsupera.module.css";
 
 function FormPostClubSuperA() {
   const [create, setCreate] = useState({
@@ -30,8 +28,6 @@ function FormPostClubSuperA() {
       }
 
       dispatch(postBoliche(createBoliche));
-
-      console.log(createBoliche, "ACA");
       alert("Boliche creado con éxito");
     } catch (error) {
       console.error(error);
@@ -39,7 +35,7 @@ function FormPostClubSuperA() {
   };
 
   const handlerSubmit = (e) => {
-    e.preventDefault(); // Evitar que el formulario se envíe automáticamente
+    e.preventDefault();
     sendFormData(create);
   };
 
@@ -48,29 +44,8 @@ function FormPostClubSuperA() {
     setCreate({ ...create, [name]: value });
   };
 
-  // const handleImageChange = (e) => {
-  //   const selectedImage = e.target.files[0];
-  //   setCreate({ ...create, image: selectedImage });
-  // };
-
-  // const handleImageChange = (e) => {
-  //   // setCreate({ ...create, image: e.target.files[0] });
-  //   const formData = new FormData();
-  //   formData.append("file", e.target.files[0]);
-
-  //   console.log(e.target.files[0], "Soy la imagen");
-
-  //   return formData;
-  // };
-
-  // const onFileChange = (e) =>{
-  //   setCreate({
-  //     ...create, [image]:
-  //   })
-  // }
-
   return (
-    <div>
+    <React.Fragment>
       <form onSubmit={handlerSubmit}>
         <input
           type="text"
@@ -100,7 +75,7 @@ function FormPostClubSuperA() {
 
         <button type="submit">CREAR</button>
       </form>
-    </div>
+    </React.Fragment>
   );
 }
 
