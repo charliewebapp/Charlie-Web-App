@@ -11,6 +11,7 @@ const ProductModel = require("./models/Product");
 const PurchaseModel = require("./models/Purchase");
 const PurchaseHistoryModel = require("./models/PurchaseHistory");
 const CollaboratorModel = require("./models/Collaborator");
+const UserModel = require("./models/User");
 
 const sequelize = new Sequelize(DB_RENDER, {
   logging: false,
@@ -51,6 +52,7 @@ ProductModel(sequelize);
 PurchaseModel(sequelize);
 PurchaseHistoryModel(sequelize);
 CollaboratorModel(sequelize);
+UserModel(sequelize)
 
 const {
   Administrator,
@@ -59,7 +61,7 @@ const {
   Purchase,
   PurchaseHistory,
   Collaborator,
-} = sequelize.models;
+User} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
