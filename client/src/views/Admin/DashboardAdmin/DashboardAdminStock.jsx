@@ -1,79 +1,85 @@
 import * as React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, updateProduct } from "../../../redux/actions";
+import { useParams } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import style from "./dashboardAdmin.module.css";
 
-const rows = [
-  {
-    id: 1,
-    Categoria: "Tragos",
-    Bebida: "Mojito",
-    Precio: "$1200",
-    Stock: "No",
-  },
-  {
-    id: 2,
-    Categoria: "Tragos",
-    Bebida: "Fernet Branca",
-    Precio: "$1200",
-    Stock: "Si",
-  },
-  {
-    id: 3,
-    Categoria: "Tragos",
-    Bebida: "Fernet Branca",
-    Precio: "$1200",
-    Stock: "Si",
-  },
-  {
-    id: 4,
-    Categoria: "Sin alcohol",
-    Bebida: "Sprite",
-    Precio: "$1200",
-    Stock: "Si",
-  },
-];
+function DashboardAdminStock() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const columns = [
-  { field: "Categoria", headerName: "Categoria", width: 250 },
-  { field: "Bebida", headerName: "Bebida", width: 250 },
-  { field: "Precio", headerName: "Precio", width: 250 },
-  { field: "Stock", headerName: "Stock", width: 250 },
-  {
-    field: "actions",
-    headerName: "Acciones",
-    width: 250,
-    renderCell: (params) => (
-      <div>
-        <button className={style.button} onClick={() => handleEdit(params.row)}>
-          Editar
-        </button>
-        <button
-          className={style.button}
-          onClick={() => handleDelete(params.row)}
-        >
-          Eliminar
-        </button>
-      </div>
-    ),
-  },
-];
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
-function handleEdit(row) {
-  console.log("Editar:", row);
-  // Aquí puedes implementar la lógica para editar la fila
-}
+  const allProductsState = useSelector((state) => state.allProducts);
+  console.log("todos los productos", allProductsState);
 
-function handleDelete(row) {
-  console.log("Eliminar:", row);
-  // Aquí puedes implementar la lógica para eliminar la fila
-}
+  const rows = allProductsState.map((prod) => {
+    return {
+      id: prod.id,
+      name: prod.name,
+      brand: prod.brand,
+      image: prod.image,
+      description: prod.description,
+      price: prod.price,
+      stock: prod.stock,
+      category: prod.category, //No se si asi, veremos
+    };
+  });
 
-function handleAddStock() {
-  console.log("Agregar");
-  // Aquí puedes implementar la lógica para eliminar la fila
-}
+  const columns = [
+    { field: "id", headerName: "Id", width: 100 },
+    { field: "name", headerName: "Nombre", width: 100 },
+    { field: "brand", headerName: "Marca", width: 100 },
+    { field: "image", headerName: "Imagen", width: 100 },
+    { field: "description", headerName: "Descripción", width: 250 },
+    { field: "price", headerName: "Precio", width: 80 },
+    { field: "stock", headerName: "Stock", width: 80 },
+    { field: "category", headerName: "Categoría", width: 100 },
+    {
+      field: "actions",
+      headerName: "Acciones",
+      width: 250,
+      renderCell: (params) => (
+        <div>
+          <Link to={`/admin/testnati/editproduct/${params.row.id}`}>
+            <button
+              className={style.button}
+              onClick={() => handleEdit(params.row)}
+            >
+              Editar{" "}
+            </button>
+          </Link>
+          <button
+            className={style.button}
+            onClick={() => handleDelete(params.row)}
+          >
+            Eliminar
+          </button>
+        </div>
+      ),
+    },
+  ];
 
-function DashboardAdmin() {
+  function handleEdit(row) {
+    console.log("Editar:", row);
+  }
+
+  function handleDelete(row) {
+    console.log("Eliminar:", row);
+    // Aquí puedes implementar la lógica para eliminar la fila
+  }
+
+  function handleAddStock() {
+    console.log("Agregar");
+    // Aquí puedes implementar la lógica para eliminar la fila
+  }
+
   return (
     <>
       <div className={style.container}>
@@ -90,4 +96,4 @@ function DashboardAdmin() {
   );
 }
 
-export default DashboardAdmin;
+export default DashboardAdminStock;
