@@ -4,12 +4,18 @@ import {
   POST_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
+  POST_ADMIN,
+  GET_BOLICHES,
 } from "./actions-types";
 
 const initialState = {
   boliches: [],
   allBoliches: [],
+
   allProducts: [],
+
+  administrators: [],
+  allAdministrators: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,11 +48,30 @@ const reducer = (state = initialState, action) => {
       };
 
     //! ///////////////CREAR BOLICHE////////////////////
+
     case POST_BOLICHE:
       return {
         ...state,
         boliches: [...state.boliches, payload],
         allBoliches: [...state.allBoliches, payload],
+      };
+
+    //! ///////////////CREAR ADMINISTRATORS////////////////////
+
+    case POST_ADMIN:
+      return {
+        ...state,
+        administrators: [...state.administrators, payload],
+        allAdministrators: [...state.allAdministrators, payload],
+      };
+
+    //! ///////////////TRAER BOLICHES////////////////////
+
+    case GET_BOLICHES:
+      return {
+        ...state,
+        boliches: payload,
+        allBoliches: payload,
       };
 
     default:

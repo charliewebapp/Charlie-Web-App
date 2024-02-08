@@ -11,6 +11,7 @@ import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmplo
 
 import DashboardSuperA from "./views/SuperAdmin/DashboardSuperA/DashboardSuperA";
 import FormPostClubSuperA from "./views/SuperAdmin/FormPostClubSuperA/FormPostClubSuperA";
+import FormPostAdminSA from "./views/SuperAdmin/FormPostAdminSA/FormPostAdminSA";
 import Profile from "./views/Users/Profile/Profile";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
@@ -53,6 +54,12 @@ const App = () => {
           // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
           element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseña de administrador
+        />
+
+        <Route
+          // http://localhost:5173/superadmin/addadmin
+          path="/superadmin/addadmin"
+          element={<FormPostAdminSA />}
         />
 
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS DEL ADMINISTRADOR */}
