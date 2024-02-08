@@ -5,6 +5,9 @@ const getProductsHandler = require("../handlers/Products/getProductsHandler");
 const getProductCategoryHandler = require("../handlers/Products/getProductsCategoryHandler");
 const deleteProductHandler = require("../handlers/Products/deleteProductsHandler");
 const putProductHandler = require("../handlers/Products/putProductHandler");
+const postUserHandler = require("../handlers/Users/postUserHandler");
+const getUsersHandler = require("../handlers/Users/getUsersHandler");
+
 
 
 const router = Router();
@@ -20,6 +23,8 @@ router.get("/:client/:category", getProductCategoryHandler);
 router.post("/:client/product", postProductsHanlder);
 router.put("/:client/:product", putProductHandler);
 router.delete("/:client/:product", deleteProductHandler);
+router.post("/user", postUserHandler);
+router.get("/user", getUsersHandler);
 //colaborador
 
 //--------------colaborador
