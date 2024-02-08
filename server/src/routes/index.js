@@ -10,6 +10,10 @@ const getCollaboratorHandler = require("../handlers/Collaborators/getCollaborato
 const deleteControllerHandler = require("../handlers/Collaborators/deleteCollaboratorHandler");
 const getCollaboratorNameHandler = require("../handlers/Collaborators/getCollaboratorNameHandler");
 const putCollaboratorsHandler = require("../handlers/Collaborators/putCollaboratorHandler");
+const postQrHandler = require("../handlers/Qrs/postQrHandler");
+const getQrHandler = require("../handlers/Qrs/getQrHandler");
+const putQrHandler = require("../handlers/Qrs/putQrHandler");
+const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
@@ -42,6 +46,10 @@ router.delete("/:client/collaborator/:user", deleteControllerHandler);
 //--------------colaborador
 
 //--------------consumidor
+router.post("/:client/collaborator/qr", postQrHandler);
+router.get("/:client/collaborator/qr/:uuid", getQrHandler);
+router.put("/:client/collaborator/qr/:uuid", putQrHandler);
+router.delete("/:client/collaborator/qr/:uuid", deleteQrHandler);
 
 module.exports = router
 

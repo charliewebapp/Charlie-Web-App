@@ -1,7 +1,8 @@
-import { GET_PRODUCTS, POST_PRODUCT, UPDATE_PRODUCT } from "./actions-types";
+import { GET_PRODUCTS, POST_PRODUCT, UPDATE_PRODUCT, GET_ORDER_QR } from "./actions-types";
 
 const initialState = {
   allProducts: [],
+  QrCode: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const reducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
+      }
+    case GET_ORDER_QR:
+      return {
+        ...state,
+        QrCode: payload,
       }
     default: {
       return { ...state };

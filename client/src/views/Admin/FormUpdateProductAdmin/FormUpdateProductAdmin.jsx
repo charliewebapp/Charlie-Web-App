@@ -3,7 +3,7 @@ import style from "./FormUpdateProductAdmin.module.css"
 import { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmin"
-import { getProducts, updateProduct } from '../../../redux/actions'
+import { updateProduct } from '../../../redux/actions'
 import { useParams } from 'react-router-dom'
 
 //MODIFICAR RUTA EN APP.JSX-> /admin/:clubName/editproduct/:idProduct
