@@ -17,9 +17,12 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         status: {
-            type: DataTypes.ENUM('aceptar', 'rechazar'),
+            type: DataTypes.ENUM('aceptar', 'rechazar', 'en proceso'),
             allowNull: false,
             defaultValue: 'en proceso'
         }
+    },
+    {
+        timestamps: false
     });
 };
