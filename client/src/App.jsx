@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
@@ -12,14 +13,35 @@ import DashboardSuperA from "./views/SuperAdmin/DashboardSuperA/DashboardSuperA"
 import FormPostClubSuperA from "./views/SuperAdmin/FormPostClubSuperA/FormPostClubSuperA";
 import Profile from "./views/Users/Profile/Profile";
 
+import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
+
+const EMAIL = 'charlieapp@gmail.com';
+const PASSWORD = 'charlie123';
+
 const App = () => {
+
+  const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+
+  function login(userData) {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+      setAccess(true);
+      navigate('/superadmin/dashboard');
+    }
+  }
+
+  useEffect(() => {
+    !access && navigate('/superadmin');
+  }, [access]);
+
+
   return (
     <>
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
         <Route
           path="/superadmin"
-          // element={<LandingSuperA />} // aca va form login //Descomentar al crear
+          element={<LoginSuperA login={login} />} // aca va form login //Descomentar al crear
         />
 
         <Route
