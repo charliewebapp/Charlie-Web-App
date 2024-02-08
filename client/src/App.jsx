@@ -12,6 +12,9 @@ import DashboardSuperA from "./views/SuperAdmin/DashboardSuperA/DashboardSuperA"
 import FormPostClubSuperA from "./views/SuperAdmin/FormPostClubSuperA/FormPostClubSuperA";
 import Profile from "./views/Users/Profile/Profile";
 
+import Colaborador from "./views/Colaborador/ColaboradorReader";
+import DetailQR from "./views/Users/DetailQR/DetailQR"
+
 const App = () => {
   return (
     <>
@@ -80,7 +83,10 @@ const App = () => {
         ...FALTAN DEMAS RUTAS
         
         */}
-      </Routes>
+
+        <Route path="colaborador" element={<Colaborador />} />
+        <Route path="qrcode" element={<DetailQR />} />
+      </Routes >
     </>
   );
 };
