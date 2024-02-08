@@ -9,7 +9,7 @@ const deleteProducts = async (client, product) => {
   const deletedProduct = await Product.destroy({
     where: {
       ClientId: clientId,
-      name: product,
+      id: product,
     },
   });
   return deletedProduct;
