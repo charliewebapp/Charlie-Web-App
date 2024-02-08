@@ -19,7 +19,7 @@ const App = () => {
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
         <Route
           path="/superadmin"
-        // element={<LandingSuperA />} // aca va form login //Descomentar al crear
+          // element={<LandingSuperA />} // aca va form login //Descomentar al crear
         />
 
         <Route
@@ -28,6 +28,7 @@ const App = () => {
         />
 
         <Route
+          // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
           element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseña de administrador
         />
@@ -66,10 +67,7 @@ const App = () => {
         />
 
         {/* ruta creada para brian test */}
-        <Route
-          path='/:clubName/profile'
-          element={<Profile />}
-        />
+        <Route path="/:clubName/profile" element={<Profile />} />
         {/*//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USUARIOS -> los componentes no dicen user*/}
         {/* FALTAN IMPORTAR
         
