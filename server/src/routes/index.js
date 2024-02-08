@@ -22,6 +22,11 @@ const putCollaboratorsHandler = require("../handlers/Collaborators/putCollaborat
 const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 const postAdminsHandler = require("../handlers/Administrator/postAdminsHandler");
 const getAllAdminsHandler = require("../handlers/Administrator/getAllAdminsHandler");
+const putAdminsHandler = require("../handlers/Administrator/putAdminsHandler");
+const getAllClients = require("../controllers/Clients/getAllClients");
+const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
+const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandler");
+const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
@@ -59,13 +64,16 @@ router.post("/client", upload.single("image"), postClientsHandler);
 //   return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
 // }
 //! /////////////////////////////////////////////////
-router.get("/client", postClientsHandler); //pendiente cambiar esta ruta
+router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
 router.put("/:client", putProductHandler); //pendiente cambiar esta ruta
 //admins
 
 router.get("/administrator", getAllAdminsHandler);
+router.get("/:client/administrator", getAdminsClientsHandler);
 router.post("/:client/administrator", postAdminsHandler);
+router.put("/:client/:administrator", putAdminsHandler);
+router.delete("/:client/:administrator", deleteAdminsHandler);
 
 //-----------------cliente(boliche)
 //products
