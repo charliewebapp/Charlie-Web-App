@@ -5,6 +5,8 @@ import {
   UPDATE_PRODUCT,
   POST_BOLICHE,
   DELETE_PRODUCT,
+  POST_ADMIN,
+  GET_BOLICHES,
 } from "./actions-types";
 
 export const getProducts = () => {
@@ -85,7 +87,9 @@ export const deleteProduct = (id) => {
   };
 };
 
-//! //////////////////////// CREAR BOLICHE ////////////////////////////
+//! //////////////////////// SUPER ADMIN ////////////////////////////
+
+//? //////////////////////// CREAR BOLICHE ////////////////////////////
 export const postBoliche = (boliche) => {
   const endpoint = "http://localhost:3001/client";
   return async (dispatch) => {
@@ -102,4 +106,43 @@ export const postBoliche = (boliche) => {
   };
 };
 
-//! //////////////////////// CREAR ADMIN ////////////////////////////
+//? //////////////////////// TRAER BOLICHES ////////////////////////////
+export const getBoliches = () => {
+  const endpoint = "http://localhost:3001/client";
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+
+      return dispatch({
+        type: GET_BOLICHES,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+//? //////////////////////// CREAR ADMIN ////////////////////////////
+export const postAdmin = (admin, params) => {
+  console.log(admin, "ADMINS");
+  console.log(params, "PARAMS");
+
+  const endpoint = `http://localhost:3001/${params}/administrator`;
+
+  console.log(endpoint, "ENDPOINT");
+
+  return async (dispatch) => {
+    try {
+      const data = await axios.post(endpoint, admin);
+
+      return dispatch({
+        type: POST_ADMIN,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
