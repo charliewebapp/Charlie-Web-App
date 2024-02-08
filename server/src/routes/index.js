@@ -50,4 +50,3 @@ router.delete("/:client/collaborator/:user", deleteControllerHandler);
 
 module.exports = router
 
-prueba
