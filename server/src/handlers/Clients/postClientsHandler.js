@@ -1,23 +1,51 @@
 const postClients = require("../../controllers/Clients/postClients");
+const fs = require("node:fs");
 
-function convertirAKebabCase(nombre) {
-  return nombre
-    // Reemplaza los espacios con guiones
-    .replace(/\s+/g, '-')
-    // Convierte a minúsculas
-    .toLowerCase();
+function saveImage(file) {
+  const newPath = `./uploads/${file.originalname}`;
+  fs.renameSync(file.path, newPath);
+  return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
 }
 
 const postClientsHandler = async function (req, res) {
   try {
-    const data = req.body;
-    const nameMayus = convertirAKebabCase(data.name);
-    const allData = {...data, name:nameMayus}
-    const response = await postClients(allData);
+    const { name, adress, city } = req.body;
+    const imagePath = req.file ? saveImage(req.file) : null;
+    const response = await postClients(name, adress, city, imagePath);
     res.status(201).json(response);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, error: "Error al crear el cliente" });
   }
 };
 
 module.exports = postClientsHandler;
+
+// try {
+//   const { name, adress, city } = req.body;
+//   const imagePath = req.file ? saveImage(req.file) : null;
+
+//   const newClient = await Client.create({
+//     name,
+//     image: imagePath,
+//     adress,
+//     city,
+//     // Puedes agregar otros campos según sea necesario
+//   });
+
+//   res.status(201).json({ success: true, data: newClient });
+// } catch (error) {
+//   console.error(error);
+//   res
+//     .status(500)
+//     .json({ success: false, error: "Error al crear el cliente" });
+// }
+// });
+
+// function saveImage(file) {
+// const newPath = `./uploads/${file.originalname}`;
+// fs.renameSync(file.path, newPath);
+// return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
+// }
