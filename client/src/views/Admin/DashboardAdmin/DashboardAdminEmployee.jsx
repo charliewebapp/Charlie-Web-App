@@ -14,17 +14,15 @@ import style from "./dashboardAdmin.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCollaborators } from "../../../redux/actions";
+import { deleteCollaborator, getCollaborators } from "../../../redux/actions";
 
 function DashboardAdminEmployee() {
   const dispatch = useDispatch();
-
-
-  // //! ESTADO GLOBAL
+  const clubName = useSelector((state) => state.selectClientAdmin);
   const allCollaboratorsState = useSelector((state) => state.allCollaborators);
 
   useEffect(() => {
-    dispatch(getCollaborators());
+    dispatch(getCollaborators(clubName));
   }, []);
 
   const rows = allCollaboratorsState.map((employee) => {
@@ -45,7 +43,7 @@ function DashboardAdminEmployee() {
   const columns = [
     { field: "name", headerName: "Nombre", width: 150 },
     { field: "lastname", headerName: "Apellido", width: 150 },
-    { field: "email", headerName: "Email", width: 150 },
+    { field: "mail", headerName: "Email", width: 150 },
     { field: "status", headerName: "Status", width: 150 },
     {
       field: "actions",
@@ -55,8 +53,7 @@ function DashboardAdminEmployee() {
 
 
         <div>
-          {/* //!!!! CAMBIAR RUTA DINAMICA CLIENT */}
-          <Link to={`/admin/testnati/updateemployee/${params.row.id}`}>
+          <Link to={`/admin/${clubName}/updateemployee/${params.row.id}`}>
             {" "}
             <button
               className={style.button}
@@ -67,7 +64,7 @@ function DashboardAdminEmployee() {
           </Link>
           <button
             className={style.button}
-            onClick={() => handleDelete(params.row)}
+            onClick={handleDelete(params.row)}
           >
             Eliminar
           </button>
@@ -88,8 +85,8 @@ function DashboardAdminEmployee() {
   }
 
   function handleDelete(row) {
+    dispatch(deleteCollaborator(row.id, clubName))
     console.log("Eliminar:", row);
-    // Aquí puedes implementar la lógica para eliminar la fila
   }
 
   function handleBlock(row) {
@@ -102,8 +99,8 @@ function DashboardAdminEmployee() {
       <div className={style.container}>
         <h2>Empleados</h2>
 
-        {/* //!!!!! CAMBIAR RUTA DINAMICA CLIENT */}
-        <Link to={`/admin/testnati/addemployee`}>
+
+        <Link to={`/admin/${clubName}/addemployee`}>
           {" "}
 
           <button className={style.button} onClick={handleAddEmployee}>

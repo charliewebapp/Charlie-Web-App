@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { validateFormEmployeeAdmin } from '../../../utils/validateFormEmployeeAdmin';
 import style from "./FormPostEmployee.module.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { postCollaborator } from '../../../redux/actions';
 
@@ -11,6 +11,8 @@ import { postCollaborator } from '../../../redux/actions';
 
 function FormPostEmployee() {
     const dispatch = useDispatch()
+    const clubName = useSelector((state) => state.selectClientAdmin);
+
 
     //local state for input
     const [collaboratorData, setCollaboratorData] = useState({
@@ -51,7 +53,7 @@ function FormPostEmployee() {
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            dispatch(postCollaborator(collaboratorData))
+            dispatch(postCollaborator(collaboratorData, clubName))
             setCollaboratorData({
                 name: "",
                 lastname: "",
@@ -107,8 +109,8 @@ function FormPostEmployee() {
             > AGREGAR COLABORADOR
             </button>
 
-            {/* //!!!!! cambiar ruta dinamica cliente */}
-            <Link to={`/admin/:clubname/dashbordAdmin`}>
+
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
                 <button>Volver </button>
             </Link>
 

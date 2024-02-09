@@ -116,7 +116,7 @@ const App = () => {
           element={requireAdminLogin(<FormPostEmployee />)}
         />
         <Route
-          path="/admin/:clubName/updateemployee"
+          path="/admin/:clubName/updateemployee/:idCollaborator"
           element={requireAdminLogin(<FormUpdateEmployee />)}
         />
         <Route

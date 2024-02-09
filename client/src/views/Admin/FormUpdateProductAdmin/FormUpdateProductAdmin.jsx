@@ -21,7 +21,7 @@ const categories = [
 
 function FormUpdateProductAdmin() {
   const dispatch = useDispatch();
-
+  const clubName = useSelector((state) => state.selectClientAdmin);
   //!cuando redux venga cargado solo dejar esto: y activar nombres repetidos - las actions y rutas funcionan (primero crear client)
 
   const allProductsState = useSelector((state) => state.allProducts);
@@ -77,16 +77,15 @@ function FormUpdateProductAdmin() {
       //     setErrors({ ...errors, name: "Este nombre de producto ya existe" });
       // }
 
-      console.log(updatedData);
       return updatedData;
     });
   };
 
-  //! SUBMIT-> falta hacer actions y redux
+
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      dispatch(updateProduct(productData, idProduct));
+      dispatch(updateProduct(productData, idProduct, clubName));
       window.alert("Se ha actualizado el producto. ");
       setProductData({
         name: "",
@@ -206,7 +205,7 @@ function FormUpdateProductAdmin() {
         EDITAR PRODUCTO
       </button>
 
-      <Link to={`/admin/testnati/dashbordAdmin`}>
+      <Link to={`/admin/${clubName}/dashboardAdmin`}>
         <button>Volver </button>
       </Link>
     </form>
