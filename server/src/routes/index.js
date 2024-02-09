@@ -46,7 +46,7 @@ router.delete("/:client/collaborator/:user", deleteControllerHandler);
 //--------------colaborador
 
 //--------------consumidor
-router.post("/:client/collaborator/qr", postQrHandler);
+router.post("/:client/collaborator/qr/:idMP", postQrHandler);
 router.get("/:client/collaborator/qr/:uuid", getQrHandler);
 router.put("/:client/collaborator/qr/:uuid", putQrHandler);
 router.delete("/:client/collaborator/qr/:uuid", deleteQrHandler);

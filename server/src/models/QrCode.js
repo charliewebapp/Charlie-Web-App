@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM('aceptar', 'rechazar', 'en proceso'),
             allowNull: false,
             defaultValue: 'en proceso'
+        },
+        idMercadoPago: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
