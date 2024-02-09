@@ -9,7 +9,10 @@ import {
   GET_BOLICHES,
   GET_COLLABORATORS,
   POST_COLLABORATOR,
-  UPDATE_COLLABORATOR
+  UPDATE_COLLABORATOR,
+  GET_ADMINS,
+  SELECT_CLIENT_ADMIN,
+  ADMIN_STATUS_LOGIN,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -29,8 +32,6 @@ export const getCollaborators = () => {
   };
 };
 
-
-
 export function updateCollaborator(collaboratorData, idCollaborator) {
   return async (dispatch) => {
     try {
@@ -48,8 +49,7 @@ export function updateCollaborator(collaboratorData, idCollaborator) {
       window.alert(error.message);
     }
   };
-};
-
+}
 
 export const postCollaborator = (collaboratorData) => {
   return async (dispatch) => {
@@ -69,7 +69,6 @@ export const postCollaborator = (collaboratorData) => {
     }
   };
 };
-
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    PRODUCTS    /////////////////////////
 export const getProducts = () => {
@@ -206,6 +205,50 @@ export const postAdmin = (admin, params) => {
       });
     } catch (error) {
       console.error(error.message);
+    }
+  };
+};
+
+//! logina dmin
+
+export const getAdmins = () => {
+  const endpoint = "http://localhost:3001/administrator";
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+
+      return dispatch({
+        type: GET_ADMINS,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const selectClientAdminName = (client) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: SELECT_CLIENT_ADMIN,
+        payload: client,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const handleAdminStatusLogin = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: ADMIN_STATUS_LOGIN,
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
 };

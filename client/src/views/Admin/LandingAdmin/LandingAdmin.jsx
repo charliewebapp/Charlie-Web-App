@@ -1,10 +1,30 @@
 import React from "react";
-import { useState } from "react";
-import style from "./LandingAdmin.module.css";
+import style from "./landingAdmin.module.css";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectClientAdminName,
+  handleAdminStatusLogin,
+  getAdmins,
+  getBoliches,
+} from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faEyeSlash,
+  faPersonWalkingDashedLineArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 function LandingAdmin() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAdmins());
+    dispatch(getBoliches());
+  }, [dispatch]);
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -12,50 +32,60 @@ function LandingAdmin() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const validation = (userData) => {
-    const errors = {};
-
-    if (!/\S+@\S+/.test(userData.email)) {
-      errors.email = "Debe ser un email válido";
-    }
-    if (userData.email === "") {
-      errors.email = "El email no puede estar vacio";
-    }
-
-    if (userData.password.length < 6 || userData.password.length > 10) {
-      errors.password = "La contraseña debe tener de 6 a 10 caracteres";
-    }
-    return errors;
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserData({
       ...userData,
       [name]: value,
     });
-    setErrors(
-      validation({
-        ...userData,
-        [name]: value,
-      })
+  };
+
+  const getAllAdmins = useSelector((state) => state.getAllAdmins);
+  const allBoliches = useSelector((state) => state.allBoliches);
+  const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
+
+  console.log("All admins", getAllAdmins);
+  console.log("allBoliches", allBoliches);
+  console.log("adminStatusLogin", adminStatusLogin);
+
+  const loginAdmin = (userData) => {
+    const adminLogin = getAllAdmins.find(
+      (admin) =>
+        admin.mail === userData.email && admin.password === userData.password
     );
+
+    if (adminLogin) {
+      const adminClient = adminLogin.ClientId;
+
+      dispatch(handleAdminStatusLogin());
+
+      const clientFromADmin = allBoliches.find(
+        (boliche) => boliche.id === adminClient
+      );
+
+      const client = clientFromADmin.name;
+      dispatch(selectClientAdminName(client));
+      navigate(`/admin/${client}/dashboardAdmin`);
+    } else {
+      console.log("Usuario o contraseña incorrectos");
+      // Manejar el caso en el que el usuario o contraseña sean incorrectos
+    }
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Alternar entre mostrar y ocultar la contraseña
+    setShowPassword(!showPassword);
   };
 
-  const hanleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    login(userData);
+    loginAdmin(userData);
   };
 
   return (
     <div className={style.container}>
       <div className={style.formContainer}>
         <h2>Bienvenido al Sitio de Administrador</h2>
-        <form onSubmit={hanleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">Correo Electrónico:</label>
             <input
