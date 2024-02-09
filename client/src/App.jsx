@@ -16,8 +16,8 @@ import Profile from "./views/Users/Profile/Profile";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 
-const EMAIL = 'charlieapp@gmail.com';
-const PASSWORD = 'charlie123';
+const EMAIL = "charlieapp@gmail.com";
+const PASSWORD = "charlie123";
 
 const App = () => {
 
@@ -36,7 +36,6 @@ const App = () => {
   //   !access && navigate('/superadmin');
   // }, [access]);
 
-
   return (
     <>
       <Routes>
@@ -54,7 +53,7 @@ const App = () => {
         <Route
           // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
-          element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseña de administrador
+          element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseÃ±a de administrador
         />
 
         <Route
