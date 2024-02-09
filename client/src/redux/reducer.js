@@ -12,6 +12,7 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   ADMIN_STATUS_LOGIN,
+  DELETE_COLLABORATOR,
 } from "./actions-types";
 
 const initialState = {
@@ -71,11 +72,16 @@ const reducer = (state = initialState, action) => {
         allCollaborators: [...state.allCollaborators, payload],
       };
     case UPDATE_COLLABORATOR:
-      //REVISAR SI FUNCIONA BIEN LA ACT DE REDUX O SI DEBO FILTRAR Y MODIFICAR SOLO ESE
       return {
         ...state,
-        allCollaborators: [...state.allCollaborators, payload],
       };
+    case DELETE_COLLABORATOR:
+      const noDeletedCollaborators = state.allCollaborators.filter(collaborator => collaborator.id !== payload)
+
+      return {
+        ...state,
+        allCollaborators: noDeletedCollaborators
+      }
 
     //! ///////////////CREAR BOLICHE////////////////////
 

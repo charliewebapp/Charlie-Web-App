@@ -13,14 +13,18 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   ADMIN_STATUS_LOGIN,
+  DELETE_COLLABORATOR,
 } from "./actions-types";
 
+
+
+
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
-export const getCollaborators = () => {
+export const getCollaborators = (clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3001/testnati/collaborator/users"
+        `http://localhost:3001/${clubName}/collaborator/users`
       );
       dispatch({
         type: GET_COLLABORATORS,
@@ -32,11 +36,11 @@ export const getCollaborators = () => {
   };
 };
 
-export function updateCollaborator(collaboratorData, idCollaborator) {
+export function updateCollaborator(collaboratorData, idCollaborator, clubName) {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/testnati/collaborator/${idCollaborator}`,
+        `http://localhost:3001/${clubName}/collaborator/${idCollaborator}`,
         collaboratorData
       );
       if (data) {
@@ -51,11 +55,11 @@ export function updateCollaborator(collaboratorData, idCollaborator) {
   };
 }
 
-export const postCollaborator = (collaboratorData) => {
+export const postCollaborator = (collaboratorData, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/testnati/collaborator",
+        `http://localhost:3001/${clubName}/collaborator`,
         collaboratorData
       );
       if (data) {
@@ -70,12 +74,30 @@ export const postCollaborator = (collaboratorData) => {
   };
 };
 
+export const deleteCollaborator = (idCollaborator, clubName) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3001/${clubName}/collaborator/${idCollaborator}`
+      );
+      if (data) {
+        dispatch({
+          type: DELETE_COLLABORATOR,
+          payload: id,
+        });
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    PRODUCTS    /////////////////////////
-export const getProducts = () => {
+export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3001/testNati/product"
+        `http://localhost:3001/${clubName}/product`
       );
       dispatch({
         type: GET_PRODUCTS,
@@ -87,11 +109,11 @@ export const getProducts = () => {
   };
 };
 
-export const postProduct = (productData) => {
+export const postProduct = (productData, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/testnati/product",
+        `http://localhost:3001/${clubName}/product`,
         productData
       );
       if (data) {
@@ -108,11 +130,11 @@ export const postProduct = (productData) => {
   };
 };
 
-export const updateProduct = (productData, idProduct) => {
+export const updateProduct = (productData, idProduct, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/testnati/${idProduct}`,
+        `http://localhost:3001/${clubName}/${idProduct}`,
         productData
       );
       if (data) {
@@ -129,11 +151,11 @@ export const updateProduct = (productData, idProduct) => {
   };
 };
 
-export const deleteProduct = (id) => {
+export const deleteProduct = (id, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/testnati/${id}`
+        `http://localhost:3001/${clubName}/${id}`
       );
       if (data) {
         dispatch({

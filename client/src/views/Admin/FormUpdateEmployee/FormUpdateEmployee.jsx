@@ -7,6 +7,7 @@ import { updateCollaborator } from '../../../redux/actions';
 
 function FormUpdateEmployee() {
     const dispatch = useDispatch()
+    const clubName = useSelector((state) => state.selectClientAdmin);
 
     // CON ESTADO GOBAL REDUX
     const allCollaboratorsState = useSelector((state) => state.allCollaborators);
@@ -62,7 +63,7 @@ function FormUpdateEmployee() {
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            dispatch(updateCollaborator(collaboratorData, idCollaborator))
+            dispatch(updateCollaborator(collaboratorData, idCollaborator, clubName))
             setCollaboratorData({
                 name: "",
                 lastname: "",
@@ -70,10 +71,10 @@ function FormUpdateEmployee() {
                 mail: "",
                 status: "",
             })
-            window.alert("Colaborador agregado")
+            window.alert("Colaborador editado")
 
         } catch (error) {
-            window.alert("No se ha agregado el colaborador. Intente nuevamente")
+            window.alert("No se ha editado el colaborador. Intente nuevamente")
         }
     }
 
@@ -118,8 +119,7 @@ function FormUpdateEmployee() {
             </button>
 
 
-            {/* //!!!!! cambiar ruta dinamica cliente */}
-            <Link to={`/admin/:clubname/dashbordAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
                 <button>Volver </button>
             </Link>
 
