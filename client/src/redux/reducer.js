@@ -13,6 +13,7 @@ import {
   SELECT_CLIENT_ADMIN,
   ADMIN_STATUS_LOGIN,
   DELETE_COLLABORATOR,
+  GET_ADMINISTRATORS,
 } from "./actions-types";
 
 const initialState = {
@@ -128,6 +129,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         adminStatusLogin: true,
+      };
+
+    //? //////////////////////// TRAER ADMIN ////////////////////////////
+
+    case GET_ADMINISTRATORS:
+      return {
+        ...state,
+        administrators: payload,
+        allAdministrators: payload,
       };
 
     default:
