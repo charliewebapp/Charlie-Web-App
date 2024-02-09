@@ -81,7 +81,7 @@ router.get("/:client/product", getProductsHandler);
 router.get("/:client/:category", getProductCategoryHandler);
 router.post("/:client/product", postProductsHanlder);
 router.put("/:client/:product", putProductHandler);
-router.delete("/:client/:product", deleteProductHandler);
+router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
 //colaborador
