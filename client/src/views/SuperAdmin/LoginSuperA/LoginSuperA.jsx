@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import validation from "./validation";
-import "./LoginSuperA.css";
+
 
 function LoginSuperA({ login }) {
 
