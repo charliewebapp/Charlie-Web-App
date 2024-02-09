@@ -1,14 +1,24 @@
 const { Client } = require("../../db");
 
-const putClients = async function (clientId, updatedData) {
-  const existingClient = await Client.findByPk(clientId);
-  if (!existingClient) {
-    throw new Error("Cliente no encontrado");
-  }
+const putClients = async function (client, newData) {
+  const clientSearched = await Client.findOne({ where: { name: client } });
+  if (!clientSearched) throw new Error("El cliente no existe.");
+  const clientId = clientSearched.dataValues.id;
 
-  await existingClient.update(updatedData);
+  const updateClient = await Client.update(newData, {
+    where: {
+      id: clientId,
+    },
+  });
 
-  return existingClient;
+  const updatededClient = await Client.findOne( {
+    where: {
+      id: clientId,
+    },
+  });
+
+
+  return  updatededClient
 };
 
 module.exports = putClients;
