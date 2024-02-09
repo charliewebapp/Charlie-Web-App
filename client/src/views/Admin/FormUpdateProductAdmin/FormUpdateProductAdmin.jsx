@@ -81,7 +81,6 @@ function FormUpdateProductAdmin() {
     });
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
