@@ -50,8 +50,6 @@ function DashboardAdminEmployee() {
       headerName: "Acciones",
       width: 250,
       renderCell: (params) => (
-
-
         <div>
           <Link to={`/admin/${clubName}/updateemployee/${params.row.id}`}>
             {" "}
@@ -64,11 +62,10 @@ function DashboardAdminEmployee() {
           </Link>
           <button
             className={style.button}
-            onClick={handleDelete(params.row)}
+            onClick={() => handleDelete(params.row)}
           >
             Eliminar
           </button>
-
         </div>
       ),
     },
@@ -85,7 +82,7 @@ function DashboardAdminEmployee() {
   }
 
   function handleDelete(row) {
-    dispatch(deleteCollaborator(row.id, clubName))
+    dispatch(deleteCollaborator(row.id, clubName));
     console.log("Eliminar:", row);
   }
 
@@ -99,10 +96,8 @@ function DashboardAdminEmployee() {
       <div className={style.container}>
         <h2>Empleados</h2>
 
-
         <Link to={`/admin/${clubName}/addemployee`}>
           {" "}
-
           <button className={style.button} onClick={handleAddEmployee}>
             {" "}
             Agregar Colaborador{" "}

@@ -93,7 +93,7 @@ function DashboardAdminStock() {
   }
 
   function handleDelete(product) {
-    dispatch(deleteProduct(product.id));
+    dispatch(deleteProduct(product.id, clubName)); // Pasar clubName como parámetro
     closeConfirmationDialog();
     setSnackbarOpen(true);
   }
@@ -128,8 +128,9 @@ function DashboardAdminStock() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {`¿Estás seguro de que deseas eliminar el producto "${productToDelete ? productToDelete.name : ""
-                }"?`}
+              {`¿Estás seguro de que deseas eliminar el producto "${
+                productToDelete ? productToDelete.name : ""
+              }"?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
