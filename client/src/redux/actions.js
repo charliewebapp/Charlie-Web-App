@@ -16,9 +16,6 @@ import {
   DELETE_COLLABORATOR,
 } from "./actions-types";
 
-
-
-
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
 export const getCollaborators = (clubName) => {
   return async (dispatch) => {
@@ -83,7 +80,7 @@ export const deleteCollaborator = (idCollaborator, clubName) => {
       if (data) {
         dispatch({
           type: DELETE_COLLABORATOR,
-          payload: id,
+          payload: idCollaborator,
         });
       }
     } catch (error) {
@@ -155,7 +152,7 @@ export const deleteProduct = (id, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/${clubName}/${id}`
+        `http://localhost:3001/${clubName}/product/${id}`
       );
       if (data) {
         dispatch({

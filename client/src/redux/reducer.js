@@ -29,7 +29,7 @@ const initialState = {
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
-  adminStatusLogin: false,
+  adminStatusLogin: true, //* Funciona, asi que dejamos en true para acceder mas rapido. Cambiar a false para demo.
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,10 +47,18 @@ const reducer = (state = initialState, action) => {
         allProducts: [...state.allProducts, payload],
       };
     case UPDATE_PRODUCT:
+      const updatedProducts = state.allProducts.map((product) => {
+        if (product.id === payload.id) {
+          return payload; // Actualiza el producto existente
+        } else {
+          return product;
+        }
+      });
       return {
         ...state,
-        allProducts: [...state.allProducts, payload],
+        allProducts: updatedProducts,
       };
+
     case DELETE_PRODUCT:
       const noDeletedProducts = state.allProducts.filter(
         (product) => product.id !== payload
@@ -76,12 +84,14 @@ const reducer = (state = initialState, action) => {
         ...state,
       };
     case DELETE_COLLABORATOR:
-      const noDeletedCollaborators = state.allCollaborators.filter(collaborator => collaborator.id !== payload)
+      const noDeletedCollaborators = state.allCollaborators.filter(
+        (collaborator) => collaborator.id !== payload
+      );
 
       return {
         ...state,
-        allCollaborators: noDeletedCollaborators
-      }
+        allCollaborators: noDeletedCollaborators,
+      };
 
     //! ///////////////CREAR BOLICHE////////////////////
 
