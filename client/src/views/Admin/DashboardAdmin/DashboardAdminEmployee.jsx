@@ -14,29 +14,33 @@ import style from "./dashboardAdmin.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "../../../redux/actions";
+import { getCollaborators } from "../../../redux/actions";
 
-function DashboardAdmin() {
+function DashboardAdminEmployee() {
   const dispatch = useDispatch();
 
-  // //!Descomentar al traer el estado global correcto y reemplazar EMPLOYEEE
-  // const EMPLOYEEE = useSelector((state) => state.EMPLOYEEE);
 
-  // //!Descomentar al traer la funcion correcta para dispatchy reemplazar GETEMPLOYEEE
-  // useEffect(() => {
-  //   dispatch(GETEMPLOYEE()); => Traer todos los employee
-  // }, []);
+  // //! ESTADO GLOBAL
+  const allCollaboratorsState = useSelector((state) => state.allCollaborators);
 
-  // //!Descomentar al traer el estado global correcto y reemplazar EMPLOYEEE
-  // const rows = EMPLOYEEE.map((employee) => {
-  //   return {
-  //     id: employee.id,
-  //     name: employee.name,
-  //     lastname: employee.lastname,
-  //     mail: employee.mail,
-  //     status: employee.status,
-  //   };
-  // });
+  useEffect(() => {
+    dispatch(getCollaborators());
+  }, []);
+
+  const rows = allCollaboratorsState.map((employee) => {
+    return {
+      id: employee.id,
+      name: employee.name,
+      lastname: employee.lastname,
+      mail: employee.mail,
+      status: employee.status,
+    };
+  });
+
+  //!eliminar al conectar estado global
+  // const rows = [
+  //   { id: 1, name: "#juana", lastname: "Maria Merie", email: "hola@gmail", status: "activo" },
+  // ];
 
   const columns = [
     { field: "name", headerName: "Nombre", width: 150 },
@@ -48,11 +52,11 @@ function DashboardAdmin() {
       headerName: "Acciones",
       width: 250,
       renderCell: (params) => (
-        //!Para las rutas dinamicas
-        // ${params.row.id}
+
+
         <div>
-          //!EN APP agregar a la ruta el campo /:idEmployee al final
-          <Link to={`/admin/:clubName/updateemployee/${params.row.id}`}>
+          {/* //!!!! CAMBIAR RUTA DINAMICA CLIENT */}
+          <Link to={`/admin/testnati/updateemployee/${params.row.id}`}>
             {" "}
             <button
               className={style.button}
@@ -67,18 +71,13 @@ function DashboardAdmin() {
           >
             Eliminar
           </button>
-          <button
-            className={style.button}
-            onClick={() => handleBlock(params.row)}
-          >
-            Bloquear
-          </button>
+
         </div>
       ),
     },
   ];
 
-  function handleAddEmployeet(row) {
+  function handleAddEmployee(row) {
     console.log("Agregar Empleado:", row);
     // Aquí puedes implementar la lógica para editar la fila
   }
@@ -103,12 +102,13 @@ function DashboardAdmin() {
       <div className={style.container}>
         <h2>Empleados</h2>
 
+        {/* //!!!!! CAMBIAR RUTA DINAMICA CLIENT */}
         <Link to={`/admin/testnati/addemployee`}>
           {" "}
-          //!Ruta a agregar empleado
+
           <button className={style.button} onClick={handleAddEmployee}>
             {" "}
-            Agregar Producto{" "}
+            Agregar Colaborador{" "}
           </button>
         </Link>
 
@@ -120,4 +120,4 @@ function DashboardAdmin() {
   );
 }
 
-export default DashboardAdmin;
+export default DashboardAdminEmployee;

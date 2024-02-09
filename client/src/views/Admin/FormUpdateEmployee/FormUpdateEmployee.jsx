@@ -1,35 +1,37 @@
 import React, { useState } from 'react'
 import { validateFormEmployeeAdmin } from '../../../utils/validateFormEmployeeAdmin';
 import style from "./FormUpdateEmployee.module.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { updateCollaborator } from '../../../redux/actions';
 
 function FormUpdateEmployee() {
     const dispatch = useDispatch()
 
-    //!cuando este activo estado global allCollaborators y dispatch dejar todo esto descomentado y comentar el sig local state
-    // const allCollaboratorsState = useSelector((state) => state.allCollaborators);
-    // const { idCollaborator } = useParams();
-    // console.log("ID", idCollaborator);
-    // const collaboratorToUpdate = allCollaboratorsState.find(
-    //   (collaborator) => collaborator.id === idCollaborator
-    // );
-    // const [collaboratorData, setCollaboratorData] = useState({
-    //     name: collaboratorToUpdate.name,
-    //     lastname: collaboratorToUpdate.lastname,
-    //     password: collaboratorToUpdate.password,
-    //     mail: collaboratorToUpdate.mail,
-    //     status: collaboratorToUpdate.status,
-    // })
+    // CON ESTADO GOBAL REDUX
+    const allCollaboratorsState = useSelector((state) => state.allCollaborators);
+    const { idCollaborator } = useParams();
 
-
-    //local state for input
+    const collaboratorToUpdate = allCollaboratorsState.find(
+        (collaborator) => collaborator.id === idCollaborator
+    );
     const [collaboratorData, setCollaboratorData] = useState({
-        name: "",
-        lastname: "",
-        password: "",
-        mail: "",
-        status: "",
+        name: collaboratorToUpdate.name,
+        lastname: collaboratorToUpdate.lastname,
+        password: collaboratorToUpdate.password,
+        mail: collaboratorToUpdate.mail,
+        status: collaboratorToUpdate.status,
     })
+
+
+    // //local state for input - HARCODEO ANTES DE REDUX
+    // const [collaboratorData, setCollaboratorData] = useState({
+    //     name: "",
+    //     lastname: "",
+    //     password: "",
+    //     mail: "",
+    //     status: "",
+    // })
 
     //local state errors
     const [errors, setErrors] = useState({
@@ -60,15 +62,15 @@ function FormUpdateEmployee() {
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            // dispatch(postColaborador(productData))
-            window.alert("Colaborador agregado")
-            setProductData({
+            dispatch(updateCollaborator(collaboratorData, idCollaborator))
+            setCollaboratorData({
                 name: "",
                 lastname: "",
                 password: "",
                 mail: "",
                 status: "",
             })
+            window.alert("Colaborador agregado")
 
         } catch (error) {
             window.alert("No se ha agregado el colaborador. Intente nuevamente")
@@ -87,7 +89,7 @@ function FormUpdateEmployee() {
             <input type="text" id="name" key="name" name="name" value={collaboratorData.name} onChange={handleChange} />
             <p>{errors.name ? errors.name : null} </p>
 
-            <label htmlFor="lastname" > Marca: </label>
+            <label htmlFor="lastname" > Apellido: </label>
             <input type="text" id="lastname" key="lastname" name="lastname" value={collaboratorData.lastname} onChange={handleChange} />
             <p>{errors.lastname ? errors.lastname : null} </p>
 
@@ -115,8 +117,11 @@ function FormUpdateEmployee() {
             > EDITAR COLABORADOR
             </button>
 
-            {/* //!agregar el link para dashboard */}
-            <button type="button">Volver</button>
+
+            {/* //!!!!! cambiar ruta dinamica cliente */}
+            <Link to={`/admin/:clubname/dashbordAdmin`}>
+                <button>Volver </button>
+            </Link>
 
         </form>
 

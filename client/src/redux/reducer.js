@@ -6,6 +6,9 @@ import {
   DELETE_PRODUCT,
   POST_ADMIN,
   GET_BOLICHES,
+  GET_COLLABORATORS,
+  POST_COLLABORATOR,
+  UPDATE_COLLABORATOR,
 } from "./actions-types";
 
 const initialState = {
@@ -16,11 +19,14 @@ const initialState = {
 
   administrators: [],
   allAdministrators: [],
+
+  allCollaborators: [],
 };
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    //! /////////////// PRODUCTS ////////////////////
     case GET_PRODUCTS:
       return {
         ...state,
@@ -36,16 +42,34 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: [...state.allProducts, payload],
       };
-
     case DELETE_PRODUCT:
       const noDeletedProducts = state.allProducts.filter(
         (product) => product.id !== payload
       );
-
       return {
         ...state,
         allProducts: noDeletedProducts,
       };
+
+    //! ///////////////   COLLABORATORS   ////////////////////
+    case GET_COLLABORATORS:
+      return {
+        ...state,
+        allCollaborators: payload,
+      };
+    case POST_COLLABORATOR:
+      return {
+        ...state,
+        allCollaborators: [...state.allCollaborators, payload],
+      };
+    case UPDATE_COLLABORATOR:
+      //REVISAR SI FUNCIONA BIEN LA ACT DE REDUX O SI DEBO FILTRAR Y MODIFICAR SOLO ESE
+      return {
+        ...state,
+        allCollaborators: [...state.allCollaborators, payload],
+      };
+
+
 
     //! ///////////////CREAR BOLICHE////////////////////
 
