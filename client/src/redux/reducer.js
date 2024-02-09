@@ -9,6 +9,9 @@ import {
   GET_COLLABORATORS,
   POST_COLLABORATOR,
   UPDATE_COLLABORATOR,
+  GET_ADMINS,
+  SELECT_CLIENT_ADMIN,
+  ADMIN_STATUS_LOGIN,
 } from "./actions-types";
 
 const initialState = {
@@ -21,6 +24,11 @@ const initialState = {
   allAdministrators: [],
 
   allCollaborators: [],
+  //! login admin
+  getAllAdmins: [], //!Los admins de todos los boliches.
+  selectAdminLogin: [], //!El admin logueado.
+  selectClientAdmin: [], //!El boliche asignado a ese admin.
+  adminStatusLogin: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,8 +77,6 @@ const reducer = (state = initialState, action) => {
         allCollaborators: [...state.allCollaborators, payload],
       };
 
-
-
     //! ///////////////CREAR BOLICHE////////////////////
 
     case POST_BOLICHE:
@@ -96,6 +102,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         boliches: payload,
         allBoliches: payload,
+      };
+
+    //! traer todos los administradores de la base de datos entera
+
+    case GET_ADMINS:
+      return {
+        ...state,
+        getAllAdmins: payload,
+      };
+
+    case SELECT_CLIENT_ADMIN: //!Declarar el cliente del admin logueado como estado global
+      return {
+        ...state,
+        selectClientAdmin: payload,
+      };
+
+    case ADMIN_STATUS_LOGIN:
+      return {
+        ...state,
+        adminStatusLogin: true,
       };
 
     default:
