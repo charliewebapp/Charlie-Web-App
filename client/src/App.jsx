@@ -59,7 +59,7 @@ const App = () => {
         <Route
           // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
-          element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseña de administrador
+          element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseÃ±a de administrador
         />
         <Route
           // http://localhost:5173/superadmin/addadmin
