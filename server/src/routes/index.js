@@ -29,6 +29,7 @@ const getAllClients = require("../controllers/Clients/getAllClients");
 const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandler");
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
+const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -69,7 +70,7 @@ router.post("/client", upload.single("image"), postClientsHandler);
 //! /////////////////////////////////////////////////
 router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
-router.put("/:client", putProductHandler); //pendiente cambiar esta ruta
+router.put("/:client", upload.single("image"), putClientsHandler); //pendiente cambiar esta ruta
 //admins
 
 router.get("/administrator", getAllAdminsHandler);

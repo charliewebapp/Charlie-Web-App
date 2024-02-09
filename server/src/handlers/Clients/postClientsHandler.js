@@ -11,6 +11,7 @@ const postClientsHandler = async function (req, res) {
   try {
     const { name, adress, city } = req.body;
     const imagePath = req.file ? saveImage(req.file) : null;
+    console.log(imagePath);
     const nameMinus = name.toLowerCase();
     const response = await postClients(nameMinus, adress, city, imagePath);
     res.status(201).json(response);
