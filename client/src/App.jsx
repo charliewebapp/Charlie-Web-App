@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Routes, Route, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
@@ -16,11 +17,10 @@ import Profile from "./views/Users/Profile/Profile";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 
-const EMAIL = 'charlieapp@gmail.com';
-const PASSWORD = 'charlie123';
+const EMAIL = "charlieapp@gmail.com";
+const PASSWORD = "charlie123";
 
 const App = () => {
-
   //LOGIN DE DANI COMENTADO PARA QUE FUNCIONEN LAS DEMAS RUTAS
   // const navigate = useNavigate();
   // const [access, setAccess] = useState(false);
@@ -36,6 +36,13 @@ const App = () => {
   //   !access && navigate('/superadmin');
   // }, [access]);
 
+  //!Login ADMIN
+
+  const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
+
+  const requireAdminLogin = (component) => {
+    return adminStatusLogin ? component : <Navigate to="/admin" />;
+  };
 
   return (
     <>
@@ -45,31 +52,27 @@ const App = () => {
           path="/superadmin"
           element={<LoginSuperA login={login} />} // aca va form login //Descomentar al crear
         /> */}
-
         <Route
           path="/superadmin/dashboard"
           element={<DashboardSuperA />} // aca va form login
         />
-
         <Route
           // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
           element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseña de administrador
         />
-
         <Route
           // http://localhost:5173/superadmin/addadmin
           path="/superadmin/addadmin"
           element={<FormPostAdminSA />}
         />
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS DEL ADMINISTRADOR
+        {/* <Route path="/admin" element={<LandingAdmin />} />
 
-        {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS DEL ADMINISTRADOR */}
-        <Route path="/admin" element={<LandingAdmin />} />
-
-        {/* HACER UN GET AL BACK PARA NOMBRE DE BOLICHE */}
+    
         <Route
           path="/admin/:clubName/dashbordAdmin"
-          element={<DashboardAdmin />} //aca mismo lista VENTAS solo mostrar /PRODUCTOS (CRUD) / COLABORADORES(crea edita elimina)
+          element={<DashboardAdmin />} 
         />
 
         <Route
@@ -83,7 +86,7 @@ const App = () => {
 
         <Route
           path="/admin/:clubName/addemployee"
-          element={<FormPostEmployee />} //agrega mas administradores o colaboradores
+          element={<FormPostEmployee />} 
         />
 
         <Route
@@ -94,8 +97,32 @@ const App = () => {
         <Route
           path="/admin/:clubName/clubprofile"
           element={<FormClubProfile />}
+        /> */}
+        <Route path="/admin" element={<LandingAdmin />} />
+        <Route
+          path="/admin/:clubName/dashboardAdmin"
+          element={requireAdminLogin(<DashboardAdmin />)}
         />
-
+        <Route
+          path="/admin/:clubName/addproduct"
+          element={requireAdminLogin(<FormPostProductAdmin />)}
+        />
+        <Route
+          path="/admin/:clubName/editproduct/:idProduct"
+          element={requireAdminLogin(<FormUpdateProductAdmin />)}
+        />
+        <Route
+          path="/admin/:clubName/addemployee"
+          element={requireAdminLogin(<FormPostEmployee />)}
+        />
+        <Route
+          path="/admin/:clubName/updateemployee"
+          element={requireAdminLogin(<FormUpdateEmployee />)}
+        />
+        <Route
+          path="/admin/:clubName/clubprofile"
+          element={requireAdminLogin(<FormClubProfile />)}
+        />
         {/* ruta creada para brian test */}
         <Route path="/:clubName/profile" element={<Profile />} />
         {/*//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USUARIOS -> los componentes no dicen user*/}
