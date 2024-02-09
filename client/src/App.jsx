@@ -21,29 +21,30 @@ const PASSWORD = 'charlie123';
 
 const App = () => {
 
-  const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
+  //LOGIN DE DANI COMENTADO PARA QUE FUNCIONEN LAS DEMAS RUTAS
+  // const navigate = useNavigate();
+  // const [access, setAccess] = useState(false);
 
-  function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate('/superadmin/dashboard');
-    }
-  }
+  // function login(userData) {
+  //   if (userData.password === PASSWORD && userData.email === EMAIL) {
+  //     setAccess(true);
+  //     navigate('/superadmin/dashboard');
+  //   }
+  // }
 
-  useEffect(() => {
-    !access && navigate('/superadmin');
-  }, [access]);
+  // useEffect(() => {
+  //   !access && navigate('/superadmin');
+  // }, [access]);
 
 
   return (
     <>
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
-        <Route
+        {/* <Route
           path="/superadmin"
           element={<LoginSuperA login={login} />} // aca va form login //Descomentar al crear
-        />
+        /> */}
 
         <Route
           path="/superadmin/dashboard"
@@ -86,7 +87,7 @@ const App = () => {
         />
 
         <Route
-          path="/admin/:clubName/updateemployee"
+          path="/admin/:clubName/updateemployee/:idCollaborator"
           element={<FormUpdateEmployee />}
         />
 

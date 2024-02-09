@@ -1,4 +1,4 @@
-/* Styling for the container */
+/* Styling for the container
 div {
     max-width: 400px;
     margin: auto;
@@ -9,43 +9,43 @@ div {
 }
 
 /* Styling for the form */
-form {
+/* form {
     display: flex;
     flex-direction: column;
-}
+} */
 
 /* Styling for labels */
-label {
+/* label {
     font-weight: bold;
     margin-bottom: 8px;
-}
+} */
 
 /* Styling for input fields */
-input {
+/* input {
     padding: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
+} */
 
 /* Styling for error messages */
-p {
+/* p {
     color: #ff0000;
     margin-top: 10px;
     margin-bottom: 10px;
-}
+} */
 
 /* Styling for the submit button */
-button {
+/* button {
     background-color: #4caf50;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
+} */
 
 /* Hover effect for the submit button */
-button:hover {
+/* button:hover {
     background-color: #45a049;
-}
+}  */

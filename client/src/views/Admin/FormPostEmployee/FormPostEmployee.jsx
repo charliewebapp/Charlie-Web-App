@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { validateFormEmployeeAdmin } from '../../../utils/validateFormEmployeeAdmin';
 import style from "./FormPostEmployee.module.css";
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { postCollaborator } from '../../../redux/actions';
 
 
 
@@ -49,16 +51,16 @@ function FormPostEmployee() {
     const handleSubmit = (event) => {
         event.preventDefault()
         try {
-            // dispatch(postColaborador(productData))
-            window.alert("Colaborador agregado")
-            setProductData({
+            dispatch(postCollaborator(collaboratorData))
+            setCollaboratorData({
                 name: "",
                 lastname: "",
                 password: "",
                 mail: "",
                 status: "",
-            })
 
+            })
+            window.alert("Colaborador agregado")
         } catch (error) {
             window.alert("No se ha agregado el colaborador. Intente nuevamente")
         }
@@ -77,7 +79,7 @@ function FormPostEmployee() {
             <input type="text" id="name" key="name" name="name" value={collaboratorData.name} onChange={handleChange} />
             <p>{errors.name ? errors.name : null} </p>
 
-            <label htmlFor="lastname" > Marca: </label>
+            <label htmlFor="lastname" > Apellido: </label>
             <input type="text" id="lastname" key="lastname" name="lastname" value={collaboratorData.lastname} onChange={handleChange} />
             <p>{errors.lastname ? errors.lastname : null} </p>
 
@@ -105,8 +107,10 @@ function FormPostEmployee() {
             > AGREGAR COLABORADOR
             </button>
 
-            {/* //!agregar el link para dashboard */}
-            <button type="button">Volver</button>
+            {/* //!!!!! cambiar ruta dinamica cliente */}
+            <Link to={`/admin/:clubname/dashbordAdmin`}>
+                <button>Volver </button>
+            </Link>
 
         </form>
 

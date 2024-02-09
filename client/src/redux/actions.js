@@ -7,8 +7,71 @@ import {
   DELETE_PRODUCT,
   POST_ADMIN,
   GET_BOLICHES,
+  GET_COLLABORATORS,
+  POST_COLLABORATOR,
+  UPDATE_COLLABORATOR
 } from "./actions-types";
 
+//! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
+export const getCollaborators = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:3001/testnati/collaborator/users"
+      );
+      dispatch({
+        type: GET_COLLABORATORS,
+        payload: data,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+
+
+export function updateCollaborator(collaboratorData, idCollaborator) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(
+        `http://localhost:3001/testnati/collaborator/${idCollaborator}`,
+        collaboratorData
+      );
+      if (data) {
+        dispatch({
+          type: UPDATE_COLLABORATOR,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+
+export const postCollaborator = (collaboratorData) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3001/testnati/collaborator",
+        collaboratorData
+      );
+      if (data) {
+        dispatch({
+          type: POST_COLLABORATOR,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+
+//! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    PRODUCTS    /////////////////////////
 export const getProducts = () => {
   return async (dispatch) => {
     try {
