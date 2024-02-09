@@ -19,12 +19,14 @@ import style from "./dashboardAdmin.module.css";
 
 function DashboardAdminStock() {
   const dispatch = useDispatch();
+  const clubName = useSelector((state) => state.selectClientAdmin);
+
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts(clubName));
   }, []);
 
   const allProductsState = useSelector((state) => state.allProducts);
@@ -57,7 +59,7 @@ function DashboardAdminStock() {
       width: 250,
       renderCell: (params) => (
         <div>
-          <Link to={`/admin/testnati/editproduct/${params.row.id}`}>
+          <Link to={`/admin/${clubName}/editproduct/${params.row.id}`}>
             <button
               className={style.button}
               onClick={() => handleEdit(params.row)}
@@ -106,7 +108,7 @@ function DashboardAdminStock() {
       <div className={style.container}>
         <h2>Stock</h2>
 
-        <Link to={`/admin/testnati/addproduct`}>
+        <Link to={`/admin/${clubName}/addproduct`}>
           <button className={style.button} onClick={handleAddStock}>
             {" "}
             Agregar Producto{" "}
@@ -126,9 +128,8 @@ function DashboardAdminStock() {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {`¿Estás seguro de que deseas eliminar el producto "${
-                productToDelete ? productToDelete.name : ""
-              }"?`}
+              {`¿Estás seguro de que deseas eliminar el producto "${productToDelete ? productToDelete.name : ""
+                }"?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

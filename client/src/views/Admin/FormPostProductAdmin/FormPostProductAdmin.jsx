@@ -18,6 +18,7 @@ const categories = [
 
 function FormPostProductAdmin() {
   const dispatch = useDispatch();
+  const clubName = useSelector((state) => state.selectClientAdmin);
   //! const productsState = useSelector(state => state.products) para consultar nombres no repetidos
 
   //local state for input
@@ -56,7 +57,6 @@ function FormPostProductAdmin() {
       //     setErrors({ ...errors, name: "Este nombre de producto ya existe" });
       // }
 
-      console.log(updatedData);
       return updatedData;
     });
   };
@@ -65,7 +65,7 @@ function FormPostProductAdmin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      dispatch(postProduct(productData));
+      dispatch(postProduct(productData, clubName));
       window.alert("Producto agregado");
       setProductData({
         name: "",
@@ -184,7 +184,7 @@ function FormPostProductAdmin() {
         {" "}
         AGREGAR PRODUCTO
       </button>
-      <Link to={`/admin/testnati/dashbordAdmin`}>
+      <Link to={`/admin/${clubName}/dashboardAdmin`}>
         <button>Volver </button>
       </Link>
     </form>
