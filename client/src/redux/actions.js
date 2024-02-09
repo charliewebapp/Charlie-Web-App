@@ -13,6 +13,7 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   ADMIN_STATUS_LOGIN,
+  GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
 } from "./actions-types";
 
@@ -268,6 +269,25 @@ export const handleAdminStatusLogin = () => {
     try {
       return dispatch({
         type: ADMIN_STATUS_LOGIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+
+//? //////////////////////// TRAER ADMIN ////////////////////////////
+export const getAdministrators = () => {
+  const endpoint = "http://localhost:3001/administrator";
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+
+      return dispatch({
+        type: GET_ADMINISTRATORS,
+        payload: data,
       });
     } catch (error) {
       console.error(error);

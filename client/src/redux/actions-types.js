@@ -20,3 +20,7 @@ export const GET_BOLICHES = "GET_BOLICHES";
 export const GET_ADMINS = "GET_ADMINS";
 export const SELECT_CLIENT_ADMIN = "SELECT_CLIENT_ADMIN";
 export const ADMIN_STATUS_LOGIN = "ADMIN_STATUS_LOGIN";
+
+
+//? //////////////////////// TRAER ADMIN ////////////////////////////
+export const GET_ADMINISTRATORS = "GET_ADMINISTRATORS";
