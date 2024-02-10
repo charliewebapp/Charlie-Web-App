@@ -16,6 +16,8 @@ export const POST_ADMIN = "POST_ADMIN";
 
 export const GET_BOLICHES = "GET_BOLICHES";
 
+export const SET_CLUB_ID = "SET_CLUB_ID";
+
 //! login super admin
 
 export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";

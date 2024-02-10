@@ -15,6 +15,7 @@ import {
   ADMIN_STATUS_LOGIN,
   DELETE_COLLABORATOR,
   GET_ADMINISTRATORS,
+  SET_CLUB_ID,
 } from "./actions-types";
 
 const initialState = {
@@ -27,6 +28,9 @@ const initialState = {
   allAdministrators: [],
 
   allCollaborators: [],
+
+  currentClubId: "",
+
   //! login admin
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
@@ -160,6 +164,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         administrators: payload,
         allAdministrators: payload,
+      };
+
+
+    //? //////////////////////// TRAER ADMINS DASHBOARD ////////////////////////////
+
+    case SET_CLUB_ID:
+      return {
+        ...state,
+        currentClubId: payload,
       };
 
     default:

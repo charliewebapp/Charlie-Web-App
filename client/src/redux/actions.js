@@ -16,6 +16,7 @@ import {
   ADMIN_STATUS_LOGIN,
   GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
+  SET_CLUB_ID,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -306,3 +307,20 @@ export const getAdministrators = () => {
     }
   };
 };
+
+
+//? //////////////////////// TRAER ADMINS DASHBOARD ////////////////////////////
+
+
+export const setClubID = (clubID) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: SET_CLUB_ID,
+        payload: clubID,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
