@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
@@ -16,21 +16,22 @@ import FormPostAdminSA from "./views/SuperAdmin/FormPostAdminSA/FormPostAdminSA"
 import Profile from "./views/Users/Profile/Profile";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
+import { handleSAdminStatusLogin } from "./redux/actions";
 
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
 
 const App = () => {
-  //LOGIN DE DANI COMENTADO PARA QUE FUNCIONEN LAS DEMAS RUTAS
-  // const navigate = useNavigate();
-  // const [access, setAccess] = useState(false);
 
-  // function login(userData) {
-  //   if (userData.password === PASSWORD && userData.email === EMAIL) {
-  //     setAccess(true);
-  //     navigate('/superadmin/dashboard');
-  //   }
-  // }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function login(userData) {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+      dispatch(handleSAdminStatusLogin());
+      navigate('/superadmin/dashboard');
+    }
+  }
 
   // useEffect(() => {
   //   !access && navigate('/superadmin');
@@ -38,7 +39,13 @@ const App = () => {
 
   //!Login ADMIN
 
+  const sadminStatusLogin = useSelector((state) => state.sadminStatusLogin);
+
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
+
+  const requireSAdminLogin = (component) => {
+    return sadminStatusLogin ? component : <Navigate to="/superadmin" />;
+  };
 
   const requireAdminLogin = (component) => {
     return adminStatusLogin ? component : <Navigate to="/admin" />;
@@ -48,23 +55,23 @@ const App = () => {
     <>
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
-        {/* <Route
+        <Route
           path="/superadmin"
           element={<LoginSuperA login={login} />} // aca va form login //Descomentar al crear
-        /> */}
+        />
         <Route
           path="/superadmin/dashboard"
-          element={<DashboardSuperA />} // aca va form login
+          element={requireSAdminLogin(<DashboardSuperA />)} // aca va form login
         />
         <Route
           // http://localhost:5173/superadmin/addclub
           path="/superadmin/addclub"
-          element={<FormPostClubSuperA />} // AGREGA BOLICHE -> designar 1 solo usuario y contraseÃ±a de administrador
+          element={requireSAdminLogin(<FormPostClubSuperA />)} // AGREGA BOLICHE -> designar 1 solo usuario y contraseÃ±a de administrador
         />
         <Route
           // http://localhost:5173/superadmin/addadmin
           path="/superadmin/addadmin"
-          element={<FormPostAdminSA />}
+          element={requireSAdminLogin(<FormPostAdminSA />)}
         />
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS DEL ADMINISTRADOR
         {/* <Route path="/admin" element={<LandingAdmin />} />
