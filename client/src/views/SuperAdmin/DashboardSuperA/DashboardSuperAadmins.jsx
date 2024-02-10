@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAdministrators } from "../../../redux/actions";
 import style from "./dashboardSuperA.module.css";
+import { Link } from "react-router-dom";
 
 
 function DashboardSuperAadmins() {
@@ -77,6 +78,10 @@ function DashboardSuperAadmins() {
         <>
             <div className={style.container}>
                 <h2>Admins</h2>
+                <br />
+                <button className={style.button}>
+                    <Link to="/superadmin/addadmin">Crear Nuevo Admin</Link>
+                </button>
                 <div className={style.DataGrid}>
                     <DataGrid rows={rows} columns={columns} autoWidth />
                 </div>

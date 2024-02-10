@@ -11,6 +11,7 @@ import {
   UPDATE_COLLABORATOR,
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
+  SADMIN_STATUS_LOGIN,
   ADMIN_STATUS_LOGIN,
   DELETE_COLLABORATOR,
   GET_ADMINISTRATORS,
@@ -30,6 +31,7 @@ const initialState = {
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
+  sadminStatusLogin: true,
   adminStatusLogin: true, //* Funciona, asi que dejamos en true para acceder mas rapido. Cambiar a false para demo.
 };
 
@@ -134,6 +136,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         selectClientAdmin: payload,
       };
+
+    //! login super admin
+
+    case SADMIN_STATUS_LOGIN:
+      return {
+        ...state,
+        sadminStatusLogin: true,
+      };
+
+    //! login admin
 
     case ADMIN_STATUS_LOGIN:
       return {
