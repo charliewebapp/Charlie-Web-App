@@ -11,14 +11,30 @@ function DashboardSuperAadmins() {
 
     const dispatch = useDispatch();
 
-    const allAdministratorsState = useSelector((state) => state.allAdministrators);
-    console.log("todos los administradores", allAdministratorsState);
-
     useEffect(() => {
         dispatch(getAdministrators());
     }, []);
 
-    const rows = allAdministratorsState.map((admin) => {
+    const allAdministratorsState = useSelector((state) => state.allAdministrators);
+
+    console.log("todos los administradores", allAdministratorsState);
+
+    const clubID = useSelector((state) => state.currentClubId);
+
+    console.log("clubID", clubID);
+
+    function filterAdminsByClub(allAdministratorsState, clubID) {
+        return allAdministratorsState.filter(admin => admin.ClientId === clubID);
+    }
+
+    console.log("filterAdminsByClub", filterAdminsByClub(allAdministratorsState, clubID));
+
+    const filteredAdmins = allAdministratorsState ? filterAdminsByClub(allAdministratorsState, clubID) : [];
+
+    console.log("filteredAdmins", filteredAdmins);
+
+
+    const rows = filteredAdmins.map((admin) => {
         return {
             id: admin.id,
             name: admin.name_client,
@@ -31,7 +47,7 @@ function DashboardSuperAadmins() {
     const columns = [
         { field: "name", headerName: "Nombre", width: 250 },
         { field: "mail", headerName: "Email", width: 250 },
-        { field: "club", headerName: "Club", width: 250 },
+        { field: "club", headerName: "Club ID", width: 250 },
         { field: "status", headerName: "Status", width: 250 },
         {
             field: "actions",

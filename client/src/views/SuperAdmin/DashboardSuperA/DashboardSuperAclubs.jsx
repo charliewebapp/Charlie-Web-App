@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +7,7 @@ import { getBoliches } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import style from "./dashboardSuperA.module.css";
 
-function DashboardSuperAclubs() {
-
+function DashboardSuperAclubs({ handleAdmins }) {
     const dispatch = useDispatch();
 
     const allBolichesState = useSelector((state) => state.allBoliches);
@@ -38,7 +38,14 @@ function DashboardSuperAclubs() {
             width: 250,
             renderCell: (params) => (
                 <div>
-                    <button className={style.button} onClick={() => handleEdit(params.row)}>
+                    <button className={style.button} onClick={() => handleAdmins(params.row)}>
+                        Admins
+                    </button>
+
+                    <button
+                        className={style.button}
+                        onClick={() => handleEdit(params.row)}
+                    >
                         Editar
                     </button>
                     <button
