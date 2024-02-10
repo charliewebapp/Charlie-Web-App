@@ -26,7 +26,10 @@ export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";
 export const GET_ADMINS = "GET_ADMINS";
 export const SELECT_CLIENT_ADMIN = "SELECT_CLIENT_ADMIN";
 export const ADMIN_STATUS_LOGIN = "ADMIN_STATUS_LOGIN";
-
+export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const GET_ADMINISTRATORS = "GET_ADMINISTRATORS";
+
+//! Ventas temporario para demo
+export const GET_SALES = "GET_SALES";

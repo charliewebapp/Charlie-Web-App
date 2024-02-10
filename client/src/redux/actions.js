@@ -17,6 +17,8 @@ import {
   GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
   SET_CLUB_ID,
+  GET_SALES,
+  LOG_OUT_ADMIN,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -244,7 +246,6 @@ export const handleSAdminStatusLogin = () => {
   };
 };
 
-
 //! login admin
 
 export const getAdmins = () => {
@@ -257,6 +258,18 @@ export const getAdmins = () => {
       return dispatch({
         type: GET_ADMINS,
         payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const logOut = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: LOG_OUT_ADMIN,
       });
     } catch (error) {
       console.error(error);
@@ -289,7 +302,6 @@ export const handleAdminStatusLogin = () => {
   };
 };
 
-
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const getAdministrators = () => {
   const endpoint = "http://localhost:3001/administrator";
@@ -308,9 +320,7 @@ export const getAdministrators = () => {
   };
 };
 
-
 //? //////////////////////// TRAER ADMINS DASHBOARD ////////////////////////////
-
 
 export const setClubID = (clubID) => {
   return async (dispatch) => {
@@ -323,4 +333,18 @@ export const setClubID = (clubID) => {
       console.error(error);
     }
   };
-}
+};
+
+//!Ventas temporario para DEMO
+
+export const getSales = (clubName) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: GET_SALES,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

@@ -21,9 +21,15 @@ function DashboardAdminEmployee() {
   const clubName = useSelector((state) => state.selectClientAdmin);
   const allCollaboratorsState = useSelector((state) => state.allCollaborators);
 
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
+  const [employeeToDelete, setEmployeeToDelete] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   useEffect(() => {
     dispatch(getCollaborators(clubName));
   }, []);
+
+  console.log("todos colaboradores", allCollaboratorsState);
 
   const rows = allCollaboratorsState.map((employee) => {
     return {
@@ -34,11 +40,6 @@ function DashboardAdminEmployee() {
       status: employee.status,
     };
   });
-
-  //!eliminar al conectar estado global
-  // const rows = [
-  //   { id: 1, name: "#juana", lastname: "Maria Merie", email: "hola@gmail", status: "activo" },
-  // ];
 
   const columns = [
     { field: "name", headerName: "Nombre", width: 150 },
@@ -62,7 +63,7 @@ function DashboardAdminEmployee() {
           </Link>
           <button
             className={style.button}
-            onClick={() => handleDelete(params.row)}
+            onClick={() => openConfirmationDialog(params.row)}
           >
             Eliminar
           </button>
@@ -81,9 +82,20 @@ function DashboardAdminEmployee() {
     // Aquí puedes implementar la lógica para editar la fila
   }
 
-  function handleDelete(row) {
-    dispatch(deleteCollaborator(row.id, clubName));
-    console.log("Eliminar:", row);
+  function openConfirmationDialog(employee) {
+    setEmployeeToDelete(employee);
+    setConfirmationDialogOpen(true);
+  }
+
+  function closeConfirmationDialog() {
+    setConfirmationDialogOpen(false);
+  }
+
+  function handleDelete(employee) {
+    dispatch(deleteCollaborator(employee.id, clubName));
+    closeConfirmationDialog();
+    setSnackbarOpen(true);
+    console.log("Eliminar:", employee);
   }
 
   function handleBlock(row) {
@@ -107,6 +119,48 @@ function DashboardAdminEmployee() {
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoWidth />
         </div>
+        <Dialog
+          open={confirmationDialogOpen}
+          onClose={closeConfirmationDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            Confirmar eliminación
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {`¿Estás seguro de que deseas eliminar al empleado "${
+                employeeToDelete ? employeeToDelete.name : ""
+              }"?`}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeConfirmationDialog} color="primary">
+              Cancelar
+            </Button>
+            <Button
+              onClick={() => handleDelete(employeeToDelete)}
+              color="primary"
+              autoFocus
+            >
+              Eliminar
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={() => setSnackbarOpen(false)}
+        >
+          <MuiAlert
+            onClose={() => setSnackbarOpen(false)}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Empleado eliminado exitosamente
+          </MuiAlert>
+        </Snackbar>
       </div>
     </>
   );
