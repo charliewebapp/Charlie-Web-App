@@ -132,7 +132,7 @@ export const updateProduct = (productData, idProduct, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/${clubName}/${idProduct}`,
+        `http://localhost:3001/${clubName}/product/${idProduct}`,
         productData
       );
       if (data) {
