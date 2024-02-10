@@ -8,7 +8,6 @@ export const validateFormProductAdmin = (dataP) => {
     else {
         if (dataP.name.length < 3) errors.name = "Debe contener al menos 3 caracteres"
         if (dataP.name.length > 15) errors.name = "Debe contener como máximo 15 caracteres"
-        if (!regExpName.test(dataP.name)) errors.name = "Debe contener solo letras y espacios"
     }
     // IMAGE
     if (dataP.image.length > 0) {

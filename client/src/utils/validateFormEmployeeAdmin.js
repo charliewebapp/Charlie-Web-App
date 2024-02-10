@@ -21,7 +21,7 @@ export const validateFormEmployeeAdmin = (data) => {
     //PASSWORD
     if (!data.password.length) errors.password = "Debe asignar la contraseña del colaborador"
     else {
-        if (data.password.length < 5) errors.password = "Debe contener al menos 5 caracteres"
+        if (data.password.length < 8) errors.password = "Debe contener entre 8 y 10 caracteres"
         if (data.password.length > 10) errors.password = "Debe contener como máximo 10 caracteres"
         if (!regExpPassword.test(data.password)) errors.password = "Debe contener letras y números"
     }
