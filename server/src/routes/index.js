@@ -31,6 +31,10 @@ const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandl
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
 const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 
+const postQrHandler = require("../handlers/Qrs/postQrHandler");
+const getQrHandler = require("../handlers/Qrs/getQrHandler");
+const putQrHandler = require("../handlers/Qrs/putQrHandler");
+// const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
@@ -96,6 +100,10 @@ router.put("/:client/collaborator/:user", putCollaboratorsHandler);
 router.delete("/:client/collaborator/:user", deleteControllerHandler);
 
 //--------------colaborador
+router.post("/:client/collaborator/qr/:idMP", postQrHandler);
+router.get("/:client/collaborator/qr/:idMP", getQrHandler);
+router.put("/:client/collaborator/qr/:idMP", putQrHandler);
+// router.delete("/:client/collaborator/qr", deleteQrHandler);
 
 //--------------consumidor
 
