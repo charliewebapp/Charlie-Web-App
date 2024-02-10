@@ -16,6 +16,10 @@ export const POST_ADMIN = "POST_ADMIN";
 
 export const GET_BOLICHES = "GET_BOLICHES";
 
+//! login super admin
+
+export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";
+
 //! login admin
 export const GET_ADMINS = "GET_ADMINS";
 export const SELECT_CLIENT_ADMIN = "SELECT_CLIENT_ADMIN";

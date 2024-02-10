@@ -12,6 +12,7 @@ import {
   UPDATE_COLLABORATOR,
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
+  SADMIN_STATUS_LOGIN,
   ADMIN_STATUS_LOGIN,
   GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
@@ -228,8 +229,22 @@ export const postAdmin = (admin, params) => {
     }
   };
 };
+//! logina super admin
 
-//! logina dmin
+export const handleSAdminStatusLogin = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: SADMIN_STATUS_LOGIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+
+//! login admin
 
 export const getAdmins = () => {
   const endpoint = "http://localhost:3001/administrator";

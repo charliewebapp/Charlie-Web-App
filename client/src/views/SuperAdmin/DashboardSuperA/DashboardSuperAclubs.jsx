@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getBoliches } from "../../../redux/actions";
+import { Link } from "react-router-dom";
 import style from "./dashboardSuperA.module.css";
 
 function DashboardSuperAclubs() {
@@ -76,6 +77,10 @@ function DashboardSuperAclubs() {
         <>
             <div className={style.container}>
                 <h2>Clubs</h2>
+                <br />
+                <button className={style.button}>
+                    <Link to="/superadmin/addclub">Crear Nuevo Club</Link>
+                </button>
                 <div className={style.DataGrid}>
                     <DataGrid rows={rows} columns={columns} autoWidth />
                 </div>
