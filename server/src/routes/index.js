@@ -11,10 +11,8 @@ const getProductsHandler = require("../handlers/Products/getProductsHandler");
 const getProductCategoryHandler = require("../handlers/Products/getProductsCategoryHandler");
 const deleteProductHandler = require("../handlers/Products/deleteProductsHandler");
 const putProductHandler = require("../handlers/Products/putProductHandler");
-
 const postUserHandler = require("../handlers/Users/postUserHandler");
 const getUsersHandler = require("../handlers/Users/getUsersHandler");
-
 
 const postCollaboratorHandler = require("../handlers/Collaborators/postCollaboratoHandler");
 const getCollaboratorHandler = require("../handlers/Collaborators/getCollaboratorHandler");
