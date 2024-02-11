@@ -74,8 +74,7 @@ function LandingAdmin() {
       dispatch(selectClientAdminName(client));
       navigate(`/admin/${client}/dashboardAdmin`);
     } else {
-      console.log("Usuario o contraseña incorrectos");
-      // Manejar el caso en el que el usuario o contraseña sean incorrectos
+      alert("Usuario o contraseña incorrectos");
     }
   };
 

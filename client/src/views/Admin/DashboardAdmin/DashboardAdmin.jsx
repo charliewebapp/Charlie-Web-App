@@ -74,7 +74,6 @@ function DashboardAdmin() {
           </div>
         </div>
 
-        {/* Renderizar condicionalmente segun el boton elegio */}
         <div>
           {productsActive && <DashboardAdminStock />}
           {salesActive && <DashboardAdminSales />}

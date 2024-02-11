@@ -74,12 +74,12 @@ function DashboardAdminEmployee() {
 
   function handleAddEmployee(row) {
     console.log("Agregar Empleado:", row);
-    // Aquí puedes implementar la lógica para editar la fila
+    //
   }
 
   function handleEdit(row) {
     console.log("Editar:", row);
-    // Aquí puedes implementar la lógica para editar la fila
+    //
   }
 
   function openConfirmationDialog(employee) {

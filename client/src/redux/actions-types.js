@@ -10,7 +10,7 @@ export const POST_COLLABORATOR = "POST_COLLABORATOR";
 export const UPDATE_COLLABORATOR = "UPDATE_COLLABORATOR";
 export const DELETE_COLLABORATOR = "DELETE_COLLABORATOR";
 
-//! /////////////// SUPER ADMIN ///////////////////////
+//! /////////////// SUPER ADMIN /////////////////////
 export const POST_BOLICHE = "POST_BOLICHE";
 export const POST_ADMIN = "POST_ADMIN";
 

@@ -50,7 +50,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    //! /////////////// PRODUCTS ////////////////////
+    //! /////////////// PRODUCTS //////////////
     case GET_PRODUCTS:
       return {
         ...state,

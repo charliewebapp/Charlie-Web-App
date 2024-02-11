@@ -4,7 +4,7 @@
 
 .container {
   display: grid;
-  justify-content: flex-start; /* Ajustado para alinear el contenido a la izquierda */
+  justify-content: flex-start; 
   align-items: flex-start; /* Alinea todo a la izquierda */
   width: 100%;
   box-sizing: border-box;

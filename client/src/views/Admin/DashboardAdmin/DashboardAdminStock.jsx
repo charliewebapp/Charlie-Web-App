@@ -95,14 +95,13 @@ function DashboardAdminStock() {
   }
 
   function handleDelete(product) {
-    dispatch(deleteProduct(product.id, clubName)); // Pasar clubName como parámetro
+    dispatch(deleteProduct(product.id, clubName));
     closeConfirmationDialog();
     setSnackbarOpen(true);
   }
 
   function handleAddStock() {
     console.log("Agregar");
-    // Aquí puedes implementar la lógica para agregar stock
   }
 
   return (

@@ -1,6 +1,6 @@
 const validation = (userData) => {
   const errors = {};
-
+  //
   if (!/\S+@\S+/.test(userData.email)) {
     errors.email = "Debe ser un email válido";
   }

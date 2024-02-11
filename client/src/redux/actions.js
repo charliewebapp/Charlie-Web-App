@@ -22,7 +22,7 @@ import {
   ADMIN_CONFIG_VIEW,
 } from "./actions-types";
 
-//! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
+//! !!!!!!!!!!!!!!!!!!  COLLABORATORS    /////////////////////////
 export const getCollaborators = (clubName) => {
   return async (dispatch) => {
     try {
