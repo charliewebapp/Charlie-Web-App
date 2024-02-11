@@ -16,6 +16,8 @@ import {
   DELETE_COLLABORATOR,
   GET_ADMINISTRATORS,
   SET_CLUB_ID,
+  GET_SALES,
+  LOG_OUT_ADMIN,
 } from "./actions-types";
 
 const initialState = {
@@ -23,20 +25,24 @@ const initialState = {
   allBoliches: [],
 
   allProducts: [],
+  productsActive: false,
 
   administrators: [],
   allAdministrators: [],
 
   allCollaborators: [],
+  collaboratorsActive: false,
 
   currentClubId: "",
+
+  salesActive: false,
 
   //! login admin
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
   sadminStatusLogin: true,
-  adminStatusLogin: true, //* Funciona, asi que dejamos en true para acceder mas rapido. Cambiar a false para demo.
+  adminStatusLogin: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +53,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: payload,
+        collaboratorsActive: false,
+        salesActive: false,
+        productsActive: true,
       };
     case POST_PRODUCT:
       return {
@@ -80,6 +89,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allCollaborators: payload,
+        productsActive: false,
+        salesActive: false,
+        collaboratorsActive: true,
       };
     case POST_COLLABORATOR:
       return {
@@ -157,6 +169,12 @@ const reducer = (state = initialState, action) => {
         adminStatusLogin: true,
       };
 
+    case LOG_OUT_ADMIN:
+      return {
+        ...state,
+        adminStatusLogin: false,
+      };
+
     //? //////////////////////// TRAER ADMIN ////////////////////////////
 
     case GET_ADMINISTRATORS:
@@ -166,13 +184,21 @@ const reducer = (state = initialState, action) => {
         allAdministrators: payload,
       };
 
-
     //? //////////////////////// TRAER ADMINS DASHBOARD ////////////////////////////
 
     case SET_CLUB_ID:
       return {
         ...state,
         currentClubId: payload,
+      };
+
+    //! Ventas para renderizar teporario
+    case GET_SALES:
+      return {
+        ...state,
+        productsActive: false,
+        collaboratorsActive: false,
+        salesActive: true,
       };
 
     default:

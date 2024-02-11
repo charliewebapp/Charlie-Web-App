@@ -87,7 +87,9 @@ function LandingAdmin() {
         <h2>Bienvenido al Sitio de Administrador</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email">Correo Electrónico:</label>
+            <label htmlFor="email" className={style.label}>
+              Correo Electrónico:
+            </label>
             <input
               type="email"
               id="email"
@@ -95,11 +97,14 @@ function LandingAdmin() {
               value={userData.email}
               onChange={handleChange}
               required
+              className={style.input}
             />
             {errors.email && <p className={style.error}>{errors.email}</p>}
           </div>
           <div>
-            <label htmlFor="password">Contraseña:</label>
+            <label htmlFor="password" className={style.label}>
+              Contraseña:
+            </label>
             <div className={style.passwordInputContainer}>
               <input
                 type={showPassword ? "text" : "password"}
@@ -108,6 +113,7 @@ function LandingAdmin() {
                 value={userData.password}
                 onChange={handleChange}
                 required
+                className={style.input}
               />
               <FontAwesomeIcon
                 icon={showPassword ? faEye : faEyeSlash}
@@ -117,7 +123,9 @@ function LandingAdmin() {
               {errors.email && <p className={style.error}>{errors.password}</p>}
             </div>
           </div>
-          <button type="submit">Iniciar Sesión</button>
+          <button type="submit" className={style.button}>
+            Iniciar Sesión
+          </button>
         </form>
       </div>
     </div>

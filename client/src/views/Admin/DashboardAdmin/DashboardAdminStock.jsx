@@ -32,18 +32,20 @@ function DashboardAdminStock() {
   const allProductsState = useSelector((state) => state.allProducts);
   console.log("todos los productos", allProductsState);
 
-  const rows = allProductsState.map((prod) => {
-    return {
-      id: prod.id,
-      name: prod.name,
-      brand: prod.brand,
-      image: prod.image,
-      description: prod.description,
-      price: prod.price,
-      stock: prod.stock,
-      category: prod.category,
-    };
-  });
+  const rows = allProductsState
+    ? allProductsState.map((prod) => {
+        return {
+          id: prod.id,
+          name: prod.name,
+          brand: prod.brand,
+          image: prod.image,
+          description: prod.description,
+          price: prod.price,
+          stock: prod.stock,
+          category: prod.category,
+        };
+      })
+    : [];
 
   const columns = [
     { field: "name", headerName: "Nombre", width: 100 },

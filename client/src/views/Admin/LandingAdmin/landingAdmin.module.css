@@ -1,18 +1,83 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .formContainer {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .formContainer form div {
-    margin-bottom: 10px;
-  }
+/* landingAdmin.module.css */
 
-  
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000; /* Color de fondo */
+}
+
+.formContainer {
+  background-color: #2b333e; /* Color de fondo */
+  color: #ffffff; /* Color del texto */
+  border: 2px solid #00fdf3; /* Color del borde */
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer h2 {
+  color: #ffffff; /* Color del texto */
+  margin-bottom: 20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.formGroup {
+  margin-bottom: 30px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  color: #ffffff; /* Color del texto */
+  margin-bottom: 10px;
+  font-family: 'Lato', sans-serif;
+}
+
+.input {
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.passwordInputContainer {
+  position: relative;
+}
+
+.togglePasswordVisibility {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffffff; /* Color del texto */
+}
+
+.error {
+  color: #ff0000;
+  margin-top: 5px;
+  font-family: 'Lato', sans-serif;
+}
+
+.button {
+  background-color: #03f9f0;
+  color: #2b333e; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Lato', sans-serif;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #ffd185;
+}
