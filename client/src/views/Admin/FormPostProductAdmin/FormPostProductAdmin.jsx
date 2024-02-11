@@ -6,7 +6,7 @@ import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmi
 import { postProduct } from "../../../redux/actions";
 import { useNavigate, Link } from "react-router-dom";
 
-//! CATEGORIAS -> VER SI LO DEJAMOS EN REDUX O EN UTILS para mapear -> en select
+// CATEGORIAS 
 const categories = [
   "Tragos",
   "Cervezas",
@@ -17,9 +17,10 @@ const categories = [
 ];
 
 function FormPostProductAdmin() {
+
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
-  //! const productsState = useSelector(state => state.products) para consultar nombres no repetidos
+  const allProductsState = useSelector(state => state.allProducts)
 
   //local state for input
   const [productData, setProductData] = useState({
@@ -51,17 +52,17 @@ function FormPostProductAdmin() {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormProductAdmin(updatedData));
 
-      //!avoid repeted names -> ver despues al hacer get products por consulta estado de redux
-      // const repetedName = productsState.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
-      // if (repetedName !== undefined) {
-      //     setErrors({ ...errors, name: "Este nombre de producto ya existe" });
-      // }
+      //avoid repeted names
+      const repetedName = allProductsState.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
+      if (repetedName !== undefined) {
+        setErrors({ ...errors, name: "Este nombre de producto ya existe" });
+      }
 
       return updatedData;
     });
   };
 
-  //! SUBMIT
+  // SUBMIT
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
