@@ -211,7 +211,7 @@ export const getBoliches = () => {
 };
 
 //? //////////////////////// CREAR ADMIN ////////////////////////////
-export const postAdmin = (admin, params) => {
+export const postAdmin = (admin, params,navigate) => {
   console.log(admin, "ADMINS");
   console.log(params, "PARAMS");
 
@@ -222,13 +222,15 @@ export const postAdmin = (admin, params) => {
   return async (dispatch) => {
     try {
       const data = await axios.post(endpoint, admin);
-
+alert("administrador creado exitosamente!")
+navigate("/superadmin/dashboard")
       return dispatch({
         type: POST_ADMIN,
         payload: data,
       });
     } catch (error) {
       console.error(error.message);
+      alert ("Error al crear el administrador : " + error.message)
     }
   };
 };

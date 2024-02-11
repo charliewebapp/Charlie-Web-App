@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./formpostadminsa.module.css";
 import { postAdmin, getBoliches } from "../../../redux/actions";
+import { useNavigate } from 'react-router-dom';
+
 
 function FormPostAdminSA() {
+  const navigate = useNavigate()
   const [clientId, setClientId] = useState("");
   const [selectedName, setSelectedName] = useState("");
 
@@ -61,7 +64,7 @@ function FormPostAdminSA() {
       };
 
       const params = selectedName;
-      dispatch(postAdmin(createForm, params));
+      dispatch(postAdmin(createForm, params,navigate));
     } catch (error) {
       console.error(error);
     }
