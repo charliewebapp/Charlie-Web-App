@@ -7,9 +7,9 @@ import { getProducts, updateProduct } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
 
-//MODIFICAR RUTA EN APP.JSX-> /admin/:clubName/editproduct/:idProduct
 
-//! CATEGORIAS -> VER SI LO DEJAMOS EN REDUX O EN UTILS para mapear -> en select
+
+// CATEGORIAS 
 const categories = [
   "Tragos",
   "Cervezas",
@@ -20,14 +20,14 @@ const categories = [
 ];
 
 function FormUpdateProductAdmin() {
+
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
-  //!cuando redux venga cargado solo dejar esto: y activar nombres repetidos - las actions y rutas funcionan (primero crear client)
+  const allProductsState = useSelector(state => state.allProducts)
 
-  const allProductsState = useSelector((state) => state.allProducts);
 
+  //Traer data del producto a editar
   const { idProduct } = useParams();
-  console.log("ID", idProduct);
   const productToUpdate = allProductsState.find(
     (product) => product.id === idProduct
   );
@@ -41,16 +41,11 @@ function FormUpdateProductAdmin() {
     category: productToUpdate.category,
   });
 
-  //!eliminar esto que sigue al conectar con back -> GET PRODUCTS:
-  // const [productData, setProductData] = useState({
-  //     name: "",
-  //     brand: "",
-  //     image: "",
-  //     description: "",
-  //     price: "",
-  //     stock: "",
-  //     category: "",
-  // })
+  //para verificar nombre no repetidos salvo producto a editar
+  const productsNotToUpdate = allProductsState.filter(
+    (product) => product.id !== idProduct
+  );
+
 
   //local state errors
   const [errors, setErrors] = useState({
@@ -71,11 +66,11 @@ function FormUpdateProductAdmin() {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormProductAdmin(updatedData));
 
-      //!avoid repeted names -> ver despues al hacer get products por consulta estado de redux
-      // const repetedName = productsState.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
-      // if (repetedName !== undefined) {
-      //     setErrors({ ...errors, name: "Este nombre de producto ya existe" });
-      // }
+      //Evita nombres repetidos salvo el producttoUpdate
+      const repetedName = productsNotToUpdate.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
+      if (repetedName !== undefined) {
+        setErrors({ ...errors, name: "Este nombre de producto ya existe" });
+      }
 
       return updatedData;
     });
