@@ -19,6 +19,7 @@ import {
   SET_CLUB_ID,
   GET_SALES,
   LOG_OUT_ADMIN,
+  ADMIN_CONFIG_VIEW,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -295,6 +296,18 @@ export const handleAdminStatusLogin = () => {
     try {
       return dispatch({
         type: ADMIN_STATUS_LOGIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const handleAdminConfigView = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: ADMIN_CONFIG_VIEW,
       });
     } catch (error) {
       console.error(error);

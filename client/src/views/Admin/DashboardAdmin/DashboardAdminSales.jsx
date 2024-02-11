@@ -19,7 +19,7 @@ const columns = [
     renderCell: (params) => (
       <div>
         <button
-          className={style.button}
+          className={style.buttonGrid}
           onClick={() => handleDetail(params.row)}
         >
           Ver detalle

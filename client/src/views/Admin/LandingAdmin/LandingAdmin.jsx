@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./landingAdmin.module.css";
+import validation from "./validation";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -38,6 +39,12 @@ function LandingAdmin() {
       ...userData,
       [name]: value,
     });
+    setErrors(
+      validation({
+        ...userData,
+        [name]: value, //viene asi para q agarre en tiepo real todo. Si pongo solo userData, queda desfasado el ultimo caracter para validar.
+      })
+    );
   };
 
   const getAllAdmins = useSelector((state) => state.getAllAdmins);
@@ -84,7 +91,7 @@ function LandingAdmin() {
   return (
     <div className={style.container}>
       <div className={style.formContainer}>
-        <h2>Bienvenido al Sitio de Administrador</h2>
+        <h2 className={style.h2}>Bienvenido al Sitio Administrador</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className={style.label}>
@@ -99,7 +106,11 @@ function LandingAdmin() {
               required
               className={style.input}
             />
-            {errors.email && <p className={style.error}>{errors.email}</p>}
+            {errors.email ? (
+              <p className={style.error}>{errors.email}</p>
+            ) : (
+              <p className={style.errorNot}> . </p>
+            )}
           </div>
           <div>
             <label htmlFor="password" className={style.label}>
@@ -120,7 +131,11 @@ function LandingAdmin() {
                 className={style.togglePasswordVisibility}
                 onClick={togglePasswordVisibility}
               />
-              {errors.email && <p className={style.error}>{errors.password}</p>}
+              {errors.password ? (
+                <p className={style.error}>{errors.password}</p>
+              ) : (
+                <p className={style.errorNot}> . </p>
+              )}
             </div>
           </div>
           <button type="submit" className={style.button}>

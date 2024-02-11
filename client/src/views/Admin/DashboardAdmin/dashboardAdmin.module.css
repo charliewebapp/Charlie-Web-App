@@ -1,26 +1,145 @@
+/* dashboardAdmin.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .container {
-    display: grid;
-    justify-content: left;
-    padding: 10px;
-    margin: 10px;
-    width: 100%; /* Opcional: para ocupar todo el ancho del contenedor padre */
-    box-sizing: border-box;
-    background-color: beige;
-    border-radius: 10px;
+  display: grid;
+  justify-content: flex-start; /* Ajustado para alinear el contenido a la izquierda */
+  align-items: flex-start; /* Alinea todo a la izquierda */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+  margin: 20px;
 }
 
-.button {
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
+.containerButton {
+    display: grid;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 1200px;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+    margin: 20px;
+    display: flex; /* Agregado */
+    justify-content: space-between; /* Agregado */
+  }
+
+.h1{
+    margin-top: 5px;
+    margin-bottom: 30px;
+    color: #2b333e ;
+    padding-bottom: 30px;
+    border-bottom: #2b333e 1px solid;
+    width: 1200px;
 }
+
+/* .h2{
+  padding: 10px;
+  margin: 10px;
+  margin-top: 30px;
+} */
+
+.h3{
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    color: #bb832b ;
+    width: 1200px;
+    border-bottom: #2b333e 0.5px solid;
+}
+
+
+.button {
+  margin: 5px;
+  padding: 12px 20px; /* Alineado con el tamaño de botón en landingAdmin.module.css */
+  background-color: transparent; /* Eliminar el fondo */
+  border: none; /* Eliminar el borde */
+  color: #2b333e;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+  transition: color 0.3s ease; /* Agregar transición para el color del texto */
+  font-weight: normal; /* Restablecer el peso de la fuente */
+  position: relative; /* Agregar posición relativa */
+}
+
+.button::after {
+  content: ''; /* Agregar contenido al pseudo-elemento */
+  position: absolute; /* Posicionar el pseudo-elemento */
+  left: 50%; /* Centrar el pseudo-elemento horizontalmente */
+  bottom: 5px; /* Ajustar la distancia entre la línea y el texto */
+  width: 50%; /* Definir el ancho de la línea (la mitad del span) */
+  height: 1px; /* Definir la altura de la línea */
+  background-color: #bb832b; /* Color de la línea */
+  transition: width 0.3s ease; /* Agregar transición para el ancho de la línea */
+  transform: translateX(-50%); /* Centrar horizontalmente el pseudo-elemento */
+}
+
+.button:hover::after {
+  width: calc(70% + 5px); /* Ajustar el ancho de la línea en el estado de hover */
+}
+
+.button:hover {
+  color: #bb832b; /* Cambiar el color del texto en el estado de hover */
+  font-weight: bold; /* Hacer el texto más grueso en el estado de hover */
+}
+
 
 .DataGrid {
     display: flex;
     justify-content: space-around;
-    height: 300px; /* Asegúrate de incluir la unidad de medida (px en este caso) */
-    width: 100%; /* El DataGrid ocupará el 100% del ancho del contenedor */
+    height: 300px;
+    width: 100%;
+    max-width: 100%; /* Para asegurarse de que no exceda el ancho del contenedor padre */
     padding: 10px;
     margin: 10px;
-    background-color: rgb(212, 255, 255)
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px; /* Radio de borde */
+    font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+  }
+
+/* Establecer un ancho fijo para cada celda en el DataGrid */
+.DataGrid > * {
+  flex: 1; /* Cada celda ocupa el mismo espacio */
+  min-width: 100px; /* Ancho mínimo de cada celda */
+}
+
+
+.buttonConfig {
+  background-color: rgba(231, 183, 110, 0.5);
+  padding: 10px 20px;
+  border: 1px solid rgba(231, 183, 110, 0.7);
+  /* color: rgba(231, 183, 110); */
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.buttonConfig:hover {
+  background-color: rgba(231, 183, 110, 0.9)
+}
+
+.linkContainer {
+  display: inline-block; /* Para que el contenedor solo ocupe el espacio del botón */
+  overflow: hidden; /* Ocultar cualquier contenido adicional */
+}
+
+.buttonGrid {
+  margin: 5px;
+  padding: 12px 20px; /* Alineado con el tamaño de botón en landingAdmin.module.css */
+  background-color: transparent; /* Eliminar el fondo */
+  border: none; /* Eliminar el borde */
+  color: #2b333e;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+  transition: color 0.3s ease; /* Agregar transición para el color del texto */
+  font-weight: normal; /* Restablecer el peso de la fuente */
+  position: relative; /* Agregar posición relativa */
+}
+
+.buttonGrid:hover {
+  color: #bb832b; /* Cambiar el color del texto en el estado de hover */
+  font-weight: bold; /* Hacer el texto más grueso en el estado de hover */
 }

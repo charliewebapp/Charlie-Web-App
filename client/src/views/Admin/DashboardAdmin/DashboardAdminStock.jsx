@@ -63,7 +63,7 @@ function DashboardAdminStock() {
         <div>
           <Link to={`/admin/${clubName}/editproduct/${params.row.id}`}>
             <button
-              className={style.button}
+              className={style.buttonGrid}
               onClick={() => handleEdit(params.row)}
             >
               Editar{" "}
@@ -71,7 +71,7 @@ function DashboardAdminStock() {
           </Link>
 
           <button
-            className={style.button}
+            className={style.buttonGrid}
             onClick={() => openConfirmationDialog(params.row)}
           >
             Eliminar
@@ -110,12 +110,17 @@ function DashboardAdminStock() {
       <div className={style.container}>
         <h2>Stock</h2>
 
-        <Link to={`/admin/${clubName}/addproduct`}>
-          <button className={style.button} onClick={handleAddStock}>
-            {" "}
-            Agregar Producto{" "}
-          </button>
-        </Link>
+        <div className={style.linkContainer}>
+          <Link
+            to={`/admin/${clubName}/addproduct`}
+            className={style.linkContainer}
+          >
+            <button className={style.buttonConfig} onClick={handleAddStock}>
+              {" "}
+              Agregar Producto{" "}
+            </button>
+          </Link>
+        </div>
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoWidth />
         </div>

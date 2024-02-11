@@ -55,14 +55,14 @@ function DashboardAdminEmployee() {
           <Link to={`/admin/${clubName}/updateemployee/${params.row.id}`}>
             {" "}
             <button
-              className={style.button}
+              className={style.buttonGrid}
               onClick={() => handleEdit(params.row)}
             >
               Editar{" "}
             </button>
           </Link>
           <button
-            className={style.button}
+            className={style.buttonGrid}
             onClick={() => openConfirmationDialog(params.row)}
           >
             Eliminar
@@ -108,13 +108,15 @@ function DashboardAdminEmployee() {
       <div className={style.container}>
         <h2>Empleados</h2>
 
-        <Link to={`/admin/${clubName}/addemployee`}>
-          {" "}
-          <button className={style.button} onClick={handleAddEmployee}>
+        <div className={style.linkContainer}>
+          <Link to={`/admin/${clubName}/addemployee`}>
             {" "}
-            Agregar Colaborador{" "}
-          </button>
-        </Link>
+            <button className={style.buttonConfig} onClick={handleAddEmployee}>
+              {" "}
+              Agregar Colaborador{" "}
+            </button>
+          </Link>
+        </div>
 
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoWidth />
