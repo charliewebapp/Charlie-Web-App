@@ -38,7 +38,7 @@ function DashboardAdminStock() {
           id: prod.id,
           name: prod.name,
           brand: prod.brand,
-          image: prod.image,
+          // image: prod.image,
           description: prod.description,
           price: prod.price,
           stock: prod.stock,
@@ -48,22 +48,22 @@ function DashboardAdminStock() {
     : [];
 
   const columns = [
-    { field: "name", headerName: "Nombre", width: 100 },
-    { field: "brand", headerName: "Marca", width: 100 },
-    { field: "image", headerName: "Imagen", width: 100 },
-    { field: "description", headerName: "Descripción", width: 250 },
-    { field: "price", headerName: "Precio", width: 80 },
-    { field: "stock", headerName: "Stock", width: 80 },
-    { field: "category", headerName: "Categoría", width: 100 },
+    { field: "name", headerName: "Nombre", width: 150 },
+    { field: "brand", headerName: "Marca", width: 150 },
+    // { field: "image", headerName: "Imagen", width: 100 },
+    { field: "description", headerName: "Descripción", width: 280 },
+    { field: "price", headerName: "Precio", width: 100 },
+    { field: "stock", headerName: "Stock", width: 100 },
+    { field: "category", headerName: "Categoría", width: 120 },
     {
       field: "actions",
       headerName: "Acciones",
-      width: 250,
+      width: 200,
       renderCell: (params) => (
         <div>
           <Link to={`/admin/${clubName}/editproduct/${params.row.id}`}>
             <button
-              className={style.button}
+              className={style.buttonGrid}
               onClick={() => handleEdit(params.row)}
             >
               Editar{" "}
@@ -71,7 +71,7 @@ function DashboardAdminStock() {
           </Link>
 
           <button
-            className={style.button}
+            className={style.buttonGrid}
             onClick={() => openConfirmationDialog(params.row)}
           >
             Eliminar
@@ -95,14 +95,13 @@ function DashboardAdminStock() {
   }
 
   function handleDelete(product) {
-    dispatch(deleteProduct(product.id, clubName)); // Pasar clubName como parámetro
+    dispatch(deleteProduct(product.id, clubName));
     closeConfirmationDialog();
     setSnackbarOpen(true);
   }
 
   function handleAddStock() {
     console.log("Agregar");
-    // Aquí puedes implementar la lógica para agregar stock
   }
 
   return (
@@ -110,12 +109,17 @@ function DashboardAdminStock() {
       <div className={style.container}>
         <h2>Stock</h2>
 
-        <Link to={`/admin/${clubName}/addproduct`}>
-          <button className={style.button} onClick={handleAddStock}>
-            {" "}
-            Agregar Producto{" "}
-          </button>
-        </Link>
+        <div className={style.linkContainer}>
+          <Link
+            to={`/admin/${clubName}/addproduct`}
+            className={style.linkContainer}
+          >
+            <button className={style.buttonConfig} onClick={handleAddStock}>
+              {" "}
+              Agregar Producto{" "}
+            </button>
+          </Link>
+        </div>
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoWidth />
         </div>

@@ -1,6 +1,6 @@
 /* landingAdmin.module.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 .container {
   display: flex;
@@ -22,19 +22,18 @@
 .formContainer h2 {
   color: #ffffff; /* Color del texto */
   margin-bottom: 20px;
-  font-family: 'Lato', sans-serif;
+   font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
 }
 
-.formGroup {
-  margin-bottom: 30px;
+.h2{
+  margin-top: 1px;
 }
 
 .label {
   display: block;
-  font-weight: bold;
   color: #ffffff; /* Color del texto */
   margin-bottom: 10px;
-  font-family: 'Lato', sans-serif;
+   font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
 }
 
 .input {
@@ -42,7 +41,7 @@
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  font-family: 'Lato', sans-serif;
+   font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -53,17 +52,26 @@
 
 .togglePasswordVisibility {
   position: absolute;
-  top: 50%;
+  top: 35%; /* Ajustar la posición vertical */
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #ffffff; /* Color del texto */
+  color: #ffffff; 
+  margin-bottom: 5px;
 }
 
+
 .error {
-  color: #ff0000;
+  color: #f65555;
   margin-top: 5px;
-  font-family: 'Lato', sans-serif;
+   font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
+   font-size: 13px;
+}
+.errorNot {
+  color: #2b333e;
+  margin-top: 5px;
+   font-family: 'Montserrat', sans-serif; 
+   font-size: 13px;
 }
 
 .button {
@@ -74,7 +82,7 @@
   padding: 12px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-family: 'Lato', sans-serif;
+   font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
   margin-top: 10px;
 }
 
