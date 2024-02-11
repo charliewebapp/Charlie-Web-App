@@ -15,7 +15,7 @@ const columns = [
   {
     field: "actions",
     headerName: "Acciones",
-    width: 250,
+    width: 350,
     renderCell: (params) => (
       <div>
         <button
@@ -34,7 +34,7 @@ function handleDetail(row) {
   // Aquí puedes implementar la lógica para editar la fila
 }
 
-function DashboardAdmin() {
+function DashboardAdminSales() {
   return (
     <>
       <div className={style.container}>
@@ -47,4 +47,4 @@ function DashboardAdmin() {
   );
 }
 
-export default DashboardAdmin;
+export default DashboardAdminSales;

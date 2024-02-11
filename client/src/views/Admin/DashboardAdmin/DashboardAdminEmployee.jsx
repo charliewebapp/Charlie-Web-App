@@ -42,9 +42,9 @@ function DashboardAdminEmployee() {
   });
 
   const columns = [
-    { field: "name", headerName: "Nombre", width: 150 },
-    { field: "lastname", headerName: "Apellido", width: 150 },
-    { field: "mail", headerName: "Email", width: 150 },
+    { field: "name", headerName: "Nombre", width: 200 },
+    { field: "lastname", headerName: "Apellido", width: 200 },
+    { field: "mail", headerName: "Email", width: 300 },
     { field: "status", headerName: "Status", width: 150 },
     {
       field: "actions",
@@ -55,14 +55,14 @@ function DashboardAdminEmployee() {
           <Link to={`/admin/${clubName}/updateemployee/${params.row.id}`}>
             {" "}
             <button
-              className={style.button}
+              className={style.buttonGrid}
               onClick={() => handleEdit(params.row)}
             >
               Editar{" "}
             </button>
           </Link>
           <button
-            className={style.button}
+            className={style.buttonGrid}
             onClick={() => openConfirmationDialog(params.row)}
           >
             Eliminar
@@ -74,12 +74,12 @@ function DashboardAdminEmployee() {
 
   function handleAddEmployee(row) {
     console.log("Agregar Empleado:", row);
-    // Aquí puedes implementar la lógica para editar la fila
+    //
   }
 
   function handleEdit(row) {
     console.log("Editar:", row);
-    // Aquí puedes implementar la lógica para editar la fila
+    //
   }
 
   function openConfirmationDialog(employee) {
@@ -108,13 +108,15 @@ function DashboardAdminEmployee() {
       <div className={style.container}>
         <h2>Empleados</h2>
 
-        <Link to={`/admin/${clubName}/addemployee`}>
-          {" "}
-          <button className={style.button} onClick={handleAddEmployee}>
+        <div className={style.linkContainer}>
+          <Link to={`/admin/${clubName}/addemployee`}>
             {" "}
-            Agregar Colaborador{" "}
-          </button>
-        </Link>
+            <button className={style.buttonConfig} onClick={handleAddEmployee}>
+              {" "}
+              Agregar Colaborador{" "}
+            </button>
+          </Link>
+        </div>
 
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoWidth />

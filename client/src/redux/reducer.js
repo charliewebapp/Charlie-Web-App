@@ -18,6 +18,7 @@ import {
   SET_CLUB_ID,
   GET_SALES,
   LOG_OUT_ADMIN,
+  ADMIN_CONFIG_VIEW,
 } from "./actions-types";
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
   selectClientAdmin: [], //!El boliche asignado a ese admin.
   sadminStatusLogin: true,
   adminStatusLogin: false,
+  adminConfigActive: false, //!Renderizar config en admin
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +57,7 @@ const reducer = (state = initialState, action) => {
         allProducts: payload,
         collaboratorsActive: false,
         salesActive: false,
+        adminConfigActive: false,
         productsActive: true,
       };
     case POST_PRODUCT:
@@ -91,6 +94,7 @@ const reducer = (state = initialState, action) => {
         allCollaborators: payload,
         productsActive: false,
         salesActive: false,
+        adminConfigActive: false,
         collaboratorsActive: true,
       };
     case POST_COLLABORATOR:
@@ -175,6 +179,14 @@ const reducer = (state = initialState, action) => {
         adminStatusLogin: false,
       };
 
+    case ADMIN_CONFIG_VIEW:
+      return {
+        ...state,
+        productsActive: false,
+        salesActive: false,
+        collaboratorsActive: false,
+        adminConfigActive: true,
+      };
     //? //////////////////////// TRAER ADMIN ////////////////////////////
 
     case GET_ADMINISTRATORS:
@@ -198,6 +210,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         productsActive: false,
         collaboratorsActive: false,
+        adminConfigActive: false,
         salesActive: true,
       };
 
