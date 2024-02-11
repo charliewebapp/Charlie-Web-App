@@ -19,6 +19,7 @@ import {
   SET_CLUB_ID,
   GET_SALES,
   LOG_OUT_ADMIN,
+  ADMIN_CONFIG_VIEW,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -211,7 +212,7 @@ export const getBoliches = () => {
 };
 
 //? //////////////////////// CREAR ADMIN ////////////////////////////
-export const postAdmin = (admin, params,navigate) => {
+export const postAdmin = (admin, params, navigate) => {
   console.log(admin, "ADMINS");
   console.log(params, "PARAMS");
 
@@ -222,15 +223,15 @@ export const postAdmin = (admin, params,navigate) => {
   return async (dispatch) => {
     try {
       const data = await axios.post(endpoint, admin);
-alert("administrador creado exitosamente!")
-navigate("/superadmin/dashboard")
+      alert("administrador creado exitosamente!");
+      navigate("/superadmin/dashboard");
       return dispatch({
         type: POST_ADMIN,
         payload: data,
       });
     } catch (error) {
       console.error(error.message);
-      alert ("Error al crear el administrador : " + error.message)
+      alert("Error al crear el administrador : " + error.message);
     }
   };
 };
@@ -272,6 +273,18 @@ export const logOut = () => {
     try {
       return dispatch({
         type: LOG_OUT_ADMIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const handleAdminConfigView = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: ADMIN_CONFIG_VIEW,
       });
     } catch (error) {
       console.error(error);

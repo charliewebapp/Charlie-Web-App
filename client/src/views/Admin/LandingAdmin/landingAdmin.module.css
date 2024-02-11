@@ -44,6 +44,7 @@
    font-family: 'Montserrat', sans-serif; /* Cambio de la fuente a Montserrat */
   margin-top: 10px;
   margin-bottom: 10px;
+  outline: none;
 }
 
 .passwordInputContainer {
