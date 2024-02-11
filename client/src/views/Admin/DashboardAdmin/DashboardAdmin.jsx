@@ -1,29 +1,36 @@
 import * as React from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getProducts,
+  getCollaborators,
+  getSales,
+  logOut,
+} from "../../../redux/actions";
 import style from "./dashboardAdmin.module.css";
 import DashboardAdminEmployee from "./DashboardAdminEmployee";
 import DashboardAdminStock from "./DashboardAdminStock";
 import DashboardAdminSales from "./DashboardAdminSales";
 
 function DashboardAdmin() {
-  const [stock, setStock] = useState(true);
-  const [sales, setSales] = useState(false);
-  const [employee, setEmployee] = useState(false);
+  const dispatch = useDispatch();
+  const clubName = useSelector((state) => state.selectClientAdmin);
+  const productsActive = useSelector((state) => state.productsActive);
+  const collaboratorsActive = useSelector((state) => state.collaboratorsActive);
+  const salesActive = useSelector((state) => state.salesActive);
 
   const handleStock = () => {
-    setSales(false);
-    setEmployee(false);
-    setStock(true);
+    dispatch(getProducts(clubName));
   };
   const handleSales = () => {
-    setStock(false);
-    setEmployee(false);
-    setSales(true);
+    dispatch(getSales(clubName));
   };
   const handleEmployee = () => {
-    setStock(false);
-    setSales(false);
-    setEmployee(true);
+    dispatch(getCollaborators(clubName));
+  };
+
+  const handleLogin = () => {
+    dispatch(logOut());
   };
 
   return (
@@ -44,14 +51,20 @@ function DashboardAdmin() {
             {" "}
             Empleados{" "}
           </button>
+          <button className={style.button} onClick={handleLogin}>
+            {" "}
+            Cerrar Sesión{" "}
+          </button>
         </div>
 
         {/* Renderizar condicionalmente segun el boton elegio */}
         <div>
-          {stock && <DashboardAdminStock />}
-          {sales && <DashboardAdminSales />}
-          {employee && <DashboardAdminEmployee />}
-          {!stock && !sales && !employee && <h1>Seleccione sección</h1>}
+          {productsActive && <DashboardAdminStock />}
+          {salesActive && <DashboardAdminSales />}
+          {collaboratorsActive && <DashboardAdminEmployee />}
+          {!productsActive && !salesActive && !collaboratorsActive && (
+            <h2>Seleccione sección</h2>
+          )}
         </div>
       </div>
     </>
