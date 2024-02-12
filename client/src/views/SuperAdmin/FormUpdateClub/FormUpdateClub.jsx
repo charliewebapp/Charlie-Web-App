@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getAdmins } from '../../../redux/actions';
+import { getBoliches } from '../../../redux/actions';
 import { validateFormUpdateClub } from '../../../utils/validateFormUpdateClub';
 import style from '../SAForms.module.css';
 
@@ -17,7 +17,7 @@ function FormUpdateClub() {
     );
 
     useEffect(() => {
-        dispatch(getAdmins());
+        dispatch(getBoliches());
     }, []);
 
     useEffect(() => {
@@ -74,17 +74,17 @@ function FormUpdateClub() {
                 <input type="text" id="name" key="name" name="name" value={clubData.name} onChange={handleChange} />
                 <p>{errors.name ? errors.name : null} </p>
 
-                <label htmlFor="adress" > Direccion: </label>
-                <input type="text" id="adress" key="adress" name="adress" value={clubData.direccion} onChange={handleChange} />
-                <p>{errors.adress ? errors.adress : null} </p>
+                <label htmlFor="direccion" > Direccion: </label>
+                <input type="text" id="direccion" key="direccion" name="direccion" value={clubData.direccion} onChange={handleChange} />
+                <p>{errors.direccion ? errors.direccion : null} </p>
 
-                <label htmlFor="city" > Ciudad: </label>
-                <input type="text" id="city" key="city" name="city" value={clubData.ciudad} onChange={handleChange} />
-                <p>{errors.city ? errors.city : null} </p>
+                <label htmlFor="ciudad" > Ciudad: </label>
+                <input type="text" id="ciudad" key="ciudad" name="ciudad" value={clubData.ciudad} onChange={handleChange} />
+                <p>{errors.ciudad ? errors.ciudad : null} </p>
 
-                <label htmlFor="country" > Pais: </label>
-                <input type="text" id="country" key="country" name="country" value={clubData.pais} onChange={handleChange} />
-                <p>{errors.country ? errors.country : null} </p>
+                <label htmlFor="pais" > Pais: </label>
+                <input type="text" id="pais" key="pais" name="pais" value={clubData.pais} onChange={handleChange} />
+                <p>{errors.pais ? errors.pais : null} </p>
 
 
                 <label htmlFor="status" > Estado: </label>
