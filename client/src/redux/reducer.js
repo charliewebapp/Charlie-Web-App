@@ -168,11 +168,8 @@ const reducer = (state = initialState, action) => {
         allBoliches: remainingBoliches,
       };
     case DELETE_BOLICHE_ADMINS:
-      console.log("Deleting admins for club:", action.payload);
-      console.log("Admins before deletion:", state.allAdministrators);
-
       const remainingAdmins = state.allAdministrators.filter(
-        (admin) => admin.ClientId !== action.payload
+        (admin) => admin.id !== action.payload
       );
       return {
         ...state,
