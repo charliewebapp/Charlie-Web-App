@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { DB_RENDER } = process.env;
 
-const AdministratorModel = require("./models/administrator");
+const AdministratorModel = require("./models/Administrator")
 const ClientModel = require("./models/Client");
 const ProductModel = require("./models/Product");
 const PurchaseModel = require("./models/Purchase");
