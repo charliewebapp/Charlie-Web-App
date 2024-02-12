@@ -179,11 +179,12 @@ export const deleteProduct = (id, clubName) => {
 //! //////////////////////// SUPER ADMIN ////////////////////////////
 
 //? //////////////////////// CREAR BOLICHE ////////////////////////////
-export const postBoliche = (boliche) => {
+export const postBoliche = (boliche,navigate) => {
   const endpoint = "http://localhost:3001/client";
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, boliche);
+      alert("Boliche creado con éxito");navigate("/superadmin/dashboard");
 
       return dispatch({
         type: POST_BOLICHE,
@@ -191,6 +192,8 @@ export const postBoliche = (boliche) => {
       });
     } catch (error) {
       console.error(error.message);
+      alert ("Error al crear el boliche: "+ error);
+
     }
   };
 };
