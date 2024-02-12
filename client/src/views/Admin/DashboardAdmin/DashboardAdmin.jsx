@@ -12,7 +12,7 @@ import {
 import style from "./dashboardAdmin.module.css";
 import DashboardAdminEmployee from "./DashboardAdminEmployee";
 import DashboardAdminStock from "./DashboardAdminStock";
-import DashboardAdminSales from "./DashboardADminSales";
+import DashboardAdminSales from "./DashboardAdminSales";
 import DashboardAdminConfig from "./DashboardAdminConfig";
 
 function DashboardAdmin() {
