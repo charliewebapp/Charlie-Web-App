@@ -55,9 +55,13 @@ function DashboardSuperAadmins() {
             width: 250,
             renderCell: (params) => (
                 <div>
-                    <button className={style.button} onClick={() => handleEdit(params.row)}>
-                        Editar
-                    </button>
+
+                    <Link to={`/superadmin/updateadmin/${params.row.id}`}>
+                        <button className={style.button} onClick={() => handleEdit(params.row)}>
+                            Editar
+                        </button>
+                    </Link>
+
                     <button
                         className={style.button}
                         onClick={() => handleDelete(params.row)}
