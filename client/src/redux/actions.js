@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   GET_PRODUCTS,
   POST_PRODUCT,
@@ -55,7 +56,12 @@ export function updateCollaborator(collaboratorData, idCollaborator, clubName) {
         });
       }
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo editar colaborador. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 }
@@ -74,7 +80,12 @@ export const postCollaborator = (collaboratorData, clubName) => {
         });
       }
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo crear colaborador. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 };
@@ -92,7 +103,12 @@ export const deleteCollaborator = (idCollaborator, clubName) => {
         });
       }
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo eliminar colaborador. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 };
@@ -130,7 +146,12 @@ export const postProduct = (productData, clubName) => {
         throw new Error("No se ha creado el producto");
       }
     } catch (error) {
-      window.alert("No se ha creado el producto" + error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo crear el producto. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 };
@@ -147,11 +168,14 @@ export const updateProduct = (productData, idProduct, clubName) => {
           type: UPDATE_PRODUCT,
           payload: data,
         });
-      } else {
-        throw new Error("No se ha actualizado el producto");
       }
     } catch (error) {
-      window.alert("No se ha actualizado el producto. " + error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo editar el producto. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 };
@@ -167,11 +191,14 @@ export const deleteProduct = (id, clubName) => {
           type: DELETE_PRODUCT,
           payload: id,
         });
-      } else {
-        throw new Error("No se ha eliminado el producto");
       }
     } catch (error) {
-      window.alert("No se ha eliminado el producto. " + error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo eliminar el producto. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+      });
     }
   };
 };
@@ -179,12 +206,13 @@ export const deleteProduct = (id, clubName) => {
 //! //////////////////////// SUPER ADMIN ////////////////////////////
 
 //? //////////////////////// CREAR BOLICHE ////////////////////////////
-export const postBoliche = (boliche,navigate) => {
+export const postBoliche = (boliche, navigate) => {
   const endpoint = "http://localhost:3001/client";
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, boliche);
-      alert("Boliche creado con éxito");navigate("/superadmin/dashboard");
+      alert("Boliche creado con éxito");
+      navigate("/superadmin/dashboard");
 
       return dispatch({
         type: POST_BOLICHE,
@@ -192,8 +220,7 @@ export const postBoliche = (boliche,navigate) => {
       });
     } catch (error) {
       console.error(error.message);
-      alert ("Error al crear el boliche: "+ error);
-
+      alert("Error al crear el boliche: " + error);
     }
   };
 };
