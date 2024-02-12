@@ -16,8 +16,11 @@ export const POST_ADMIN = "POST_ADMIN";
 
 export const GET_BOLICHES = "GET_BOLICHES";
 
-export const SET_CLUB_ID = "SET_CLUB_ID";
+export const DELETE_BOLICHE = "DELETE_BOLICHE";
+export const DELETE_ADMINISTRATORS = "DELETE_ADMINISTRATORS";
 
+export const SET_CLUB_ID = "SET_CLUB_ID";
+export const DELETE_BOLICHE_ADMINS = "DELETE_BOLICHE_ADMINS";
 //! login super admin
 
 export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";

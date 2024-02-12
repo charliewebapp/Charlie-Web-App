@@ -13,6 +13,8 @@ import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmplo
 import DashboardSuperA from "./views/SuperAdmin/DashboardSuperA/DashboardSuperA";
 import FormPostClubSuperA from "./views/SuperAdmin/FormPostClubSuperA/FormPostClubSuperA";
 import FormPostAdminSA from "./views/SuperAdmin/FormPostAdminSA/FormPostAdminSA";
+import FormUpdateAdmin from "./views/SuperAdmin/FormUpdateAdmin/FormUpdateAdmin";
+import FormUpdateClub from "./views/SuperAdmin/FormUpdateClub/FormUpdateClub";
 import Profile from "./views/Users/Profile/Profile";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
@@ -72,6 +74,16 @@ const App = () => {
           // http://localhost:5173/superadmin/addadmin
           path="/superadmin/addadmin"
           element={requireSAdminLogin(<FormPostAdminSA />)}
+        />
+        <Route
+          // http://localhost:5173/superadmin/updateadmin
+          path="/superadmin/updateadmin/:idAdmin"
+          element={requireSAdminLogin(<FormUpdateAdmin />)}
+        />
+        <Route
+          // http://localhost:5173/superadmin/updateclub
+          path="/superadmin/updateclub/:idClub"
+          element={requireSAdminLogin(<FormUpdateClub />)}
         />
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS DEL ADMINISTRADOR
         {/* <Route path="/admin" element={<LandingAdmin />} />
