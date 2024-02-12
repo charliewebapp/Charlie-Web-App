@@ -79,7 +79,7 @@ router.get("/administrator", getAllAdminsHandler);
 router.get("/:client/administrator", getAdminsClientsHandler);
 router.post("/:client/administrator", postAdminsHandler);
 router.put("/:client/:administrator", putAdminsHandler);
-router.delete("/:client/:administrator", deleteAdminsHandler);
+router.delete("/:client/:administratorId", deleteAdminsHandler);
 
 //-----------------cliente(boliche)
 //products
