@@ -23,6 +23,7 @@ import {
   ADMIN_CONFIG_VIEW,
   DELETE_BOLICHE,
   DELETE_BOLICHE_ADMINS,
+  ADMIN_ID_LOGGED,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -341,6 +342,19 @@ export const selectClientAdminName = (client) => {
       return dispatch({
         type: SELECT_CLIENT_ADMIN,
         payload: client,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const adminIdLogged = (adminID) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: ADMIN_ID_LOGGED,
+        payload: adminID,
       });
     } catch (error) {
       console.error(error);

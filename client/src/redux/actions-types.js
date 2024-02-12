@@ -31,6 +31,7 @@ export const SELECT_CLIENT_ADMIN = "SELECT_CLIENT_ADMIN";
 export const ADMIN_STATUS_LOGIN = "ADMIN_STATUS_LOGIN";
 export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 export const ADMIN_CONFIG_VIEW = "ADMIN_CONFIG_VIEW";
+export const ADMIN_ID_LOGGED = "ADMIN_ID_LOGGED";
 
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const GET_ADMINISTRATORS = "GET_ADMINISTRATORS";
