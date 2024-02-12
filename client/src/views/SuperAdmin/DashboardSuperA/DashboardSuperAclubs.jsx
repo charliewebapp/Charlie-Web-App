@@ -1,102 +1,104 @@
-
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getBoliches } from "../../../redux/actions";
+import { deleteBoliche, getBoliches } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import style from "./dashboardSuperA.module.css";
 
 function DashboardSuperAclubs({ handleAdmins }) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const allBolichesState = useSelector((state) => state.allBoliches);
-    console.log("todos los boliches", allBolichesState);
+  const allBolichesState = useSelector((state) => state.allBoliches);
+  console.log("todos los boliches", allBolichesState);
 
-    useEffect(() => {
-        dispatch(getBoliches());
-    }, []);
+  useEffect(() => {
+    dispatch(getBoliches());
+  }, []);
 
-    const rows = allBolichesState.map((club) => {
-        return {
-            id: club.id,
-            name: club.name,
-            ciudad: club.city,
-            direccion: club.adress,
-            status: club.status,
-        };
-    });
+  function handleDelete(row) {
+    dispatch(deleteBoliche(row.name));
+  }
 
-    const columns = [
-        { field: "name", headerName: "Nombre", width: 250 },
-        { field: "ciudad", headerName: "Ciudad", width: 250 },
-        { field: "direccion", headerName: "Direccion", width: 250 },
-        { field: "status", headerName: "Status", width: 250 },
-        {
-            field: "actions",
-            headerName: "Acciones",
-            width: 250,
-            renderCell: (params) => (
-                <div>
-                    <button className={style.button} onClick={() => handleAdmins(params.row)}>
-                        Admins
-                    </button>
+  const rows = allBolichesState.map((club) => {
+    return {
+      id: club.id,
+      name: club.name,
+      ciudad: club.city,
+      direccion: club.adress,
+      status: club.status,
+    };
+  });
+  function handleDelete(row) {
+    dispatch(deleteBoliche(row.name));
+  }
 
-                    <Link to={`/superadmin/updateclub/${params.row.id}`}>
-                        <button
-                            className={style.button}
-                            onClick={() => handleEdit(params.row)}
-                        >
-                            Editar
-                        </button>
-                    </Link>
+  function handleBlock(row) {
+    // Aquí puedes implementar la lógica para bloquear la fila
+  }
 
-                    <button
-                        className={style.button}
-                        onClick={() => handleDelete(params.row)}
-                    >
-                        Eliminar
-                    </button>
-                    <button
-                        className={style.button}
-                        onClick={() => handleBlock(params.row)}
-                    >
-                        Bloquear
-                    </button>
-                </div>
-            ),
-        },
-    ];
+  const columns = [
+    { field: "name", headerName: "Nombre", width: 250 },
+    { field: "ciudad", headerName: "Ciudad", width: 250 },
+    { field: "direccion", headerName: "Direccion", width: 250 },
+    { field: "status", headerName: "Status", width: 250 },
+    {
+      field: "actions",
+      headerName: "Acciones",
+      width: 250,
+      renderCell: (params) => (
+        <div>
+          <button
+            className={style.button}
+            onClick={() => handleAdmins(params.row)}
+          >
+            Admins
+          </button>
 
-    function handleEdit(row) {
-        console.log("Editar:", row);
-        // Aquí puedes implementar la lógica para editar la fila
-    }
+          <Link to={`/superadmin/updateclub/${params.row.id}`}>
+            <button
+              className={style.button}
+              onClick={() => handleEdit(params.row)}
+            >
+              Editar
+            </button>
+          </Link>
+          <button
+            className={style.button}
+            onClick={() => handleDelete(params.row)}
+          >
+            Eliminar
+          </button>
+          <button
+            className={style.button}
+            onClick={() => handleBlock(params.row)}
+          >
+            Bloquear
+          </button>
+        </div>
+      ),
+    },
+  ];
 
-    function handleDelete(row) {
-        console.log("Eliminar:", row);
-        // Aquí puedes implementar la lógica para eliminar la fila
-    }
+  function handleEdit(row) {
+    console.log("Editar:", row);
+    // Aquí puedes implementar la lógica para editar la fila
+  }
 
-    function handleBlock(row) {
-        console.log("Eliminar:", row);
-        // Aquí puedes implementar la lógica para eliminar la fila
-    }
-
-    return (
-        <>
-            <div className={style.container}>
-                <h2>Clubs</h2>
-                <br />
-                <button className={style.button}>
-                    <Link to="/superadmin/addclub">Crear Nuevo Club</Link>
-                </button>
-                <div className={style.DataGrid}>
-                    <DataGrid rows={rows} columns={columns} autoWidth />
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className={style.container}>
+        <h2>Clubs</h2>
+        <br />
+        <button className={style.button}>
+          <Link to="/superadmin/addclub">Crear Nuevo Club</Link>
+        </button>
+        <div className={style.DataGrid}>
+          <DataGrid rows={rows} columns={columns} autoWidth />
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default DashboardSuperAclubs;

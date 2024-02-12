@@ -19,6 +19,9 @@ import {
   GET_SALES,
   LOG_OUT_ADMIN,
   ADMIN_CONFIG_VIEW,
+  DELETE_BOLICHE,
+  DELETE_ADMINISTRATORS,
+  DELETE_BOLICHE_ADMINS,
 } from "./actions-types";
 
 const initialState = {
@@ -68,7 +71,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       const updatedProducts = state.allProducts.map((product) => {
         if (product.id === payload.id) {
-          return payload; // Actualiza el producto existente
+          return payload;
         } else {
           return product;
         }
@@ -141,6 +144,53 @@ const reducer = (state = initialState, action) => {
         ...state,
         boliches: payload,
         allBoliches: payload,
+      };
+
+    //! ///////////////BORRAR BOLICHES////////////////////
+    // case DELETE_BOLICHE:
+    //   console.log(`Reducer deleting club: ${action.payload}`);
+    //   return {
+    //     ...state,
+    //     boliches: state.boliches.filter(
+    //       (boliche) => boliche.name !== action.payload
+    //     ),
+    //     allBoliches: state.allBoliches.filter(
+    //       (boliche) => boliche.name !== action.payload
+    //     ),
+    //   };
+    case DELETE_BOLICHE:
+      const remainingBoliches = state.boliches.filter(
+        (boliche) => boliche.name !== action.payload
+      );
+      return {
+        ...state,
+        boliches: remainingBoliches,
+        allBoliches: remainingBoliches,
+      };
+    case DELETE_BOLICHE_ADMINS:
+      console.log("Deleting admins for club:", action.payload);
+      console.log("Admins before deletion:", state.allAdministrators);
+
+      const remainingAdmins = state.allAdministrators.filter(
+        (admin) => admin.ClientId !== action.payload
+      );
+      return {
+        ...state,
+        administrators: remainingAdmins,
+        allAdministrators: remainingAdmins,
+      };
+
+    //! ///////////////BORRAR ADMINISTRADORES////////////////////
+    case DELETE_ADMINISTRATORS:
+      console.log(`Reducer deleting club: ${action.payload}`);
+      return {
+        ...state,
+        boliches: state.boliches.filter(
+          (boliche) => boliche.name !== action.payload
+        ),
+        allBoliches: state.allBoliches.filter(
+          (boliche) => boliche.name !== action.payload
+        ),
       };
 
     //! traer todos los administradores de la base de datos entera
