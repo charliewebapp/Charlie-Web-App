@@ -32,12 +32,14 @@ const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 const postQrHandler = require("../handlers/Qrs/postQrHandler");
 const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
+const setToken = require("../controllers/MercadoPago/setToken");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 
 const router = Router();
+router.post('/mercadopago-authorization/success' , setToken)
 //--------------superadmin
 
 //boliche
