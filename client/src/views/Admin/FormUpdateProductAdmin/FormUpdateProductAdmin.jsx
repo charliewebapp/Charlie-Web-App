@@ -6,6 +6,7 @@ import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmi
 import { getProducts, updateProduct } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
+import Swal from "sweetalert2"
 
 
 
@@ -80,7 +81,6 @@ function FormUpdateProductAdmin() {
     event.preventDefault();
     try {
       dispatch(updateProduct(productData, idProduct, clubName));
-      window.alert("Se ha actualizado el producto. ");
       setProductData({
         name: "",
         brand: "",
@@ -90,8 +90,15 @@ function FormUpdateProductAdmin() {
         stock: "",
         category: "",
       });
+      Swal.fire({
+        title: "Éxito",
+        text: "El producto se editó correctamente",
+        icon: "success",
+        timer: "3000",
+      })
     } catch (error) {
-      window.alert("No se ha actualizado el producto. Intente nuevamente. ");
+      //El sweet de error viene de actions
+      console.log(error.message)
     }
   };
 

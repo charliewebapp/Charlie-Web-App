@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmin";
 import { postProduct } from "../../../redux/actions";
 import { useNavigate, Link } from "react-router-dom";
+import Swal from "sweetalert2"
 
 // CATEGORIAS 
 const categories = [
@@ -67,7 +68,6 @@ function FormPostProductAdmin() {
     event.preventDefault();
     try {
       dispatch(postProduct(productData, clubName));
-      window.alert("Producto agregado");
       setProductData({
         name: "",
         brand: "",
@@ -77,8 +77,15 @@ function FormPostProductAdmin() {
         stock: "",
         category: "",
       });
+      Swal.fire({
+        title: "Éxito",
+        text: "El producto se agregó correctamente",
+        icon: "success",
+        timer: "3000",
+      })
     } catch (error) {
-      window.alert("No se ha creado el producto. Intente nuevamente");
+      //El sweet de error viene de actions
+      console.log(error.message)
     }
   };
 
