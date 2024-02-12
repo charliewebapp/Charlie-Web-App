@@ -406,3 +406,23 @@ export const getSales = (clubName) => {
     }
   };
 };
+
+//! /////////////////////////DELETE ADMINISTRATOR////////////////////////
+
+export const deleteBolicheAdmins = (clubName, id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3001/${clubName}/${id}`
+      );
+      if (data) {
+        dispatch({
+          type: DELETE_BOLICHE_ADMINS,
+          payload: id,
+        });
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};

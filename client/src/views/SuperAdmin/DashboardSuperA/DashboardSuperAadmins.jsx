@@ -2,7 +2,7 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getAdministrators } from "../../../redux/actions";
+import { deleteBolicheAdmins, getAdministrators } from "../../../redux/actions";
 import style from "./dashboardSuperA.module.css";
 import { Link } from "react-router-dom";
 
@@ -16,12 +16,11 @@ function DashboardSuperAadmins() {
   const allAdministratorsState = useSelector(
     (state) => state.allAdministrators
   );
+  const allBolichesState = useSelector((state) => state.allBoliches);
 
   console.log("todos los administradores", allAdministratorsState);
 
   const clubID = useSelector((state) => state.currentClubId);
-
-  console.log("clubID", clubID);
 
   function filterAdminsByClub(allAdministratorsState, clubID) {
     return allAdministratorsState.filter((admin) => admin.ClientId === clubID);
@@ -47,6 +46,21 @@ function DashboardSuperAadmins() {
       status: admin.status,
     };
   });
+
+  // function handleEdit(row) {
+  //   console.log("Editar:", row);
+  //   // Aquí puedes implementar la lógica para editar la fila
+  // }
+
+  function handleDelete(row) {
+    const clubId = row.club;
+
+    const id = allBolichesState.find((club) => club.id === clubId).name;
+
+    const clubName = row.id;
+
+    dispatch(deleteBolicheAdmins(id, clubName));
+  }
 
   const columns = [
     { field: "name", headerName: "Nombre", width: 250 },
@@ -74,31 +88,10 @@ function DashboardSuperAadmins() {
           >
             Eliminar
           </button>
-          <button
-            className={style.button}
-            onClick={() => handleBlock(params.row)}
-          >
-            Bloquear
-          </button>
         </div>
       ),
     },
   ];
-
-  function handleEdit(row) {
-    console.log("Editar:", row);
-    // Aquí puedes implementar la lógica para editar la fila
-  }
-
-  function handleDelete(row) {
-    console.log("Eliminar:", row);
-    // Aquí puedes implementar la lógica para eliminar la fila
-  }
-
-  function handleBlock(row) {
-    console.log("Eliminar:", row);
-    // Aquí puedes implementar la lógica para eliminar la fila
-  }
 
   return (
     <>
