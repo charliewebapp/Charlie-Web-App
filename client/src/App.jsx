@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
+import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
 import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 import LandingAdmin from "./views/Admin/LandingAdmin/LandingAdmin";
@@ -121,6 +122,10 @@ const App = () => {
         <Route
           path="/admin/:clubName/dashboardAdmin"
           element={requireAdminLogin(<DashboardAdmin />)}
+        />
+         <Route
+          path="/admin/:clubName/dashboardAdmin/success"
+          element={requireAdminLogin(<DashboardAdminConfigSuccess />)}
         />
         <Route
           path="/admin/:clubName/addproduct"

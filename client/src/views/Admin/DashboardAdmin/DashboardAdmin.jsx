@@ -15,6 +15,7 @@ import DashboardAdminStock from "./DashboardAdminStock";
 import DashboardAdminSales from "./DashboardAdminSales";
 import DashboardAdminConfig from "./DashboardAdminConfig";
 
+
 function DashboardAdmin() {
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
