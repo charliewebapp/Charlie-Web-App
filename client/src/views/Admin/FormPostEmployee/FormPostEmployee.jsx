@@ -4,6 +4,7 @@ import style from "../Forms.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { postCollaborator } from '../../../redux/actions';
+import Swal from "sweetalert2"
 
 
 
@@ -62,9 +63,17 @@ function FormPostEmployee() {
                 status: "",
 
             })
-            window.alert("Colaborador agregado")
+
+            Swal.fire({
+                title: "Éxito",
+                text: "El colaborador se agregó correctamente",
+                icon: "success",
+                timer: "3000",
+            })
+
         } catch (error) {
-            window.alert("No se ha agregado el colaborador. Intente nuevamente")
+            //El sweet de error viene de actions
+            console.log(error.message)
         }
     }
 
