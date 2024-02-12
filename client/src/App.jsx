@@ -125,7 +125,7 @@ const App = () => {
         />
          <Route
           path="/admin/:clubName/dashboardAdmin/success"
-          element={requireAdminLogin(<DashboardAdminConfigSuccess />)}
+          element={requireAdminLogin(<DashboardAdminConfigSuccess location={window.location} />)}
         />
         <Route
           path="/admin/:clubName/addproduct"
