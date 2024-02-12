@@ -20,6 +20,8 @@ import {
   GET_SALES,
   LOG_OUT_ADMIN,
   ADMIN_CONFIG_VIEW,
+  DELETE_BOLICHE,
+  DELETE_BOLICHE_ADMINS,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -210,15 +212,26 @@ export const getBoliches = () => {
     }
   };
 };
+//? //////////////////////// BORRAR BOLICHE ////////////////////////////
+export const deleteBoliche = (clubName) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(`http://localhost:3001/${clubName}`);
+      if (data) {
+        dispatch({
+          type: DELETE_BOLICHE,
+          payload: clubName,
+        });
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
 
 //? //////////////////////// CREAR ADMIN ////////////////////////////
 export const postAdmin = (admin, params, navigate) => {
-  console.log(admin, "ADMINS");
-  console.log(params, "PARAMS");
-
   const endpoint = `http://localhost:3001/${params}/administrator`;
-
-  console.log(endpoint, "ENDPOINT");
 
   return async (dispatch) => {
     try {
