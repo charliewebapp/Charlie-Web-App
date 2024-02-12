@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { postBoliche } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 import style from "./formpostclubsupera.module.css";
+import { useNavigate } from "react-router-dom";
 
 function FormPostClubSuperA() {
+  const navigate = useNavigate()
   const [create, setCreate] = useState({
     name: "",
     image: null, // Inicializado como null
@@ -27,10 +29,10 @@ function FormPostClubSuperA() {
         createBoliche.append("image", create.image); // Append the file directly
       }
 
-      dispatch(postBoliche(createBoliche));
-      alert("Boliche creado con éxito");
+      dispatch(postBoliche(createBoliche,navigate));
     } catch (error) {
-      console.error(error);
+      console.error(error)
+      alert ("Error al crear el boliche: "+ error);
     }
   };
 
