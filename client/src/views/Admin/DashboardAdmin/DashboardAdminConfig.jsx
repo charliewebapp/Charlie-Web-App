@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./dashboardAdmin.module.css";
-import FormUpdatePasswordAdmin from "../FormUpdatePasswordAdmin.jsx/FormUpdatePasswordAdmin";
+import FormUpdatePasswordAdmin from "../FormUpdatePasswordAdmin/FormUpdatePasswordAdmin";
 
 function DashboardAdminConfig() {
   return (
