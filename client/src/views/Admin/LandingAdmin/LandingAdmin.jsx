@@ -9,6 +9,7 @@ import {
   handleAdminStatusLogin,
   getAdmins,
   getBoliches,
+  adminIdLogged,
 } from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -51,10 +52,6 @@ function LandingAdmin() {
   const allBoliches = useSelector((state) => state.allBoliches);
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
 
-  console.log("All admins", getAllAdmins);
-  console.log("allBoliches", allBoliches);
-  console.log("adminStatusLogin", adminStatusLogin);
-
   const loginAdmin = (userData) => {
     const adminLogin = getAllAdmins.find(
       (admin) =>
@@ -65,6 +62,7 @@ function LandingAdmin() {
       const adminClient = adminLogin.ClientId;
 
       dispatch(handleAdminStatusLogin());
+      dispatch(adminIdLogged(adminLogin));
 
       const clientFromADmin = allBoliches.find(
         (boliche) => boliche.id === adminClient

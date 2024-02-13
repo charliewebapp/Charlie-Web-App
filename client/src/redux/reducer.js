@@ -22,6 +22,7 @@ import {
   DELETE_BOLICHE,
   DELETE_ADMINISTRATORS,
   DELETE_BOLICHE_ADMINS,
+  ADMIN_ID_LOGGED,
 } from "./actions-types";
 
 const initialState = {
@@ -234,6 +235,13 @@ const reducer = (state = initialState, action) => {
         collaboratorsActive: false,
         adminConfigActive: true,
       };
+
+    case ADMIN_ID_LOGGED:
+      return {
+        ...state,
+        selectAdminLogin: payload,
+      };
+
     //? //////////////////////// TRAER ADMIN ////////////////////////////
 
     case GET_ADMINISTRATORS:

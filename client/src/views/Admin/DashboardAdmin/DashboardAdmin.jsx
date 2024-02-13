@@ -41,16 +41,6 @@ function DashboardAdmin() {
     dispatch(logOut());
   };
 
-  console.log(
-    "config",
-    adminConfigActive,
-    "sales",
-    salesActive,
-    "products",
-    productsActive,
-    "collaborators",
-    collaboratorsActive
-  );
   return (
     <>
       <div className={style.container}>
