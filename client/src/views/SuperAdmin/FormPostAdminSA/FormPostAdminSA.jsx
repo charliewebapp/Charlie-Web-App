@@ -4,6 +4,7 @@ import style from "../../SuperAdmin/SAForms.module.css";
 import { postAdmin, getBoliches } from "../../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { validateFormPostAdmin } from "../../../utils/validateFormPostAdmin";
 
 function FormPostAdminSA() {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ function FormPostAdminSA() {
     mail: "",
     ClientId: "",
   });
+
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getBoliches());
@@ -41,6 +44,9 @@ function FormPostAdminSA() {
     const { name, value } = e.target;
     setCreateAdmin({ ...createAdmin, [name]: value });
 
+    const validationErrors = validateFormPostAdmin({ ...createAdmin, [name]: value });
+    setErrors(validationErrors);
+
     setSelectedBoliche(value);
   };
 
@@ -53,8 +59,10 @@ function FormPostAdminSA() {
         ClientId: clientId,
       };
 
+
+
       const params = selectedName;
-      await dispatch(postAdmin(createForm, params, navigate));
+      dispatch(postAdmin(createForm, params, navigate));
 
       Swal.fire({
         icon: "success",
@@ -74,9 +82,15 @@ function FormPostAdminSA() {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validateFormPostAdmin(createAdmin); // Validate the form data
 
-    sendFormData(createAdmin);
+    if (Object.keys(validationErrors).length === 0) { // If there are no errors
+      sendFormData(createAdmin);
+    }
   };
+
+  console.log(errors, "errors")
+
   return (
     <div className={style.formContainer}>
       <div>
@@ -95,6 +109,8 @@ function FormPostAdminSA() {
           onChange={handleInputChange}
         />
 
+        <p>{errors.name_client ? errors.name_client : null} </p>
+
         <label htmlFor="mail">Mail del administrador</label>
         <input
           type="email"
@@ -104,6 +120,8 @@ function FormPostAdminSA() {
           onChange={handleInputChange}
         />
 
+        <p>{errors.mail ? errors.mail : null} </p>
+
         <label htmlFor="password">Contraseña del administrador</label>
         <input
           type="password"
@@ -111,6 +129,9 @@ function FormPostAdminSA() {
           value={createAdmin.password}
           onChange={handleInputChange}
         />
+
+        <p>{errors.password ? errors.password : null} </p>
+
         <select onChange={handleSelectChange}>
           <option>Seleccionar boliche</option>
           {boliches.map((boliche) => (
@@ -124,7 +145,10 @@ function FormPostAdminSA() {
           ))}
         </select>
 
-        <button type="submit">CREAR</button>
+        <button
+          type="submit"
+          disabled={Object.values(errors).some(error => error && error.length > 0)}
+        >CREAR</button>
       </form>
     </div>
   );
