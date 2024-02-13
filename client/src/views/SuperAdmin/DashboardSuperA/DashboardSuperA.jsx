@@ -5,6 +5,7 @@ import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
 import DashboardSuperAclubs from "../DashboardSuperA/DashboardSuperAclubs";
 import { setClubID } from "../../../redux/actions";
 import style from "./dashboardSuperA.module.css";
+import { FaArrowLeft } from "react-icons/fa";
 
 function DashboardAdmin() {
   const [clubs, setClubs] = useState(true);
@@ -27,12 +28,11 @@ function DashboardAdmin() {
   return (
     <>
       <div className={style.container}>
-        <h1> Dashboard Super Administrador</h1>
+        <h1 className={style.h1}> Dashboard Super Administrador</h1>
 
         <div>
           <button className={style.button} onClick={handleClubs}>
-            {" "}
-            Clubs{" "}
+            <h2 className={style.clubs}>Clubs</h2>
           </button>
         </div>
 

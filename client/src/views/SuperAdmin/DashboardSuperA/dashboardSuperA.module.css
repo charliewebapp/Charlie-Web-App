@@ -1,7 +1,7 @@
-/* dashboardAdmin.module.css */
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-
+.clubs {
+  margin: 0;
+}
 .container {
   display: grid;
   justify-content: flex-start;

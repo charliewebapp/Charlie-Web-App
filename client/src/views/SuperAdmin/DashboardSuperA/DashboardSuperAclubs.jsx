@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { deleteBoliche, getBoliches } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import style from "./dashboardSuperA.module.css";
+import Swal from "sweetalert2";
 
 function DashboardSuperAclubs({ handleAdmins }) {
   const dispatch = useDispatch();
@@ -30,7 +31,20 @@ function DashboardSuperAclubs({ handleAdmins }) {
     };
   });
   function handleDelete(row) {
-    dispatch(deleteBoliche(row.name));
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Una vez eliminado, no podrás recuperar este boliche!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBoliche(row.name));
+        Swal.fire("Eliminado!", "El boliche ha sido eliminado.", "success");
+      }
+    });
   }
 
   function handleBlock(row) {
@@ -39,15 +53,15 @@ function DashboardSuperAclubs({ handleAdmins }) {
 
   const columns = [
     { field: "name", headerName: "Nombre", width: 250 },
-    { field: "ciudad", headerName: "Ciudad", width: 250 },
+    { field: "ciudad", headerName: "Ciudad", width: 200 },
     { field: "direccion", headerName: "Direccion", width: 250 },
-    { field: "status", headerName: "Status", width: 250 },
+    { field: "status", headerName: "Status", width: 100 },
     {
       field: "actions",
       headerName: "Acciones",
-      width: 250,
+      width: 300,
       renderCell: (params) => (
-        <div>
+        <div className={style.divButtonDash}>
           <button
             className={style.button}
             onClick={() => handleAdmins(params.row)}
@@ -88,13 +102,14 @@ function DashboardSuperAclubs({ handleAdmins }) {
   return (
     <>
       <div className={style.container}>
-        <h2>Clubs</h2>
-        <br />
-        <button className={style.button}>
-          <Link to="/superadmin/addclub">Crear Nuevo Club</Link>
-        </button>
-        <div className={style.DataGrid}>
-          <DataGrid rows={rows} columns={columns} autoWidth />
+        <div className={style.linkContainer}>
+          <Link to="/superadmin/addclub" className={style.linkContainer}>
+            <button className={style.buttonConfig}>Crear Nuevo Club</button>
+          </Link>
+
+          <div className={style.DataGrid}>
+            <DataGrid rows={rows} columns={columns} autoWidth />
+          </div>
         </div>
       </div>
     </>
