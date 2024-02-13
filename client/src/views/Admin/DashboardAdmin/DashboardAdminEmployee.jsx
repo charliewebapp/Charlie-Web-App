@@ -21,8 +21,8 @@ function DashboardAdminEmployee() {
   const rows = allCollaboratorsState.map((employee) => {
     return {
       id: employee.id,
-      name: employee.name,
-      lastname: employee.lastname,
+      name: employee.name.toUpperCase(),
+      lastname: employee.lastname.toUpperCase(),
       mail: employee.mail,
       status: employee.status,
     };
@@ -69,6 +69,7 @@ function DashboardAdminEmployee() {
     //
   }
 
+  // rgba(231, 183, 110, 0.8)
   function openConfirmationDialog(employee) {
     setEmployeeToDelete(employee);
     Swal.fire({
@@ -76,9 +77,10 @@ function DashboardAdminEmployee() {
       text: `¿Quieres eliminar al empleado "${employee.name}"?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "rgb(187, 131, 43)",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
       confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "No, cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
         handleDelete(employee);
@@ -87,14 +89,22 @@ function DashboardAdminEmployee() {
   }
 
   function handleDelete(employee) {
-    dispatch(deleteCollaborator(employee.id, clubName))
-      .then(() => {
-        Swal.fire("¡Empleado eliminado!", "", "success");
+    try {
+      dispatch(deleteCollaborator(employee.id, clubName))
+      Swal.fire({
+        title: "Éxito",
+        text: "El colaborador se eliminó correctamente",
+        icon: "success",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)"
+
       })
-      .catch(() => {
-        Swal.fire("Error al eliminar el empleado", "", "error");
-      });
+
+    } catch (error) {
+      console.log(error.message)
+    }
   }
+
 
   return (
     <>

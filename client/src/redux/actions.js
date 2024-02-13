@@ -38,7 +38,13 @@ export const getCollaborators = (clubName) => {
         payload: data,
       });
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire({
+        title: "Error",
+        text: `Error al cargar los colaboradores. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -62,6 +68,7 @@ export function updateCollaborator(collaboratorData, idCollaborator, clubName) {
         text: `No se pudo editar colaborador. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };
@@ -86,6 +93,7 @@ export const postCollaborator = (collaboratorData, clubName) => {
         text: `No se pudo crear colaborador. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };
@@ -106,9 +114,10 @@ export const deleteCollaborator = (idCollaborator, clubName) => {
     } catch (error) {
       Swal.fire({
         title: "Error",
-        text: `No se pudo eliminar colaborador. ${error.message}`,
+        text: `No se pudo eliminar colaborador!!!!. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };
@@ -126,7 +135,13 @@ export const getProducts = (clubName) => {
         payload: data,
       });
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire({
+        title: "Error",
+        text: `Error al cargar los productos. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -152,6 +167,7 @@ export const postProduct = (productData, clubName) => {
         text: `No se pudo crear el producto. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };
@@ -176,6 +192,7 @@ export const updateProduct = (productData, idProduct, clubName) => {
         text: `No se pudo editar el producto. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };
@@ -199,6 +216,7 @@ export const deleteProduct = (id, clubName) => {
         text: `No se pudo eliminar el producto. ${error.message}`,
         icon: "error",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       });
     }
   };

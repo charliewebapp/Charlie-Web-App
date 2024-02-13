@@ -69,6 +69,7 @@ function FormPostEmployee() {
                 text: "El colaborador se agregó correctamente",
                 icon: "success",
                 timer: "3000",
+                confirmButtonColor: "rgb(187, 131, 43)",
             })
 
         } catch (error) {

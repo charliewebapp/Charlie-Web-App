@@ -17,6 +17,7 @@ import {
   faEyeSlash,
   faPersonWalkingDashedLineArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2"
 
 function LandingAdmin() {
   const dispatch = useDispatch();
@@ -72,7 +73,13 @@ function LandingAdmin() {
       dispatch(selectClientAdminName(client));
       navigate(`/admin/${client}/dashboardAdmin`);
     } else {
-      alert("Usuario o contraseña incorrectos");
+      Swal.fire({
+        title: "Acceso denegado",
+        text: `Credenciales incorrectas. `,
+        icon: "error",
+        timer: "6000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 

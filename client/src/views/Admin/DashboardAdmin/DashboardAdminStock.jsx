@@ -30,16 +30,16 @@ function DashboardAdminStock() {
 
   const rows = allProductsState
     ? allProductsState.map((prod) => {
-        return {
-          id: prod.id,
-          name: prod.name,
-          brand: prod.brand,
-          description: prod.description,
-          price: prod.price,
-          stock: prod.stock,
-          category: prod.category,
-        };
-      })
+      return {
+        id: prod.id,
+        name: prod.name.toUpperCase(),
+        brand: prod.brand.toUpperCase(),
+        description: prod.description,
+        price: prod.price,
+        stock: prod.stock,
+        category: prod.category,
+      };
+    })
     : [];
 
   const columns = [
@@ -86,10 +86,10 @@ function DashboardAdminStock() {
       text: `¿Quieres eliminar el producto "${product.name}"?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, eliminarlo",
-      cancelButtonText: "Cancelar",
+      confirmButtonColor: "rgb(187, 131, 43)",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "No, cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
         handleDelete(product);
@@ -98,18 +98,21 @@ function DashboardAdminStock() {
   }
 
   function handleDelete(product) {
-    dispatch(deleteProduct(product.id, clubName))
-      .then(() => {
-        Swal.fire("Producto eliminado exitosamente", "", "success");
+    try {
+      dispatch(deleteProduct(product.id, clubName))
+      Swal.fire({
+        title: "Éxito",
+        text: "El producto se eliminó correctamente",
+        icon: "success",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)"
       })
-      .catch(() => {
-        Swal.fire(
-          "Hubo un problema al eliminar el producto. Inténtalo nuevamente.",
-          "",
-          "error"
-        );
-      });
+
+    } catch (error) {
+      console.log(error.message)
+    }
   }
+
 
   function handleAddStock() {
     console.log("Agregar");

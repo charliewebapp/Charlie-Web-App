@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'); */
 
 /* PARA COPIAR ESTE CSS: el return debe tener 
         UN DIV RAÍZ con className={style.formContainer}  
@@ -8,7 +8,7 @@
 
 /* Estilo general del contenedor del formulario*/
 .formContainer {
-    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;

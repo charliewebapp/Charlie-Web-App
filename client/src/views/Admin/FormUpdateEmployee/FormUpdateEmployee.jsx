@@ -68,6 +68,7 @@ function FormUpdateEmployee() {
                 text: "El colaborador se editó correctamente",
                 icon: "success",
                 timer: "3000",
+                confirmButtonColor: "rgb(187, 131, 43)",
             })
 
         } catch (error) {
