@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import style from "../../SuperAdmin/SAForms.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { validateFormPostClub } from "../../../utils/validateFormPostClub";
 
 function FormPostClubSuperA() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ function FormPostClubSuperA() {
     adress: "",
     city: "",
   });
+
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
 
@@ -30,7 +33,7 @@ function FormPostClubSuperA() {
         createBoliche.append("image", create.image); // Append the file directly
       }
 
-      await dispatch(postBoliche(createBoliche, navigate));
+      dispatch(postBoliche(createBoliche, navigate));
 
       Swal.fire({
         icon: "success",
@@ -47,13 +50,23 @@ function FormPostClubSuperA() {
       });
     }
   };
+
   const handlerSubmit = (e) => {
     e.preventDefault();
-    sendFormData(create);
+    const validationErrors = validateFormPostClub(create); // Validate the form data
+    if (Object.keys(validationErrors).length === 0) { // If there are no errors
+      sendFormData(create);
+
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setCreate({ ...create, [name]: value });
+
+    const validationErrors = validateFormPostClub({ ...create, [name]: value });
+    setErrors(validationErrors); // Set the errors state
+
     setCreate({ ...create, [name]: value });
   };
 
@@ -74,6 +87,8 @@ function FormPostClubSuperA() {
           onChange={handleInputChange}
         />
 
+        <p>{errors.name ? errors.name : null} </p>
+
         <input type="file" onChange={handleImageChange} />
 
         <label htmlFor="adress">Direccion</label>
@@ -84,6 +99,8 @@ function FormPostClubSuperA() {
           onChange={handleInputChange}
         />
 
+        <p>{errors.adress ? errors.adress : null} </p>
+
         <label htmlFor="city">Ciudad</label>
         <input
           type="text"
@@ -92,7 +109,12 @@ function FormPostClubSuperA() {
           onChange={handleInputChange}
         />
 
-        <button type="submit">CREAR</button>
+        <p>{errors.city ? errors.city : null} </p>
+
+        <button
+          type="submit"
+          disabled={Object.values(errors).some(error => error && error.length > 0)}
+        >CREAR</button>
       </form>
     </div>
   );

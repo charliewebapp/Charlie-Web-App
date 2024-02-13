@@ -126,7 +126,7 @@ function FormUpdateClub() {
 
                 <button
                     type="submit"
-                // disabled={Object.values(errors).some(error => error && error.length > 0)}
+                    disabled={Object.values(errors).some(error => error && error.length > 0)}
                 > EDITAR CLUB
                 </button>
 
