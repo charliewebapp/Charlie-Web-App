@@ -95,6 +95,7 @@ function FormUpdateProductAdmin() {
         text: "El producto se editó correctamente",
         icon: "success",
         timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
       })
     } catch (error) {
       //El sweet de error viene de actions
