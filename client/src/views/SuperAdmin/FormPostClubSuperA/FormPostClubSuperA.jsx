@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { postBoliche } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
-import style from "./formpostclubsupera.module.css";
-import { useNavigate } from "react-router-dom";
+import style from "../../SuperAdmin/SAForms.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FormPostClubSuperA() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [create, setCreate] = useState({
     name: "",
     image: null, // Inicializado como null
@@ -29,13 +30,23 @@ function FormPostClubSuperA() {
         createBoliche.append("image", create.image); // Append the file directly
       }
 
-      dispatch(postBoliche(createBoliche,navigate));
+      await dispatch(postBoliche(createBoliche, navigate));
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Boliche creado con éxito!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
-      console.error(error)
-      alert ("Error al crear el boliche: "+ error);
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "¡Error al crear el boliche!",
+      });
     }
   };
-
   const handlerSubmit = (e) => {
     e.preventDefault();
     sendFormData(create);
@@ -47,37 +58,43 @@ function FormPostClubSuperA() {
   };
 
   return (
-    <React.Fragment>
+    <div className={style.formContainer}>
+      <div>
+        <h1>Crear boliche</h1>
+        <Link to={`/superadmin/dashboard`}>
+          <button type="button">Volver </button>
+        </Link>
+      </div>
       <form onSubmit={handlerSubmit}>
+        <label htmlFor="name">Nombre del boliche</label>
         <input
           type="text"
           name="name"
           value={create.name}
           onChange={handleInputChange}
-          placeholder="Nombre del boliche"
         />
 
         <input type="file" onChange={handleImageChange} />
 
+        <label htmlFor="adress">Direccion</label>
         <input
           type="text"
           name="adress"
           value={create.adress}
           onChange={handleInputChange}
-          placeholder="Direccion"
         />
 
+        <label htmlFor="city">Ciudad</label>
         <input
           type="text"
           name="city"
           value={create.city}
           onChange={handleInputChange}
-          placeholder="Ciudad"
         />
 
         <button type="submit">CREAR</button>
       </form>
-    </React.Fragment>
+    </div>
   );
 }
 

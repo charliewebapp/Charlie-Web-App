@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import style from "./formpostadminsa.module.css";
+import style from "../../SuperAdmin/SAForms.module.css";
 import { postAdmin, getBoliches } from "../../../redux/actions";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function FormPostAdminSA() {
   const navigate = useNavigate();
@@ -27,19 +28,9 @@ function FormPostAdminSA() {
     name: "",
   });
 
-  // const handleChangeTwo = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setSelectedBoliche((prevSelected) => ({
-  //     ...prevSelected,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleSelectChange = (event) => {
-    // Actualiza clientId con el valor del select
     setClientId(event.target.value);
-    // Actualiza selectedName con el nombre del boliche seleccionado
+
     const selectedOption =
       event.target.options[event.target.selectedIndex].innerText;
     console.log(selectedOption);
@@ -63,9 +54,21 @@ function FormPostAdminSA() {
       };
 
       const params = selectedName;
-      dispatch(postAdmin(createForm, params, navigate));
+      await dispatch(postAdmin(createForm, params, navigate));
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Administrador creado con éxito!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "¡No se pudo crear el administrador!",
+      });
     }
   };
 
@@ -75,26 +78,36 @@ function FormPostAdminSA() {
     sendFormData(createAdmin);
   };
   return (
-    <React.Fragment>
+    <div className={style.formContainer}>
+      <div>
+        <h1>Crear administrador</h1>
+        <Link to={`/superadmin/dashboard`}>
+          <button type="button">Volver </button>
+        </Link>
+      </div>
+
       <form onSubmit={handlerSubmit}>
+        <label htmlFor="name_client">Nombre del administrador</label>
         <input
           type="text"
           name="name_client"
           value={createAdmin.name_client}
-          placeholder="Nombre del administrador"
           onChange={handleInputChange}
         />
+
+        <label htmlFor="mail">Mail del administrador</label>
         <input
           type="email"
           name="mail"
-          placeholder="Correo del administrador"
+          placeholder=""
           value={createAdmin.mail}
           onChange={handleInputChange}
         />
+
+        <label htmlFor="password">Contraseña del administrador</label>
         <input
           type="password"
           name="password"
-          placeholder="Contraseña del administrador"
           value={createAdmin.password}
           onChange={handleInputChange}
         />
@@ -113,7 +126,7 @@ function FormPostAdminSA() {
 
         <button type="submit">CREAR</button>
       </form>
-    </React.Fragment>
+    </div>
   );
 }
 

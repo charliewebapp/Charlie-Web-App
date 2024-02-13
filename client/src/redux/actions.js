@@ -230,7 +230,6 @@ export const postBoliche = (boliche, navigate) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, boliche);
-      alert("Boliche creado con éxito");
       navigate("/superadmin/dashboard");
 
       return dispatch({
@@ -238,12 +237,16 @@ export const postBoliche = (boliche, navigate) => {
         payload: data,
       });
     } catch (error) {
-      console.error(error.message);
-      alert("Error al crear el boliche: " + error);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo crear el boliche. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
-
 //? //////////////////////// TRAER BOLICHES ////////////////////////////
 export const getBoliches = () => {
   const endpoint = "http://localhost:3001/client";
@@ -285,24 +288,27 @@ export const postAdmin = (admin, params, navigate) => {
   return async (dispatch) => {
     try {
       const data = await axios.post(endpoint, admin);
-      alert("administrador creado exitosamente!");
+
       navigate("/superadmin/dashboard");
       return dispatch({
         type: POST_ADMIN,
         payload: data,
       });
     } catch (error) {
-      console.error(error.message);
-      alert("Error al crear el administrador : " + error.message);
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo crear el administrador. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
 
-
 //? //////////////////////// EDITAR CLUB ////////////////////////////
 
 export const updateClub = (formData, clubName) => {
-
   const endpoint = `http://localhost:3001/${clubName}`;
 
   return async (dispatch) => {
@@ -316,7 +322,6 @@ export const updateClub = (formData, clubName) => {
   };
 };
 
-
 //? //////////////////////// EDITAR ADMIN ////////////////////////////
 
 export const updateAdmin = (adminData, idAdmin, clubName) => {
@@ -326,11 +331,10 @@ export const updateAdmin = (adminData, idAdmin, clubName) => {
     try {
       const { data } = await axios.put(endpoint, adminData);
       return data;
-
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 };
 
 //! logina super admin
