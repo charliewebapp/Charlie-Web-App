@@ -5,11 +5,11 @@ export const validateFormAdmin = (data) => {
     const regExpEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     //NAME
-    if (!data.name.length) errors.name = "Debe ingresar el nombre del administrador"
+    if (!data.name_client.length) errors.name_client = "Debe ingresar el nombre del administrador"
     else {
-        if (data.name.length < 3) errors.name = "Debe contener al menos 3 caracteres"
-        if (data.name.length > 15) errors.name = "Debe contener como máximo 15 caracteres"
-        if (!regExpLetter.test(data.name)) errors.name = "Puede contener solo letras y espacios"
+        if (data.name_client.length < 3) errors.name_client = "Debe contener al menos 3 caracteres"
+        if (data.name_client.length > 15) errors.name_client = "Debe contener como máximo 15 caracteres"
+        if (!regExpLetter.test(data.name_client)) errors.name_client = "Puede contener solo letras y espacios"
     }
     //PASSWORD
     if (!data.password.length) errors.password = "Debe asignar la contraseña del administrador"

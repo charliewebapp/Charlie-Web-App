@@ -11,25 +11,25 @@ export const validateFormUpdateClub = (data) => {
         if (!regExpLetter.test(data.name)) errors.name = "Puede contener solo letras y espacios"
     }
     //ADDRESS
-    if (!data.direccion || !data.direccion.length) errors.direccion = "Debe ingresar la dirección del club"
+    if (!data.adress || !data.adress.length) errors.adress = "Debe ingresar la dirección del club"
     else {
-        if (data.direccion.length < 10) errors.direccion = "Debe contener al menos 10 caracteres"
-        if (data.direccion.length > 25) errors.direccion = "Debe contener como máximo 25 caracteres"
-        if (!regExpAddress.test(data.direccion)) errors.direccion = "Puede contener solo letras, números, espacios y comas"
+        if (data.adress.length < 10) errors.adress = "Debe contener al menos 10 caracteres"
+        if (data.adress.length > 25) errors.adress = "Debe contener como máximo 25 caracteres"
+        if (!regExpAddress.test(data.adress)) errors.adress = "Puede contener solo letras, números, espacios y comas"
     }
-    //CIUDAD
-    if (!data.ciudad.length) errors.ciudad = "Debe ingresar la ciudad del club"
+    //city
+    if (!data.city.length) errors.city = "Debe ingresar la city del club"
     else {
-        if (data.ciudad.length < 3) errors.ciudad = "Debe contener al menos 3 caracteres"
-        if (data.ciudad.length > 15) errors.ciudad = "Debe contener como máximo 15 caracteres"
-        if (!regExpLetter.test(data.ciudad)) errors.ciudad = "Puede contener solo letras y espacios"
+        if (data.city.length < 3) errors.city = "Debe contener al menos 3 caracteres"
+        if (data.city.length > 15) errors.city = "Debe contener como máximo 15 caracteres"
+        if (!regExpLetter.test(data.city)) errors.city = "Puede contener solo letras y espacios"
     }
-    //PAIS
-    if (!data.pais.length) errors.pais = "Debe ingresar el país del club"
+    //country
+    if (!data.country.length) errors.country = "Debe ingresar el país del club"
     else {
-        if (data.pais.length < 3) errors.pais = "Debe contener al menos 3 caracteres"
-        if (data.pais.length > 15) errors.pais = "Debe contener como máximo 15 caracteres"
-        if (!regExpLetter.test(data.pais)) errors.pais = "Puede contener solo letras y espacios"
+        if (data.country.length < 3) errors.country = "Debe contener al menos 3 caracteres"
+        if (data.country.length > 15) errors.country = "Debe contener como máximo 15 caracteres"
+        if (!regExpLetter.test(data.country)) errors.country = "Puede contener solo letras y espacios"
     }
     //STATUS 
     if (data.status === "") errors.status = "Debe seleccionar el estado del club"
