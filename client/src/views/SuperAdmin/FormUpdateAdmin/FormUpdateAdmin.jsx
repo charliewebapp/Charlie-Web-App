@@ -1,29 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getAdmins } from '../../../redux/actions';
+import { getAdministrators, getBoliches } from '../../../redux/actions';
 import { validateFormAdmin } from '../../../utils/validateFormUpdateAdmin';
+import { updateAdmin } from '../../../redux/actions';
+import Swal from "sweetalert2"
 import style from '../SAForms.module.css';
 
 function FormUpdateAdmin() {
     const dispatch = useDispatch();
     const [adminData, setAdminData] = useState({});
 
-    const allAdmins = useSelector((state) => state.getAllAdmins);
+    const allAdmins = useSelector((state) => state.allAdministrators
+    ); const allBoliches = useSelector((state) => state.allBoliches);
+    console.log(allBoliches, "allBoliches")
     const { idAdmin } = useParams();
 
     const adminToUpdate = allAdmins.find(
         (admin) => admin.id === idAdmin
     );
+    console.log(adminToUpdate, "adminToUpdate")
 
     useEffect(() => {
-        dispatch(getAdmins());
+        dispatch(getAdministrators());
+        dispatch(getBoliches());
     }, []);
 
     useEffect(() => {
         if (adminToUpdate) {
             setAdminData({
-                name: adminToUpdate.name_client,
+                id: adminToUpdate.id,
+                name_client: adminToUpdate.name_client,
                 password: adminToUpdate.password,
                 mail: adminToUpdate.mail,
                 status: adminToUpdate.status,
@@ -31,9 +38,13 @@ function FormUpdateAdmin() {
         }
     }, [adminToUpdate]);
 
+    const club = allBoliches.find((club) => club.id === adminToUpdate.ClientId);
+    const clubName = club.name;
+    console.log(club, "club")
+    console.log(clubName, "clubName")
+
     const [errors, setErrors] = useState({
-        name: "Ingrese el nombre",
-        lastname: "Ingrese el apellido",
+        name_client: "Ingrese el nombre",
         password: "Asigne una contraseña",
         mail: "Ingrese el email",
         status: "Ingrese el estado",
@@ -48,6 +59,28 @@ function FormUpdateAdmin() {
 
             return updatedData;
         });
+    };
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        try {
+            dispatch(updateAdmin(adminData, idAdmin, clubName));
+            setAdminData({
+                name_client: "",
+                password: "",
+                mail: "",
+                status: "",
+            });
+            Swal.fire({
+                title: "Éxito",
+                text: "El administrador se editó correctamente",
+                icon: "success",
+                timer: "3000",
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (
@@ -66,12 +99,12 @@ function FormUpdateAdmin() {
             <br />
 
             <form
-            // onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
             >
 
-                <label htmlFor="name">Nombre: </label>
-                <input type="text" id="name" key="name" name="name" value={adminData.name} onChange={handleChange} />
-                <p>{errors.name ? errors.name : null} </p>
+                <label htmlFor="name_client">Nombre: </label>
+                <input type="text" id="name_client" key="name_client" name="name_client" value={adminData.name_client} onChange={handleChange} />
+                <p>{errors.name_client ? errors.name_client : null} </p>
 
                 <label htmlFor="password" > Password: </label>
                 <input type="text" id="password" key="password" name="password" value={adminData.password} onChange={handleChange} />
@@ -93,7 +126,7 @@ function FormUpdateAdmin() {
 
                 <button
                     type="submit"
-                    disabled={Object.values(errors).some(error => error && error.length > 0)}
+                // disabled={Object.values(errors).some(error => error && error.length > 0)}
                 > EDITAR ADMIN
                 </button>
 

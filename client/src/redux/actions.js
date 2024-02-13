@@ -279,6 +279,42 @@ export const postAdmin = (admin, params, navigate) => {
     }
   };
 };
+
+
+//? //////////////////////// EDITAR CLUB ////////////////////////////
+
+export const updateClub = (formData, clubName) => {
+
+  const endpoint = `http://localhost:3001/${clubName}`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, formData);
+      return data;
+      // handle response data if needed
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+
+//? //////////////////////// EDITAR ADMIN ////////////////////////////
+
+export const updateAdmin = (adminData, idAdmin, clubName) => {
+  const endpoint = `http://localhost:3001/${clubName}/${idAdmin}`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, adminData);
+      return data;
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
 //! logina super admin
 
 export const handleSAdminStatusLogin = () => {

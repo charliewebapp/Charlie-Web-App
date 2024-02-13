@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getBoliches } from '../../../redux/actions';
+import { getBoliches, updateClub } from '../../../redux/actions';
 import { validateFormUpdateClub } from '../../../utils/validateFormUpdateClub';
+import Swal from "sweetalert2"
 import style from '../SAForms.module.css';
 
 function FormUpdateClub() {
@@ -16,6 +17,9 @@ function FormUpdateClub() {
         (club) => club.id === idClub
     );
 
+    console.log(clubToUpdate, "clubToUpdate")
+    console.log(idClub, "idClub")
+
     useEffect(() => {
         dispatch(getBoliches());
     }, []);
@@ -24,19 +28,20 @@ function FormUpdateClub() {
         if (clubToUpdate) {
             setClubData({
                 name: clubToUpdate.name,
-                direccion: clubToUpdate.adress,
-                ciudad: clubToUpdate.city,
-                pais: clubToUpdate.country,
+                adress: clubToUpdate.adress,
+                city: clubToUpdate.city,
+                country: clubToUpdate.country,
                 status: clubToUpdate.status,
+                image: clubToUpdate.image,
             });
         }
     }, [clubToUpdate]);
 
     const [errors, setErrors] = useState({
         name: "Ingrese el nombre del club",
-        direccion: "Ingrese la dirección del club",
-        ciudad: "Ingrese la ciudad del club",
-        pais: "Ingrese el país del club",
+        adress: "Ingrese la dirección del club",
+        city: "Ingrese la ciudad del club",
+        country: "Ingrese el país del club",
         status: "Seleccione el estado del club",
     });
 
@@ -48,7 +53,30 @@ function FormUpdateClub() {
             setErrors(validateFormUpdateClub(updatedData));
 
             return updatedData;
-        });
+        })
+    };
+
+    const clubName = clubToUpdate.name;
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        try {
+            const formData = new FormData();
+            Object.keys(clubData).forEach(key => {
+                formData.append(key, clubData[key]);
+            });
+
+            dispatch(updateClub(formData, clubName));
+
+            Swal.fire({
+                title: "Éxito",
+                text: "El club se editó correctamente",
+                icon: "success",
+                timer: "3000",
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (
@@ -67,24 +95,24 @@ function FormUpdateClub() {
             <br />
 
             <form
-            // onSubmit={handleSubmit}
+                onSubmit={handleSubmit}
             >
 
                 <label htmlFor="name">Nombre: </label>
                 <input type="text" id="name" key="name" name="name" value={clubData.name} onChange={handleChange} />
                 <p>{errors.name ? errors.name : null} </p>
 
-                <label htmlFor="direccion" > Direccion: </label>
-                <input type="text" id="direccion" key="direccion" name="direccion" value={clubData.direccion} onChange={handleChange} />
-                <p>{errors.direccion ? errors.direccion : null} </p>
+                <label htmlFor="adress" > Direccion: </label>
+                <input type="text" id="adress" key="adress" name="adress" value={clubData.adress} onChange={handleChange} />
+                <p>{errors.adress ? errors.adress : null} </p>
 
-                <label htmlFor="ciudad" > Ciudad: </label>
-                <input type="text" id="ciudad" key="ciudad" name="ciudad" value={clubData.ciudad} onChange={handleChange} />
-                <p>{errors.ciudad ? errors.ciudad : null} </p>
+                <label htmlFor="city" > Ciudad: </label>
+                <input type="text" id="city" key="city" name="city" value={clubData.city} onChange={handleChange} />
+                <p>{errors.city ? errors.city : null} </p>
 
-                <label htmlFor="pais" > Pais: </label>
-                <input type="text" id="pais" key="pais" name="pais" value={clubData.pais} onChange={handleChange} />
-                <p>{errors.pais ? errors.pais : null} </p>
+                <label htmlFor="country" > Pais: </label>
+                <input type="text" id="country" key="country" name="country" value={clubData.country} onChange={handleChange} />
+                <p>{errors.country ? errors.country : null} </p>
 
 
                 <label htmlFor="status" > Estado: </label>
@@ -98,7 +126,7 @@ function FormUpdateClub() {
 
                 <button
                     type="submit"
-                    disabled={Object.values(errors).some(error => error && error.length > 0)}
+                // disabled={Object.values(errors).some(error => error && error.length > 0)}
                 > EDITAR CLUB
                 </button>
 
