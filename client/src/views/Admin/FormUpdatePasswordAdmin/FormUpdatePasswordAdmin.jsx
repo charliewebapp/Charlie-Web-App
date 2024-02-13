@@ -31,10 +31,14 @@ function FormUpdatePasswordAdmin() {
     const value = e.target.value;
     setNewPassword(value);
     setNewPasswordError(
-      value !== confirmNewPassword ? "Las contraseñas nuevas no coinciden." : ""
+      value.length < 8 || value.length > 10
+        ? "La nueva contraseña debe tener entre 8 y 10 caracteres."
+        : !/(?=.*[a-zA-Z])(?=.*\d)/.test(value)
+        ? "La nueva contraseña debe contener al menos un número."
+        : ""
     );
     setConfirmNewPasswordError(
-      value !== newPassword ? "Las contraseñas nuevas no coinciden." : ""
+      value !== confirmNewPassword ? "Las contraseñas nuevas no coinciden." : ""
     );
   };
 
@@ -76,8 +80,8 @@ function FormUpdatePasswordAdmin() {
       currentPasswordInput === currentPassword &&
       newPassword === confirmNewPassword
     ) {
-      // Aquí puedes llamar a la función de actualización de contraseña
-      // dispatch(updateAdministratorPassword(adminID , newPassword))
+      //! dispatch(updateAdministratorPassword(adminID , newPassword))
+      //! Agregar sweet alert
       setCurrentPasswordInput("");
       setNewPassword("");
       setConfirmNewPassword("");
@@ -88,7 +92,7 @@ function FormUpdatePasswordAdmin() {
   };
 
   console.log("id", adminID);
-  console.log("nueva contrase;a", newPassword);
+  console.log("nueva contraseña", newPassword);
 
   return (
     <div className={style.formContainer}>
@@ -109,10 +113,8 @@ function FormUpdatePasswordAdmin() {
             onClick={toggleShowCurrentPassword}
           />
         </div>
-        {currentPasswordError ? (
+        {currentPasswordError && (
           <div className={style.error}>{currentPasswordError}</div>
-        ) : (
-          <p className={style.noError}>.......</p>
         )}
 
         <label htmlFor="newPassword">Nueva Contraseña:</label>
@@ -131,10 +133,8 @@ function FormUpdatePasswordAdmin() {
             onClick={toggleShowNewPassword}
           />
         </div>
-        {newPasswordError ? (
+        {newPasswordError && (
           <div className={style.error}>{newPasswordError}</div>
-        ) : (
-          <p className={style.noError}>.......</p>
         )}
 
         <label htmlFor="confirmNewPassword">Confirmar Nueva Contraseña:</label>
@@ -155,10 +155,8 @@ function FormUpdatePasswordAdmin() {
             onClick={toggleShowConfirmNewPassword}
           />
         </div>
-        {confirmNewPasswordError ? (
+        {confirmNewPasswordError && (
           <div className={style.error}>{confirmNewPasswordError}</div>
-        ) : (
-          <p className={style.noError}>.......</p>
         )}
 
         <button
