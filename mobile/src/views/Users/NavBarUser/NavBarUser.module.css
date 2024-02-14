@@ -1,0 +1,60 @@
+.NavBarUser {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+
+}
+
+.circleIcon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    font-size: 30px;
+    color: rgba(231, 183, 110, 0.8);
+
+}
+
+.circleLogo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(231, 183, 110, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+}
+
+
+
+
+.circleImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.circleWithText {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(231, 183, 110, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+}

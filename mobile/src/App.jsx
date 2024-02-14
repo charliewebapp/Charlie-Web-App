@@ -7,7 +7,6 @@ import Home from './views/Users/Home/Home'
 import Cards from './views/Users/Cards/Cards'
 import Profile from './views/Users/Profile/Profile'
 import Cart from './views/Users/Cart/Cart'
-import LoginCollab from './views/Collaborators/LoginCollab/LoginCollab'
 import DetailQR from './views/Users/DetailQR/DetailQR'
 
 function App() {
@@ -44,22 +43,6 @@ function App() {
           path="/:clubName/cart"
           element={<Cart />}
         />
-
-
-
-
-
-
-
-
-        {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS COLLABORATORS */}
-        <Route
-          path="/:clubName/collab/login"
-          element={<LoginCollab />}
-        />
-
-        {/* ver que otra ruta necesita para QR */}
-
 
 
 
