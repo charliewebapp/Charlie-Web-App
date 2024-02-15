@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import styles from "./Card.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProductToCart,
+  removeProductFromCart,
+  clearCart,
+} from "../../../redux/actions";
 
 function Card({ id, name, price, description, cart, setCart, stock }) {
+  const cartGlobal = useSelector((state) => state.cart); //El carrito que voy cargando.
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+
+  console.log("carrito global", cartGlobal);
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
-    setCart({ ...cart, [id]: (cart[id] || 0) + 1 });
+    dispatch(addProductToCart({ id, name, price, quantity: quantity + 1 }));
   };
 
   const handleDecrement = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
-      setCart({ ...cart, [id]: (cart[id] || 0) - 1 });
+      dispatch(
+        removeProductFromCart({ id, name, price, quantity: quantity - 1 })
+      );
     }
   };
 

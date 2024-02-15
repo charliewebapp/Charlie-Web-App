@@ -7,17 +7,13 @@ import styles from "./Cards.module.css";
 
 function Cards() {
   const { clubName } = useParams();
-  console.log("boliche", clubName);
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
   useEffect(() => {
     dispatch(getProducts(clubName));
   }, []);
-  console.log("productos disponibles", allProducts);
-
-  const [cart, setCart] = useState({});
-  console.log("carrito", cart);
+  //   console.log("productos disponibles", allProducts);
 
   return (
     <div className={styles.container}>
@@ -29,8 +25,6 @@ function Cards() {
           name={product.name.toUpperCase()}
           price={product.price}
           description={product.description}
-          cart={cart}
-          setCart={setCart}
         />
       ))}
     </div>
