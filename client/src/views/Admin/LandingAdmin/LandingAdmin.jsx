@@ -17,7 +17,7 @@ import {
   faEyeSlash,
   faPersonWalkingDashedLineArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 function LandingAdmin() {
   const dispatch = useDispatch();
@@ -62,17 +62,33 @@ function LandingAdmin() {
     if (adminLogin) {
       const adminClient = adminLogin.ClientId;
 
-      dispatch(handleAdminStatusLogin());
-      dispatch(adminIdLogged(adminLogin));
+      if (adminLogin.status === "active") {
+        // Si el usuario está activo, realizar el inicio de sesión
+        dispatch(handleAdminStatusLogin());
+        dispatch(adminIdLogged(adminLogin));
 
-      const clientFromADmin = allBoliches.find(
-        (boliche) => boliche.id === adminClient
-      );
+        const clientFromADmin = allBoliches.find(
+          (boliche) => boliche.id === adminClient
+        );
 
-      const client = clientFromADmin.name;
-      dispatch(selectClientAdminName(client));
-      navigate(`/admin/${client}/dashboardAdmin`);
+        const client = clientFromADmin.name;
+        dispatch(selectClientAdminName(client));
+        navigate(`/admin/${client}/dashboardAdmin`);
+      } else if (adminLogin.status === "inactive") {
+        // Si el usuario está inactivo, mostrar alerta
+        Swal.fire({
+          title: "Acceso denegado",
+          text: "Usuario inactivo temporalmente. Comuníquese con Charlie.ar.",
+          imageUrl:
+            "https://res.cloudinary.com/dzpqgjczu/image/upload/v1708029042/Dise%C3%B1o_sin_t%C3%ADtulo_13_fekc0m.png",
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: "Custom image",
+          confirmButtonColor: "rgb(56, 0, 56)",
+        });
+      }
     } else {
+      // Si las credenciales son incorrectas, mostrar alerta de error
       Swal.fire({
         title: "Acceso denegado",
         text: `Credenciales incorrectas. `,
