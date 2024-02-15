@@ -13,6 +13,7 @@ const PurchaseHistoryModel = require("./models/PurchaseHistory");
 const CollaboratorModel = require("./models/Collaborator");
 const UserModel = require("./models/User");
 const QrCodeModel = require("./models/QrCode");
+const AuthorizationsModel = require("./models/Authorizations");
 
 const sequelize = new Sequelize(DB_RENDER, {
   logging: false,
@@ -55,6 +56,7 @@ PurchaseHistoryModel(sequelize);
 CollaboratorModel(sequelize);
 UserModel(sequelize);
 QrCodeModel(sequelize);
+AuthorizationsModel(sequelize);
 
 const {
   Administrator,
@@ -64,7 +66,8 @@ const {
   PurchaseHistory,
   Collaborator,
   User,
-  QrCode
+  QrCode,
+  Authorizations
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -74,6 +77,8 @@ Administrator.belongsTo(Client);
 Product.belongsTo(Client);
 // Product.belongsTo(Category);
 Collaborator.belongsTo(Client);
+
+Client.hasOne(Authorizations);
 
 //purchase (falta modelo consumidor de emi)
 // Purchase.belongsTo(Client)
