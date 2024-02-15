@@ -1,0 +1,7 @@
+
+.container {
+  background-color: #1A1D22;
+  align-self: center;
+  /* overflow: hidden; Oculta el contenido que desborda */
+  width: 100%;
+}
