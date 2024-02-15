@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1b1b2f;
+}
+
+.h1 {
+    color: #e43f5a;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.h2 {
+    color: #a3bcb6;
+    font-size: 20px;
+    margin-bottom: 20px;
+}

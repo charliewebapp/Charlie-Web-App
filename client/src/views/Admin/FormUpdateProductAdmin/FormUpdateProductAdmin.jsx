@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import style from "./FormUpdateProductAdmin.module.css";
+import style from "../Forms.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmin";
 import { getProducts, updateProduct } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
+import Swal from "sweetalert2"
 
-//MODIFICAR RUTA EN APP.JSX-> /admin/:clubName/editproduct/:idProduct
 
-//! CATEGORIAS -> VER SI LO DEJAMOS EN REDUX O EN UTILS para mapear -> en select
+
+// CATEGORIAS 
 const categories = [
   "Tragos",
   "Cervezas",
@@ -20,14 +21,14 @@ const categories = [
 ];
 
 function FormUpdateProductAdmin() {
+
   const dispatch = useDispatch();
+  const clubName = useSelector((state) => state.selectClientAdmin);
+  const allProductsState = useSelector(state => state.allProducts)
 
-  //!cuando redux venga cargado solo dejar esto: y activar nombres repetidos - las actions y rutas funcionan (primero crear client)
 
-  const allProductsState = useSelector((state) => state.allProducts);
-
+  //Traer data del producto a editar
   const { idProduct } = useParams();
-  console.log("ID", idProduct);
   const productToUpdate = allProductsState.find(
     (product) => product.id === idProduct
   );
@@ -41,16 +42,11 @@ function FormUpdateProductAdmin() {
     category: productToUpdate.category,
   });
 
-  //!eliminar esto que sigue al conectar con back -> GET PRODUCTS:
-  // const [productData, setProductData] = useState({
-  //     name: "",
-  //     brand: "",
-  //     image: "",
-  //     description: "",
-  //     price: "",
-  //     stock: "",
-  //     category: "",
-  // })
+  //para verificar nombre no repetidos salvo producto a editar
+  const productsNotToUpdate = allProductsState.filter(
+    (product) => product.id !== idProduct
+  );
+
 
   //local state errors
   const [errors, setErrors] = useState({
@@ -71,23 +67,20 @@ function FormUpdateProductAdmin() {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormProductAdmin(updatedData));
 
-      //!avoid repeted names -> ver despues al hacer get products por consulta estado de redux
-      // const repetedName = productsState.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
-      // if (repetedName !== undefined) {
-      //     setErrors({ ...errors, name: "Este nombre de producto ya existe" });
-      // }
+      //Evita nombres repetidos salvo el producttoUpdate
+      const repetedName = productsNotToUpdate.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
+      if (repetedName !== undefined) {
+        setErrors({ ...errors, name: "Este nombre de producto ya existe" });
+      }
 
-      console.log(updatedData);
       return updatedData;
     });
   };
 
-  //! SUBMIT-> falta hacer actions y redux
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      dispatch(updateProduct(productData, idProduct));
-      window.alert("Se ha actualizado el producto. ");
+      dispatch(updateProduct(productData, idProduct, clubName));
       setProductData({
         name: "",
         brand: "",
@@ -97,119 +90,133 @@ function FormUpdateProductAdmin() {
         stock: "",
         category: "",
       });
+      Swal.fire({
+        title: "Éxito",
+        text: "El producto se editó correctamente",
+        icon: "success",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      })
     } catch (error) {
-      window.alert("No se ha actualizado el producto. Intente nuevamente. ");
+      //El sweet de error viene de actions
+      console.log(error.message)
     }
   };
 
   return (
-    <form className={style.container} onSubmit={handleSubmit}>
-      <h2>Editar Producto </h2>
+    <div className={style.formContainer}>
+      <div>
+        <h2>Editar Producto </h2>
+        <Link to={`/admin/${clubName}/dashboardAdmin`}>
+          <button>Volver </button>
+        </Link>
+      </div>
 
-      <label htmlFor="name"> Bebida: </label>
-      <input
-        type="text"
-        id="name"
-        key="name"
-        name="name"
-        value={productData.name}
-        onChange={handleChange}
-      />
-      <p>{errors.name ? errors.name : null} </p>
 
-      <label htmlFor="brand"> Marca: </label>
-      <input
-        type="text"
-        id="brand"
-        key="brand"
-        name="brand"
-        value={productData.brand}
-        onChange={handleChange}
-      />
-      <p>{errors.brand ? errors.brand : null} </p>
+      <form onSubmit={handleSubmit}>
 
-      <label htmlFor="image"> Imagen: </label>
-      <input
-        type="text"
-        id="image"
-        key="image"
-        name="image"
-        value={productData.image}
-        onChange={handleChange}
-      />
-      <p>{errors.image ? errors.image : null} </p>
+        <label htmlFor="name"> Bebida: </label>
+        <input
+          type="text"
+          id="name"
+          key="name"
+          name="name"
+          value={productData.name}
+          onChange={handleChange}
+        />
+        <p>{errors.name ? errors.name : null} </p>
 
-      <label htmlFor="description"> Descripción: </label>
-      <input
-        type="text"
-        id="description"
-        key="description"
-        name="description"
-        value={productData.description}
-        onChange={handleChange}
-      />
-      <p>{errors.description ? errors.description : null} </p>
+        <label htmlFor="brand"> Marca: </label>
+        <input
+          type="text"
+          id="brand"
+          key="brand"
+          name="brand"
+          value={productData.brand}
+          onChange={handleChange}
+        />
+        <p>{errors.brand ? errors.brand : null} </p>
 
-      <label htmlFor="price"> Precio: </label>
-      <input
-        type="text"
-        id="price"
-        key="price"
-        name="price"
-        value={productData.price}
-        onChange={handleChange}
-      />
-      <p>{errors.price ? errors.price : null} </p>
+        <label htmlFor="image"> Imagen: </label>
+        <input
+          type="text"
+          id="image"
+          key="image"
+          name="image"
+          value={productData.image}
+          onChange={handleChange}
+        />
+        <p>{errors.image ? errors.image : null} </p>
 
-      <label htmlFor="category"> Categoría: </label>
-      <select
-        name="category"
-        id="category"
-        onChange={handleChange}
-        value={productData.category}
-      >
-        <option value="" disabled hidden>
-          Seleccione una categoría
-        </option>
-        {categories &&
-          categories.map((category, index) => (
-            <option value={category} key={index}>
-              {" "}
-              {category}{" "}
-            </option>
-          ))}
-      </select>
-      <p> {errors.category ? errors.category : null} </p>
+        <label htmlFor="description"> Descripción: </label>
+        <input
+          type="text"
+          id="description"
+          key="description"
+          name="description"
+          value={productData.description}
+          onChange={handleChange}
+        />
+        <p>{errors.description ? errors.description : null} </p>
 
-      <label htmlFor="stock"> Stock: </label>
-      <select
-        name="stock"
-        id="stock"
-        onChange={handleChange}
-        value={productData.stock}
-      >
-        <option value="" disabled hidden>
-          Seleccione el stock
-        </option>
-        <option value="available"> DISPONIBLE </option>
-        <option value="notavailable"> NO HAY STOCK DISPONIBLE </option>
-      </select>
-      <p> {errors.stock ? errors.stock : null} </p>
+        <label htmlFor="price"> Precio: </label>
+        <input
+          type="text"
+          id="price"
+          key="price"
+          name="price"
+          value={productData.price}
+          onChange={handleChange}
+        />
+        <p>{errors.price ? errors.price : null} </p>
 
-      <button
-        type="submit"
-        disabled={Object.values(errors).some(
-          (error) => error && error.length > 0
-        )}
-      >
-        {" "}
-        EDITAR PRODUCTO
-      </button>
+        <label htmlFor="category"> Categoría: </label>
+        <select
+          name="category"
+          id="category"
+          onChange={handleChange}
+          value={productData.category}
+        >
+          <option value="" disabled hidden>
+            Seleccione una categoría
+          </option>
+          {categories &&
+            categories.map((category, index) => (
+              <option value={category} key={index}>
+                {" "}
+                {category}{" "}
+              </option>
+            ))}
+        </select>
+        <p> {errors.category ? errors.category : null} </p>
 
-      <Link to={`/admin/testnati/dashbordAdmin`}>
-        <button>Volver </button>
-      </Link>
-    </form>
+        <label htmlFor="stock"> Stock: </label>
+        <select
+          name="stock"
+          id="stock"
+          onChange={handleChange}
+          value={productData.stock}
+        >
+          <option value="" disabled hidden>
+            Seleccione el stock
+          </option>
+          <option value="available"> DISPONIBLE </option>
+          <option value="notavailable"> NO HAY STOCK DISPONIBLE </option>
+        </select>
+        <p> {errors.stock ? errors.stock : null} </p>
+
+        <button
+          type="submit"
+          disabled={Object.values(errors).some(
+            (error) => error && error.length > 0
+          )}
+        >
+          {" "}
+          EDITAR PRODUCTO
+        </button>
+
+      </form>
+    </div>
   );
 }
 

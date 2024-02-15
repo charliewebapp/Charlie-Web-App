@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import validation from "./validation";
-import "./LoginSuperA.css";
+import style from "./LoginSuperA.module.css";
+
 
 function LoginSuperA({ login }) {
 
@@ -37,42 +38,48 @@ function LoginSuperA({ login }) {
 
 
 
-    <div>
+    <div className={style.container}>
 
-      <br />
+      <div className={style.formContainer}>
+        <h2 className={style.h2}>Bienvenido al Sitio Super Administrador</h2>
 
-      <form >
 
-        <label>Email </label>
-        <input
-          onChange={handleChange}
-          value={userData.email}
-          type="text"
-          name='email'
-        />
 
-        {errors.e1 ? (<p>{errors.e1}</p>)
-          : errors.e2 ? (<p>{errors.e2}</p>)
-            : (<p>{errors.e3}</p>)}
+        <form >
 
-        <br />
+          <label className={style.label}>Email </label>
+          <input
+            onChange={handleChange}
+            value={userData.email}
+            type="text"
+            name='email'
+            className={style.input}
+          />
 
-        <label>Password </label>
-        <input
-          onChange={handleChange}
-          value={userData.password}
-          type="password"
-          name="password"
-        />
+          {errors.e1 ? (<p>{errors.e1}</p>)
+            : errors.e2 ? (<p>{errors.e2}</p>)
+              : (<p className={style.error}>{errors.e3}</p>)}
 
-        {errors.p1 ? (<p>{errors.p1}</p>)
-          : (<p>{errors.p2}</p>)}
+          <br />
 
-        <br />
+          <label className={style.label}>Password </label>
+          <input
+            onChange={handleChange}
+            value={userData.password}
+            type="password"
+            name="password"
+            className={style.input}
+          />
 
-        <button type="submit" onClick={handleSubmit}>Submit</button>
+          {errors.p1 ? (<p>{errors.p1}</p>)
+            : (<p className={style.error}>{errors.p2}</p>)}
 
-      </form>
+          <br />
+
+          <button type="submit" onClick={handleSubmit} className={style.button}>Submit</button>
+
+        </form>
+      </div>
 
     </div>
   )

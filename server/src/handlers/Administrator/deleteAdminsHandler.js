@@ -1,14 +1,15 @@
-const deleteAdmins = require("../../controllers/Collaborators/deleteCollaborator");
+const deleteAdmins = require("../../controllers/Administrator/deleteAdmins");
 
 const deleteAdminsHandler = async (req, res) => {
   try {
-    const { client, administrator } = req.params;
-    const clientMinus = client.toLowerCase();
-    const deletedController = await deleteAdmins(clientMinus,administrator);
+  
+    const {administratorId} = req.params;
+    const deletedController = await deleteAdmins(administratorId);
+    console.log(administratorId)
     return res.status(201).json(deletedController);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-};
+};  
 
 module.exports = deleteAdminsHandler;

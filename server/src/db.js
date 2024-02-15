@@ -12,6 +12,7 @@ const PurchaseModel = require("./models/Purchase");
 const PurchaseHistoryModel = require("./models/PurchaseHistory");
 const CollaboratorModel = require("./models/Collaborator");
 const UserModel = require("./models/User");
+const QrCodeModel = require("./models/QrCode");
 
 const sequelize = new Sequelize(DB_RENDER, {
   logging: false,
@@ -52,7 +53,8 @@ ProductModel(sequelize);
 PurchaseModel(sequelize);
 PurchaseHistoryModel(sequelize);
 CollaboratorModel(sequelize);
-UserModel(sequelize)
+UserModel(sequelize);
+QrCodeModel(sequelize);
 
 const {
   Administrator,
@@ -61,7 +63,9 @@ const {
   Purchase,
   PurchaseHistory,
   Collaborator,
-User} = sequelize.models;
+  User,
+  QrCode
+} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -74,6 +78,8 @@ Collaborator.belongsTo(Client);
 //purchase (falta modelo consumidor de emi)
 // Purchase.belongsTo(Client)
 // CONSUMIDORES-DE-EMI.belongsTo(Client) //este falta
+
+QrCode.belongsToMany(Collaborator, { through: "QrCodes_Collaborators", timestamps: false });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

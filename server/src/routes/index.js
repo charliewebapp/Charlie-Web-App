@@ -27,6 +27,12 @@ const getAllClients = require("../controllers/Clients/getAllClients");
 const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandler");
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
+const putClientsHandler = require("../handlers/Clients/putClientsHandler");
+
+const postQrHandler = require("../handlers/Qrs/postQrHandler");
+const getQrHandler = require("../handlers/Qrs/getQrHandler");
+const putQrHandler = require("../handlers/Qrs/putQrHandler");
+// const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
@@ -66,22 +72,22 @@ router.post("/client", upload.single("image"), postClientsHandler);
 //! /////////////////////////////////////////////////
 router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
-router.put("/:client", putProductHandler); //pendiente cambiar esta ruta
+router.put("/:client", upload.single("image"), putClientsHandler); //pendiente cambiar esta ruta
 //admins
 
 router.get("/administrator", getAllAdminsHandler);
 router.get("/:client/administrator", getAdminsClientsHandler);
 router.post("/:client/administrator", postAdminsHandler);
 router.put("/:client/:administrator", putAdminsHandler);
-router.delete("/:client/:administrator", deleteAdminsHandler);
+router.delete("/:client/:administratorId", deleteAdminsHandler);
 
 //-----------------cliente(boliche)
 //products
 router.get("/:client/product", getProductsHandler);
 router.get("/:client/:category", getProductCategoryHandler);
 router.post("/:client/product", postProductsHanlder);
-router.put("/:client/:product", putProductHandler);
-router.delete("/:client/:product", deleteProductHandler);
+router.put("/:client/product/:id", putProductHandler);
+router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
 //colaborador
@@ -92,6 +98,10 @@ router.put("/:client/collaborator/:user", putCollaboratorsHandler);
 router.delete("/:client/collaborator/:user", deleteControllerHandler);
 
 //--------------colaborador
+router.post("/:client/collaborator/qr/:idMP", postQrHandler);
+router.get("/:client/collaborator/qr/:idMP", getQrHandler);
+router.put("/:client/collaborator/qr/:idMP", putQrHandler);
+// router.delete("/:client/collaborator/qr", deleteQrHandler);
 
 //--------------consumidor
 

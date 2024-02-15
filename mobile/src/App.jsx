@@ -1,33 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { Routes, Route } from "react-router-dom";
+
 import './App.css'
+import LoginUser from './views/Users/LoginUser/LoginUser'
+import Home from './views/Users/Home/Home'
+import Cards from './views/Users/Cards/Cards'
+import Profile from './views/Users/Profile/Profile'
+import Cart from './views/Users/Cart/Cart'
+import LoginCollab from './views/Collaborators/LoginCollab/LoginCollab'
+import DetailQR from './views/Users/DetailQR/DetailQR'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USERS */}
+
+        {/* / la NavBarUser -> iria en cada componente correspondiente*/}
+
+        <Route
+          path="/:clubName/login"
+          element={<LoginUser />}
+        />
+        <Route
+          path="/:clubName/home" //acá iría las cards con el nombre de las categorías
+          element={<Home />}
+        />
+        <Route
+          path="/:clubName/cards"
+          element={<Cards />} // ACÁ IRIA MAPEADO CARD DENTRO DE CADA CARDS DE CATEGORÍAS
+        />
+        <Route
+          path="/:clubName/profile" //capaz es necesario poner /:idUser
+          element={<Profile />}
+        />
+        <Route
+          path="/:clubName/detailqr"
+          element={<DetailQR />}
+        />
+        <Route
+          path="/:clubName/cart"
+          element={<Cart />}
+        />
+
+
+
+
+
+
+
+
+        {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS COLLABORATORS */}
+        <Route
+          path="/:clubName/collab/login"
+          element={<LoginCollab />}
+        />
+
+        {/* ver que otra ruta necesita para QR */}
+
+
+
+
+
+
+
+      </Routes>
+
     </>
   )
 }
