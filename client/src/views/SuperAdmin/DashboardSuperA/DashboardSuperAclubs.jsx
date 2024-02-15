@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { deleteBoliche, getBoliches } from "../../../redux/actions";
 import { Link } from "react-router-dom";
-import style from "./dashboardSuperA.module.css";
+import style from "./dashboard.module.css";
 import Swal from "sweetalert2";
-
 function DashboardSuperAclubs({ handleAdmins }) {
   const dispatch = useDispatch();
 
@@ -16,7 +15,7 @@ function DashboardSuperAclubs({ handleAdmins }) {
   useEffect(() => {
     dispatch(getBoliches());
   }, []);
-
+  console.log(getBoliches, "ACA");
   function handleDelete(row) {
     dispatch(deleteBoliche(row.name));
   }
@@ -47,23 +46,19 @@ function DashboardSuperAclubs({ handleAdmins }) {
     });
   }
 
-  function handleBlock(row) {
-    // Aquí puedes implementar la lógica para bloquear la fila
-  }
-
   const columns = [
-    { field: "name", headerName: "Nombre", width: 250 },
-    { field: "ciudad", headerName: "Ciudad", width: 200 },
-    { field: "direccion", headerName: "Direccion", width: 250 },
-    { field: "status", headerName: "Status", width: 100 },
+    { field: "name", headerName: "Nombre", width: 180 },
+    { field: "ciudad", headerName: "Ciudad", width: 180 },
+    { field: "direccion", headerName: "Direccion", width: 200 },
+    { field: "status", headerName: "Status", width: 80 },
     {
       field: "actions",
       headerName: "Acciones",
-      width: 300,
+      width: 250,
       renderCell: (params) => (
         <div className={style.divButtonDash}>
           <button
-            className={style.button}
+            className={style.acciones}
             onClick={() => handleAdmins(params.row)}
           >
             Admins
@@ -71,48 +66,33 @@ function DashboardSuperAclubs({ handleAdmins }) {
 
           <Link to={`/superadmin/updateclub/${params.row.id}`}>
             <button
-              className={style.button}
+              className={style.acciones}
               onClick={() => handleEdit(params.row)}
             >
               Editar
             </button>
           </Link>
           <button
-            className={style.button}
+            className={style.accionDelete}
             onClick={() => handleDelete(params.row)}
           >
             Eliminar
-          </button>
-          <button
-            className={style.button}
-            onClick={() => handleBlock(params.row)}
-          >
-            Bloquear
           </button>
         </div>
       ),
     },
   ];
 
-  function handleEdit(row) {
-    console.log("Editar:", row);
-    // Aquí puedes implementar la lógica para editar la fila
-  }
-
   return (
-    <>
-      <div className={style.container}>
-        <div className={style.linkContainer}>
-          <Link to="/superadmin/addclub" className={style.linkContainer}>
-            <button className={style.buttonConfig}>Crear Nuevo Club</button>
-          </Link>
-
-          <div className={style.DataGrid}>
-            <DataGrid rows={rows} columns={columns} autoWidth />
-          </div>
-        </div>
+    <div className={style.linkContainer}>
+      <h2>BOLICHES</h2>
+      <div className={style.DataGrid}>
+        <DataGrid rows={rows} columns={columns} autoPageSize rowHeight={40} />
       </div>
-    </>
+      <Link to="/superadmin/addclub" className={style.linkContainer}>
+        <button className={style.btnCreate}>CREAR NUEVO BOLICHE</button>
+      </Link>
+    </div>
   );
 }
 

@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { DB_RENDER } = process.env;
 
-const AdministratorModel = require("./models/administrator");
+const AdministratorModel = require("./models/Administrator");
 const ClientModel = require("./models/Client");
 const ProductModel = require("./models/Product");
 const PurchaseModel = require("./models/Purchase");
@@ -83,6 +83,12 @@ Client.hasOne(Authorizations);
 //purchase (falta modelo consumidor de emi)
 // Purchase.belongsTo(Client)
 // CONSUMIDORES-DE-EMI.belongsTo(Client) //este falta
+
+
+QrCode.belongsToMany(Collaborator, {
+  through: "QrCodes_Collaborators",
+  timestamps: false,
+});
 
 QrCode.belongsTo(Client)
 QrCode.belongsTo(User)
