@@ -15,7 +15,7 @@ const AuthMercadoPago = async (req, res) => {
       accessToken: ACCESS_TOKEN,
       options: { timeout: 5000 },
     });
-    const redirect_uri = `https://mercadopago-7p1q.onrender.com/${path}/mercadopago-authorization/success`;
+    const redirect_uri =`https://mercadopago-7p1q.onrender.com/${path}/mercadopago-authorization/success`;
     const postData = {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
