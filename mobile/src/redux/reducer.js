@@ -3,11 +3,13 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   CLEAN_CART,
+  GET_MY_BOLICHE,
 } from "./actionsTypes";
 
 const initialState = {
   allProducts: [],
   cart: [],
+  myBoliche: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,9 +47,16 @@ const reducer = (state = initialState, action) => {
         cart: [],
       };
 
+    case GET_MY_BOLICHE:
+      return {
+        ...state,
+        myBoliche: payload
+      }
+
     default:
       return { ...state };
   }
 };
 
 export default reducer;
+
