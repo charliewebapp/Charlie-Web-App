@@ -1,139 +1,184 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { getAdministrators, getBoliches } from '../../../redux/actions';
-import { validateFormAdmin } from '../../../utils/validateFormUpdateAdmin';
-import { updateAdmin } from '../../../redux/actions';
-import Swal from "sweetalert2"
-import style from '../SAForms.module.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { getAdministrators, getBoliches } from "../../../redux/actions";
+import { validateFormAdmin } from "../../../utils/validateFormUpdateAdmin";
+import { updateAdmin } from "../../../redux/actions";
+import Swal from "sweetalert2";
+import style from "../DashboardSuperA/dashboard.module.css";
+import logotype from "../../../assets/img/charlielogo.png";
+import imgCharlie from "../../../assets/img/charlie.png";
+import { RiLogoutBoxLine } from "react-icons/ri";
 
 function FormUpdateAdmin() {
-    const dispatch = useDispatch();
-    const [adminData, setAdminData] = useState({});
+  const dispatch = useDispatch();
+  const [adminData, setAdminData] = useState({});
 
-    const allAdmins = useSelector((state) => state.allAdministrators
-    ); const allBoliches = useSelector((state) => state.allBoliches);
-    console.log(allBoliches, "allBoliches")
-    const { idAdmin } = useParams();
+  const allAdmins = useSelector((state) => state.allAdministrators);
+  const allBoliches = useSelector((state) => state.allBoliches);
+  console.log(allBoliches, "allBoliches");
+  const { idAdmin } = useParams();
 
-    const adminToUpdate = allAdmins.find(
-        (admin) => admin.id === idAdmin
-    );
-    console.log(adminToUpdate, "adminToUpdate")
+  const adminToUpdate = allAdmins.find((admin) => admin.id === idAdmin);
+  console.log(adminToUpdate, "adminToUpdate");
 
-    useEffect(() => {
-        dispatch(getAdministrators());
-        dispatch(getBoliches());
-    }, []);
+  useEffect(() => {
+    dispatch(getAdministrators());
+    dispatch(getBoliches());
+  }, []);
 
-    useEffect(() => {
-        if (adminToUpdate) {
-            setAdminData({
-                id: adminToUpdate.id,
-                name_client: adminToUpdate.name_client,
-                password: adminToUpdate.password,
-                mail: adminToUpdate.mail,
-                status: adminToUpdate.status,
-            });
-        }
-    }, [adminToUpdate]);
+  useEffect(() => {
+    if (adminToUpdate) {
+      setAdminData({
+        id: adminToUpdate.id,
+        name_client: adminToUpdate.name_client,
+        password: adminToUpdate.password,
+        mail: adminToUpdate.mail,
+        status: adminToUpdate.status,
+      });
+    }
+  }, [adminToUpdate]);
 
-    const club = allBoliches.find((club) => club.id === adminToUpdate.ClientId);
-    const clubName = club.name;
-    console.log(club, "club")
-    console.log(clubName, "clubName")
+  const club = allBoliches.find((club) => club.id === adminToUpdate.ClientId);
+  const clubName = club.name;
+  console.log(club, "club");
+  console.log(clubName, "clubName");
 
-    const [errors, setErrors] = useState({
-        name_client: "Ingrese el nombre",
-        password: "Asigne una contraseña",
-        mail: "Ingrese el email",
-        status: "Ingrese el estado",
+  const [errors, setErrors] = useState({
+    name_client: "Ingrese el nombre",
+    password: "Asigne una contraseña",
+    mail: "Ingrese el email",
+    status: "Ingrese el estado",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setAdminData((prevData) => {
+      const updatedData = { ...prevData, [name]: value };
+      setErrors(validateFormAdmin(updatedData));
+
+      return updatedData;
     });
+  };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      dispatch(updateAdmin(adminData, idAdmin, clubName));
+      setAdminData({
+        name_client: "",
+        password: "",
+        mail: "",
+        status: "",
+      });
+      Swal.fire({
+        title: "Éxito",
+        text: "El administrador se editó correctamente",
+        icon: "success",
+        timer: "3000",
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-        setAdminData((prevData) => {
-            const updatedData = { ...prevData, [name]: value };
-            setErrors(validateFormAdmin(updatedData));
+  return (
+    <div className={style.bg}>
+      <div className={style.container}>
+        <div className={style.aside}>
+          <img src={logotype} className={style.asideLogo} />
+          <div className={style.logotype}>
+            <img src={logotype} className={style.logo} />
+            CHARLIE
+          </div>
+          <div className={style.buttones}>
+            <Link to={`/superadmin/dashboard`}>
+              <button className={style.button}>BOLICHES</button>
+            </Link>
+          </div>
+          <div className={style.config}>
+            <button className={style.btnCfg}>
+              <RiLogoutBoxLine />
+              Cerrar sesion
+            </button>
+          </div>
+        </div>
+        <div className={style.views}>
+          <div className={style.navbar}>
+            <h1 className={style.h1}>DASHBOARD SUPER ADMIN</h1>
+          </div>
+          <div className={style.dashboard}>
+            <h2>EDITAR ADMINISTRADOR</h2>
 
-            return updatedData;
-        });
-    };
+            <form onSubmit={handleSubmit} className={style.FormPostAdminSA}>
+              <label htmlFor="name_client">Nombre: </label>
+              <input
+                type="text"
+                id="name_client"
+                key="name_client"
+                name="name_client"
+                value={adminData.name_client}
+                onChange={handleChange}
+              />
+              <span>{errors.name_client ? errors.name_client : null} </span>
 
+              <label htmlFor="password"> Password: </label>
+              <input
+                type="text"
+                id="password"
+                key="password"
+                name="password"
+                value={adminData.password}
+                onChange={handleChange}
+              />
+              <span>{errors.password ? errors.password : null} </span>
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        try {
-            dispatch(updateAdmin(adminData, idAdmin, clubName));
-            setAdminData({
-                name_client: "",
-                password: "",
-                mail: "",
-                status: "",
-            });
-            Swal.fire({
-                title: "Éxito",
-                text: "El administrador se editó correctamente",
-                icon: "success",
-                timer: "3000",
-            });
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+              <label htmlFor="mail"> E-mail: </label>
+              <input
+                type="text"
+                id="mail"
+                key="mail"
+                name="mail"
+                value={adminData.mail}
+                onChange={handleChange}
+              />
+              <span>{errors.mail ? errors.mail : null} </span>
 
-    return (
+              <label htmlFor="status"> Estado: </label>
+              <select
+                name="status"
+                id="status"
+                onChange={handleChange}
+                value={adminData.status}
+              >
+                <option value="" disabled hidden>
+                  Seleccione el estado:
+                </option>
+                <option value="active"> ACTIVO </option>
+                <option value="inactive"> INACTIVO </option>
+              </select>
+              <span> {errors.status ? errors.status : null} </span>
 
-        <div
-            className={style.formContainer}
-        >
-
-            <div>
-                <h2>Editar Administrador</h2>
-                <Link to={'/superadmin/dashboard'}>
-                    <button>Volver a Clubs </button>
-                </Link>
-            </div>
-
-            <br />
-
-            <form
-                onSubmit={handleSubmit}
-            >
-
-                <label htmlFor="name_client">Nombre: </label>
-                <input type="text" id="name_client" key="name_client" name="name_client" value={adminData.name_client} onChange={handleChange} />
-                <p>{errors.name_client ? errors.name_client : null} </p>
-
-                <label htmlFor="password" > Password: </label>
-                <input type="text" id="password" key="password" name="password" value={adminData.password} onChange={handleChange} />
-                <p>{errors.password ? errors.password : null} </p>
-
-                <label htmlFor="mail" > E-mail: </label>
-                <input type="text" id="mail" key="mail" name="mail" value={adminData.mail} onChange={handleChange} />
-                <p>{errors.mail ? errors.mail : null} </p>
-
-
-                <label htmlFor="status" > Estado: </label>
-                <select name="status" id="status" onChange={handleChange} value={adminData.status} >
-                    <option value="" disabled hidden>Seleccione el estado:</option>
-                    <option value="active" > ACTIVO </option>
-                    <option value="inactive"> INACTIVO </option>
-                </select>
-                <p> {errors.status ? errors.status : null} </p>
-
-
-                <button
-                    type="submit"
-                    disabled={Object.values(errors).some(error => error && error.length > 0)}
-                > EDITAR ADMIN
-                </button>
-
+              <button
+                className={style.btnForms}
+                type="submit"
+                disabled={Object.values(errors).some(
+                  (error) => error && error.length > 0
+                )}
+              >
+                EDITAR ADMIN
+              </button>
             </form>
 
+            <img src={imgCharlie} className={style.imgCharlie}></img>
+          </div>
+
+          <div className={style.footer}>© Charlie</div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default FormUpdateAdmin;

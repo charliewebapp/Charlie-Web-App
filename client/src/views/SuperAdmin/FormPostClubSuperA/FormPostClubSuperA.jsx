@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { postBoliche } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
-import style from "../../SuperAdmin/SAForms.module.css";
+import style from "../DashboardSuperA/dashboard.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { validateFormPostClub } from "../../../utils/validateFormPostClub";
+import logotype from "../../../assets/img/charlielogo.png";
+import imgCharlie from "../../../assets/img/charlie.png";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { FaFileImage, FaReact } from "react-icons/fa"; // Importa el icono de React
 
 function FormPostClubSuperA() {
   const navigate = useNavigate();
@@ -54,9 +58,9 @@ function FormPostClubSuperA() {
   const handlerSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateFormPostClub(create); // Validate the form data
-    if (Object.keys(validationErrors).length === 0) { // If there are no errors
+    if (Object.keys(validationErrors).length === 0) {
+      // If there are no errors
       sendFormData(create);
-
     }
   };
 
@@ -69,55 +73,113 @@ function FormPostClubSuperA() {
 
     setCreate({ ...create, [name]: value });
   };
+  const buttonStyle = {
+    display: "flex",
+    border: "1px solid #380036",
+    width: "350px",
+    height: "40px",
+    margin: "10px 0 10px 0",
+    padding: "0 10px",
+    color: "#380036",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "16px",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
+  // Estilos para el input
+  const fileInputStyle = {
+    display: "none", // Oculta el input
+  };
   return (
-    <div className={style.formContainer}>
-      <div>
-        <h1>Crear boliche</h1>
-        <Link to={`/superadmin/dashboard`}>
-          <button type="button">Volver </button>
-        </Link>
+    <div className={style.bg}>
+      <div className={style.container}>
+        <div className={style.aside}>
+          <img src={logotype} className={style.asideLogo} />
+          <div className={style.logotype}>
+            <img src={logotype} className={style.logo} />
+            CHARLIE
+          </div>
+          <div className={style.buttones}>
+            <Link to={`/superadmin/dashboard`}>
+              <button className={style.button}>BOLICHES</button>
+            </Link>
+          </div>
+          <div className={style.config}>
+            <button className={style.btnCfg}>
+              <RiLogoutBoxLine />
+              Cerrar sesion
+            </button>
+          </div>
+        </div>
+        <div className={style.views}>
+          <div className={style.navbar}>
+            <h1 className={style.h1}>DASHBOARD SUPER ADMIN</h1>
+          </div>
+          <div className={style.dashboard}>
+            <h2>CREAR BOLICHE</h2>
+
+            <form onSubmit={handlerSubmit} className={style.FormPostAdminSA}>
+              <label htmlFor="name">Nombre del boliche</label>
+              <input
+                type="text"
+                name="name"
+                value={create.name}
+                onChange={handleInputChange}
+              />
+
+              <span>{errors.name ? errors.name : null} </span>
+
+              {/* <input type="file" onChange={handleImageChange} /> */}
+              <label style={buttonStyle}>
+                <FaFileImage /> Agrega tu logo
+                <input
+                  type="file"
+                  onChange={handleImageChange}
+                  style={fileInputStyle}
+                  className={style.buttonStyle}
+                />
+              </label>
+
+              <label htmlFor="adress">Direccion</label>
+              <input
+                type="text"
+                name="adress"
+                value={create.adress}
+                onChange={handleInputChange}
+              />
+
+              <span>{errors.adress ? errors.adress : null} </span>
+
+              <label htmlFor="city">Ciudad</label>
+              <input
+                type="text"
+                name="city"
+                value={create.city}
+                onChange={handleInputChange}
+              />
+
+              <span>{errors.city ? errors.city : null} </span>
+
+              <button
+                className={style.btnForms}
+                type="submit"
+                disabled={Object.values(errors).some(
+                  (error) => error && error.length > 0
+                )}
+              >
+                CREAR
+              </button>
+            </form>
+
+            <img src={imgCharlie} className={style.imgCharlie}></img>
+          </div>
+
+          <div className={style.footer}>© Charlie</div>
+        </div>
       </div>
-      <form onSubmit={handlerSubmit}>
-        <label htmlFor="name">Nombre del boliche</label>
-        <input
-          type="text"
-          name="name"
-          value={create.name}
-          onChange={handleInputChange}
-        />
-
-        <p>{errors.name ? errors.name : null} </p>
-
-        <input type="file" onChange={handleImageChange} />
-
-        <label htmlFor="adress">Direccion</label>
-        <input
-          type="text"
-          name="adress"
-          value={create.adress}
-          onChange={handleInputChange}
-        />
-
-        <p>{errors.adress ? errors.adress : null} </p>
-
-        <label htmlFor="city">Ciudad</label>
-        <input
-          type="text"
-          name="city"
-          value={create.city}
-          onChange={handleInputChange}
-        />
-
-        <p>{errors.city ? errors.city : null} </p>
-
-        <button
-          type="submit"
-          disabled={Object.values(errors).some(error => error && error.length > 0)}
-        >CREAR</button>
-      </form>
     </div>
   );
 }
-
 export default FormPostClubSuperA;

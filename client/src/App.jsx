@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
+
 import LandingAdmin from "./views/Admin/LandingAdmin/LandingAdmin";
 import FormPostProductAdmin from "./views/Admin/FormPostProductAdmin/FormPostProductAdmin";
 import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmployee";
@@ -25,18 +26,20 @@ import DetailQR
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
 
+//no borrar esto
+import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
 
 const App = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function login(userData) {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       dispatch(handleSAdminStatusLogin());
-      navigate('/superadmin/dashboard');
+      navigate("/superadmin/dashboard");
     }
   }
 

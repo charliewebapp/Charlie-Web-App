@@ -1,6 +1,57 @@
+// import * as React from "react";
+// import { DataGrid } from "@mui/x-data-grid";
+// import style from "./dashboardAdmin.module.css";
+
+// const rows = [
+//   { id: 1, Orden: "#324", Usuario: "Maria Merie", Total: "$1900" },
+//   { id: 2, Orden: "#234", Usuario: "Pepe Cosme", Total: "$4059" },
+//   { id: 3, Orden: "#984", Usuario: "Fulano Tal", Total: "$2398" },
+// ];
+
+// const columns = [
+//   { field: "Orden", headerName: "Orden", width: 250 },
+//   { field: "Usuario", headerName: "Usuario", width: 250 },
+//   { field: "Total", headerName: "Total", width: 250 },
+//   {
+//     field: "actions",
+//     headerName: "Acciones",
+//     width: 350,
+//     renderCell: (params) => (
+//       <div>
+//         <button
+//           className={style.button}
+//           onClick={() => handleDetail(params.row)}
+//         >
+//           Ver detalle
+//         </button>
+//       </div>
+//     ),
+//   },
+// ];
+
+// function handleDetail(row) {
+//   console.log("Editar:", row);
+//   // Aquí puedes implementar la lógica para editar la fila
+// }
+
+// function DashboardAdminSales() {
+//   return (
+//     <>
+//       <div className={style.container}>
+//         <h2>Ventas</h2>
+//         <div className={style.DataGrid}>
+//           <DataGrid rows={rows} columns={columns} autoWidth />
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// export default DashboardAdminSales;
+
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import style from "./dashboardAdmin.module.css";
+import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 
 const rows = [
   { id: 1, Orden: "#324", Usuario: "Maria Merie", Total: "$1900" },
@@ -9,17 +60,17 @@ const rows = [
 ];
 
 const columns = [
-  { field: "Orden", headerName: "Orden", width: 250 },
-  { field: "Usuario", headerName: "Usuario", width: 250 },
-  { field: "Total", headerName: "Total", width: 250 },
+  { field: "Orden", headerName: "Orden", width: 225 },
+  { field: "Usuario", headerName: "Usuario", width: 225 },
+  { field: "Total", headerName: "Total", width: 225 },
   {
     field: "actions",
     headerName: "Acciones",
-    width: 350,
+    width: 220,
     renderCell: (params) => (
       <div>
         <button
-          className={style.button}
+          className={style.acciones}
           onClick={() => handleDetail(params.row)}
         >
           Ver detalle
@@ -37,10 +88,10 @@ function handleDetail(row) {
 function DashboardAdminSales() {
   return (
     <>
-      <div className={style.container}>
-        <h2>Ventas</h2>
+      <div className={style.linkContainer}>
+        <h2>VENTAS</h2>
         <div className={style.DataGrid}>
-          <DataGrid rows={rows} columns={columns} autoWidth />
+          <DataGrid rows={rows} columns={columns} autoPageSize rowHeight={40} />
         </div>
       </div>
     </>
