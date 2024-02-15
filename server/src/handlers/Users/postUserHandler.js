@@ -3,10 +3,10 @@ const postUser = require("../../controllers/Users/postUser");
 const postUserHandler = async (req, res) => {
   try {
     
-    const {mail, password } = req.body; 
+    const {id, name, mail, password } = req.body; 
   
-    if (!mail || !password) return res.status(400).json({ error: error.message });
-    const UserData = {mail, password}
+    if (!name) return res.status(400).json({ error: "Falta Name" });
+    const UserData = {id,name, mail, password}
 
     const newUser = await postUser(UserData);
     return res.status(201).json(newUser);

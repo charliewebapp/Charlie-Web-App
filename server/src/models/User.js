@@ -6,13 +6,17 @@ module.exports = (sequelize) => {
     "User",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull:false
+      },
+      name:{
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       mail: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,

@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
-// import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+
 import LandingAdmin from "./views/Admin/LandingAdmin/LandingAdmin";
 import FormPostProductAdmin from "./views/Admin/FormPostProductAdmin/FormPostProductAdmin";
 import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmployee";
@@ -17,8 +17,17 @@ import FormUpdateAdmin from "./views/SuperAdmin/FormUpdateAdmin/FormUpdateAdmin"
 import FormUpdateClub from "./views/SuperAdmin/FormUpdateClub/FormUpdateClub";
 import Profile from "./views/Users/Profile/Profile";
 
+import ColaboradorNavbar from "./views/Colaborador/colaboradornavbar";
+import DetailQR
+ from "./views/Users/DetailQR/DetailQR";
+ import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
+ import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
+
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
+
+//no borrar esto
+import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
@@ -44,12 +53,18 @@ const App = () => {
 
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
 
+  const colaboradorStatusLogin = useSelector((state) => state.colaboradorStatusLogin);
+
   const requireSAdminLogin = (component) => {
     return sadminStatusLogin ? component : <Navigate to="/superadmin" />;
   };
 
   const requireAdminLogin = (component) => {
     return adminStatusLogin ? component : <Navigate to="/admin" />;
+  };
+
+  const requireColaboradorLogin = (component) => {
+    return colaboradorStatusLogin ? component : <Navigate to="/admin" />;
   };
 
   return (
@@ -140,7 +155,7 @@ const App = () => {
         {/* <Route
           path="/admin/:clubName/clubprofile"
           element={requireAdminLogin(<FormClubProfile />)}
-        />
+        /> */}
         {/* ruta creada para brian test */}
         <Route path="/:clubName/profile" element={<Profile />} />
         {/*//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USUARIOS -> los componentes no dicen user*/}
@@ -153,6 +168,19 @@ const App = () => {
         ...FALTAN DEMAS RUTAS
         
         */}
+
+
+
+
+        {/* {location.pathname !== "/admin"  && <ColaboradorNavbar  />} */}
+
+        <Route path="qrcode" element={<DetailQR />} />
+
+        <Route path="colaboradorqr" element={<ColaboradorReader />} />
+
+        <Route path="colaborador/perfil" element={<ColaboradorProfile />} />
+
+
       </Routes>
     </>
   );
