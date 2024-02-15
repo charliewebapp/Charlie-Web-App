@@ -29,16 +29,22 @@ const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandl
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
 const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 
+
+
 const postQrHandler = require("../handlers/Qrs/postQrHandler");
 const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
+const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 
 const router = Router();
-//--------------superadmin
+
+//mercado-pago
+router.post("/mercadopago-authorization/success", AuthMercadoPago);
+
 
 //boliche
 //! /////////////////////////////////////////////////
