@@ -24,6 +24,7 @@ import {
   DELETE_BOLICHE,
   DELETE_BOLICHE_ADMINS,
   ADMIN_ID_LOGGED,
+  COLLABORATOR_STATUS_LOGIN,
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -498,3 +499,66 @@ export const deleteBolicheAdmins = (clubName, id) => {
     }
   };
 };
+
+
+
+//! login colaborador
+
+
+export const handleCollaboratorStatusLogin = () => {
+  return async (dispatch) => {
+      try {
+          return dispatch({
+              type: COLLABORATOR_STATUS_LOGIN,
+          });
+      } catch (error) {
+          console.error(error);
+      }
+  };
+}
+
+
+////////////////////////QR ACTIONS ///////////////////////////
+
+
+export const acceptOrder = () => {
+  return async (dispatch) => {
+      try {
+          const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/accept`)
+          // console.log(data)
+          // if (data) {
+          //     dispatch({
+          //         type: "ACCEPT_ORDER",
+          //         payload: data
+          //     })
+          // } else {
+          //     throw new Error("No se ha aceptado la orden")
+          // }
+
+      } catch (error) {
+          window.alert("No se ha aceptado la orden. " + error.message)
+      }
+  }
+
+}
+
+export const rejectOrder = () => {
+  return async (dispatch) => {
+      try {
+          const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/reject`)
+          // console.log(data)
+          // if (data) {
+          //     dispatch({
+          //         type: "REJECT_ORDER",
+          //         payload: data
+          //     })
+          // } else {
+          //     throw new Error("No se ha rechazado la orden")
+          // }
+
+      } catch (error) {
+          window.alert("La orden no fue rechazada con exito. " + error.message)
+      }
+  }
+
+}
