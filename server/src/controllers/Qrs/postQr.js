@@ -1,6 +1,6 @@
 const { QrCode } = require('../../db');
 
-const createQrCode = async (products, totalPrice, status, idMp) => {
+const createQrCode = async (products, totalPrice, status, idMp, ClientId, UserId) => {
     
     const idMercadoPago = Number(idMp)
     
@@ -8,7 +8,9 @@ const createQrCode = async (products, totalPrice, status, idMp) => {
         products,
         totalPrice,
         status,
-        idMercadoPago
+        idMercadoPago,
+        ClientId, 
+        UserId
     });
     
     return newQrCode;
