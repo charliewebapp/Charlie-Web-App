@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "./formupdatepasswordadmin.module.css";
+import style from "./FormUpdatePasswordAdmin.module.css";
 
 function FormUpdatePasswordAdmin() {
   const selectAdminID = useSelector((state) => state.selectAdminLogin);
