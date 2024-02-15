@@ -79,7 +79,8 @@ Collaborator.belongsTo(Client);
 // Purchase.belongsTo(Client)
 // CONSUMIDORES-DE-EMI.belongsTo(Client) //este falta
 
-QrCode.belongsToMany(Collaborator, { through: "QrCodes_Collaborators", timestamps: false });
+QrCode.belongsTo(Client)
+QrCode.belongsTo(User)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
