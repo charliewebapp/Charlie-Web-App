@@ -45,7 +45,7 @@ function NavBarUser() {
             <div className={styles.circleLogo}>
                 <p>LOGO</p>
                 {/* aca iria el logo del boliche -> traer desde el server */}
-                <img src="src\assets\logoBanana.jpg" alt="" />
+                {/* <img src="src\assets\logoBanana.jpg" alt="" /> */}
             </div>
 
             <div className={styles.circleIcon}>
