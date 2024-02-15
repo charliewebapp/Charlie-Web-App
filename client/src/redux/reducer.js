@@ -23,6 +23,7 @@ import {
   DELETE_ADMINISTRATORS,
   DELETE_BOLICHE_ADMINS,
   ADMIN_ID_LOGGED,
+  COLLABORATOR_STATUS_LOGIN,
 } from "./actions-types";
 
 const initialState = {
@@ -267,6 +268,13 @@ const reducer = (state = initialState, action) => {
         collaboratorsActive: false,
         adminConfigActive: false,
         salesActive: true,
+      };
+
+      //! login colaborador
+    case COLLABORATOR_STATUS_LOGIN:
+      return {
+        ...state,
+        colaboradorStatusLogin: true,
       };
 
     default:

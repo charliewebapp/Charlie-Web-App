@@ -33,6 +33,9 @@ export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 export const ADMIN_CONFIG_VIEW = "ADMIN_CONFIG_VIEW";
 export const ADMIN_ID_LOGGED = "ADMIN_ID_LOGGED";
 
+//! login colaborador
+export const COLLABORATOR_STATUS_LOGIN = "COLLABORATOR_STATUS_LOGIN"
+
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const GET_ADMINISTRATORS = "GET_ADMINISTRATORS";
 
