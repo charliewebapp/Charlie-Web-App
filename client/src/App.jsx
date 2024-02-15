@@ -25,6 +25,9 @@ import DetailQR
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
 
+//no borrar esto
+import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
 
