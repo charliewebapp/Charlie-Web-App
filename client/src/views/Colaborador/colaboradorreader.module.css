@@ -1,0 +1,42 @@
+.container {
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1b1b2f;
+}
+
+
+.h1 {
+    color: #e43f5a;
+    font-size: 30px;
+    margin: auto;
+}
+
+.button {
+    color: #a3bcb6;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1b1b2f;
+    color: #a3bcb6;
+    margin-top: 20px;
+    width: 80%;
+    font-size: 20px;
+}
+
+.status {
+    color: #f7a1a5;
+    font-size: 25px;
+}

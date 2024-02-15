@@ -173,7 +173,7 @@ const App = () => {
 
         <Route path="qrcode" element={<DetailQR />} />
 
-        <Route path="colaboradoqr" element={<ColaboradorReader />} />
+        <Route path="colaboradorqr" element={<ColaboradorReader />} />
 
         <Route path="colaborador/perfil" element={<ColaboradorProfile />} />
 
