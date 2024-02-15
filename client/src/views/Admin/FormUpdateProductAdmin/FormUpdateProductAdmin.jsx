@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import style from "../Forms.module.css";
+import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { validateFormProductAdmin } from "../../../utils/validateFormProductAdmin";
 import { getProducts, updateProduct } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
-import Swal from "sweetalert2"
-
-
-
-// CATEGORIAS 
+import Swal from "sweetalert2";
+import logotype from "../../../assets/img/charlielogo.png";
+import imgCharlie from "../../../assets/img/charlie.png";
+import { FaArrowLeft } from "react-icons/fa";
+// CATEGORIAS
 const categories = [
   "Tragos",
   "Cervezas",
@@ -21,11 +21,9 @@ const categories = [
 ];
 
 function FormUpdateProductAdmin() {
-
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
-  const allProductsState = useSelector(state => state.allProducts)
-
+  const allProductsState = useSelector((state) => state.allProducts);
 
   //Traer data del producto a editar
   const { idProduct } = useParams();
@@ -47,7 +45,6 @@ function FormUpdateProductAdmin() {
     (product) => product.id !== idProduct
   );
 
-
   //local state errors
   const [errors, setErrors] = useState({
     name: "",
@@ -68,7 +65,10 @@ function FormUpdateProductAdmin() {
       setErrors(validateFormProductAdmin(updatedData));
 
       //Evita nombres repetidos salvo el producttoUpdate
-      const repetedName = productsNotToUpdate.find(product => product.name.toLowerCase() === updatedData.name.toLowerCase());
+      const repetedName = productsNotToUpdate.find(
+        (product) =>
+          product.name.toLowerCase() === updatedData.name.toLowerCase()
+      );
       if (repetedName !== undefined) {
         setErrors({ ...errors, name: "Este nombre de producto ya existe" });
       }
@@ -96,126 +96,123 @@ function FormUpdateProductAdmin() {
         icon: "success",
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
-      })
+      });
     } catch (error) {
       //El sweet de error viene de actions
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 
   return (
-    <div className={style.formContainer}>
-      <div>
-        <h2>Editar Producto </h2>
-        <Link to={`/admin/${clubName}/dashboardAdmin`}>
-          <button>Volver </button>
-        </Link>
+    <div className={style.bg}>
+      <div className={style.container}>
+        <div className={style.aside}>
+          <img src={logotype} className={style.asideLogo} />
+          <div className={style.logotype}>
+            <img src={logotype} className={style.logo} />
+            CHARLIE
+          </div>
+          <div className={style.buttones}>
+            <Link to={`/admin/test/dashboardAdmin`}>
+              <button className={style.button}>
+                <FaArrowLeft />
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className={style.views}>
+          <div className={style.navbar}>
+            <h1 className={style.h1}>DASHBOARD ADMIN</h1>
+          </div>
+          <div className={style.dashboard}>
+            <h2>EDITAR PRODUCTO</h2>
+
+            <form onSubmit={handleSubmit} className={style.FormPostAdminSA}>
+              <label htmlFor="name"> Bebida: </label>
+              <input
+                type="text"
+                id="name"
+                key="name"
+                name="name"
+                value={productData.name}
+                onChange={handleChange}
+              />
+              <span>{errors.name ? errors.name : null} </span>
+
+              <label htmlFor="description"> Descripción: </label>
+              <input
+                type="text"
+                id="description"
+                key="description"
+                name="description"
+                value={productData.description}
+                onChange={handleChange}
+              />
+              <span>{errors.description ? errors.description : null} </span>
+
+              <label htmlFor="price"> Precio: </label>
+              <input
+                type="text"
+                id="price"
+                key="price"
+                name="price"
+                value={productData.price}
+                onChange={handleChange}
+              />
+              <span>{errors.price ? errors.price : null} </span>
+
+              <label htmlFor="category"> Categoría: </label>
+              <select
+                name="category"
+                id="category"
+                onChange={handleChange}
+                value={productData.category}
+              >
+                <option value="" disabled hidden>
+                  Seleccione una categoría
+                </option>
+                {categories &&
+                  categories.map((category, index) => (
+                    <option value={category} key={index}>
+                      {" "}
+                      {category}{" "}
+                    </option>
+                  ))}
+              </select>
+              <span> {errors.category ? errors.category : null} </span>
+
+              <label htmlFor="stock"> Stock: </label>
+              <select
+                name="stock"
+                id="stock"
+                onChange={handleChange}
+                value={productData.stock}
+              >
+                <option value="" disabled hidden>
+                  Seleccione el stock
+                </option>
+                <option value="available"> DISPONIBLE </option>
+                <option value="notavailable"> NO HAY STOCK DISPONIBLE </option>
+              </select>
+              <span> {errors.stock ? errors.stock : null} </span>
+
+              <button
+                className={style.btnForms}
+                type="submit"
+                disabled={Object.values(errors).some(
+                  (error) => error && error.length > 0
+                )}
+              >
+                EDITAR PRODUCTO
+              </button>
+            </form>
+
+            <img src={imgCharlie} className={style.imgCharlie}></img>
+          </div>
+
+          <div className={style.footer}>© Charlie</div>
+        </div>
       </div>
-
-
-      <form onSubmit={handleSubmit}>
-
-        <label htmlFor="name"> Bebida: </label>
-        <input
-          type="text"
-          id="name"
-          key="name"
-          name="name"
-          value={productData.name}
-          onChange={handleChange}
-        />
-        <p>{errors.name ? errors.name : null} </p>
-
-        <label htmlFor="brand"> Marca: </label>
-        <input
-          type="text"
-          id="brand"
-          key="brand"
-          name="brand"
-          value={productData.brand}
-          onChange={handleChange}
-        />
-        <p>{errors.brand ? errors.brand : null} </p>
-
-        <label htmlFor="image"> Imagen: </label>
-        <input
-          type="text"
-          id="image"
-          key="image"
-          name="image"
-          value={productData.image}
-          onChange={handleChange}
-        />
-        <p>{errors.image ? errors.image : null} </p>
-
-        <label htmlFor="description"> Descripción: </label>
-        <input
-          type="text"
-          id="description"
-          key="description"
-          name="description"
-          value={productData.description}
-          onChange={handleChange}
-        />
-        <p>{errors.description ? errors.description : null} </p>
-
-        <label htmlFor="price"> Precio: </label>
-        <input
-          type="text"
-          id="price"
-          key="price"
-          name="price"
-          value={productData.price}
-          onChange={handleChange}
-        />
-        <p>{errors.price ? errors.price : null} </p>
-
-        <label htmlFor="category"> Categoría: </label>
-        <select
-          name="category"
-          id="category"
-          onChange={handleChange}
-          value={productData.category}
-        >
-          <option value="" disabled hidden>
-            Seleccione una categoría
-          </option>
-          {categories &&
-            categories.map((category, index) => (
-              <option value={category} key={index}>
-                {" "}
-                {category}{" "}
-              </option>
-            ))}
-        </select>
-        <p> {errors.category ? errors.category : null} </p>
-
-        <label htmlFor="stock"> Stock: </label>
-        <select
-          name="stock"
-          id="stock"
-          onChange={handleChange}
-          value={productData.stock}
-        >
-          <option value="" disabled hidden>
-            Seleccione el stock
-          </option>
-          <option value="available"> DISPONIBLE </option>
-          <option value="notavailable"> NO HAY STOCK DISPONIBLE </option>
-        </select>
-        <p> {errors.stock ? errors.stock : null} </p>
-
-        <button
-          type="submit"
-          disabled={Object.values(errors).some(
-            (error) => error && error.length > 0
-          )}
-        >
-          {" "}
-          EDITAR PRODUCTO
-        </button>
-
-      </form>
     </div>
   );
 }

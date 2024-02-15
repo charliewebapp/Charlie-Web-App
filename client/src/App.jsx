@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
-import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+// import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 import LandingAdmin from "./views/Admin/LandingAdmin/LandingAdmin";
 import FormPostProductAdmin from "./views/Admin/FormPostProductAdmin/FormPostProductAdmin";
 import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmployee";
@@ -24,14 +24,13 @@ const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
 
 const App = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function login(userData) {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       dispatch(handleSAdminStatusLogin());
-      navigate('/superadmin/dashboard');
+      navigate("/superadmin/dashboard");
     }
   }
 
@@ -138,7 +137,7 @@ const App = () => {
           path="/admin/:clubName/updateemployee/:idCollaborator"
           element={requireAdminLogin(<FormUpdateEmployee />)}
         />
-        <Route
+        {/* <Route
           path="/admin/:clubName/clubprofile"
           element={requireAdminLogin(<FormClubProfile />)}
         />
