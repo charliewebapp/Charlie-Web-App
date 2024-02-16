@@ -4,12 +4,14 @@ import {
   REMOVE_PRODUCT,
   CLEAN_CART,
   GET_MY_BOLICHE,
+  POST_USER,
 } from "./actionsTypes";
 
 const initialState = {
   allProducts: [],
   cart: [],
   myBoliche: {},
+  myUser: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,6 +53,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         myBoliche: payload
+      }
+    case POST_USER:
+      return {
+        ...state,
+        myUser: payload
       }
 
     default:

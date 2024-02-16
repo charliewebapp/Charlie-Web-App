@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react"
 import { getMyBoliche } from '../../../redux/actions';
+import styles from "./LoginUser.module.css"
 
 function LoginUser() {
     //ingresa a charlie.ar/:clubName/login -> saco clubName || apreto boton login y redirige a auth0 ||
@@ -32,8 +33,12 @@ function LoginUser() {
     }
 
     return (
-        <>
-            <div>Logo del boliche segun request server</div>
+        <div className={styles.loginUser}>
+            <div className={styles.circleLogo}>
+                <p>LOGO</p>
+                {/* aca iria el logo del boliche -> traer desde el server */}
+                {/* <img src="src\assets\logoBanana.jpg" alt="" /> */}
+            </div>
             <h1>Bienvenido a {clubName}</h1>
 
             {
@@ -43,10 +48,10 @@ function LoginUser() {
 
             { //si está logueado -> lleva a la carta
                 isAuthenticated && (
-                    <button onClick={handleClickCart}>Ver Carta</button>
+                    <button className={styles.loginButton} onClick={handleClickCart}>Ver Carta</button>
                 )
             }
-        </>
+        </div>
 
     )
 }

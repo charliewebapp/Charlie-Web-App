@@ -6,6 +6,7 @@ import {
   REMOVE_PRODUCT,
   CLEAN_CART,
   GET_MY_BOLICHE,
+  POST_USER,
 } from "./actionsTypes";
 
 export const getProducts = (clubName) => {
@@ -139,7 +140,7 @@ export const getMyBoliche = (clubName) => {
       console.error(error);
     }
   };
-}; 
+};
 
 //! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
 export const postOrderInDB = (order, idMP, clubID) => {
@@ -156,3 +157,31 @@ export const postOrderInDB = (order, idMP, clubID) => {
     }
   }
 }
+
+
+//! --------------------------------- USER ACTIONS---------------------------
+
+export const postUser = (userData) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:3001/user`, userData
+      );
+      if (data) {
+        dispatch({
+          type: POST_USER,
+          payload: userData,
+        });
+      }
+    } catch (error) {
+      console.log(error.message)
+      // Swal.fire({
+      //   title: "Error",
+      //   text: `No se pudo postear el usuario. ${error.message}`,
+      //   icon: "error",
+      //   timer: "3000",
+      //   confirmButtonColor: "rgb(187, 131, 43)",
+      // });
+    }
+  };
+};
