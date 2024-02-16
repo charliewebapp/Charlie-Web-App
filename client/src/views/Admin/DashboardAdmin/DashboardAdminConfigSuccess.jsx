@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function DashboardAdminConfigSuccess({ location }) {
   const path = localStorage.getItem("pathname");
-  const urlDeploy = 'https://0116-2800-810-498-7dc-15ff-5481-8b98-682.ngrok-free.app/'
+  const urlDeploy = 'https://admin-charlie.onrender.com/'
   const urlComeBack = `${urlDeploy}admin/${path}/dashboardAdmin`
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
