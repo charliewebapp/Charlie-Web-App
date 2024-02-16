@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { postOrderInDB } from '../../../redux/actions';
 
+
 const OrderConfirmation = () => {
+
+    const urlParams = new URLSearchParams(window.location.search);
+  const paymentId = urlParams.get("payment_id");
+  const params = Object.fromEntries(urlParams.entries());
 
 
     const dispatch = useDispatch();
@@ -101,6 +106,23 @@ const OrderConfirmation = () => {
             </ul> */}
             {/* <p>Total: {totalPrice.toFixed(2)}</p> */}
             <button onClick={sendToDB}>Enviar</button>
+
+            <div>
+      <h2>Datos de la URL</h2>
+      <ul>
+        <li>collection_id: {params.collection_id}</li>
+        <li>collection_status: {params.collection_status}</li>
+        <li>payment_id: {params.payment_id}</li>
+        <li>status: {params.status}</li>
+        <li>external_reference: {params.external_reference}</li>
+        <li>payment_type: {params.payment_type}</li>
+        <li>merchant_order_id: {params.merchant_order_id}</li>
+        <li>preference_id: {params.preference_id}</li>
+        <li>site_id: {params.site_id}</li>
+        <li>processing_mode: {params.processing_mode}</li>
+        <li>merchant_account_id: {params.merchant_account_id}</li>
+      </ul>
+    </div>
         </div>
     );
 };

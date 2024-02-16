@@ -140,3 +140,19 @@ export const getMyBoliche = (clubName) => {
     }
   };
 }; 
+
+//! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
+export const postOrderInDB = (order, idMP, clubID) => {
+  console.log("aqui inicia el order", order, "aqui finaliza", idMP, clubID)
+  return async () => {
+    try {
+      for (const orderItem of order) {
+        const data = await axios.post(`http://localhost:3001/${clubID}/collaborator/qr/${idMP}`, orderItem);
+        console.log(data, "data para orderItem:", orderItem);
+      }
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha creado la orden. " + error.message);
+    }
+  }
+}
