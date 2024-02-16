@@ -1,0 +1,33 @@
+/* Para dispositivos móviles (hasta 767px) */
+@media only screen and (max-width: 767px) {
+    .loginUser {
+        height: 100vh;
+        /* 100% de la altura de la ventana */
+        width: 100vw;
+        /* 100% del ancho de la ventana */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: space-around;
+    }
+
+    .circleLogo {
+        width: 120px;
+        height: 120px;
+        margin: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        background-color: rgba(231, 183, 110, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+
+    }
+}
+
+/* Para pantallas más grandes (a partir de 768px) */
+@media only screen and (min-width: 768px) {
+    /* Estilos para pantallas más grandes */
+}

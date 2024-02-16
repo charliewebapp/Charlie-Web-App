@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams, useNavigate } from 'react-router-dom';
+import NavBarUser from '../NavBarUser/NavBarUser'
 
 
 function Profile() {
@@ -23,6 +24,7 @@ function Profile() {
 
     return (
         <div>
+
             <p>Profile - Acá va el historial de pedidos </p>
 
             //BOTON DE LOG OUT CON AUTH0

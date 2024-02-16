@@ -8,14 +8,12 @@ function Home() {
     const { clubName } = useParams()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getMyBoliche(clubName))
-    }, [])
+
 
     return (
 
         <div>
-            <NavBarUser></NavBarUser>
+            <NavBarUser />
             <h1>Estas en {clubName}</h1>
             <div>
                 <p>Tragos</p>
