@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./FormUpdatePasswordAdmin.module.css";
+import { useParams } from "react-router-dom";
+import { updateAdmin } from "../../../redux/actions";
 
 function FormUpdatePasswordAdmin() {
+  const dispatch = useDispatch();
   const selectAdminID = useSelector((state) => state.selectAdminLogin);
-  const adminID = selectAdminID.id;
-  const currentPassword = selectAdminID.password;
+  const { clubName } = useParams();
 
+  const adminID = selectAdminID.id;
+  const adminName = selectAdminID.name;
+
+  const currentPassword = selectAdminID.password;
+  console.log(adminID, "adminID", clubName, "clubName");
   const [currentPasswordInput, setCurrentPasswordInput] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -65,6 +72,9 @@ function FormUpdatePasswordAdmin() {
     setShowConfirmNewPassword(!showConfirmNewPassword);
   };
 
+  const formData = {
+    password: newPassword,
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -80,8 +90,8 @@ function FormUpdatePasswordAdmin() {
       currentPasswordInput === currentPassword &&
       newPassword === confirmNewPassword
     ) {
-      //! dispatch(updateAdministratorPassword(adminID , newPassword))
       //! Agregar sweet alert
+      dispatch(updateAdmin(formData, adminID, clubName));
       setCurrentPasswordInput("");
       setNewPassword("");
       setConfirmNewPassword("");

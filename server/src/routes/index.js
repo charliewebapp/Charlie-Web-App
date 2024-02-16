@@ -14,7 +14,6 @@ const putProductHandler = require("../handlers/Products/putProductHandler");
 const postUserHandler = require("../handlers/Users/postUserHandler");
 const getUsersHandler = require("../handlers/Users/getUsersHandler");
 
-
 const postCollaboratorHandler = require("../handlers/Collaborators/postCollaboratoHandler");
 const getCollaboratorHandler = require("../handlers/Collaborators/getCollaboratorHandler");
 const deleteControllerHandler = require("../handlers/Collaborators/deleteCollaboratorHandler");
@@ -32,16 +31,18 @@ const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 const purchaseByUser = require("../controllers/Users/purchaseByUser");
 const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 
-
-
 const postQrHandler = require("../handlers/Qrs/postQrHandler");
 const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
 
 const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
+<<<<<<< Updated upstream
 const apiKey = require("../controllers/MercadoPago/apiKey");
 const PreferenceId = require("../controllers/MercadoPago/PreferenceId");
 const webhook = require("../controllers/MercadoPago/webhook");
+=======
+const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllCollaboratorHandler");
+>>>>>>> Stashed changes
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -54,7 +55,6 @@ router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
-
 
 //boliche
 //! /////////////////////////////////////////////////
@@ -114,6 +114,7 @@ router.get("/:client/collaborator/:user", getCollaboratorNameHandler);
 router.post("/:client/collaborator", postCollaboratorHandler);
 router.put("/:client/collaborator/:user", putCollaboratorsHandler);
 router.delete("/:client/collaborator/:user", deleteControllerHandler);
+router.get("/collaborator", getAllCollaboratorHandler);
 
 //--------------colaborador
 router.post("/:client/collaborator/qr/:idMP", postQrHandler);
