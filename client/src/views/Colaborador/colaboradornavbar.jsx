@@ -1,15 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { handleCollaboratorStatusLogout } from '../../redux/actions';
+import styles from './ColaboradorNavbar.module.css';
+
+
+
 
 const ColaboradorNavbar = () => {
+
+
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(handleCollaboratorStatusLogout())
+    }
+
+
+
     return (
-        <nav>
+        <nav className={styles.container}>
             <ul>
                 <li>
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/colaborador/perfil">Profile</Link>
                 </li>
                 <li>
-                    <Link to="/scan-qr">Scan QR Code</Link>
+                    <Link to="/colaboradorqr">Scan QR Code</Link>
                 </li>
                 <li>
                     <button onClick={handleLogout}>Logout</button>

@@ -1,19 +1,18 @@
 const { QrCode } = require('../../db');
 
-const createQrCode = async (products, totalPrice, status, idMp, ClientId, UserId) => {
-    
-    const idMercadoPago = Number(idMp)
-    
+const createQrCode = async (productname, quantity, price, idMP, client) => {
+
+    // const idMercadoPago = Number(idMp)
+
     const newQrCode = await QrCode.create({
-        products,
-        totalPrice,
-        status,
-        idMercadoPago,
-        ClientId, 
-        UserId
+        productname,
+        quantity,
+        price,
+        idMP,
+        client
     });
-    
+
     return newQrCode;
 };
 
-module.exports = createQrCode
+module.exports = createQrCode

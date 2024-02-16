@@ -24,6 +24,8 @@ import {
   DELETE_BOLICHE_ADMINS,
   ADMIN_ID_LOGGED,
   COLLABORATOR_STATUS_LOGIN,
+  COLLABORATOR_STATUS_LOGOUT,
+  GET_ORDER_QR
 } from "./actions-types";
 
 const initialState = {
@@ -48,8 +50,11 @@ const initialState = {
   selectAdminLogin: [], //!El admin logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
   sadminStatusLogin: true,
-  adminStatusLogin: false,
+  adminStatusLogin: true,
+  colaboradorStatusLogin: true,
   adminConfigActive: false, //!Renderizar config en admin
+
+  orderqrdata: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -270,11 +275,23 @@ const reducer = (state = initialState, action) => {
         salesActive: true,
       };
 
-      //! login colaborador
+    //! login colaborador
     case COLLABORATOR_STATUS_LOGIN:
       return {
         ...state,
         colaboradorStatusLogin: true,
+      };
+
+    case COLLABORATOR_STATUS_LOGOUT:
+      return {
+        ...state,
+        colaboradorStatusLogin: false,
+      };
+
+    case GET_ORDER_QR:
+      return {
+        ...state,
+        orderqrdata: payload,
       };
 
     default:

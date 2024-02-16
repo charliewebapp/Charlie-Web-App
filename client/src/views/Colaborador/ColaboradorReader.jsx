@@ -89,11 +89,11 @@ function ColaboradorReader() {
         }
     }
 
-    if (scanResultObj) {
-        const { status } = scanResultObj;
+    // if (scanResultObj) {
+    //     const { status } = scanResultObj;
 
-        console.log(status, "este es el status");
-    }
+    //     console.log(status, "este es el status");
+    // }
 
 
     return (
@@ -102,26 +102,28 @@ function ColaboradorReader() {
                 QR Code Reader
             </h1>
 
-            {scanResultObj && (
-                <div className={style.order}>
-                    {scanResultObj.products.map((product, index) => (
-                        <div key={index}>
-                            <p>Name: {product.name}</p>
-                            <p>Quantity: {product.quantity}</p>
-                        </div>
+            {scanResultObj && scanResultObj.map((product, index) => (
+                <div key={index}>
+                    {Object.keys(product).map(key => (
+                        <p key={key}>{key}: {product[key]}</p>
                     ))}
-                    <p className={style.status}>Status: {scanResultObj.status}</p>
-
-                    <button className={style.button} value="aceptar" onClick={processOrder}>Aceptar</button>
-
-                    <button className={style.button} value="rechazar" onClick={processOrder}>Rechazar</button>
-
                 </div>
+            ))}
+
+
+            {scanResultObj && (
+                <button className={style.button} value="aceptar" onClick={processOrder}>Aceptar</button>
             )}
+
+            {scanResultObj && (
+                <button className={style.button} value="rechazar" onClick={processOrder}>Rechazar</button>
+            )}
+
+
             <div id="reader">
             </div>
         </div>
     );
 }
 
-export default ColaboradorReader
+export default ColaboradorReader;

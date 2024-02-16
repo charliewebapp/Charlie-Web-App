@@ -8,25 +8,29 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true,
         },
-        products: {
-            type: DataTypes.ARRAY(DataTypes.JSON),
+        productname: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        totalPrice: {
+        quantity: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        status: {
-            type: DataTypes.ENUM('aceptado', 'rechazado', 'en proceso'),
-            allowNull: false,
-            defaultValue: 'en proceso'
+        price: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
-        idMercadoPago: {
+        // status: {
+        //     type: DataTypes.ENUM('aceptado', 'rechazado', 'en proceso'),
+        //     allowNull: false,
+        //     defaultValue: 'en proceso'
+        // },
+        idMP: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
     },
-    {
-        timestamps: false
-    });
+        {
+            timestamps: false
+        });
 };

@@ -1,0 +1,47 @@
+/* ColaboradorProfile.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    background-color: #1b1b2f;
+}
+
+.container h2 {
+    color: #e43f5a;
+    margin-bottom: 1em;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.container label {
+    font-size: 1.2em;
+    color: #a3bcb6;
+}
+
+.container input {
+    padding: 0.5em;
+    font-size: 1em;
+    color: #a3bcb6;
+    background-color: #1b1b2f;
+    border: 1px solid #a3bcb6;
+}
+
+.container button {
+    background-color: #e43f5a;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.container button:hover {
+    background-color: #f7a1a5;
+}

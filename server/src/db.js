@@ -90,8 +90,8 @@ QrCode.belongsToMany(Collaborator, {
   timestamps: false,
 });
 
-QrCode.belongsTo(Client)
-QrCode.belongsTo(User)
+// QrCode.belongsTo(Client)
+// QrCode.belongsTo(User)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

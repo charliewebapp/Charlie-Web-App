@@ -1,0 +1,37 @@
+.container {
+    /* background-image: url('../../utils/charlielogo.png'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    padding: 1em 0;
+
+}
+
+.container ul {
+    list-style-type: none;
+    display: flex;
+    gap: 2em;
+}
+
+.container li {
+    text-decoration: none;
+}
+
+.container a {
+    color: #333;
+    text-decoration: none;
+}
+
+.container button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.container button:hover {
+    background-color: #c82333;
+}
