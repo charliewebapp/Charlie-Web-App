@@ -74,21 +74,10 @@ export const removeProductFromCart = (product) => {
 
       if (productIndex !== -1) {
         const updatedCart = [...cart];
-
-        if (updatedCart[productIndex].quantity > 1) {
-          // Reducir la cantidad del producto en 1 si es mayor que 1
-          updatedCart[productIndex] = {
-            ...updatedCart[productIndex],
-            quantity: updatedCart[productIndex].quantity - 1,
-          };
-        } else {
-          // Si la cantidad es 1, eliminar el producto del carrito
-          updatedCart.splice(productIndex, 1);
-        }
-
+        updatedCart[productIndex].quantity -= 1;
         dispatch({
-          type: REMOVE_PRODUCT,
-          payload: updatedCart, // Pasar el carrito actualizado como payload
+          type: REMOVE_PRODUCT, //!Probar con REMOVE product ...
+          payload: updatedCart,
         });
       }
     } catch (error) {
@@ -121,8 +110,6 @@ export const clearCart = () => {
   };
 };
 
-
-
 //! -------------------------------------- BOLICHE ----------------------------------------
 export const getMyBoliche = (clubName) => {
   const endpoint = "http://localhost:3001/client";
@@ -130,7 +117,9 @@ export const getMyBoliche = (clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint);
-      const myBoliche = data.find(boliche => boliche.name.toLowerCase() === clubName.toLowerCase())
+      const myBoliche = data.find(
+        (boliche) => boliche.name.toLowerCase() === clubName.toLowerCase()
+      );
 
       return dispatch({
         type: GET_MY_BOLICHE,
@@ -144,29 +133,29 @@ export const getMyBoliche = (clubName) => {
 
 //! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
 export const postOrderInDB = (order, idMP, clubID) => {
-  console.log("aqui inicia el order", order, "aqui finaliza", idMP, clubID)
+  console.log("aqui inicia el order", order, "aqui finaliza", idMP, clubID);
   return async () => {
     try {
       for (const orderItem of order) {
-        const data = await axios.post(`http://localhost:3001/${clubID}/collaborator/qr/${idMP}`, orderItem);
+        const data = await axios.post(
+          `http://localhost:3001/${clubID}/collaborator/qr/${idMP}`,
+          orderItem
+        );
         console.log(data, "data para orderItem:", orderItem);
       }
     } catch (error) {
       console.error(error); // Log the error to the console
       window.alert("No se ha creado la orden. " + error.message);
     }
-  }
-}
-
+  };
+};
 
 //! --------------------------------- USER ACTIONS---------------------------
 
 export const postUser = (userData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(
-        `http://localhost:3001/user`, userData
-      );
+      const { data } = await axios.post(`http://localhost:3001/user`, userData);
       if (data) {
         dispatch({
           type: POST_USER,
@@ -174,7 +163,7 @@ export const postUser = (userData) => {
         });
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       // Swal.fire({
       //   title: "Error",
       //   text: `No se pudo postear el usuario. ${error.message}`,
