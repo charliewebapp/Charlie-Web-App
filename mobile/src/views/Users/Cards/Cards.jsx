@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getProducts } from "../../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css";
@@ -17,9 +17,9 @@ function Cards() {
 
   return (
     <div className={styles.container}>
-      {allProducts.map((product) => (
+      {allProducts.map((product, index) => (
         <Card
-          key={product.id}
+          key={index}
           id={product.id}
           stock={product.stock}
           name={product.name.toUpperCase()}
@@ -27,6 +27,11 @@ function Cards() {
           description={product.description}
         />
       ))}
+      <div>
+        <Link to={`/${clubName}/cart`}>
+          <button>Carrito</button>
+        </Link>
+      </div>
     </div>
   );
 }
