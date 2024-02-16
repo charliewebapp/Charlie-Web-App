@@ -11,6 +11,9 @@ function Cart() {
   // console.log("boliche", clubName);
   const cart = useSelector((state) => state.cart);
   // console.log("carrito en Cart", cart); //VIENE VACIOOOOO
+  let arrayString = JSON.stringify(cart);
+// Guardar la cadena en localStorage
+localStorage.setItem('myArray', arrayString);
 
   const urlKey = "http://localhost:3001/search-apiKey";
   const [preferenceId, setPreferenceId] = useState(null);
