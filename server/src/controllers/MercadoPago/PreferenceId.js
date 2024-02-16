@@ -23,7 +23,7 @@ const PreferenceId = async (req, res) => {
 
     // console.log(products);
 
-    const urlDeploy ="https://51b1-2800-810-498-7dc-6452-efcc-1be-5b86.ngrok-free.app/";
+    const urlDeploy ="https://0116-2800-810-498-7dc-15ff-5481-8b98-682.ngrok-free.app/";
 
     const body = {
       items: products,

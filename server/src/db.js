@@ -70,19 +70,10 @@ const {
   Authorizations
 } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 
 Administrator.belongsTo(Client);
 Product.belongsTo(Client);
-// Product.belongsTo(Category);
 Collaborator.belongsTo(Client);
-
-
-//purchase (falta modelo consumidor de emi)
-// Purchase.belongsTo(Client)
-// CONSUMIDORES-DE-EMI.belongsTo(Client) //este falta
-
 
 QrCode.belongsToMany(Collaborator, {
   through: "QrCodes_Collaborators",
@@ -93,6 +84,11 @@ QrCode.belongsToMany(Collaborator, {
 // QrCode.belongsTo(User)
 
 Client.hasOne(Authorizations);
+User.hasOne(Purchase);
+Client.hasOne(Purchase);
+QrCode.hasOne(Purchase);
+// Client.hasOne(Purchase);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

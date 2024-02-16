@@ -19,7 +19,7 @@ const AuthMercadoPago = async (req, res) => {
       options: { timeout: 5000 },
     });
 
-    const urlDeploy = 'https://51b1-2800-810-498-7dc-6452-efcc-1be-5b86.ngrok-free.app/'
+    const urlDeploy = 'https://0116-2800-810-498-7dc-15ff-5481-8b98-682.ngrok-free.app/'
     const urlSuccess = `${urlDeploy}admin/dashboardAdmin/mercadopago-authorization/success`
     const postData = {
       client_id: CLIENT_ID,

@@ -132,15 +132,12 @@ export const getMyBoliche = (clubName) => {
 };
 
 //! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
-export const postOrderInDB = (order, idMP, clubID) => {
-  console.log("aqui inicia el order", order, "aqui finaliza", idMP, clubID);
+export const postOrderInDB = (cart, idMP, clubID) => {
+  console.log("aqui inicia el order", cart, "aqui finaliza", idMP, clubID)
   return async () => {
     try {
-      for (const orderItem of order) {
-        const data = await axios.post(
-          `http://localhost:3001/${clubID}/collaborator/qr/${idMP}`,
-          orderItem
-        );
+      for (const orderItem of cart) {
+        const data = await axios.post(`http://localhost:3001/${clubID}/collaborator/qr/${idMP}`, orderItem);
         console.log(data, "data para orderItem:", orderItem);
       }
     } catch (error) {

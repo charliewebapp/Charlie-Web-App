@@ -36,13 +36,11 @@ const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
 
 const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
-<<<<<<< Updated upstream
 const apiKey = require("../controllers/MercadoPago/apiKey");
 const PreferenceId = require("../controllers/MercadoPago/PreferenceId");
 const webhook = require("../controllers/MercadoPago/webhook");
-=======
 const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllCollaboratorHandler");
->>>>>>> Stashed changes
+const setPurchase = require("../controllers/MercadoPago/setPurchase");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -55,6 +53,7 @@ router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
+
 
 //boliche
 //! /////////////////////////////////////////////////
