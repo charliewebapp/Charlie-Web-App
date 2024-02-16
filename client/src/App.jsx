@@ -30,6 +30,7 @@ import { handleSAdminStatusLogin } from "./redux/actions";
 
 //no borrar esto
 import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
 
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
@@ -142,6 +143,10 @@ const App = () => {
         <Route
           path="/admin/:clubName/dashboardAdmin"
           element={requireAdminLogin(<DashboardAdmin />)}
+        />
+        <Route
+          path="/admin/dashboardAdmin/mercadopago-authorization/success"
+          element={requireAdminLogin(<DashboardAdminConfigSuccess location={window.location} />)}
         />
         <Route
           path="/admin/:clubName/addproduct"

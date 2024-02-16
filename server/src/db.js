@@ -78,7 +78,6 @@ Product.belongsTo(Client);
 // Product.belongsTo(Category);
 Collaborator.belongsTo(Client);
 
-Client.hasOne(Authorizations);
 
 //purchase (falta modelo consumidor de emi)
 // Purchase.belongsTo(Client)
@@ -92,6 +91,8 @@ QrCode.belongsToMany(Collaborator, {
 
 // QrCode.belongsTo(Client)
 // QrCode.belongsTo(User)
+
+Client.hasOne(Authorizations);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

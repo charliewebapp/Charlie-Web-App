@@ -37,7 +37,10 @@ const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 const postQrHandler = require("../handlers/Qrs/postQrHandler");
 const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
+
 const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
+const apiKey = require("../controllers/MercadoPago/apiKey");
+const PreferenceId = require("../controllers/MercadoPago/PreferenceId");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -47,6 +50,8 @@ const router = Router();
 
 //mercado-pago
 router.post("/mercadopago-authorization/success", AuthMercadoPago);
+router.post("/search-apiKey", apiKey);
+router.post("/create_preference", PreferenceId);
 
 
 //boliche
