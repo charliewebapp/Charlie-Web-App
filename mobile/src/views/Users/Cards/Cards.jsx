@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProducts } from "../../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css";
+import NavBarUser from "../NavBarUser/NavBarUser";
 
 function Cards() {
   const { clubName } = useParams();
@@ -17,6 +18,7 @@ function Cards() {
 
   return (
     <div className={styles.container}>
+      <NavBarUser />
       {allProducts.map((product, index) => (
         <Card
           key={index}

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CardCart from "./CardCart";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
+import NavBarUser from "../NavBarUser/NavBarUser";
 
 function Cart() {
   const { clubName } = useParams();
@@ -30,12 +31,12 @@ function Cart() {
 
   const createProference = async () => {
     try {
-      let newArray = cart.map(item => ({
+      let newArray = cart.map((item) => ({
         id: item.id,
         title: item.name,
         unit_price: item.price,
-        quantity: item.quantity
-    }));
+        quantity: item.quantity,
+      }));
       console.log("post purchase");
       const response = await axios.post(
         "http://localhost:3001/create_preference",
@@ -52,7 +53,6 @@ function Cart() {
     }
   };
 
- 
   const goCheckout = async () => {
     await keyData();
     const preferenceId = await createProference();
@@ -66,9 +66,10 @@ function Cart() {
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
     0
   );
- 
+
   return (
     <div>
+      <NavBarUser />
       <h1>Carrito</h1>
       {cart.map((product) => (
         <CardCart
@@ -82,13 +83,13 @@ function Cart() {
       ))}
       <button onClick={goCheckout}>Pagar$ {total}</button>
       {preferenceId && (
-          <Wallet
-            initialization={{
-              preferenceId: preferenceId,
-              redirectMode: "blank",
-            }}
-          />
-        )}
+        <Wallet
+          initialization={{
+            preferenceId: preferenceId,
+            redirectMode: "blank",
+          }}
+        />
+      )}
     </div>
   );
 }
