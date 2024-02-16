@@ -10,6 +10,10 @@ import {
   getAdmins,
   getBoliches,
   adminIdLogged,
+  collaboratorIdLogged,
+  selectClientColaboratorName,
+  getAllColaborators,
+  handleCollaboratorStatusLogin,
 } from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,6 +30,7 @@ function LandingAdmin() {
   useEffect(() => {
     dispatch(getAdmins());
     dispatch(getBoliches());
+    dispatch(getAllColaborators());
   }, [dispatch]);
 
   const [userData, setUserData] = useState({
@@ -51,34 +56,65 @@ function LandingAdmin() {
 
   const getAllAdmins = useSelector((state) => state.getAllAdmins);
   const allBoliches = useSelector((state) => state.allBoliches);
+  const getCollaborators = useSelector((state) => state.collaborators);
+  console.log(getCollaborators);
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
 
-  const loginAdmin = (userData) => {
+  const loginUsers = (userData) => {
     const adminLogin = getAllAdmins.find(
       (admin) =>
         admin.mail === userData.email && admin.password === userData.password
+    );
+
+    const collaboratorLogin = getCollaborators.find(
+      (collaborator) =>
+        collaborator.mail === userData.email &&
+        collaborator.password === userData.password
     );
 
     if (adminLogin) {
       const adminClient = adminLogin.ClientId;
 
       if (adminLogin.status === "active") {
-        // Si el usuario está activo, realizar el inicio de sesión
         dispatch(handleAdminStatusLogin());
         dispatch(adminIdLogged(adminLogin));
 
-        const clientFromADmin = allBoliches.find(
+        const clientFromAdmin = allBoliches.find(
           (boliche) => boliche.id === adminClient
         );
 
-        const client = clientFromADmin.name;
+        const client = clientFromAdmin.name;
         dispatch(selectClientAdminName(client));
         navigate(`/admin/${client}/dashboardAdmin`);
       } else if (adminLogin.status === "inactive") {
-        // Si el usuario está inactivo, mostrar alerta
         Swal.fire({
           title: "Acceso denegado",
-          text: "Usuario inactivo temporalmente. Comuníquese con Charlie.ar.",
+          text: "Usuario administrador inactivo temporalmente. Comuníquese con Charlie.ar.",
+          imageUrl:
+            "https://res.cloudinary.com/dzpqgjczu/image/upload/v1708029042/Dise%C3%B1o_sin_t%C3%ADtulo_13_fekc0m.png",
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: "Custom image",
+          confirmButtonColor: "rgb(56, 0, 56)",
+        });
+      }
+    } else if (collaboratorLogin) {
+      const collaboratorClient = collaboratorLogin.ClientId;
+
+      if (collaboratorLogin.status === "active") {
+        dispatch(handleCollaboratorStatusLogin());
+        dispatch(collaboratorIdLogged(collaboratorLogin));
+
+        const clientFromCollaborator = allBoliches.find(
+          (boliche) => boliche.id === collaboratorClient
+        );
+
+        dispatch(selectClientColaboratorName(clientFromCollaborator));
+        navigate("/colaboradorqr");
+      } else if (collaboratorLogin.status === "inactive") {
+        Swal.fire({
+          title: "Acceso denegado",
+          text: "Usuario colaborador inactivo temporalmente. Comuníquese con Charlie.ar.",
           imageUrl:
             "https://res.cloudinary.com/dzpqgjczu/image/upload/v1708029042/Dise%C3%B1o_sin_t%C3%ADtulo_13_fekc0m.png",
           imageWidth: 200,
@@ -88,10 +124,10 @@ function LandingAdmin() {
         });
       }
     } else {
-      // Si las credenciales son incorrectas, mostrar alerta de error
+      // Utiliza collaboratorLogin para verificar las credenciales incorrectas
       Swal.fire({
         title: "Acceso denegado",
-        text: `Credenciales incorrectas. `,
+        text: "Credenciales incorrectas.",
         icon: "error",
         timer: "6000",
         confirmButtonColor: "rgb(187, 131, 43)",
@@ -105,7 +141,7 @@ function LandingAdmin() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginAdmin(userData);
+    loginUsers(userData);
   };
 
   return (
