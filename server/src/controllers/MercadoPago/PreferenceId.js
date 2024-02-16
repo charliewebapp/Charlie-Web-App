@@ -23,17 +23,17 @@ const PreferenceId = async (req, res) => {
 
     // console.log(products);
 
-    const urlDeploy ="https://0116-2800-810-498-7dc-15ff-5481-8b98-682.ngrok-free.app/";
+    const urlDeploy ="https://admin-charlie.onrender.com/";
 
     const body = {
       items: products,
       back_urls: {
-        // success: `${urlDeploy}${clubName}/paymentsuccess`,
+        success: `${urlDeploy}${clubName}/paymentsuccess`,
         success: `https://www.youtube.com`,
         // failure: "https://www.youtube.com",
         // pending: "https://www.youtube.com",
       },
-      // notification_url: `${urlDeploy}${clubName}/paymentsuccess`,
+      notification_url: `${urlDeploy}${clubName}/paymentsuccess`,
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });

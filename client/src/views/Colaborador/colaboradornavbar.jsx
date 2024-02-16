@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { handleCollaboratorStatusLogout } from '../../redux/actions';
-import styles from './ColaboradorNavbar.module.css';
+import styles from './colaboradornavbar.module.css';
 
 
 
