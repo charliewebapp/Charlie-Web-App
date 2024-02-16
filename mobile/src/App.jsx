@@ -8,6 +8,9 @@ import Profile from "./views/Users/Profile/Profile";
 import Cart from "./views/Users/Cart/Cart";
 import LoginCollab from "./views/Collaborators/LoginCollab/LoginCollab";
 import DetailQR from "./views/Users/DetailQR/DetailQR";
+import Buy from "./views/Users/HarcMPBuy/Buy";
+import PaymentSuccess from "./views/Users/HarcMPBuy/PaymentSuccess";
+import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 
 function App() {
   return (
@@ -32,11 +35,15 @@ function App() {
         />
         <Route path="/:clubName/detailqr" element={<DetailQR />} />
         <Route path="/:clubName/cart" element={<Cart />} />
+        <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} />
 
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS COLLABORATORS */}
         <Route path="/:clubName/collab/login" element={<LoginCollab />} />
 
         {/* ver que otra ruta necesita para QR */}
+        {/* rutas Mercado Pago */}
+        <Route path="/:clubName/buy" element={<Buy />} />
+        <Route path="/:clubName/paymentsuccess" element={<PaymentSuccess />} />
       </Routes>
     </>
   );

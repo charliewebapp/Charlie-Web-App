@@ -21,16 +21,19 @@ const PreferenceId = async (req, res) => {
 
     const products = req.body.products;
 
+    // console.log(products);
+
     const urlDeploy ="https://51b1-2800-810-498-7dc-6452-efcc-1be-5b86.ngrok-free.app/";
 
     const body = {
       items: products,
       back_urls: {
-        success: `${urlDeploy}${clubName}/paymentsuccess`,
+        // success: `${urlDeploy}${clubName}/paymentsuccess`,
+        success: `https://www.youtube.com`,
         // failure: "https://www.youtube.com",
         // pending: "https://www.youtube.com",
       },
-      notification_url: `${urlDeploy}${clubName}/paymentsuccess`,
+      // notification_url: `${urlDeploy}${clubName}/paymentsuccess`,
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });

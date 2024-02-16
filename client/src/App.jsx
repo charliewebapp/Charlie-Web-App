@@ -23,7 +23,6 @@ import DetailQR
 import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
 import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
 
-import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
@@ -182,7 +181,6 @@ const App = () => {
         */}
 
 
-        <Route path="/orderconfirmation" element={<OrderConfirmation />} />
 
         <Route path="/qrcode" element={<DetailQR />} />
 
