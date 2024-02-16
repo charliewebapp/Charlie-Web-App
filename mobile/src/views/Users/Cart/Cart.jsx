@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import CardCart from "./CardCart";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { clearCart } from "../../../redux/actions";
 import axios from "axios";
 import NavBarUser from "../NavBarUser/NavBarUser";
 
 function Cart() {
   const { clubName } = useParams();
-  // console.log("boliche", clubName);
+  const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
-  // console.log("carrito en Cart", cart); //VIENE VACIOOOOO
+
   let arrayString = JSON.stringify(cart);
-// Guardar la cadena en localStorage
-localStorage.setItem('myArray', arrayString);
+  // Guardar la cadena en localStorage
+  localStorage.setItem("myArray", arrayString);
 
   const urlKey = "http://localhost:3001/search-apiKey";
   const [preferenceId, setPreferenceId] = useState(null);
@@ -70,10 +72,15 @@ localStorage.setItem('myArray', arrayString);
     0
   );
 
+  const handleEmptyCart = () => {
+    dispatch(clearCart());
+  };
+
   return (
     <div>
       <NavBarUser />
       <h1>Carrito</h1>
+      <button onClick={handleEmptyCart}>Vaciar Carrito </button>
       {cart.map((product) => (
         <CardCart
           key={product.id}

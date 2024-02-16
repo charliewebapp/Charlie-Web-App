@@ -10,13 +10,10 @@ import {
 function CardCart({ name, price, totalPrice, id }) {
   const dispatch = useDispatch();
   const cartGlobal = useSelector((state) => state.cart);
-  console.log("carrito en CartCart", cartGlobal); //VIENE VACIOOOOO
 
-  //* agregar aca y abajo botton
   const productInCart = cartGlobal.find((product) => product.id === id);
   console.log(cartGlobal);
 
-  // Si el producto está en el carrito global, obtener su cantidad, de lo contrario, es cero
   const quantity = productInCart ? productInCart.quantity : 0;
 
   const handleIncrement = () => {
@@ -28,6 +25,8 @@ function CardCart({ name, price, totalPrice, id }) {
       dispatch(
         removeProductFromCart({ id, name, price, quantity: quantity - 1 })
       );
+    } else {
+      dispatch(removeProductFromCart({ id }));
     }
   };
 
@@ -54,7 +53,6 @@ function CardCart({ name, price, totalPrice, id }) {
         <button className={styles.addButton} onClick={handleIncrement}>
           +
         </button>
-        <button> Borrar </button>
       </div>
     </div>
   );

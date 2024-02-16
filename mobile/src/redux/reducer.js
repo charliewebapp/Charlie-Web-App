@@ -30,9 +30,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case REMOVE_PRODUCT:
+      const updatedCart = state.cart.filter((item) => item.quantity > 0);
       return {
         ...state,
-        cart: payload,
+        cart: updatedCart,
       };
 
     case CLEAN_CART:
