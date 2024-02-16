@@ -14,6 +14,7 @@ const putProductHandler = require("../handlers/Products/putProductHandler");
 const postUserHandler = require("../handlers/Users/postUserHandler");
 const getUsersHandler = require("../handlers/Users/getUsersHandler");
 
+
 const postCollaboratorHandler = require("../handlers/Collaborators/postCollaboratoHandler");
 const getCollaboratorHandler = require("../handlers/Collaborators/getCollaboratorHandler");
 const deleteControllerHandler = require("../handlers/Collaborators/deleteCollaboratorHandler");
@@ -28,6 +29,8 @@ const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler")
 const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandler");
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
 const putClientsHandler = require("../handlers/Clients/putClientsHandler");
+const purchaseByUser = require("../controllers/Users/purchaseByUser");
+const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 
 
 
@@ -96,6 +99,8 @@ router.put("/:client/product/:id", putProductHandler);
 router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
+router.get("/purchasebyuser", purchaseByUser);
+router.get("/purchasebyclient", purchaseByClient);
 //colaborador
 router.get("/:client/collaborator/users", getCollaboratorHandler);
 router.get("/:client/collaborator/:user", getCollaboratorNameHandler);
