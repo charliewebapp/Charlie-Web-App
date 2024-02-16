@@ -25,6 +25,9 @@ import {
   DELETE_BOLICHE_ADMINS,
   ADMIN_ID_LOGGED,
   COLLABORATOR_STATUS_LOGIN,
+  COLLABORATOR_STATUS_LOGOUT,
+  POST_ORDER,
+  GET_ORDER_QR
 } from "./actions-types";
 
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
@@ -507,58 +510,120 @@ export const deleteBolicheAdmins = (clubName, id) => {
 
 export const handleCollaboratorStatusLogin = () => {
   return async (dispatch) => {
-      try {
-          return dispatch({
-              type: COLLABORATOR_STATUS_LOGIN,
-          });
-      } catch (error) {
-          console.error(error);
-      }
+    try {
+      return dispatch({
+        type: COLLABORATOR_STATUS_LOGIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 
+export const handleCollaboratorStatusLogout = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: COLLABORATOR_STATUS_LOGOUT,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+//! cambio contraseña colaborador
+
+export const changeColaboradorPassword = (newPassword) => {
+  const endpoint = `http://localhost:3001/`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, password);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
 ////////////////////////QR ACTIONS ///////////////////////////
 
 
 export const acceptOrder = () => {
   return async (dispatch) => {
-      try {
-          const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/accept`)
-          // console.log(data)
-          // if (data) {
-          //     dispatch({
-          //         type: "ACCEPT_ORDER",
-          //         payload: data
-          //     })
-          // } else {
-          //     throw new Error("No se ha aceptado la orden")
-          // }
+    try {
+      const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/accept`)
+      // console.log(data)
+      // if (data) {
+      //     dispatch({
+      //         type: "ACCEPT_ORDER",
+      //         payload: data
+      //     })
+      // } else {
+      //     throw new Error("No se ha aceptado la orden")
+      // }
 
-      } catch (error) {
-          window.alert("No se ha aceptado la orden. " + error.message)
-      }
+    } catch (error) {
+      window.alert("No se ha aceptado la orden. " + error.message)
+    }
   }
 
 }
 
 export const rejectOrder = () => {
   return async (dispatch) => {
-      try {
-          const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/reject`)
-          // console.log(data)
-          // if (data) {
-          //     dispatch({
-          //         type: "REJECT_ORDER",
-          //         payload: data
-          //     })
-          // } else {
-          //     throw new Error("No se ha rechazado la orden")
-          // }
+    try {
+      const { data } = await axios.put(`http://localhost:3001/:client/collaborator/qr/:uuid/reject`)
+      // console.log(data)
+      // if (data) {
+      //     dispatch({
+      //         type: "REJECT_ORDER",
+      //         payload: data
+      //     })
+      // } else {
+      //     throw new Error("No se ha rechazado la orden")
+      // }
 
-      } catch (error) {
-          window.alert("La orden no fue rechazada con exito. " + error.message)
-      }
+    } catch (error) {
+      window.alert("La orden no fue rechazada con exito. " + error.message)
+    }
   }
 
 }
+
+
+
+//!/////////////////////////  QR ACTIONS ///////////////////////////
+
+export const postOrderInDB = (order, idMP, clubID) => {
+  console.log("aqui inicia el order", order, "aqui finaliza", idMP, clubID)
+  return async () => {
+    try {
+      for (const orderItem of order) {
+        const data = await axios.post(`http://localhost:3001/${clubID}/collaborator/qr/${idMP}`, orderItem);
+        console.log(data, "data para orderItem:", orderItem);
+      }
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha creado la orden. " + error.message);
+    }
+  }
+}
+
+
+
+export const getOrderQRCode = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/pepe/collaborator/qr/484698956`);
+
+
+      dispatch({ type: GET_ORDER_QR, payload: data });
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha creado la orden. " + error.message);
+    }
+  };
+}
+

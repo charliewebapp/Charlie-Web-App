@@ -1,3 +1,5 @@
+/* detailqr.module.css */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -17,4 +19,11 @@
     color: #a3bcb6;
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+.shareButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
 }

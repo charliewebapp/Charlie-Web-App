@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
@@ -19,9 +19,11 @@ import Profile from "./views/Users/Profile/Profile";
 
 import ColaboradorNavbar from "./views/Colaborador/colaboradornavbar";
 import DetailQR
- from "./views/Users/DetailQR/DetailQR";
- import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
- import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
+  from "./views/Users/DetailQR/DetailQR";
+import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
+import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
+
+import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
@@ -35,6 +37,7 @@ const PASSWORD = "charlie123";
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   function login(userData) {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
@@ -68,7 +71,11 @@ const App = () => {
   };
 
   return (
+
     <>
+
+      {location.pathname === "/colaboradorqr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
+
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
         <Route
@@ -170,15 +177,13 @@ const App = () => {
         */}
 
 
+        <Route path="/orderconfirmation" element={<OrderConfirmation />} />
 
+        <Route path="/qrcode" element={<DetailQR />} />
 
-        {/* {location.pathname !== "/admin"  && <ColaboradorNavbar  />} */}
+        <Route path="/colaboradorqr" element={requireColaboradorLogin(<ColaboradorReader />)} />
 
-        <Route path="qrcode" element={<DetailQR />} />
-
-        <Route path="colaboradorqr" element={<ColaboradorReader />} />
-
-        <Route path="colaborador/perfil" element={<ColaboradorProfile />} />
+        <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
 
 
       </Routes>

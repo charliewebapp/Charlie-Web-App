@@ -5,9 +5,9 @@ const getQrCodeByUUID = async (idMP) => {
     // const collaborator = await Collaborator.findOne({ where: { id: QrCode.CollaboratorId } });
 
     // if (collaborator) {            
-    const qrCode = await QrCode.findOne({
-        where: { idMercadoPago: idMP },
-        attributes: ['products', 'totalPrice']
+    const qrCode = await QrCode.findAll({
+        where: { idMP: idMP },
+        attributes: ['productname', 'quantity']
     });
 
     if (qrCode) {
