@@ -1,0 +1,39 @@
+@media only screen and (max-width: 767px) {
+    .loginUser {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        /* Alinear el texto al centro */
+        padding: 20px;
+        /* Ajustar según sea necesario */
+    }
+
+    .circleLogo {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        background-color: rgba(231, 183, 110, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+
+    }
+
+    .loginButton {
+        background-color: #f0f0f0;
+        /* Color de fondo claro */
+        padding: 10px 20px;
+        /* Ajustar según sea necesario */
+        border-radius: 5px;
+        /* Borde redondeado */
+        text-decoration: none;
+        color: #333;
+        /* Color del texto */
+        margin-top: 10px;
+        /* Ajustar según sea necesario */
+    }
+}
