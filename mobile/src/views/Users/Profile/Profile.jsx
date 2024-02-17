@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams, useNavigate } from 'react-router-dom';
 import NavBarUser from '../NavBarUser/NavBarUser'
+import styles from "./Profile.module.css"
 
 
 function Profile() {
@@ -23,14 +24,15 @@ function Profile() {
     };
 
     return (
-        <div>
+        <div className={styles.Profile}>
+            <NavBarUser></NavBarUser>
 
-            <p>Profile - Acá va el historial de pedidos </p>
+            <div className={styles.profileContainer}>HISTORIAL DE PEDIDOS </div>
 
-            //BOTON DE LOG OUT CON AUTH0
+
             {
                 isAuthenticated && (
-                    <button onClick={handleLogout}>
+                    <button onClick={handleLogout} className={styles.profileButton}>
                         Sign out
                     </button>
                 )

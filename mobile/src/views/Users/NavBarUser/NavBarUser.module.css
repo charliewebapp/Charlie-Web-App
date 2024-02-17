@@ -1,3 +1,10 @@
+.loading {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+}
+
+
 .NavBarUser {
     width: 100vw;
     height: 20vh;
@@ -10,6 +17,7 @@
     background-color: black;
 
 }
+
 
 .circleIcon {
     width: 80px;

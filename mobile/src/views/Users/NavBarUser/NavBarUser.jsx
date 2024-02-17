@@ -53,16 +53,19 @@ function NavBarUser() {
     }, [user, isLoading, isUserLoaded, dispatch, userData]);
 
 
-
-
-
+    if (isLoading) {
+        return (<div className={styles.NavBarUser}>
+            <img src="\src\assets\loading2.gif" alt="Loading..." className={styles.loading} />
+        </div>)
+    }
 
     return (
         <div className={styles.NavBarUser}>
 
 
-            { //render de foto perfil o iniciales en home
-                isAuthenticated && isHome && (
+            { // render de foto perfil o iniciales en home
+                // isAuthenticated && isHome && ( //! descomentar al arreglar la flecha back
+                isAuthenticated && (
                     <div >
                         {
                             user.picture && (
@@ -89,7 +92,7 @@ function NavBarUser() {
 
                     </div>)
             }
-            { // render de flecha volver
+            {/* { //! ARREGLAR LA FLECHA BACK - render de flecha volver en donde NO sea home
 
                 !isHome && (
                     <Link to={location.state?.from || '/'}>
@@ -98,11 +101,11 @@ function NavBarUser() {
                         </div>
                     </Link>
                 )
-            }
+            } */}
 
 
 
-            <Link to={`/${clubName}/home`}>
+            <Link to={`/${clubName}/home`} style={{ textDecoration: 'none' }}>
                 <div className={styles.circleLogo}>
                     <p>LOGO</p>
                     {/* aca iria el logo del boliche -> traer desde el server */}

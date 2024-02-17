@@ -8,6 +8,7 @@ import NavBarUser from "../NavBarUser/NavBarUser";
 
 function Cards() {
   const { clubName } = useParams();
+  let { category } = useParams();
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
 
@@ -16,10 +17,18 @@ function Cards() {
   }, []);
   //   console.log("productos disponibles", allProducts);
 
+  // if categoria sin alcohol - falta espacio en el medio
+  if (category === "sinalcohol") {
+    category = "Sin Alcohol"
+  }
+  const filteredProducts = allProducts.filter(
+    (product) => product.category.toLowerCase() === category.toLowerCase()
+  );
+
   return (
     <div className={styles.container}>
       <NavBarUser />
-      {allProducts.map((product, index) => (
+      {filteredProducts.map((product, index) => (
         <Card
           key={index}
           id={product.id}
