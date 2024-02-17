@@ -10,6 +10,7 @@ function DashboardAdminConfig() {
   const { client } = useParams();
 
   const authorization = () => {
+    console.log('iniciando autorizacion');
     const clientId = import.meta.env.VITE_CLIENTID;
     localStorage.setItem("pathname", clubName);
     const state = uuidv4();
