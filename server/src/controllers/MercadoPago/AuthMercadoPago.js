@@ -7,11 +7,11 @@ const { Client, Authorizations } = require("../../db");
 const AuthMercadoPago = async (req, res) => {
   try {
     const { code, path } = req.body;
-
+    console.log(code, path);
     const searchClient = await Client.findOne({
       where: { name: path },
     });
-
+    console.log(searchClient);
     const clientId = searchClient.dataValues.id;
 
     // const urlDeploy = 'https://admin-charlie.onrender.com'
