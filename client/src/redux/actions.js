@@ -134,6 +134,7 @@ export const deleteCollaborator = (idCollaborator, clubName) => {
 export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
+      console.log("clubName es array", clubName);
       const { data } = await axios.get(
         `http://localhost:3001/${clubName}/product`
       );

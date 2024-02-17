@@ -7,11 +7,11 @@ function DashboardAdminConfig() {
   const { clubName } = useParams();
   const urlDeploy = "https://admin-charlie.onrender.com/";
   const urlSuccess = `${urlDeploy}admin/dashboardAdmin/mercadopago-authorization/success`;
-  const { client } = useParams();
 
   const authorization = () => {
     console.log('iniciando autorizacion');
     const clientId = import.meta.env.VITE_CLIENTID;
+    console.log(clubName);
     localStorage.setItem("pathname", clubName);
     const state = uuidv4();
     const authorizationUrl = `https://auth.mercadopago.com/authorization?client_id=${clientId}&response_type=code&platform_id=mp&state=${state}&redirect_uri=${urlSuccess}`;
