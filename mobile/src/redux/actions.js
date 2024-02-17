@@ -76,7 +76,7 @@ export const removeProductFromCart = (product) => {
         const updatedCart = [...cart];
         updatedCart[productIndex].quantity -= 1;
         dispatch({
-          type: REMOVE_PRODUCT, //!Probar con REMOVE product ...
+          type: REMOVE_PRODUCT,
           payload: updatedCart,
         });
       }
@@ -133,11 +133,14 @@ export const getMyBoliche = (clubName) => {
 
 //! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
 export const postOrderInDB = (cart, idMP, clubID) => {
-  console.log("aqui inicia el order", cart, "aqui finaliza", idMP, clubID)
+  console.log("aqui inicia el order", cart, "aqui finaliza", idMP, clubID);
   return async () => {
     try {
       for (const orderItem of cart) {
-        const data = await axios.post(`http://localhost:3001/${clubID}/collaborator/qr/${idMP}`, orderItem);
+        const data = await axios.post(
+          `http://localhost:3001/${clubID}/collaborator/qr/${idMP}`,
+          orderItem
+        );
         console.log(data, "data para orderItem:", orderItem);
       }
     } catch (error) {
