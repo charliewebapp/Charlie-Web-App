@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function DashboardAdminConfigSuccess({ location }) {
+  const URL_ADMIN = import.meta.env.URL_ADMIN
   const path = localStorage.getItem("pathname");
-  const urlDeploy = 'https://admin-charlie.onrender.com/'
-  const urlComeBack = `${urlDeploy}admin/${path}/dashboardAdmin`
+  // const urlDeploy = 'https://admin-charlie.onrender.com/'
+  const urlComeBack = `${URL_ADMIN}/admin/${path}/dashboardAdmin`
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const code = searchParams.get("code");
