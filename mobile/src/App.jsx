@@ -6,9 +6,7 @@ import Home from "./views/Users/Home/Home";
 import Cards from "./views/Users/Cards/Cards";
 import Profile from "./views/Users/Profile/Profile";
 import Cart from "./views/Users/Cart/Cart";
-import LoginCollab from "./views/Collaborators/LoginCollab/LoginCollab";
 import DetailQR from "./views/Users/DetailQR/DetailQR";
-
 import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 
 function App() {
@@ -21,23 +19,22 @@ function App() {
 
         <Route path="/:clubName/login" element={<LoginUser />} />
         <Route
-          path="/:clubName/home" //acá iría las cards con el nombre de las categorías
+          path="/:clubName/home"
           element={<Home />}
         />
         <Route
-          path="/:clubName/cards"
-          element={<Cards />} // ACÁ IRIA MAPEADO CARD DENTRO DE CADA CARDS DE CATEGORÍAS
+          path="/:clubName/cards/:category"
+          element={<Cards />}
         />
         <Route
-          path="/:clubName/profile" //capaz es necesario poner /:idUser
+          path="/:clubName/profile"
           element={<Profile />}
         />
         <Route path="/:clubName/detailqr" element={<DetailQR />} />
         <Route path="/:clubName/cart" element={<Cart />} />
         <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} />
 
-        {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS COLLABORATORS */}
-        <Route path="/:clubName/collab/login" element={<LoginCollab />} />
+
 
 
 
