@@ -30,11 +30,10 @@ const PreferenceId = async (req, res) => {
       items: products,
       back_urls: {
         success: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
-        // success: `https://www.youtube.com`,
         // failure: "https://www.youtube.com",
         // pending: "https://www.youtube.com",
       },
-      notification_url: `${urlDeploy}${clubName}/orderConfirmation`,
+      notification_url: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });
