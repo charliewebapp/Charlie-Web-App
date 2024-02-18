@@ -2,29 +2,47 @@ import React, { useState } from 'react';
 import Swal from "sweetalert2"
 import { useDispatch } from 'react-redux';
 import { changeColaboradorPassword } from '../../redux/actions';
+import { useSelector } from 'react-redux';
 import styles from './ColaboradorProfile.module.css';
-
+import { validateFormUpdateColaborador } from '../../utils/validateFormUpdateColaborador';
 
 
 const ColaboradorProfile = () => {
 
+  const selectedColaborador = useSelector((state) => state.selectColaboratorLogin);
+  const colaboradorPassword = selectedColaborador.password
 
   const dispatch = useDispatch();
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [error, setError] = useState("");
+  const [oldPassError, setOldPassError] = useState("");
+
   const handleChangeOldPassword = (e) => {
-    setOldPassword(e.target.value);
+    const value = e.target.value;
+    setOldPassword(value);
+    const errors1 = validateFormUpdateColaborador(value, newPassword, confirmPassword, colaboradorPassword);
+    setOldPassError(errors1.oldPassword)
   };
 
   const handleChangeNewPassword = (e) => {
-    setNewPassword(e.target.value);
+    const value = e.target.value;
+    setNewPassword(value);
+    const errors = validateFormUpdateColaborador(oldPassword, value, confirmPassword, colaboradorPassword);
+    setError(errors.newPassword || errors.confirmPassword);
   };
 
   const handleChangeConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
+    const value = e.target.value;
+    setConfirmPassword(value);
+    const errors = validateFormUpdateColaborador(oldPassword, newPassword, value, colaboradorPassword);
+    setError(errors.newPassword || errors.confirmPassword);
   };
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +72,7 @@ const ColaboradorProfile = () => {
         }
       });
     } catch (error) {
-      // Handle the error here
+      console.error(error);
     }
   };
 
@@ -70,6 +88,7 @@ const ColaboradorProfile = () => {
           value={oldPassword}
           onChange={handleChangeOldPassword}
         />
+        <p>{oldPassError ? oldPassError : null} </p>
 
         <label htmlFor="newPassword">Contraseña nueva:</label>
         <input
@@ -86,8 +105,9 @@ const ColaboradorProfile = () => {
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
         />
+        <p>{error}</p>
 
-        <button type="submit">Cambiar contraseña</button>
+        <button type="submit" disabled={error || oldPassError || !oldPassword || !newPassword || !confirmPassword}>Cambiar contraseña</button>
       </form>
     </div>
   );
