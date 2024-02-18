@@ -4,13 +4,13 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("Purchase", {
     id: {
-      type: DataTypes.INTEGER,
-      autoincrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
     paymentId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
     dateTime: {
@@ -22,11 +22,18 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    cart : {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false,
+    },
     status: {
-      type: DataTypes.ENUM("aproved", "rejected", "pending"),
+      type: DataTypes.ENUM("approved", "rejected", "pending"),
       defaultValue: "pending",
       allowNull: false,
     },
+  },
+  {
+      timestamps: false
   });
 };
 

@@ -15,7 +15,7 @@ function Cart() {
 
   let arrayString = JSON.stringify(cart);
   // Guardar la cadena en localStorage
-  localStorage.setItem("myArray", arrayString);
+  
 
   const urlKey = "http://localhost:3001/search-apiKey";
   const [preferenceId, setPreferenceId] = useState(null);
@@ -59,6 +59,7 @@ function Cart() {
   };
 
   const goCheckout = async () => {
+    localStorage.setItem("myArray", arrayString);
     await keyData();
     const preferenceId = await createProference();
     if (preferenceId) {

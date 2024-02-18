@@ -3,38 +3,85 @@ import { useDispatch, useSelector } from "react-redux";
 import { postOrderInDB } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
 const OrderConfirmation = () => {
   let storedArrayString = localStorage.getItem("myArray");
   let storedArray = JSON.parse(storedArrayString);
+  const {myUser} = useSelector((state) => state.myUser);
+  console.log("myUser: ", myUser);
+
   const amount = storedArray.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
     0
   );
 
-  
-    const urlParams = new URLSearchParams(window.location.search);
-    const paymentId = urlParams.get("payment_id");
-    const params = Object.fromEntries(urlParams.entries());
-    const { clubName } = useParams();
-    const dispatch = useDispatch();
+  const urlParams = new URLSearchParams(window.location.search);
+  const paymentId = urlParams.get("payment_id");
+  const params = Object.fromEntries(urlParams.entries());
+  const { clubName } = useParams();
+  const dispatch = useDispatch();
+  const [purchaseData, setPurchaseData] = useState(null);
+  const sendToDB = () => {
+    dispatch(postOrderInDB(storedArray, paymentId, clubName));
+  };
 
+  const postData = {
+    amount: amount,
+    paymentId: Number(paymentId),
+    clubName: clubName,
+    cart: storedArray,
+    //userId: myUser.id, => necesito deploy para probar
+  };
 
+  console.log("postData: ", postData);
 
-  const postPurchase =  async( )=>{
-    try {
-        console.log('entrando');
-        const {data} = axios.post("http://localhost:3001/setPurchase", {
-            amount, paymentId , clubName 
-        })
-        console.log('finalizado');
-        console.log(data);
-    } catch (error) {
-        
+  const formatDateTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      // hour: "numeric",
+      // minute: "numeric"
+    };
+    return dateTime.toLocaleString(undefined, options);
+  };
+
+  const status = (status) => {
+    if (status === "approved") {
+      return "Esta compra fue retirada";
+    } else if (status === "rejected") {
+      return "Se compra fue rechazada y reembolsada";
+    } else {
+      return "Compra Pendiente por retirar";
     }
-  }
+  };
 
+  const postPurchase = async () => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3001/setPurchase",
+        postData
+      );
+      setPurchaseData(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
+  useEffect(() => {
+    if (
+      postData.amount &&
+      postData.paymentId &&
+      postData.clubName &&
+      postData.cart
+    ) {
+      postPurchase();
+    } else {
+      console.log("Faltan datos en postData");
+    }
+  }, []);
 
   // const orders = [
 
@@ -71,34 +118,29 @@ const OrderConfirmation = () => {
   //     dispatch(postOrderInDB(orders, idMP, client));
   // }, [dispatch, orders]);
 
-  const sendToDB = () => {
-    dispatch(postOrderInDB(storedArray, paymentId, clubName));
-  };
-
   return (
     <div>
-      <h1>Confirmacion de tu orden</h1>
-      <p>Tu orden ha sido procesada con exito</p>
-      <ul>
-        {storedArray.map((product) => (
-          <li key={product.id}>{product.productname}</li>
-        ))}
-      </ul>
-      {/* <p>Total: {totalPrice.toFixed(2)}</p> */}
-      <button onClick={sendToDB}>Enviar</button>
-      <button onClick={postPurchase}>Enviar a DB</button>
-
-      <div>
-        <h2>Datos de la URL</h2>
-        <ul>
-          <li>payment_id: {params.payment_id}</li>
-          <li>payment_type: {params.payment_type}</li>
-          <li>merchant_order_id: {params.merchant_order_id}</li>
-          <li>preference_id: {params.preference_id}</li>
-        </ul>
-      </div>
+      {purchaseData ? (
+        <div>
+          <p>Fecha: {formatDateTime(purchaseData.dateTime)}</p>
+          <p>Total: ${purchaseData.amount}</p>
+          <p>Productos:</p>
+          <ul>
+            {purchaseData.cart.map((item) => (
+              <li key={item.id}>
+                {item.name} - Cantidad: {item.quantity} - Precio: ${item.price}
+              </li>
+            ))}
+          </ul>
+          <p>Estado: {status(purchaseData.status)}</p>
+        </div>
+      ) : (
+        <p>Cargando...</p>
+      )}
     </div>
   );
 };
 
 export default OrderConfirmation;
+
+// https://www.youtube.com/?collection_id=72621454230&collection_status=approved&payment_id=72621454230&status=approved&external_reference=null&payment_type=account_money&merchant_order_id=15885055240&preference_id=1685591570-adc2b4ec-e0f5-4198-b41d-9545ab2d0796&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
