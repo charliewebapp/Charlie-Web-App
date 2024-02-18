@@ -8,6 +8,7 @@ import Profile from "./views/Users/Profile/Profile";
 import Cart from "./views/Users/Cart/Cart";
 import DetailQR from "./views/Users/DetailQR/DetailQR";
 import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
+import RedirectLogOut from "./views/Users/RedirectLogOut/RedirectLogOut";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
         <Route path="/:clubName/cart" element={<Cart />} />
         <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} />
 
+
+        <Route path="/logout" element={<RedirectLogOut />} />
 
 
 
