@@ -1,7 +1,76 @@
+@media only screen and (max-width: 767px) {
 
 .container {
-  background-color: #1A1D22;
-  align-self: center;
-  /* overflow: hidden; Oculta el contenido que desborda */
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #00121E;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+  margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: rgb(165, 165, 165);
+}
+
+.carrousel{
+  font-style: italic;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.active {
+  font-weight: bold; /* O cualquier otro estilo que desees para la categoría activa */
+  color: #00FDF3;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.span{
+  font-style: italic;
+  text-transform: uppercase;
+  color: #EEAE44;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: #888888;
+  padding: 10px 20px;
+  margin-left: 70%; /* Empuja el contenedor del carrito hacia la derecha */
+}
+
+.cartLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+.cartLink:hover {
+  color: #333333; /* Cambiar color al pasar el cursor */
+}
+
+.cartItemCount {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+
 }
