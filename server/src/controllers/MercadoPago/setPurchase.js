@@ -2,7 +2,7 @@ const { Client, User, QRCode, Purchase } = require("../../db");
 
 const setPurchase = async (req, res) => {
   try {
-    const { amount, paymentId, clubName, cart } = req.body;
+    const { amount, paymentId, clubName, cart , userId } = req.body;
 
     const client = await Client.findOne({
       where: {
@@ -27,7 +27,7 @@ const setPurchase = async (req, res) => {
         paymentId: paymentId,
         cart: cart,
         ClientId: clientId,
-        
+        UserId: userId
       });
       console.log('newPurchase: ',newPurchase.dataValues);
       return res.status(201).json(newPurchase);
