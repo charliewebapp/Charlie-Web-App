@@ -5,11 +5,13 @@ import { FaBottleDroplet, FaMartiniGlassCitrus } from "react-icons/fa6";
 import { FaBeerMugEmpty, FaBottleWater } from "react-icons/fa6";
 import { FaWineGlassAlt, FaGlassWhiskey, FaWineBottle } from "react-icons/fa";
 import styles from "./Home.module.css";
+import { useSelector } from "react-redux";
 
 
 function Home() {
   const { clubName } = useParams();
-
+  const myUser = useSelector((state) => state.myUser);
+  console.log("myUser: ", myUser);
 
   return (
     <>

@@ -86,7 +86,7 @@ QrCode.belongsToMany(Collaborator, {
 Client.hasOne(Authorizations);
 User.hasOne(Purchase);
 Client.hasOne(Purchase);
-QrCode.hasOne(Purchase);
+// QrCode.hasOne(Purchase);
 // Client.hasOne(Purchase);
 
 

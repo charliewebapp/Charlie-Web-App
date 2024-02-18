@@ -53,6 +53,7 @@ router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
+router.post("/setPurchase", setPurchase);
 
 
 //boliche
