@@ -11,7 +11,7 @@ const OrderConfirmation = () => {
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
 
-  const myUser = localStorage.getItem('myUser');
+  const myUser = JSON.parse(localStorage.getItem('myUser'));
 
   console.log("myUser: ", myUser);
 
