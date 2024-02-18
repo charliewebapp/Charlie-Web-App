@@ -52,6 +52,7 @@ const initialState = {
   //! login admin
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
+  selectColaboratorLogin: [], //!El colaborador logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
   sadminStatusLogin: true,
   adminStatusLogin: true,
