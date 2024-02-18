@@ -11,7 +11,8 @@ const OrderConfirmation = () => {
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
 
-  const myUser = localStorage.getItem('myUser');
+  // const myUser = localStorage.getItem('myUser');
+  const myUser = JSON.parse(localStorage.getItem('myUser'));
 
   const amount = storedArray.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
