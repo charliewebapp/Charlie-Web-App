@@ -11,7 +11,7 @@ const AuthMercadoPago = async (req, res) => {
     const searchClient = await Client.findOne({
       where: { name: path },
     });
-    const clientId = searchClient.dataValues.id;
+    const clientId = searchClient.dataValues.id; //agregar control de error si no encuentra el cliente
 
     // const urlDeploy = 'https://admin-charlie.onrender.com'
     const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;

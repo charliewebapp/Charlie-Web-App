@@ -31,7 +31,7 @@ const OrderConfirmation = () => {
     paymentId: Number(paymentId),
     clubName: clubName,
     cart: storedArray,
-    //userId: myUser.id, => necesito deploy para probar
+    userId: myUser.id,
   };
 
   console.log("postData: ", postData);
