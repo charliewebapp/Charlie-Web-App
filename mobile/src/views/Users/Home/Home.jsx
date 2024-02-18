@@ -10,8 +10,10 @@ import { useSelector } from "react-redux";
 
 function Home() {
   const { clubName } = useParams();
-  const myUser = useSelector((state) => state.myUser);
+  const {myUser} = useSelector((state) => state.myUser);
   console.log("myUser: ", myUser);
+
+  localStorage.setItem('myUser', JSON.stringify(myUser));
 
   return (
     <>

@@ -8,8 +8,10 @@ import { useState } from "react";
 const OrderConfirmation = () => {
   let storedArrayString = localStorage.getItem("myArray");
   let storedArray = JSON.parse(storedArrayString);
-  const {myUser} = useSelector((state) => state.myUser);
-  console.log("myUser: ", myUser);
+  // const {myUser} = useSelector((state) => state.myUser);
+  // console.log("myUser: ", myUser);
+
+  const myUser = localStorage.getItem('myUser');
 
   const amount = storedArray.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
