@@ -11,17 +11,15 @@ function Profile() {
 
     //log out de Auth0
     const { logout, isAuthenticated } = useAuth0();
-    const handleLogout = () => {
-        // Redirigir al usuario a la ruta dinámica después del cierre de sesión
-        const returnTo = window.location.origin + `/${clubName}/login`;
-        console.log(returnTo)
-        logout({
-            returnTo
-        });
-
-        // Redirigir manualmente a la ruta después del cierre de sesión
-        navigate(`/${clubName}/login`);
-    };
+    //redirecciona nuevamente a login -> no funciona
+    // const handleLogout = () => {
+    //     // Redirigir al usuario a la ruta dinámica después del cierre de sesión
+    //     const returnTo = window.location.origin + `/${clubName}/login`;
+    //     console.log(returnTo)
+    //     logout({
+    //         returnTo
+    //     });
+    // };
 
     return (
         <div className={styles.Profile}>
@@ -32,7 +30,7 @@ function Profile() {
 
             {
                 isAuthenticated && (
-                    <button onClick={handleLogout} className={styles.profileButton}>
+                    <button onClick={() => logout()} className={styles.profileButton}>
                         Sign out
                     </button>
                 )

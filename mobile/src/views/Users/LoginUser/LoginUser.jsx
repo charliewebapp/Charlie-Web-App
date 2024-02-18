@@ -43,7 +43,7 @@ function LoginUser() {
 
             {
                 !isAuthenticated && (
-                    <button onClick={handleLogin}>Iniciar sesión</button>)
+                    <button className={styles.loginButton} onClick={handleLogin}>Iniciar sesión</button>)
             }
 
             { //si está logueado -> lleva a la carta
