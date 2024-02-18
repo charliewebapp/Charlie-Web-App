@@ -1,6 +1,6 @@
 const { MercadoPagoConfig, OAuth } = require("mercadopago");
 require("dotenv").config();
-const { ACCESS_TOKEN, CLIENT_ID, CLIENT_SECRET , URL_ADMIN} = process.env;
+const { ACCESS_TOKEN, CLIENT_ID, CLIENT_SECRET, URL_ADMIN } = process.env;
 const axios = require("axios");
 const { Client, Authorizations } = require("../../db");
 
@@ -11,11 +11,11 @@ const AuthMercadoPago = async (req, res) => {
     const searchClient = await Client.findOne({
       where: { name: path },
     });
-    console.log(searchClient);
     const clientId = searchClient.dataValues.id;
 
     // const urlDeploy = 'https://admin-charlie.onrender.com'
-    const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`
+    const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;
+
     const postData = {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
@@ -24,7 +24,8 @@ const AuthMercadoPago = async (req, res) => {
       redirect_uri: urlSuccess,
     };
 
-    const { data } = await axios.post(
+
+    const { data, status } = await axios.post(
       "https://api.mercadopago.com/oauth/token",
       postData,
       {
@@ -33,6 +34,14 @@ const AuthMercadoPago = async (req, res) => {
         },
       }
     );
+    if (status >= 200 && status < 300) {
+      console.log("La petición fue exitosa");
+      // Tu lógica aquí para procesar los datos de la respuesta
+    } else {
+      console.error("La petición falló. Código de estado: " + status);
+      // Puedes manejar el error de acuerdo a tus necesidades
+    }
+
 
     // const data = {
     //   access_token:
@@ -46,11 +55,7 @@ const AuthMercadoPago = async (req, res) => {
     //   live_mode: true,
     // };
 
-      console.log(data);
-
     data.ClientId = clientId;
-
-    
 
     const newAutorization = await Authorizations.findOrCreate({
       where: { user_id: data.user_id },
@@ -61,7 +66,7 @@ const AuthMercadoPago = async (req, res) => {
 
     return res.status(201).json(data);
   } catch (error) {
-    console.log('el error es: ',error.message);
+    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };
