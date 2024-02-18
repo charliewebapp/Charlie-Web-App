@@ -1,6 +1,7 @@
 const { Preference, default: MercadoPagoConfig } = require("mercadopago");
 const { Client, Authorizations } = require("../../db");
 const mercadopago = require("mercadopago"); 
+const { URL_CHARLIE } = process.env;
 
 
 const PreferenceId = async (req, res) => {
@@ -23,12 +24,12 @@ const PreferenceId = async (req, res) => {
 
     // console.log(products);
 
-    const urlDeploy ="https://admin-charlie.onrender.com/";
+    // const urlDeploy ="https://admin-charlie.onrender.com/";
 
     const body = {
       items: products,
       back_urls: {
-        success: `${urlDeploy}${clubName}/orderConfirmation`,
+        success: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
         // success: `https://www.youtube.com`,
         // failure: "https://www.youtube.com",
         // pending: "https://www.youtube.com",
