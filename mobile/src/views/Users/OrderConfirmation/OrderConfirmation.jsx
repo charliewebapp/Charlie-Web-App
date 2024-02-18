@@ -13,6 +13,8 @@ const OrderConfirmation = () => {
 
   const myUser = localStorage.getItem('myUser');
 
+  console.log("myUser: ", myUser);
+
   const amount = storedArray.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
     0
