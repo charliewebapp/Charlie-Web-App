@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Swal from "sweetalert2"
 import { useDispatch } from 'react-redux';
-import { changeColaboradorPassword } from '../../redux/actions';
+import { useEffect } from 'react';
+import { changeColaboradorPassword, getBoliches } from '../../redux/actions';
 import { useSelector } from 'react-redux';
 import styles from './ColaboradorProfile.module.css';
 import { validateFormUpdateColaborador } from '../../utils/validateFormUpdateColaborador';
@@ -9,10 +10,35 @@ import { validateFormUpdateColaborador } from '../../utils/validateFormUpdateCol
 
 const ColaboradorProfile = () => {
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBoliches());
+  }, [dispatch]);
+
+  const allBoliches = useSelector((state) => state.allBoliches);
+
   const selectedColaborador = useSelector((state) => state.selectColaboratorLogin);
   const colaboradorPassword = selectedColaborador.password
+  const colabClientID = selectedColaborador.ClientId
+  const colabname = selectedColaborador.name
 
-  const dispatch = useDispatch();
+
+  console.log(colaboradorPassword, 'contraseña del colaborador')
+
+
+
+  const club = allBoliches.find(
+    (boliche) => boliche.id === colabClientID
+  );
+
+  const clubname = club.name
+
+  console.log(clubname, "club name")
+
+  console.log(colabname, "nombre del colaborador")
+
+
 
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -43,6 +69,7 @@ const ColaboradorProfile = () => {
   };
 
 
+  console.log(newPassword, "nueva contraseña")
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +84,7 @@ const ColaboradorProfile = () => {
         confirmButtonText: "confirmar",
         showLoaderOnConfirm: true,
         preConfirm: () => {
-          // dispatch(changeColaboradorPassword(newPassword));
+          dispatch(changeColaboradorPassword(clubname, colabname, newPassword));
           return Promise.resolve();
         }
       }).then((result) => {
