@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import styles from "./DashboardAdminConfigSuccess.module.css"
 
 export default function DashboardAdminConfigSuccess({ location }) {
   const url_admin = import.meta.env.VITE_URL_ADMIN
@@ -12,7 +13,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
     const code = searchParams.get("code");
     exchangeAuthorizationCodeForToken(code);
   }, [location.search]);
-  
+
   const exchangeAuthorizationCodeForToken = async (code) => {
     try {
       const { data } = await axios.post(
@@ -26,15 +27,18 @@ export default function DashboardAdminConfigSuccess({ location }) {
   };
 
   const backHome = () => {
-    
+
     window.location.href = urlComeBack
   }
 
   return (
-    <div>
-      <h1>Su cuenta ha sido conectada correctamente!</h1>
-      <h2>¡Gracias por confiar en Charlie!</h2>
-      <button onClick={backHome}>Finalizar Conexión</button>
+    <div className={styles.container}>
+      <div className={styles.navbar}>
+        <h1 className={styles.h1}>DASHBOARD ADMINISTRADOR</h1>
+      </div>
+      <h2 className={styles.h2}>Su cuenta ha sido conectada correctamente!</h2>
+      <h3 className={styles.h2}>¡Gracias por confiar en Charlie!</h3>
+      <button onClick={backHome} className={styles.button}>Finalizar Conexión</button>
     </div>
   );
 }
