@@ -50,10 +50,14 @@
   align-items: center;
   justify-content: flex-end;
   margin-top: 20px;
-  border-radius: 15px;
-  background-color: #888888;
+  border-radius: 25px;
+  background-color:#43F85E;
   padding: 10px 20px;
   margin-left: 70%; /* Empuja el contenedor del carrito hacia la derecha */
+  margin-bottom: 15px;
+  margin-right: 75px;
+  overflow-x: auto; /* Permitir desplazamiento horizontal */
+  white-space: nowrap; /* Evitar el retorno de línea */
 }
 
 .cartLink {
@@ -68,8 +72,17 @@
 }
 
 .cartItemCount {
-  font-size: 20px;
-  margin-left: 10px;
+  margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+}
+
+.cartItemTotalContainer {
+  display: flex;
+  align-items: center;
+  margin-left:4px; /* Ajusta el margen izquierdo según sea necesario */
+}
+
+.cartTotalPrice {
+  font-weight: italic; /* Ajusta el estilo según sea necesario */
 }
 
 
