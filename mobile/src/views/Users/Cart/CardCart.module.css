@@ -1,5 +1,7 @@
+@media only screen and (max-width: 767px) {
+
 .container {
-    background-color: #002D46;
+    background-color: #181C21;
     width: 94%;
     color: black;
     padding: 10px;
@@ -7,9 +9,9 @@
     justify-content: space-between;
     margin: 5px;
     padding: 5px;
-    border-radius: 30px;
+    border-radius: 13px;
     height: 100px; /* Cambiar la altura según sea necesario */
-    border: #63B5B6 1px solid;
+    border: none;
   }
   
   .text {
@@ -64,17 +66,23 @@
   }
   
   .subtractButton{
-    background-color: #63B5B6;
     padding: 5px;
     border-radius: 50%;
-    color: #1A1D22;
+    color: #FCCF83;
+    border: none;
+    width: 100%;
+    background-color:#181C21;
+    font-size: 60px;
   }
   
   .addButton{
-    background-color: #63B5B6;
     padding: 5px;
     border-radius: 50%;
-    color: #1A1D22;
+    color: #FCCF83;
+    border: none;
+    width: 100%;
+    background-color:#181C21;
+    font-size: 35px;
   }
   
   .quantity{
@@ -85,3 +93,4 @@
     padding: 10px;
     width: 100%;
   }
+}

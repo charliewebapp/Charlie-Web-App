@@ -58,6 +58,12 @@ function Cards() {
   // Calcular el total de elementos en el carrito
   const totalItemsInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  // Calcular el total del carrito en precio
+  const totalPriceInCart = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
   return (
     <div className={styles.container}>
       <NavBarUser />
@@ -102,7 +108,12 @@ function Cards() {
       <div className={styles.cart}>
         <Link to={`/${clubName}/cart`} className={styles.cartLink}>
           <TiShoppingCart size={24} />
-          <span className={styles.cartItemCount}>{totalItemsInCart}</span>
+          <div className={styles.cartItemTotalContainer}>
+            <span className={styles.cartItemCount}>{totalItemsInCart}</span>
+            <span className={styles.cartTotalPrice}>
+              ${totalPriceInCart.toFixed(2)}
+            </span>
+          </div>
         </Link>
       </div>
     </div>

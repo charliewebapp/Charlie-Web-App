@@ -1,3 +1,5 @@
+@media only screen and (max-width: 767px) {
+
 .container {
   background-color: #002D46;
   width: 94%;
@@ -5,9 +7,9 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 13px;
   height: 100px; /* Cambiar la altura según sea necesario */
   border: #63B5B6 1px solid;
 }
@@ -68,6 +70,8 @@
   padding: 5px;
   border-radius: 50%;
   color: #1A1D22;
+  border: none;
+  width: 100%;
 }
 
 .addButton{
@@ -75,6 +79,8 @@
   padding: 5px;
   border-radius: 50%;
   color: #1A1D22;
+  border: none;
+  width: 100%;
 }
 
 .quantity{
@@ -84,4 +90,5 @@
   margin: 5px;
   padding: 10px;
   width: 100%;
+}
 }

@@ -1,0 +1,65 @@
+@media only screen and (max-width: 767px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    border-color: #fccf83 2px solid;
+    position: relative; /* Para el posicionamiento absoluto del icono */
+    margin: 10px;
+  }
+
+  .tuPedido{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #00121E;
+      border: #fccf83 2px solid;
+      border-radius: 25px;
+      width: 100%;
+      margin: 10px;
+  }
+
+  .h1 {
+    font-style: italic;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0; /* Ajusta el margen derecho */
+    margin-bottom: 20px; /* Añade espacio entre el título y los elementos siguientes */
+    text-transform: uppercase;
+  }
+
+  .pedidoTrash {
+    width: 100%;
+    position: relative; /* Para el posicionamiento absoluto del icono */
+  }
+
+  .trashIcon {
+    color: #fccf83;
+    position: absolute;
+    top: 50%; /* Coloca el ícono en el centro vertical */
+    right: 10px; /* Ajusta el ícono a la derecha */
+    transform: translateY(-50%); /* Centra verticalmente el ícono */
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .storeIcon{
+      color: #fccf83;
+      position: absolute;
+      top: 50%; /* Coloca el ícono en el centro vertical */
+      left: 10px; /* Ajusta el ícono a la derecha */
+      transform: translateY(-50%); /* Centra verticalmente el ícono */
+      cursor: pointer;
+      margin-right: 10px;
+  }
+
+  .button {
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    margin: 17px;
+    background-color: #43F85E;
+  }
+}

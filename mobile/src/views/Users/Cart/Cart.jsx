@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CardCart from "./CardCart";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { clearCart } from "../../../redux/actions";
 import axios from "axios";
 import NavBarUser from "../NavBarUser/NavBarUser";
+import styles from "./Cart.module.css";
+import { GoTrash } from "react-icons/go";
+import { AiOutlineShop } from "react-icons/ai";
 
 function Cart() {
   const { clubName } = useParams();
@@ -15,7 +18,6 @@ function Cart() {
 
   let arrayString = JSON.stringify(cart);
   // Guardar la cadena en localStorage
-  
 
   const urlKey = "http://localhost:3001/search-apiKey";
   const [preferenceId, setPreferenceId] = useState(null);
@@ -78,29 +80,41 @@ function Cart() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <NavBarUser />
-      <h1>Carrito</h1>
-      <button onClick={handleEmptyCart}>Vaciar Carrito </button>
-      {cart.map((product) => (
-        <CardCart
-          key={product.id}
-          id={product.id}
-          name={product.name.toUpperCase()}
-          price={product.price}
-          quantity={product.quantity}
-          totalPrice={product.price * product.quantity}
-        />
-      ))}
-      <button onClick={goCheckout}>Pagar$ {total}</button>
-      {preferenceId && (
-        <Wallet
-          initialization={{
-            preferenceId: preferenceId,
-            redirectMode: "blank",
-          }}
-        />
-      )}
+      <div className={styles.tuPedido}>
+        <div className={styles.pedidoTrash}>
+          <h1 className={styles.h1}>
+            <Link to={`/${clubName}/home`}>
+              <AiOutlineShop className={styles.storeIcon} />
+            </Link>
+            Tu pedido
+            <GoTrash className={styles.trashIcon} onClick={handleEmptyCart} />
+          </h1>
+        </div>
+
+        {cart.map((product) => (
+          <CardCart
+            key={product.id}
+            id={product.id}
+            name={product.name.toUpperCase()}
+            price={product.price}
+            quantity={product.quantity}
+            totalPrice={product.price * product.quantity}
+          />
+        ))}
+        <button className={styles.button} onClick={goCheckout}>
+          Pagar ${total}
+        </button>
+        {preferenceId && (
+          <Wallet
+            initialization={{
+              preferenceId: preferenceId,
+              redirectMode: "blank",
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }

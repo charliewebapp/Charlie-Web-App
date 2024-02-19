@@ -1,3 +1,5 @@
+@media only screen and (max-width: 767px) {
+
 .loading {
     width: 80px;
     height: 80px;
@@ -51,8 +53,8 @@
 }
 
 .circleLogo {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     object-fit: cover;
     border-radius: 50%;
     background-color: rgba(231, 183, 110, 0.4);
@@ -74,11 +76,30 @@
 .circleWithText {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
-    background-color: rgba(231, 183, 110, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
 
+}
+
+.cartIconContainer {
+    position: relative;
+    margin-left: 20px;
+  }
+  
+  .itemCount {
+    position: absolute;
+    bottom: -20px; 
+    right: 10px; /* Ajusta este valor según sea necesario para alinear el contador */
+    color: #030F01;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    background-color:#6CE93B;
+  }
+  
 }
