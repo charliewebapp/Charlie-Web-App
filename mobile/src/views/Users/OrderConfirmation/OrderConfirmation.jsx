@@ -4,6 +4,7 @@ import { postOrderInDB } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import styles from "./OrderConfirmation.module.css";
 
 const OrderConfirmation = () => {
   let storedArrayString = localStorage.getItem("myArray");
@@ -11,7 +12,7 @@ const OrderConfirmation = () => {
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
 
-  const myUser = JSON.parse(localStorage.getItem('myUser'));
+  const myUser = JSON.parse(localStorage.getItem("myUser"));
 
   console.log("myUser: ", myUser);
 
@@ -123,20 +124,23 @@ const OrderConfirmation = () => {
   // }, [dispatch, orders]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {purchaseData ? (
         <div>
-          <p>Fecha: {formatDateTime(purchaseData.dateTime)}</p>
-          <p>Total: ${purchaseData.amount}</p>
-          <p>Productos:</p>
-          <ul>
+          <h1 className={styles.h2}> TU PEDIDO </h1>
+          <h4>Fecha: {formatDateTime(purchaseData.dateTime)}</h4>
+          <h4>Total: ${purchaseData.amount}</h4>
+          <h2>Productos:</h2>
+          <ul className={styles.products}>
             {purchaseData.cart.map((item) => (
               <li key={item.id}>
-                {item.name} - Cantidad: {item.quantity} - Precio: ${item.price}
+                {item.name} | Cantidad: {item.quantity} | Valor: ${item.price}
               </li>
             ))}
           </ul>
           <p>Estado: {status(purchaseData.status)}</p>
+          <h5> Número de transacción: {purchaseData.paymentId}</h5>
+          <button className={styles.button}>Volver a home</button>
         </div>
       ) : (
         <p>Cargando...</p>
