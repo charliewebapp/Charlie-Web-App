@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import Swal from "sweetalert2"
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { changeColaboradorPassword, getBoliches } from '../../redux/actions';
-import { useSelector } from 'react-redux';
-import styles from './ColaboradorProfile.module.css';
-import { validateFormUpdateColaborador } from '../../utils/validateFormUpdateColaborador';
-
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { changeColaboradorPassword, getBoliches } from "../../redux/actions";
+import { useSelector } from "react-redux";
+import styles from "./ColaboradorProfile.module.css";
+import { validateFormUpdateColaborador } from "../../utils/validateFormUpdateColaborador";
 
 const ColaboradorProfile = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,31 +16,26 @@ const ColaboradorProfile = () => {
 
   const allBoliches = useSelector((state) => state.allBoliches);
 
-  const selectedColaborador = useSelector((state) => state.selectColaboratorLogin);
-  const colaboradorPassword = selectedColaborador.password
-  const colabClientID = selectedColaborador.ClientId
-  const colabname = selectedColaborador.name
-
-
-  console.log(colaboradorPassword, 'contraseña del colaborador')
-
-
-
-  const club = allBoliches.find(
-    (boliche) => boliche.id === colabClientID
+  const selectedColaborador = useSelector(
+    (state) => state.selectColaboratorLogin
   );
+  const colaboradorPassword = selectedColaborador.password;
+  const colabClientID = selectedColaborador.ClientId;
+  const colabname = selectedColaborador.name;
 
-  const clubname = club.name
+  console.log(colaboradorPassword, "contraseña del colaborador");
 
-  console.log(clubname, "club name")
+  const club = allBoliches.find((boliche) => boliche.id === colabClientID);
 
-  console.log(colabname, "nombre del colaborador")
+  const clubname = club.name;
 
+  console.log(clubname, "club name");
 
+  console.log(colabname, "nombre del colaborador");
 
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
   const [oldPassError, setOldPassError] = useState("");
@@ -50,26 +43,40 @@ const ColaboradorProfile = () => {
   const handleChangeOldPassword = (e) => {
     const value = e.target.value;
     setOldPassword(value);
-    const errors1 = validateFormUpdateColaborador(value, newPassword, confirmPassword, colaboradorPassword);
-    setOldPassError(errors1.oldPassword)
+    const errors1 = validateFormUpdateColaborador(
+      value,
+      newPassword,
+      confirmPassword,
+      colaboradorPassword
+    );
+    setOldPassError(errors1.oldPassword);
   };
 
   const handleChangeNewPassword = (e) => {
     const value = e.target.value;
     setNewPassword(value);
-    const errors = validateFormUpdateColaborador(oldPassword, value, confirmPassword, colaboradorPassword);
+    const errors = validateFormUpdateColaborador(
+      oldPassword,
+      value,
+      confirmPassword,
+      colaboradorPassword
+    );
     setError(errors.newPassword || errors.confirmPassword);
   };
 
   const handleChangeConfirmPassword = (e) => {
     const value = e.target.value;
     setConfirmPassword(value);
-    const errors = validateFormUpdateColaborador(oldPassword, newPassword, value, colaboradorPassword);
+    const errors = validateFormUpdateColaborador(
+      oldPassword,
+      newPassword,
+      value,
+      colaboradorPassword
+    );
     setError(errors.newPassword || errors.confirmPassword);
   };
 
-
-  console.log(newPassword, "nueva contraseña")
+  console.log(newPassword, "nueva contraseña");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +85,7 @@ const ColaboradorProfile = () => {
         title: "Atencion!",
         text: "estas seguro que deseas cambiar tu contraseña?",
         inputAttributes: {
-          autocapitalize: "off"
+          autocapitalize: "off",
         },
         showCancelButton: true,
         confirmButtonText: "confirmar",
@@ -86,7 +93,7 @@ const ColaboradorProfile = () => {
         preConfirm: () => {
           dispatch(changeColaboradorPassword(clubname, colabname, newPassword));
           return Promise.resolve();
-        }
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
@@ -95,14 +102,13 @@ const ColaboradorProfile = () => {
             icon: "success",
             timer: "4000",
           });
-          console.log('Contraseña cambiada');
+          console.log("Contraseña cambiada");
         }
       });
     } catch (error) {
       console.error(error);
     }
   };
-
 
   return (
     <div className={styles.container}>
@@ -115,7 +121,9 @@ const ColaboradorProfile = () => {
           value={oldPassword}
           onChange={handleChangeOldPassword}
         />
-        <p>{oldPassError ? oldPassError : null} </p>
+        <span className={styles.span}>
+          {oldPassError ? oldPassError : null}{" "}
+        </span>
 
         <label htmlFor="newPassword">Contraseña nueva:</label>
         <input
@@ -132,9 +140,20 @@ const ColaboradorProfile = () => {
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
         />
-        <p>{error}</p>
+        <span className={styles.span}>{error}</span>
 
-        <button type="submit" disabled={error || oldPassError || !oldPassword || !newPassword || !confirmPassword}>Cambiar contraseña</button>
+        <button
+          type="submit"
+          disabled={
+            error ||
+            oldPassError ||
+            !oldPassword ||
+            !newPassword ||
+            !confirmPassword
+          }
+        >
+          Cambiar contraseña
+        </button>
       </form>
     </div>
   );

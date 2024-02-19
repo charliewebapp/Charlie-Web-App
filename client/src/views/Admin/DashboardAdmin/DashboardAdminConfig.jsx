@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./dashboardAdmin.module.css";
+import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import FormUpdatePasswordAdmin from "../FormUpdatePasswordAdmin/FormUpdatePasswordAdmin";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -9,7 +9,7 @@ function DashboardAdminConfig() {
   const urlSuccess = `${urlDeploy}admin/dashboardAdmin/mercadopago-authorization/success`;
 
   const authorization = () => {
-    console.log('iniciando autorizacion');
+    console.log("iniciando autorizacion");
     const clientId = import.meta.env.VITE_CLIENTID;
     console.log(clubName);
     localStorage.setItem("pathname", clubName);
@@ -19,8 +19,8 @@ function DashboardAdminConfig() {
   };
 
   return (
-    <div className={style.container}>
-      <h2 className={style.h2}>Configuración</h2>
+    <div className={style.containerMP}>
+      <h2 className={style.h2}>Metodos de pago</h2>
       <div className={style.containerButton}>
         <button className={style.buttonConfig} onClick={authorization}>
           {" "}

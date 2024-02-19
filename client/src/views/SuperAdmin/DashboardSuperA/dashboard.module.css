@@ -233,6 +233,19 @@
 
 /*  //! ///////////////////////// FORMULARIOS STYLES ///////////////////////////////////////  */
 
+.changePassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid rgb(214, 214, 214);
+  padding: 10px;
+}
+
 .FormPostAdminSA {
   padding: 10px;
   border-radius: 5px;
@@ -313,4 +326,35 @@
   margin: 10px 0;
   padding: 0 10px;
   outline: none;
+}
+
+/*  //! ///////////////////////// MP STYLES ///////////////////////////////////////  */
+
+.buttonConfig {
+  width: 100%;
+  height: 60px;
+  border: none;
+  color: white;
+  background-color: #009ee3;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 1;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.buttonConfig:hover {
+  background-color: #0180b6;
+  transition: ease 0.1s;
+}
+
+.containerMP h2 {
+  font-size: 25px;
+  font-weight: 700;
+  font-style: normal;
+  margin: 10px 0 5px 0;
+  text-align: center;
 }
