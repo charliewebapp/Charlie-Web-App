@@ -23,9 +23,10 @@ const AuthMercadoPago = async (req, res) => {
       grant_type: "authorization_code",
       redirect_uri: urlSuccess,
     };
+    console.log(postData)
 
 
-    const { data, status } = await axios.post(
+    const { data } = await axios.post(
       "https://api.mercadopago.com/oauth/token",
       postData,
       {
@@ -34,13 +35,7 @@ const AuthMercadoPago = async (req, res) => {
         },
       }
     );
-    if (status >= 200 && status < 300) {
-      console.log("La petición fue exitosa");
-      // Tu lógica aquí para procesar los datos de la respuesta
-    } else {
-      console.error("La petición falló. Código de estado: " + status);
-      // Puedes manejar el error de acuerdo a tus necesidades
-    }
+
 
 
     // const data = {

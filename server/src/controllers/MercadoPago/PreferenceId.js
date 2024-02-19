@@ -1,12 +1,13 @@
 const { Preference, default: MercadoPagoConfig } = require("mercadopago");
 const { Client, Authorizations } = require("../../db");
-const mercadopago = require("mercadopago"); 
+const mercadopago = require("mercadopago");
 const { URL_CHARLIE } = process.env;
 
 
 const PreferenceId = async (req, res) => {
   try {
     const clubName = req.body.path;
+    console.log("este es el club Name " + clubName)
     const clientSearched = await Client.findOne({
       where: { name: clubName },
     });
@@ -17,7 +18,7 @@ const PreferenceId = async (req, res) => {
     const token = auth.dataValues.access_token;
 
     const client = new MercadoPagoConfig({
-      accessToken: token, 
+      accessToken: token,
     });
 
     const products = req.body.products;
