@@ -4,8 +4,9 @@ const putCollaboratorsHandler = async (req, res) => {
   try {
     const { client, user } = req.params;
     const clientMinus = client.toLowerCase()
-    const newData = req.body;
-    
+    const newData = req.body
+    console.log(newData, 'newData')
+
     const updateProduct = await putCollaborators(clientMinus, user, newData);
     return res.status(201).json(updateProduct);
   } catch (error) {

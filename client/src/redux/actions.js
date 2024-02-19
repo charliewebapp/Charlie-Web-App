@@ -579,12 +579,18 @@ export const selectClientColaboratorName = (collaborator) => {
 
 //! cambio contraseña colaborador
 
-export const changeColaboradorPassword = (newPassword) => {
-  const endpoint = `http://localhost:3001/`;
+export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
+  console.log(newPassword, clubname, colabname, "data")
+  const endpoint = `http://localhost:3001/${clubname}/collaborator/${colabname}`;
+
+  const password = {
+    password: newPassword,
+  };
 
   return async (dispatch) => {
     try {
       const { data } = await axios.put(endpoint, password);
+
       return data;
     } catch (error) {
       console.error(error);
