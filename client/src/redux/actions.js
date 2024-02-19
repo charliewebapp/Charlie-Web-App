@@ -33,12 +33,14 @@ import {
   GET_ALL_COLLABORATORS,
 } from "./actions-types";
 
+const URL_API = import.meta.env.VITE_URL_API;
+
 //! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    COLLABORATORS    /////////////////////////
 export const getCollaborators = (clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/${clubName}/collaborator/users`
+        `${URL_API}/${clubName}/collaborator/users`
       );
       dispatch({
         type: GET_COLLABORATORS,
@@ -60,7 +62,7 @@ export function updateCollaborator(collaboratorData, idCollaborator, clubName) {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/${clubName}/collaborator/${idCollaborator}`,
+        `${URL_API}/${clubName}/collaborator/${idCollaborator}`,
         collaboratorData
       );
       if (data) {
@@ -85,7 +87,7 @@ export const postCollaborator = (collaboratorData, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/${clubName}/collaborator`,
+        `${URL_API}/${clubName}/collaborator`,
         collaboratorData
       );
       if (data) {
@@ -110,7 +112,7 @@ export const deleteCollaborator = (idCollaborator, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/${clubName}/collaborator/${idCollaborator}`
+        `${URL_API}/${clubName}/collaborator/${idCollaborator}`
       );
       if (data) {
         dispatch({
@@ -136,7 +138,7 @@ export const getProducts = (clubName) => {
     try {
       console.log("clubName es array", clubName);
       const { data } = await axios.get(
-        `http://localhost:3001/${clubName}/product`
+        `${URL_API}/${clubName}/product`
       );
       dispatch({
         type: GET_PRODUCTS,
@@ -158,7 +160,7 @@ export const postProduct = (productData, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/${clubName}/product`,
+        `${URL_API}/${clubName}/product`,
         productData
       );
       if (data) {
@@ -185,7 +187,7 @@ export const updateProduct = (productData, idProduct, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/${clubName}/product/${idProduct}`,
+        `${URL_API}/${clubName}/product/${idProduct}`,
         productData
       );
       if (data) {
@@ -210,7 +212,7 @@ export const deleteProduct = (id, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/${clubName}/product/${id}`
+        `${URL_API}/${clubName}/product/${id}`
       );
       if (data) {
         dispatch({
@@ -234,7 +236,7 @@ export const deleteProduct = (id, clubName) => {
 
 //? //////////////////////// CREAR BOLICHE ////////////////////////////
 export const postBoliche = (boliche, navigate) => {
-  const endpoint = "http://localhost:3001/client";
+  const endpoint = `${URL_API}/client`;
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, boliche);
@@ -257,7 +259,7 @@ export const postBoliche = (boliche, navigate) => {
 };
 //? //////////////////////// TRAER BOLICHES ////////////////////////////
 export const getBoliches = () => {
-  const endpoint = "http://localhost:3001/client";
+  const endpoint = `${URL_API}/client`;
 
   return async (dispatch) => {
     try {
@@ -276,7 +278,7 @@ export const getBoliches = () => {
 export const deleteBoliche = (clubName) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`http://localhost:3001/${clubName}`);
+      const { data } = await axios.delete(`${URL_API}/${clubName}`);
       if (data) {
         dispatch({
           type: DELETE_BOLICHE,
@@ -291,7 +293,7 @@ export const deleteBoliche = (clubName) => {
 
 //? //////////////////////// CREAR ADMIN ////////////////////////////
 export const postAdmin = (admin, params, navigate) => {
-  const endpoint = `http://localhost:3001/${params}/administrator`;
+  const endpoint = `${URL_API}/${params}/administrator`;
 
   return async (dispatch) => {
     try {
@@ -317,7 +319,7 @@ export const postAdmin = (admin, params, navigate) => {
 //? //////////////////////// EDITAR CLUB ////////////////////////////
 
 export const updateClub = (formData, clubName) => {
-  const endpoint = `http://localhost:3001/${clubName}`;
+  const endpoint = `${URL_API}/${clubName}`;
 
   return async (dispatch) => {
     try {
@@ -333,7 +335,7 @@ export const updateClub = (formData, clubName) => {
 //? //////////////////////// EDITAR ADMIN ////////////////////////////
 
 export const updateAdmin = (adminData, idAdmin, clubName) => {
-  const endpoint = `http://localhost:3001/${clubName}/${idAdmin}`;
+  const endpoint = `${URL_API}/${clubName}/${idAdmin}`;
 
   return async (dispatch) => {
     try {
@@ -362,7 +364,7 @@ export const handleSAdminStatusLogin = () => {
 //! login admin
 
 export const getAdmins = () => {
-  const endpoint = "http://localhost:3001/administrator";
+  const endpoint = `${URL_API}/administrator`;
 
   return async (dispatch) => {
     try {
@@ -442,7 +444,7 @@ export const handleAdminStatusLogin = () => {
 
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const getAdministrators = () => {
-  const endpoint = "http://localhost:3001/administrator";
+  const endpoint = `${URL_API}/administrator`;
 
   return async (dispatch) => {
     try {
@@ -493,7 +495,7 @@ export const deleteBolicheAdmins = (clubName, id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/${clubName}/${id}`
+        `${URL_API}/${clubName}/${id}`
       );
       if (data) {
         dispatch({
@@ -510,7 +512,7 @@ export const deleteBolicheAdmins = (clubName, id) => {
 //! login colaborador
 
 export const getAllColaborators = () => {
-  const endpoint = "http://localhost:3001/collaborator";
+  const endpoint = `${URL_API}/collaborator`;
 
   return async (dispatch) => {
     try {
@@ -581,7 +583,7 @@ export const selectClientColaboratorName = (collaborator) => {
 
 export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
   console.log(newPassword, clubname, colabname, "data")
-  const endpoint = `http://localhost:3001/${clubname}/collaborator/${colabname}`;
+  const endpoint = `${URL_API}/${clubname}/collaborator/${colabname}`;
 
   const password = {
     password: newPassword,
@@ -604,7 +606,7 @@ export const acceptOrder = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/:client/collaborator/qr/:uuid/accept`
+        `${URL_API}/:client/collaborator/qr/:uuid/accept`
       );
       // console.log(data)
       // if (data) {
@@ -625,7 +627,7 @@ export const rejectOrder = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3001/:client/collaborator/qr/:uuid/reject`
+        `${URL_API}/:client/collaborator/qr/:uuid/reject`
       );
       // console.log(data)
       // if (data) {
@@ -650,7 +652,7 @@ export const postOrderInDB = (order, idMP, clubID) => {
     try {
       for (const orderItem of order) {
         const data = await axios.post(
-          `http://localhost:3001/${clubID}/collaborator/qr/${idMP}`,
+          `${URL_API}/${clubID}/collaborator/qr/${idMP}`,
           orderItem
         );
         console.log(data, "data para orderItem:", orderItem);
@@ -666,7 +668,7 @@ export const getOrderQRCode = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/pepe/collaborator/qr/484698956`
+        `${URL_API}/pepe/collaborator/qr/484698956`
       );
 
       dispatch({ type: GET_ORDER_QR, payload: data });

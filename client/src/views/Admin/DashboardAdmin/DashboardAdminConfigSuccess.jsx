@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./DashboardAdminConfigSuccess.module.css"
 
+const URL_API = import.meta.env.VITE_URL_API;
+
 export default function DashboardAdminConfigSuccess({ location }) {
   const url_admin = import.meta.env.VITE_URL_ADMIN
   const path = localStorage.getItem("pathname");
@@ -17,7 +19,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
   const exchangeAuthorizationCodeForToken = async (code) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:3001/mercadopago-authorization/success`,
+        `${URL_API}/mercadopago-authorization/success`,
         { code, path }
       );
       console.log("respuesta del back: ", data);

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import styles from "./OrderConfirmation.module.css";
+const URL_API = import.meta.env.VITE_URL_API;
 
 const OrderConfirmation = () => {
   let storedArrayString = localStorage.getItem("myArray");
@@ -66,7 +67,7 @@ const OrderConfirmation = () => {
   const postPurchase = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/setPurchase",
+        `${URL_API}/setPurchase`,
         postData
       );
       setPurchaseData(data);
