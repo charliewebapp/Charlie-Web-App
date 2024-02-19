@@ -9,6 +9,7 @@ import NavBarUser from "../NavBarUser/NavBarUser";
 import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
 import { AiOutlineShop } from "react-icons/ai";
+const URL_API = import.meta.env.VITE_URL_API;
 
 function Cart() {
   const { clubName } = useParams();
@@ -19,7 +20,7 @@ function Cart() {
   let arrayString = JSON.stringify(cart);
   // Guardar la cadena en localStorage
 
-  const urlKey = "http://localhost:3001/search-apiKey";
+  const urlKey = `${URL_API}/search-apiKey`;
   const [preferenceId, setPreferenceId] = useState(null);
   const [apiKey, setapiKey] = useState(null);
   localStorage.setItem("pathname", clubName);
@@ -46,7 +47,7 @@ function Cart() {
       }));
       console.log("post purchase");
       const response = await axios.post(
-        "http://localhost:3001/create_preference",
+        `${URL_API}/create_preference`,
         {
           products: newArray,
           path: clubName,

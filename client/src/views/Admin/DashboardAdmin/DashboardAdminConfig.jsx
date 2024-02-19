@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 function DashboardAdminConfig() {
   const { clubName } = useParams();
-  const urlDeploy = "https://admin-charlie.onrender.com/";
-  const urlSuccess = `${urlDeploy}admin/dashboardAdmin/mercadopago-authorization/success`;
+  const URL_ADMIN = import.meta.env.VITE_URL_ADMIN;
+  // const urlDeploy = "https://admin-charlie.onrender.com/";
+  const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;
 
   const authorization = () => {
     console.log("iniciando autorizacion");

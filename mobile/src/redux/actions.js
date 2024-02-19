@@ -9,11 +9,13 @@ import {
   POST_USER,
 } from "./actionsTypes";
 
+const URL_API = import.meta.env.VITE_URL_API;
+
 export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/${clubName}/product`
+        `${URL_API}/${clubName}/product`
       );
       dispatch({
         type: GET_PRODUCTS,
@@ -112,7 +114,7 @@ export const clearCart = () => {
 
 //! -------------------------------------- BOLICHE ----------------------------------------
 export const getMyBoliche = (clubName) => {
-  const endpoint = "http://localhost:3001/client";
+  const endpoint = `${URL_API}/client`;
 
   return async (dispatch) => {
     try {
@@ -138,7 +140,7 @@ export const postOrderInDB = (cart, idMP, clubID) => {
     try {
       for (const orderItem of cart) {
         const data = await axios.post(
-          `http://localhost:3001/${clubID}/collaborator/qr/${idMP}`,
+          `${URL_API}/${clubID}/collaborator/qr/${idMP}`,
           orderItem
         );
         console.log(data, "data para orderItem:", orderItem);
@@ -155,7 +157,7 @@ export const postOrderInDB = (cart, idMP, clubID) => {
 export const postUser = (userData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`http://localhost:3001/user`, userData);
+      const { data } = await axios.post(`${URL_API}/user`, userData);
       if (data) {
         dispatch({
           type: POST_USER,
