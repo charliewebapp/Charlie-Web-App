@@ -1,37 +1,40 @@
 .container {
-    /* background-image: url('../../utils/charlielogo.png'); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: space-around;
-    padding: 1em 0;
-
+  /* background-image: url('../../utils/charlielogo.png'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-around;
+  padding: 1em 0;
 }
 
 .container ul {
-    list-style-type: none;
-    display: flex;
-    gap: 2em;
+  list-style-type: none;
+  display: flex;
+  gap: 2em;
 }
 
 .container li {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+.span {
+  color: #c82333 !important;
 }
 
 .container a {
-    color: #333;
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
 }
 
 .container button {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 0.5em 1em;
-    cursor: pointer;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
 }
 
 .container button:hover {
-    background-color: #c82333;
+  background-color: #c82333;
 }
