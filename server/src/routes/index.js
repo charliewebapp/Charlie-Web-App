@@ -28,17 +28,33 @@ const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler")
 const deleteAdminsHandler = require("../handlers/Administrator/deleteAdminsHandler");
 const getAdminsClientsHandler = require("../handlers/Administrator/getAdminsClientsHandler");
 const putClientsHandler = require("../handlers/Clients/putClientsHandler");
+const purchaseByUser = require("../controllers/Users/purchaseByUser");
+const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 
 const postQrHandler = require("../handlers/Qrs/postQrHandler");
 const getQrHandler = require("../handlers/Qrs/getQrHandler");
 const putQrHandler = require("../handlers/Qrs/putQrHandler");
+
+const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
+const apiKey = require("../controllers/MercadoPago/apiKey");
+const PreferenceId = require("../controllers/MercadoPago/PreferenceId");
+const webhook = require("../controllers/MercadoPago/webhook");
+const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllCollaboratorHandler");
+const setPurchase = require("../controllers/MercadoPago/setPurchase");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 
 const router = Router();
-//--------------superadmin
+
+//mercado-pago
+router.post("/mercadopago-authorization/success", AuthMercadoPago);
+router.post("/search-apiKey", apiKey);
+router.post("/create_preference", PreferenceId);
+router.post("/paymentsuccess", webhook);
+router.post("/setPurchase", setPurchase);
+
 
 //boliche
 //! /////////////////////////////////////////////////
@@ -90,12 +106,15 @@ router.put("/:client/product/:id", putProductHandler);
 router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
+router.get("/purchasebyuser", purchaseByUser);
+router.get("/purchasebyclient", purchaseByClient);
 //colaborador
 router.get("/:client/collaborator/users", getCollaboratorHandler);
 router.get("/:client/collaborator/:user", getCollaboratorNameHandler);
 router.post("/:client/collaborator", postCollaboratorHandler);
 router.put("/:client/collaborator/:user", putCollaboratorsHandler);
 router.delete("/:client/collaborator/:user", deleteControllerHandler);
+router.get("/collaborator", getAllCollaboratorHandler);
 
 //--------------colaborador
 router.post("/:client/collaborator/qr/:idMP", postQrHandler);

@@ -23,6 +23,12 @@ import {
   DELETE_ADMINISTRATORS,
   DELETE_BOLICHE_ADMINS,
   ADMIN_ID_LOGGED,
+  SELECT_CLIENT_COLLABORATOR,
+  COLLABORATOR_ID_LOGGED,
+  COLLABORATOR_STATUS_LOGIN,
+  COLLABORATOR_STATUS_LOGOUT,
+  GET_ORDER_QR,
+  GET_ALL_COLLABORATORS,
 } from "./actions-types";
 
 const initialState = {
@@ -35,6 +41,7 @@ const initialState = {
   administrators: [],
   allAdministrators: [],
 
+  collaborators: [],
   allCollaborators: [],
   collaboratorsActive: false,
 
@@ -45,10 +52,17 @@ const initialState = {
   //! login admin
   getAllAdmins: [], //!Los admins de todos los boliches.
   selectAdminLogin: [], //!El admin logueado.
+  selectColaboratorLogin: [], //!El colaborador logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
   sadminStatusLogin: true,
-  adminStatusLogin: false,
+  adminStatusLogin: true,
+  colaboradorStatusLogin: true,
   adminConfigActive: false, //!Renderizar config en admin
+
+  selectCollaboratorLogin: [], //? El colaborador logueado
+  selectClientCollaborator: [], //? El boliche asignado a ese colaborador
+
+  orderqrdata: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -267,6 +281,43 @@ const reducer = (state = initialState, action) => {
         collaboratorsActive: false,
         adminConfigActive: false,
         salesActive: true,
+      };
+
+    //! login colaborador
+    case GET_ALL_COLLABORATORS:
+      return {
+        ...state,
+        collaborators: payload,
+      };
+
+    case SELECT_CLIENT_COLLABORATOR: //!Declarar el cliente del admin logueado como estado global
+      return {
+        ...state,
+        selectClientCollaborator: payload,
+      };
+
+    case COLLABORATOR_ID_LOGGED:
+      return {
+        ...state,
+        selectColaboratorLogin: payload,
+      };
+
+    case COLLABORATOR_STATUS_LOGIN:
+      return {
+        ...state,
+        colaboradorStatusLogin: true,
+      };
+
+    case COLLABORATOR_STATUS_LOGOUT:
+      return {
+        ...state,
+        colaboradorStatusLogin: false,
+      };
+
+    case GET_ORDER_QR:
+      return {
+        ...state,
+        orderqrdata: payload,
       };
 
     default:

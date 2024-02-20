@@ -1,0 +1,105 @@
+@media only screen and (max-width: 767px) {
+
+.loading {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+}
+
+
+.NavBarUser {
+    width: 100vw;
+    height: 20vh;
+    /* padding: 15px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* padding: 20px; */
+    background-color: black;
+
+}
+
+
+.circleIcon {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    font-size: 40px;
+    color: rgba(231, 183, 110, 0.8);
+}
+
+.circleIconBack {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 60px;
+    padding-left: 5px;
+    font-weight: 900;
+    color: rgba(231, 183, 110, 0.8);
+
+}
+
+.circleLogo {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(231, 183, 110, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+}
+
+.circleImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.circleWithText {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cartIconContainer {
+    position: relative;
+    margin-left: 20px;
+  }
+  
+  .itemCount {
+    position: absolute;
+    bottom: -20px; 
+    right: 10px; /* Ajusta este valor según sea necesario para alinear el contador */
+    color: #030F01;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    background-color:#6CE93B;
+  }
+  
+}

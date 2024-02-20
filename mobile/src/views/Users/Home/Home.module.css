@@ -1,0 +1,59 @@
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+
+
+    .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 10px;
+    }
+
+    .card {
+        /* width: calc(50% - 10px); */
+        /* Dos tarjetas por fila con 10px de espacio entre ellas */
+        height: 190px;
+        width: 170px;
+        /* Ajustar según sea necesario */
+        background-color: #444545;
+        border-radius: 15%;
+        margin: 5px;
+        /* Espacio entre filas */
+
+        overflow: hidden;
+        /* Ocultar cualquier contenido que se desborde */
+        /* display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center; */
+        text-align: center;
+    }
+
+    .cardTitle {
+        background-color: #2e2e2e;
+        color: #e3bc7b;
+        padding: 10px;
+        font-size: 30px;
+        text-decoration: none;
+
+    }
+
+    .cardContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+
+    .icon {
+        font-size: 80px;
+        color: #45ede7;
+        text-align: center;
+        margin: 10px;
+        /* margin-left: 25px; */
+        margin-top: 20px;
+
+        /* Espacio entre el ícono y el texto */
+    }
+}

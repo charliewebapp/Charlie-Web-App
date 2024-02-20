@@ -1,11 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
-import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+
 import LandingAdmin from "./views/Admin/LandingAdmin/LandingAdmin";
 import FormPostProductAdmin from "./views/Admin/FormPostProductAdmin/FormPostProductAdmin";
 import FormUpdateEmployee from "./views/Admin/FormUpdateEmployee/FormUpdateEmployee";
@@ -17,21 +17,32 @@ import FormUpdateAdmin from "./views/SuperAdmin/FormUpdateAdmin/FormUpdateAdmin"
 import FormUpdateClub from "./views/SuperAdmin/FormUpdateClub/FormUpdateClub";
 import Profile from "./views/Users/Profile/Profile";
 
+import ColaboradorNavbar from "./views/Colaborador/colaboradornavbar";
+import DetailQR
+  from "./views/Users/DetailQR/DetailQR";
+import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
+import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
+
+
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
+
+//no borrar esto
+import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
+import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
 
 const EMAIL = "charlieapp@gmail.com";
 const PASSWORD = "charlie123";
 
 const App = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   function login(userData) {
     if (userData.password === PASSWORD && userData.email === EMAIL) {
       dispatch(handleSAdminStatusLogin());
-      navigate('/superadmin/dashboard');
+      navigate("/superadmin/dashboard");
     }
   }
 
@@ -45,6 +56,8 @@ const App = () => {
 
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
 
+  const colaboradorStatusLogin = useSelector((state) => state.colaboradorStatusLogin);
+
   const requireSAdminLogin = (component) => {
     return sadminStatusLogin ? component : <Navigate to="/superadmin" />;
   };
@@ -53,8 +66,16 @@ const App = () => {
     return adminStatusLogin ? component : <Navigate to="/admin" />;
   };
 
+  const requireColaboradorLogin = (component) => {
+    return colaboradorStatusLogin ? component : <Navigate to="/admin" />;
+  };
+
   return (
+
     <>
+
+      {location.pathname === "/colaboradorqr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
+
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
         <Route
@@ -123,6 +144,10 @@ const App = () => {
           element={requireAdminLogin(<DashboardAdmin />)}
         />
         <Route
+          path="/admin/dashboardAdmin/mercadopago-authorization/success"
+          element={requireAdminLogin(<DashboardAdminConfigSuccess location={window.location} />)}
+        />
+        <Route
           path="/admin/:clubName/addproduct"
           element={requireAdminLogin(<FormPostProductAdmin />)}
         />
@@ -138,10 +163,10 @@ const App = () => {
           path="/admin/:clubName/updateemployee/:idCollaborator"
           element={requireAdminLogin(<FormUpdateEmployee />)}
         />
-        <Route
+        {/* <Route
           path="/admin/:clubName/clubprofile"
           element={requireAdminLogin(<FormClubProfile />)}
-        />
+        /> */}
         {/* ruta creada para brian test */}
         <Route path="/:clubName/profile" element={<Profile />} />
         {/*//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS USUARIOS -> los componentes no dicen user*/}
@@ -154,6 +179,16 @@ const App = () => {
         ...FALTAN DEMAS RUTAS
         
         */}
+
+
+
+        <Route path="/qrcode" element={<DetailQR />} />
+
+        <Route path="/colaboradorqr" element={requireColaboradorLogin(<ColaboradorReader />)} />
+
+        <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
+
+
       </Routes>
     </>
   );

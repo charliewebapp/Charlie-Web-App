@@ -33,8 +33,19 @@ export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 export const ADMIN_CONFIG_VIEW = "ADMIN_CONFIG_VIEW";
 export const ADMIN_ID_LOGGED = "ADMIN_ID_LOGGED";
 
+//! login colaborador
+export const COLLABORATOR_STATUS_LOGIN = "COLLABORATOR_STATUS_LOGIN";
+export const SELECT_CLIENT_COLLABORATOR = "SELECT_CLIENT_COLLABORATOR";
+export const COLLABORATOR_ID_LOGGED = "COLLABORATOR_ID_LOGGED";
+export const COLLABORATOR_STATUS_LOGOUT = "COLLABORATOR_STATUS_LOGOUT";
+export const GET_ALL_COLLABORATORS = "GET_ALL_COLLABORATORS";
+
 //? //////////////////////// TRAER ADMIN ////////////////////////////
 export const GET_ADMINISTRATORS = "GET_ADMINISTRATORS";
 
 //! Ventas temporario para demo
 export const GET_SALES = "GET_SALES";
+
+export const POST_ORDER = "POST_ORDER";
+
+export const GET_ORDER_QR = "GET_ORDER_QR";

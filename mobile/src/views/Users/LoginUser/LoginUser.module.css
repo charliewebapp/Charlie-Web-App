@@ -1,0 +1,42 @@
+@media only screen and (max-width: 767px) {
+    .loginUser {
+        height: 100%;
+        width: 100%;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .circleLogo {
+        margin-top: 70px;
+        margin-bottom: 15px;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        background-color: rgba(231, 183, 110, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+
+    }
+
+    .loginButton {
+
+        width: 150px;
+        height: 70px;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+        background-color: #444545;
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        outline: none;
+    }
+}

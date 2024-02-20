@@ -1,0 +1,94 @@
+@media only screen and (max-width: 767px) {
+
+.container {
+  background-color: #002D46;
+  width: 94%;
+  color: black;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 13px;
+  height: 100px; /* Cambiar la altura según sea necesario */
+  border: #63B5B6 1px solid;
+}
+
+.text {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px;
+  width: 90%;
+}
+
+.nameAndPrice {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Alineación desde la izquierda */
+  align-items: center; /* Alineación vertical */
+  /* background-color: #2e5e60; */
+  height: 10%;
+}
+
+.name {
+  color: #1DDDE4;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.price {
+  color: white;
+  font-size: 18px;
+}
+
+.description {
+  color: white;
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  height: 50%;
+  /* background-color: aquamarine; */
+  height: 30%;
+}
+
+.buttonSelection {
+  padding: 5px;
+  display: flex;
+  justify-content: right; /* Centrar horizontalmente */
+  align-self: center;
+  align-items: center; /* Centrar verticalmente */
+  width: 25%;
+  height: 50%;
+}
+
+.subtractButton{
+  background-color: #63B5B6;
+  padding: 5px;
+  border-radius: 50%;
+  color: #1A1D22;
+  border: none;
+  width: 100%;
+}
+
+.addButton{
+  background-color: #63B5B6;
+  padding: 5px;
+  border-radius: 50%;
+  color: #1A1D22;
+  border: none;
+  width: 100%;
+}
+
+.quantity{
+  background-color: black;
+  color: #1DDDE4;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+}
+}
