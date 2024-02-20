@@ -31,7 +31,13 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{
+        backgroundColor: stock === "available" ? "#002D46" : "#00111D",
+        border: stock === "available" ? "#63B5B6 1px solid" : "none",
+      }}
+    >
       {stock === "available" ? (
         <>
           <div className={styles.text}>
@@ -40,7 +46,7 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
                 <p>{name}</p>
               </div>
               <div className={styles.price}>
-                <p>{price}</p>
+                <p>$ {price}</p>
               </div>
             </div>
             <div className={styles.description}>
@@ -58,11 +64,11 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
           </div>
         </>
       ) : (
-        <div className={styles.text}>
-          <div className={styles.name}>
+        <div className={styles.containerSoldout}>
+          <div className={styles.nameSO}>
             <p>{name}</p>
           </div>
-          <div className={styles.description}>
+          <div className={styles.descriptionSO}>
             <p>Sold Out</p>
           </div>
         </div>

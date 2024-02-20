@@ -1,37 +1,33 @@
 @media only screen and (max-width: 767px) {
 
 .container {
-  background-color: #002D46;
-  width: 94%;
-  color: black;
+  width: 90%;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   margin: 10px;
   padding: 5px;
   border-radius: 13px;
-  height: 100px; /* Cambiar la altura según sea necesario */
-  border: #63B5B6 1px solid;
+  height: 80px; /* Cambiar la altura según sea necesario */
+
 }
 
 .text {
-  padding: 10px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
-  width: 90%;
+  width: 65%;
 }
 
 .nameAndPrice {
-  padding: 5px;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; /* Alineación desde la izquierda */
-  align-items: center; /* Alineación vertical */
-  /* background-color: #2e5e60; */
-  height: 10%;
+  justify-content: flex-start;
+  align-items: center; 
+  height: 40%;
+  margin-bottom: -10px;
 }
 
 .name {
@@ -43,16 +39,14 @@
 .price {
   color: white;
   font-size: 18px;
+  font-weight: lighter;
 }
 
 .description {
-  color: white;
+  color: #969FAA;
   width: 100%;
   text-align: left;
-  font-size: 15px;
-  height: 50%;
-  /* background-color: aquamarine; */
-  height: 30%;
+  font-size: 16px;
 }
 
 .buttonSelection {
@@ -91,4 +85,37 @@
   padding: 10px;
   width: 100%;
 }
+
+.containerSoldout{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 65%;
+
+}
+.nameSO{
+  color: #969FAA;
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; 
+  height: 40%;
+  margin-bottom: 4px;
+}
+
+.descriptionSO {
+  background-color: #1E2E39;
+  color: red;
+  border-radius: 20px;
+  text-align: left;
+  font-size: 14px;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
 }
