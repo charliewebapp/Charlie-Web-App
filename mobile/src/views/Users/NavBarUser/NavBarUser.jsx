@@ -6,6 +6,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyBoliche, postUser } from "../../../redux/actions";
 import { MdArrowBackIos } from "react-icons/md";
+import loadingGif from "../../../assets/img/loading2.gif"
 
 function NavBarUser() {
   const { clubName } = useParams();
@@ -17,7 +18,7 @@ function NavBarUser() {
   const location = useLocation();
   const currentPath = location.pathname;
   // console.log(currentPath);
-  const isHome = currentPath === `/${clubName}/home`;
+  // const isHome = currentPath === `/${clubName}/home`;
 
   //* -------------------------------------------------- USER -----------------
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -47,11 +48,14 @@ function NavBarUser() {
     }
   }, [user, isLoading, isUserLoaded, dispatch, userData]);
 
+
+
+  //* ---- GIF LOADING ----------------------------------------------------------
   if (isLoading) {
     return (
       <div className={styles.NavBarUser}>
         <img
-          src="\src\assets\loading2.gif"
+          src={loadingGif}
           alt="Loading..."
           className={styles.loading}
         />
@@ -63,7 +67,6 @@ function NavBarUser() {
     <div className={styles.NavBarUser}>
       {
         // render de foto perfil o iniciales en home
-        // isAuthenticated && isHome && ( //! descomentar al arreglar la flecha back
         isAuthenticated && (
           <div>
             {user.picture && (
@@ -90,7 +93,7 @@ function NavBarUser() {
           </div>
         )
       }
-      {/* { //! ARREGLAR LA FLECHA BACK - render de flecha volver en donde NO sea home
+      {/* { // FLECHA BACK NO HACER - render de flecha volver en donde NO sea home
 
                 !isHome && (
                     <Link to={location.state?.from || '/'}>
