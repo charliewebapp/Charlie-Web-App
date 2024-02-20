@@ -111,7 +111,7 @@ function Cart() {
           <Wallet
             initialization={{
               preferenceId: preferenceId,
-              redirectMode: "blank",
+              redirectMode: "self",
             }}
           />
         )}
