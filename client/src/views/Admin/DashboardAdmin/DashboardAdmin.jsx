@@ -110,6 +110,10 @@ import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoSettingsSharp } from "react-icons/io5";
+import Swal from "sweetalert2";
+
+
+
 function DashboardAdmin() {
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
@@ -136,9 +140,24 @@ function DashboardAdmin() {
     dispatch(handleAdminConfigView());
   };
 
-  const handleLogin = () => {
-    dispatch(logOut());
-  };
+
+
+  const openConfirmationLogOut = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: `¿Quieres cerrar sesión?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgb(187, 131, 43)",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+      confirmButtonText: "Cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logOut());
+      }
+    });
+  }
 
   return (
     <div className={style.bg}>
@@ -165,7 +184,7 @@ function DashboardAdmin() {
               <IoSettingsSharp />
               Configuración
             </button>
-            <button className={style.btnCfg} onClick={handleLogin}>
+            <button className={style.btnCfg} onClick={openConfirmationLogOut}>
               <RiLogoutBoxLine />
               Cerrar Sesión
             </button>
