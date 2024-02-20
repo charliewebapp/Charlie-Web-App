@@ -12,6 +12,7 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   SADMIN_STATUS_LOGIN,
+  LOG_OUT_SADMIN,
   ADMIN_STATUS_LOGIN,
   DELETE_COLLABORATOR,
   GET_ADMINISTRATORS,
@@ -54,7 +55,7 @@ const initialState = {
   selectAdminLogin: [], //!El admin logueado.
   selectColaboratorLogin: [], //!El colaborador logueado.
   selectClientAdmin: [], //!El boliche asignado a ese admin.
-  sadminStatusLogin: true,
+  sadminStatusLogin: false,
   adminStatusLogin: true,
   colaboradorStatusLogin: true,
   adminConfigActive: false, //!Renderizar config en admin
@@ -226,6 +227,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         sadminStatusLogin: true,
       };
+//!logout super admin
+      case LOG_OUT_SADMIN:
+        return {
+          ...state,
+          sadminStatusLogin: false,
+        };
 
     //! login admin
 

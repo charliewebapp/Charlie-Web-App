@@ -14,6 +14,7 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   SADMIN_STATUS_LOGIN,
+  LOG_OUT_SADMIN,
   ADMIN_STATUS_LOGIN,
   GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
@@ -385,6 +386,18 @@ export const logOut = () => {
     try {
       return dispatch({
         type: LOG_OUT_ADMIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const logOutSadmin = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: LOG_OUT_SADMIN,
       });
     } catch (error) {
       console.error(error);
