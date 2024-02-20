@@ -42,6 +42,7 @@ const webhook = require("../controllers/MercadoPago/webhook");
 const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllCollaboratorHandler");
 const setPurchase = require("../controllers/MercadoPago/setPurchase");
 const postPurchases = require("../controllers/Purchases/postPurchases");
+const setDetail = require("../controllers/MercadoPago/setDetail");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -55,16 +56,14 @@ router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
 router.post("/setPurchase", setPurchase);
-
+router.get("/detailPurchase/:id", setDetail);
 
 // //history
 // router.post("/:client/collaborator/qr/:idMP", postQrHandler);
 // router.get("/:client/collaborator/qr/:idMP", getQrHandler);
 // router.put("/:client/collaborator/qr/:idMP", putQrHandler);
 
-router.post("/:client/searchHistory", postPurchases)
-
-
+router.post("/:client/searchHistory", postPurchases);
 
 //boliche
 //! /////////////////////////////////////////////////
