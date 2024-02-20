@@ -43,6 +43,7 @@ const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllColla
 const setPurchase = require("../controllers/MercadoPago/setPurchase");
 const postPurchases = require("../controllers/Purchases/postPurchases");
 const setDetail = require("../controllers/MercadoPago/setDetail");
+const putClientStatusHandler = require("../handlers/Clients/putClientStatusHandler");
 // const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
 
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
@@ -98,6 +99,7 @@ router.post("/client", upload.single("image"), postClientsHandler);
 router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
 router.put("/:client", upload.single("image"), putClientsHandler); //pendiente cambiar esta ruta
+router.put("/:client/status", putClientStatusHandler);
 //admins
 
 router.get("/administrator", getAllAdminsHandler);
