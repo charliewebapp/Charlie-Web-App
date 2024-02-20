@@ -26,6 +26,21 @@ function Cards() {
     (product) => product.category.toLowerCase() === category.toLowerCase()
   );
 
+  const productsWithAvailableStock = filteredProducts.filter(
+    (product) => product.stock === "available"
+  );
+
+  // Filtrar productos sin stock disponible
+  const productsWithoutAvailableStock = filteredProducts.filter(
+    (product) => product.stock !== "available"
+  );
+
+  // Concatenar los productos con stock disponible seguidos de los productos sin stock disponible
+  const orderedFilteredProducts = [
+    ...productsWithAvailableStock,
+    ...productsWithoutAvailableStock,
+  ];
+
   // Lógica para mostrar solo tres botones a la vez
   const categories = [
     "Tragos", //0
@@ -95,7 +110,7 @@ function Cards() {
           {categories[nextCategoryIndex]}
         </Link>
       </div>
-      {filteredProducts.map((product, index) => (
+      {orderedFilteredProducts.map((product, index) => (
         <Card
           key={index}
           id={product.id}
