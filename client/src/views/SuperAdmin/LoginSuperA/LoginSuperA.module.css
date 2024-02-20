@@ -55,18 +55,16 @@
 }
 
 .passwordInputContainer {
-    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .togglePasswordVisibility {
-    position: absolute;
-    top: 35%;
-    /* Ajustar la posición vertical */
-    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
     color: #ffffff;
-    margin-bottom: 5px;
+    margin-left: 20px; /* Ajusta según sea necesario para alinear con el input */
+    margin-bottom: -9px;
 }
 
 
