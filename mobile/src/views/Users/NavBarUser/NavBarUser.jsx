@@ -16,7 +16,7 @@ function NavBarUser() {
   //Conditional render nav bar items
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log(currentPath);
+  // console.log(currentPath);
   const isHome = currentPath === `/${clubName}/home`;
 
   //* -------------------------------------------------- USER -----------------
