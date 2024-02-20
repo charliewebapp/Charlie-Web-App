@@ -3,11 +3,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
 import DashboardSuperAclubs from "../DashboardSuperA/DashboardSuperAclubs";
-import { setClubID } from "../../../redux/actions";
+import { setClubID,logOutSadmin} from "../../../redux/actions";
 import style from "./dashboard.module.css";
 import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import Swal from "sweetalert2";
+
 function DashboardAdmin() {
   const [clubs, setClubs] = useState(true);
   const [admins, setAdmins] = useState(false);
@@ -25,7 +27,22 @@ function DashboardAdmin() {
     setClubs(false);
     setAdmins(true);
   };
-
+  const openConfirmationLogOut = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: `¿Quieres cerrar sesión?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgb(187, 131, 43)",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+      confirmButtonText: "Cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logOutSadmin());
+      }
+    });
+  }
   return (
     <div className={style.bg}>
       <div className={style.container}>
@@ -41,7 +58,7 @@ function DashboardAdmin() {
             </button>
           </div>
           <div className={style.config}>
-            <button className={style.btnCfg}>
+            <button className={style.btnCfg} onClick={openConfirmationLogOut}>
               <RiLogoutBoxLine />
               Cerrar sesion
             </button>

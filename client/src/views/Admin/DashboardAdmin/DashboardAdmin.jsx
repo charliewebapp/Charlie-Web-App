@@ -126,14 +126,27 @@ function DashboardAdmin() {
     dispatch(getProducts(clubName));
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
   const handleStock = () => {
-    dispatch(getProducts(clubName));
+    if (!loading) {
+      setLoading(true);
+      dispatch(getProducts(clubName)).finally(() => setLoading(false));
+    }
   };
+  
   const handleSales = () => {
-    dispatch(getSales(clubName));
+    if (!loading) {
+      setLoading(true);
+      dispatch(getSales(clubName)).finally(() => setLoading(false));
+    }
   };
+  
   const handleEmployee = () => {
-    dispatch(getCollaborators(clubName));
+    if (!loading) {
+      setLoading(true);
+      dispatch(getCollaborators(clubName)).finally(() => setLoading(false));
+    }
   };
 
   const handleConfig = () => {

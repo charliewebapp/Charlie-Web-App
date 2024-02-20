@@ -13,6 +13,7 @@ export const DELETE_COLLABORATOR = "DELETE_COLLABORATOR";
 //! /////////////// SUPER ADMIN ///////////////////////
 export const POST_BOLICHE = "POST_BOLICHE";
 export const POST_ADMIN = "POST_ADMIN";
+export const LOG_OUT_SADMIN = "LOG_OUT_SADMIN";
 
 export const GET_BOLICHES = "GET_BOLICHES";
 
