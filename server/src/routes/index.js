@@ -31,9 +31,6 @@ const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 const purchaseByUser = require("../controllers/Users/purchaseByUser");
 const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 
-const postQrHandler = require("../handlers/Qrs/postQrHandler");
-const getQrHandler = require("../handlers/Qrs/getQrHandler");
-const putQrHandler = require("../handlers/Qrs/putQrHandler");
 
 const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
 const apiKey = require("../controllers/MercadoPago/apiKey");
@@ -49,6 +46,8 @@ const putClientStatusHandler = require("../handlers/Clients/putClientStatusHandl
 // const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
 // const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 
+const putPurchases = require("../controllers/Purchases/putPurchases");
+
 const router = Router();
 
 //mercado-pago
@@ -60,41 +59,13 @@ router.post("/setPurchase", setPurchase);
 router.get("/detailPurchase/:id", setDetail);
 
 // //history
-// router.post("/:client/collaborator/qr/:idMP", postQrHandler);
-// router.get("/:client/collaborator/qr/:idMP", getQrHandler);
-// router.put("/:client/collaborator/qr/:idMP", putQrHandler);
 
 router.post("/:client/searchHistory", postPurchases);
 
 //boliche
 //! /////////////////////////////////////////////////
 router.post("/client", upload.single("image"), postClientsHandler);
-//   try {
-//     const { name, adress, city } = req.body;
-//     const imagePath = req.file ? saveImage(req.file) : null;
 
-//     const newClient = await Client.create({
-//       name,
-//       image: imagePath,
-//       adress,
-//       city,
-//       // Puedes agregar otros campos según sea necesario
-//     });
-
-//     res.status(201).json({ success: true, data: newClient });
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(500)
-//       .json({ success: false, error: "Error al crear el cliente" });
-//   }
-// });
-
-// function saveImage(file) {
-//   const newPath = `./uploads/${file.originalname}`;
-//   fs.renameSync(file.path, newPath);
-//   return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
-// }
 //! /////////////////////////////////////////////////
 router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
@@ -128,10 +99,8 @@ router.delete("/:client/collaborator/:user", deleteControllerHandler);
 router.get("/collaborator", getAllCollaboratorHandler);
 
 //--------------colaborador
-router.post("/:client/collaborator/qr/:idMP", postQrHandler);
-router.get("/:client/collaborator/qr/:idMP", getQrHandler);
-router.put("/:client/collaborator/qr/:idMP", putQrHandler);
-// router.delete("/:client/collaborator/qr", deleteQrHandler);
+
+router.put("/:client/purchase/status/:PurchaseId", putPurchases);
 
 //--------------consumidor
 
