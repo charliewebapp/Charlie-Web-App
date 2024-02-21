@@ -8,10 +8,17 @@ import styles from "./OrderConfirmation.module.css";
 const URL_API = import.meta.env.VITE_URL_API;
 
 const OrderConfirmation = () => {
+  const dispatch = useDispatch();
   let storedArrayString = localStorage.getItem("myArray");
   let storedArray = JSON.parse(storedArrayString);
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
+
+  //* Limpia carrito luego del pago exitoso
+  useEffect(() => {
+    // Dispatch clearCart() cuando el componente se monta
+    dispatch(clearCart());
+  }, [dispatch]);
 
   const myUser = JSON.parse(localStorage.getItem("myUser"));
 
@@ -26,7 +33,6 @@ const OrderConfirmation = () => {
   const paymentId = urlParams.get("payment_id");
   const params = Object.fromEntries(urlParams.entries());
   const { clubName } = useParams();
-  const dispatch = useDispatch();
   const [purchaseData, setPurchaseData] = useState(null);
   const sendToDB = () => {
     dispatch(postOrderInDB(storedArray, paymentId, clubName));
@@ -66,10 +72,7 @@ const OrderConfirmation = () => {
 
   const postPurchase = async () => {
     try {
-      const { data } = await axios.post(
-        `${URL_API}/setPurchase`,
-        postData
-      );
+      const { data } = await axios.post(`${URL_API}/setPurchase`, postData);
       setPurchaseData(data);
     } catch (error) {
       console.log(error.message);
