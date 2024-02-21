@@ -96,10 +96,8 @@ const App = () => {
 
   return (
     <>
-      {location.pathname === "/colaboradorqr" ||
-      location.pathname === "/colaborador/perfil" ? (
-        <ColaboradorNavbar />
-      ) : null}
+
+      {location.pathname === "/colaborador/qr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
 
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
@@ -207,14 +205,12 @@ const App = () => {
         
         */}
         <Route path="/qrcode" element={<DetailQR />} />
-        <Route
-          path="/colaboradorqr"
-          element={requireColaboradorLogin(<ColaboradorReader />)}
-        />
-        <Route
-          path="/colaborador/perfil"
-          element={requireColaboradorLogin(<ColaboradorProfile />)}
-        />
+
+        <Route path="/colaborador/qr" element={requireColaboradorLogin(<ColaboradorReader />)} />
+
+        <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
+
+
       </Routes>
     </>
   );

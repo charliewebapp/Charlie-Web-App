@@ -9,10 +9,8 @@ const AdministratorModel = require("./models/Administrator");
 const ClientModel = require("./models/Client");
 const ProductModel = require("./models/Product");
 const PurchaseModel = require("./models/Purchase");
-const PurchaseHistoryModel = require("./models/PurchaseHistory");
 const CollaboratorModel = require("./models/Collaborator");
 const UserModel = require("./models/User");
-const QrCodeModel = require("./models/QrCode");
 const AuthorizationsModel = require("./models/Authorizations");
 
 const sequelize = new Sequelize(DB_RENDER, {
@@ -52,10 +50,8 @@ AdministratorModel(sequelize);
 ClientModel(sequelize);
 ProductModel(sequelize);
 PurchaseModel(sequelize);
-PurchaseHistoryModel(sequelize);
 CollaboratorModel(sequelize);
 UserModel(sequelize);
-QrCodeModel(sequelize);
 AuthorizationsModel(sequelize);
 
 const {
@@ -63,10 +59,8 @@ const {
   Client,
   Product,
   Purchase,
-  PurchaseHistory,
   Collaborator,
   User,
-  QrCode,
   Authorizations
 } = sequelize.models;
 
@@ -75,19 +69,12 @@ Administrator.belongsTo(Client);
 Product.belongsTo(Client);
 Collaborator.belongsTo(Client);
 
-QrCode.belongsToMany(Collaborator, {
-  through: "QrCodes_Collaborators",
-  timestamps: false,
-});
 
-// QrCode.belongsTo(Client)
-// QrCode.belongsTo(User)
 
 Client.hasOne(Authorizations);
 User.hasOne(Purchase);
 Client.hasOne(Purchase);
-// QrCode.hasOne(Purchase);
-// Client.hasOne(Purchase);
+
 
 
 module.exports = {
