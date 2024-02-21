@@ -8,18 +8,20 @@
 }
 
 .profileContainer {
+    background-color: #001625;
+    border: #fccf83 2px solid;
     width: 300px;
     height: 500px;
-    background-color: #444545;
+    border-radius: 15px;
 }
 
 .profileButton {
-    width: 100px;
+    width: 300px;
     height: 50px;
     padding: 10px;
     margin: 10px;
     border-radius: 15px;
-    background-color: #444545;
+    background-color: #001625;
     color: white;
     cursor: pointer;
     border: none;
