@@ -62,28 +62,38 @@
 .subtractButton{
   background-color: #63B5B6;
   padding: 5px;
+  padding-left: 19px;
+  padding-right: 19px;
   border-radius: 50%;
   color: #1A1D22;
-  border: none;
+  border: #1DDDE4 1px solid;
   width: 100%;
+  font-size: 30px;
 }
 
 .addButton{
   background-color: #63B5B6;
   padding: 5px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-radius: 50%;
   color: #1A1D22;
-  border: none;
+  border: #1DDDE4 1px solid;
   width: 100%;
+  font-size: 30px;
 }
 
 .quantity{
-  background-color: black;
+  background-color:transparent;
   color: #1DDDE4;
   border-radius: 10px;
   margin: 5px;
-  padding: 10px;
-  width: 100%;
+  padding:10px;
+  padding-left: 13px;
+  padding-right: 13px;
+  width: 50%;
+  font-size: 19px;
 }
 
 .containerSoldout{

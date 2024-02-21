@@ -7,6 +7,7 @@
     border-color: #fccf83 2px solid;
     position: relative; /* Para el posicionamiento absoluto del icono */
     margin: 10px;
+    
   }
 
   .tuPedido{
@@ -14,7 +15,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: #00121E;
+      background-color: #001625;
       border: #fccf83 2px solid;
       border-radius: 25px;
       width: 100%;
@@ -57,9 +58,60 @@
 
   .button {
     border-radius: 20px;
+    width: 80%;
     padding: 10px;
     border: none;
     margin: 17px;
     background-color: #43F85E;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .moreItemContainer{
+      background-color:#005E65;
+      width: 94%;
+      color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      border: none;
+      padding: 5px;
+      border-radius: 13px;
+      height: 70px;
+  }
+
+  .moreItemButton{
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    align-self: center;
+    align-items: center; /* Centrar verticalmente */
+    width: 25%;
+    height: 50%;
+  }
+
+  .buttonItem{
+    background-color: transparent;
+    color:#00F6EC;
+    border: none;
+    padding: 5px;
+    font-size: 50px;
+    font-weight: lighter;
+    
+  }
+  .moreItemText{
+    color:#00F6EC;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    font-weight: lighter;
+    font-size: 20px;
+
   }
 }

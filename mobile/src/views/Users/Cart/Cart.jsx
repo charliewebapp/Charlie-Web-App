@@ -8,13 +8,11 @@ import axios from "axios";
 import NavBarUser from "../NavBarUser/NavBarUser";
 import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
-import { AiOutlineShop } from "react-icons/ai";
 const URL_API = import.meta.env.VITE_URL_API;
 
 function Cart() {
   const { clubName } = useParams();
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
 
   let arrayString = JSON.stringify(cart);
@@ -46,13 +44,10 @@ function Cart() {
         quantity: item.quantity,
       }));
       console.log("post purchase");
-      const response = await axios.post(
-        `${URL_API}/create_preference`,
-        {
-          products: newArray,
-          path: clubName,
-        }
-      );
+      const response = await axios.post(`${URL_API}/create_preference`, {
+        products: newArray,
+        path: clubName,
+      });
 
       const { id } = response.data;
       return id;
@@ -86,9 +81,6 @@ function Cart() {
       <div className={styles.tuPedido}>
         <div className={styles.pedidoTrash}>
           <h1 className={styles.h1}>
-            <Link to={`/${clubName}/home`}>
-              <AiOutlineShop className={styles.storeIcon} />
-            </Link>
             Tu pedido
             <GoTrash className={styles.trashIcon} onClick={handleEmptyCart} />
           </h1>
@@ -104,6 +96,14 @@ function Cart() {
             totalPrice={product.price * product.quantity}
           />
         ))}
+        <div className={styles.moreItemContainer}>
+          <span className={styles.moreItemText}>Agregar Item</span>
+          <div className={styles.moreItemButton}>
+            <Link to={`/${clubName}/home`}>
+              <button className={styles.buttonItem}> + </button>
+            </Link>
+          </div>
+        </div>
         <button className={styles.button} onClick={goCheckout}>
           Pagar ${total}
         </button>
