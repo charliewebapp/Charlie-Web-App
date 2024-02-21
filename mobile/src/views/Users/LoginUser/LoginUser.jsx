@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react"
 import { getMyBoliche } from '../../../redux/actions';
 import styles from "./LoginUser.module.css"
+import charlieLetras from "../../../assets/img/charlie-blanco.png"
 
 function LoginUser() {
     //ingresa a charlie.ar/:clubName/login -> saco clubName || apreto boton login y redirige a auth0 ||
@@ -34,16 +35,20 @@ function LoginUser() {
 
     return (
         <div className={styles.loginUser}>
-            <div className={styles.circleLogo}>
-                <p>LOGO</p>
-                {/* aca iria el logo del boliche -> traer desde el server */}
-                {/* <img src="src\assets\logoBanana.jpg" alt="" /> */}
+            <div className={styles.containerLogos}>
+                <div className={styles.circleLogo}>
+                    <p>LOGO</p>
+                </div>
+                <div className={styles.byLetras}>by</div>
+                <img src={charlieLetras} alt="Charlie" className={styles.logoLetras} />
+
             </div>
-            <h1>Bienvenido a {clubName}</h1>
+
+
 
             {
                 !isAuthenticated && (
-                    <button className={styles.loginButton} onClick={handleLogin}>Iniciar sesión</button>)
+                    <button className={styles.loginButton} onClick={handleLogin}>Log In</button>)
             }
 
             { //si está logueado -> lleva a la carta
