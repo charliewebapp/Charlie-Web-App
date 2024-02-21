@@ -7,6 +7,8 @@ import {
   POST_USER,
   INITIALIZE_CART_FROM_LOCAL_STORAGE,
   SET_CART_FROM_LOCAL_STORAGE, // Agregar esta importación
+  GET_ORDER_QR,
+  GET_DETAIL_QR,
 } from "./actionsTypes";
 
 const initialState = {
@@ -14,6 +16,8 @@ const initialState = {
   cart: [],
   myBoliche: {},
   myUser: {},
+  orderqrdata: [],
+  detailQrCode: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +63,24 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         myUser: payload,
+      };
+    case GET_ORDER_QR:
+      return {
+        ...state,
+        orderqrdata: payload,
+        detailQrCode: [],
+      };
+    case GET_DETAIL_QR:
+      return {
+        ...state,
+        detailQrCode: payload,
+        orderqrdata: [],
+      };
+
+    case SET_CART_FROM_LOCAL_STORAGE:
+      return {
+        ...state,
+        cart: payload,
       };
 
     case SET_CART_FROM_LOCAL_STORAGE:

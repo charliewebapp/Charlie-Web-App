@@ -6,11 +6,18 @@ import { acceptOrder, rejectOrder } from '../../redux/actions'
 import style from './colaboradorreader.module.css';
 import Swal from "sweetalert2"
 
+
 function ColaboradorReader() {
 
     const dispatch = useDispatch()
 
+    const [refresh, setRefresh] = useState(false)
+
     const [scanResult, setScanResult] = useState(null)
+
+    const handleRefresh = () => {
+        setRefresh(prevRefresh => !prevRefresh);
+    }
 
     useEffect(() => {
 
@@ -33,7 +40,12 @@ function ColaboradorReader() {
             console.log(error);
         }
 
-    }, []);
+        return () => {
+            scanner.clear()
+            setScanResult(null);
+        }
+
+    }, [refresh]);
 
     const scanResultObj = JSON.parse(scanResult);
 
@@ -44,12 +56,28 @@ function ColaboradorReader() {
 
         if (e.target.value === "aceptar") {
             try {
-                // dispatch(acceptOrder())
                 Swal.fire({
-                    title: "Éxito",
-                    text: "La orden ha sido aceptada",
-                    icon: "success",
-                    timer: "4000",
+                    title: "Atencion!",
+                    text: "estas seguro que deseas aceptar la orden?",
+                    inputAttributes: {
+                        autocapitalize: "off"
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: "confirmar",
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        // dispatch(acceptOrder())
+                        return Promise.resolve();
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Éxito",
+                            text: "La orden ha sido aceptada",
+                            icon: "success",
+                            timer: "4000",
+                        })
+                    }
                 });
             }
             catch (error) {
@@ -89,11 +117,17 @@ function ColaboradorReader() {
         }
     }
 
+
+    const scanResultObj0 = scanResultObj && scanResultObj[0];
+
+
     // if (scanResultObj) {
     //     const { status } = scanResultObj;
 
     //     console.log(status, "este es el status");
     // }
+
+
 
 
     return (
@@ -102,7 +136,7 @@ function ColaboradorReader() {
                 QR Code Reader
             </h1>
 
-            {scanResultObj && scanResultObj.map((product, index) => (
+            {scanResultObj0 && scanResultObj0.status === "pending" && scanResultObj0.cart.map((product, index) => (
                 <div key={index}>
                     {Object.keys(product).map(key => (
                         <p key={key}>{key}: {product[key]}</p>
@@ -110,15 +144,19 @@ function ColaboradorReader() {
                 </div>
             ))}
 
-
-            {scanResultObj && (
-                <button className={style.button} value="aceptar" onClick={processOrder}>Aceptar</button>
+            {scanResultObj0 && scanResultObj0.status === "pending" && (
+                <>
+                    <button className={style.button} value="aceptar" onClick={processOrder}>Aceptar</button>
+                    <button className={style.button} value="rechazar" onClick={processOrder}>Rechazar</button>
+                </>
             )}
 
-            {scanResultObj && (
-                <button className={style.button} value="rechazar" onClick={processOrder}>Rechazar</button>
+            {scanResultObj0 && scanResultObj0.status !== "pending" && (
+                <h2>Orden ya procesada</h2>
             )}
 
+            {scanResultObj0 && (
+                <button className={style.button} onClick={handleRefresh}>Refresh</button>)}
 
             <div id="reader">
             </div>

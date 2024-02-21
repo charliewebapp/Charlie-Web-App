@@ -9,6 +9,7 @@ import Cart from "./views/Users/Cart/Cart";
 import DetailQR from "./views/Users/DetailQR/DetailQR";
 import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 import RedirectLogOut from "./views/Users/RedirectLogOut/RedirectLogOut";
+import OrderDetail from "./views/Users/Profile/OrderDetail"
 
 function App() {
   return (
@@ -27,13 +28,38 @@ function App() {
           path="/:clubName/cards/:category"
           element={<Cards />}
         />
+        <Route path="/:clubName/cart" element={<Cart />} />
+
+        <Route path="/orderdetail" element={<OrderDetail />} />
+
+
+
+//!Ruta de prueba para el Profile
+        {/* <Route
+  path="/:clubName/profile"
+  element={<Profile />}
+/> */}
         <Route
-          path="/:clubName/profile"
+          path="/profile"
           element={<Profile />}
         />
-        <Route path="/:clubName/detailqr" element={<DetailQR />} />
-        <Route path="/:clubName/cart" element={<Cart />} />
-        <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} />
+
+
+
+        //!Ruta de prueba para el QR
+        {/* <Route path="/:clubName/detailqr" element={<DetailQR />} /> */}
+        <Route path="/detailqr" element={<DetailQR />} />
+
+
+
+
+        //!Ruta de prueba para el OrderConfirmation
+        {/* <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} /> */}
+
+        <Route path="/orderConfirmation" element={<OrderConfirmation />} />
+
+
+
 
 
         <Route path="/logout" element={<RedirectLogOut />} />
