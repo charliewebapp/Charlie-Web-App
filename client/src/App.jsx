@@ -31,8 +31,10 @@ import { handleSAdminStatusLogin } from "./redux/actions";
 import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
 
-const EMAIL = "charlieapp@gmail.com";
-const PASSWORD = "charlie123";
+const URL_EMAIL = import.meta.env.VITE_EMAIL;
+const URL_PASSWORD = import.meta.env.VITE_PASSWORD;
+
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const App = () => {
   const location = useLocation();
 
   function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
+    if (userData.password === URL_PASSWORD && userData.email === URL_EMAIL) {
       dispatch(handleSAdminStatusLogin());
       navigate("/superadmin/dashboard");
     }
@@ -74,7 +76,7 @@ const App = () => {
 
     <>
 
-      {location.pathname === "/colaboradorqr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
+      {location.pathname === "/colaborador/qr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
 
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
@@ -184,7 +186,7 @@ const App = () => {
 
         <Route path="/qrcode" element={<DetailQR />} />
 
-        <Route path="/colaboradorqr" element={requireColaboradorLogin(<ColaboradorReader />)} />
+        <Route path="/colaborador/qr" element={requireColaboradorLogin(<ColaboradorReader />)} />
 
         <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
 

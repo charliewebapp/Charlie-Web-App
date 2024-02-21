@@ -6,10 +6,15 @@ import styles from "./Profile.module.css";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getDetailQrCode } from "../../../redux/actions";
+import OrderDetail from "./OrderDetail"
+
 
 function Profile() {
   const { clubName } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
   //log out de Auth0
@@ -31,6 +36,9 @@ function Profile() {
     });
   };
 
+
+
+  const detail = useSelector((state) => state.detailQrCode);
 
 
   const [history, setHistory] = useState([]);
@@ -84,6 +92,22 @@ function Profile() {
       return "Compra Pendiente por retirar";
     }
   };
+
+  // useEffect(() => {
+  //   if (detail.length > 0) {
+  //     setIsLoading(false);
+  //     navigate("/orderdetail"); //!pasar el id de la orden
+  //   }
+  // }, [detail]);
+
+  const [isLoading, setIsLoading] = useState(null);
+
+  const renderQr = () => {
+    setIsLoading(true);
+    dispatch(getDetailQrCode()).finally(() => navigate("/orderdetail"))
+    //!pasar el id de la orden
+  }
+
 
   const historyHarc = [
     {
@@ -166,6 +190,7 @@ function Profile() {
       <NavBarUser></NavBarUser>
 
       <div className={styles.profileContainer}>
+        {isLoading ? <div>Loading...</div> : null}
         <h2>HISTORIAL DE PEDIDOS </h2>
 
         {historyHarc.map((item) => (
@@ -173,7 +198,10 @@ function Profile() {
             <p>Fecha: {formatDateTime(item.dateTime)}</p>
             <p>Total: ${item.amount}</p>
             <p>Estado: {status(item.status)}</p>
-            <button>Ver Detalle de Compra</button>
+
+
+            <button onClick={renderQr}>Ver Detalle de Compra</button>
+
           </div>
         ))}
       </div>

@@ -13,3 +13,7 @@ export const GET_MY_BOLICHE = "GET_MY_BOLICHE";
 
 //! -------- USERS -----------------
 export const POST_USER = "POST_USER";
+
+export const GET_ORDER_QR = "GET_ORDER_QR";
+
+export const GET_DETAIL_QR = "GET_DETAIL_QR";

@@ -110,7 +110,7 @@ function LandingAdmin() {
         );
 
         dispatch(selectClientColaboratorName(clientFromCollaborator));
-        navigate("/colaboradorqr");
+        navigate("/colaborador/qr");
       } else if (collaboratorLogin.status === "inactive") {
         Swal.fire({
           title: "Acceso denegado",
