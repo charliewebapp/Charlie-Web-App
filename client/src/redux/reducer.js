@@ -227,12 +227,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         sadminStatusLogin: true,
       };
-//!logout super admin
-      case LOG_OUT_SADMIN:
-        return {
-          ...state,
-          sadminStatusLogin: false,
-        };
+    //!logout super admin
+    case LOG_OUT_SADMIN:
+      return {
+        ...state,
+        sadminStatusLogin: false,
+      };
 
     //! login admin
 
