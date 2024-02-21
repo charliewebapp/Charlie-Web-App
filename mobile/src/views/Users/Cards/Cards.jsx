@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getProducts } from "../../../redux/actions";
+import {
+  getProducts,
+  initializeCartFromLocalStorage,
+} from "../../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css";
 import NavBarUser from "../NavBarUser/NavBarUser";
@@ -15,6 +18,9 @@ function Cards() {
   const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
+    // Cargar el carrito desde localStorage al cargar la página por primera vez
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    dispatch(initializeCartFromLocalStorage(savedCart));
     dispatch(getProducts(clubName));
   }, [clubName, dispatch]);
 

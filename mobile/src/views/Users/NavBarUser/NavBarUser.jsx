@@ -4,16 +4,27 @@ import styles from "./NavBarUser.module.css";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyBoliche, postUser } from "../../../redux/actions";
+import {
+  getMyBoliche,
+  postUser,
+  setCartFromLocalStorage,
+} from "../../../redux/actions";
 import { MdArrowBackIos } from "react-icons/md";
-import loadingGif from "../../../assets/img/loading2.gif"
+import loadingGif from "../../../assets/img/loading2.gif";
 
 function NavBarUser() {
   const { clubName } = useParams();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
   const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  useEffect(() => {
+    // Recuperar el carrito del localStorage al montar el componente
+    if (cartFromLocalStorage) {
+      dispatch(setCartFromLocalStorage(cartFromLocalStorage));
+    }
+  }, [dispatch]);
   //Conditional render nav bar items
   const location = useLocation();
   const currentPath = location.pathname;
@@ -48,17 +59,11 @@ function NavBarUser() {
     }
   }, [user, isLoading, isUserLoaded, dispatch, userData]);
 
-
-
   //* ---- GIF LOADING ----------------------------------------------------------
   if (isLoading) {
     return (
       <div className={styles.NavBarUser}>
-        <img
-          src={loadingGif}
-          alt="Loading..."
-          className={styles.loading}
-        />
+        <img src={loadingGif} alt="Loading..." className={styles.loading} />
       </div>
     );
   }
