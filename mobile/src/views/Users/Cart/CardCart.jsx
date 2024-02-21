@@ -12,7 +12,6 @@ function CardCart({ name, price, totalPrice, id }) {
   const cartGlobal = useSelector((state) => state.cart);
 
   const productInCart = cartGlobal.find((product) => product.id === id);
-  console.log(cartGlobal);
 
   const quantity = productInCart ? productInCart.quantity : 0;
 
@@ -38,18 +37,18 @@ function CardCart({ name, price, totalPrice, id }) {
             <p>{name}</p>
           </div>
           <div className={styles.price}>
-            <p>{price}</p>
+            <p></p>
           </div>
         </div>
         <div className={styles.description}>
-          <p> Total: {totalPrice}</p>
+          <p>${totalPrice}</p>
         </div>
       </div>
       <div className={styles.buttonSelection}>
+        <p className={styles.quantity}> {quantity} </p>
         <button className={styles.subtractButton} onClick={handleDecrement}>
           -
         </button>
-        <p className={styles.quantity}>{quantity}</p>
         <button className={styles.addButton} onClick={handleIncrement}>
           +
         </button>

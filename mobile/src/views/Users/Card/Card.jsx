@@ -13,7 +13,6 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
 
   // Encontrar el producto correspondiente en el carrito global
   const productInCart = cartGlobal.find((product) => product.id === id);
-  console.log(cartGlobal); //!Se fue estado localll y set cuantity abajo.
 
   // Si el producto está en el carrito global, obtener su cantidad, de lo contrario, es cero
   const quantity = productInCart ? productInCart.quantity : 0;
