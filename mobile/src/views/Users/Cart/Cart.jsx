@@ -3,20 +3,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import CardCart from "./CardCart";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { clearCart } from "../../../redux/actions";
+import { clearCart, setCartFromLocalStorage } from "../../../redux/actions";
 import axios from "axios";
 import NavBarUser from "../NavBarUser/NavBarUser";
 import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
+import Swal from "sweetalert2";
 const URL_API = import.meta.env.VITE_URL_API;
 
 function Cart() {
   const { clubName } = useParams();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+
+  useEffect(() => {
+    // Recuperar el carrito del localStorage al montar el componente
+    if (cartFromLocalStorage) {
+      dispatch(setCartFromLocalStorage(cartFromLocalStorage));
+    }
+  }, [dispatch]);
+
+  console.log("cart en carrito: ", cartFromLocalStorage);
+  console.log("cart de estado global: ", cart);
 
   let arrayString = JSON.stringify(cart);
   // Guardar la cadena en localStorage
+  console.log("cart de Brian: ", arrayString);
 
   const urlKey = `${URL_API}/search-apiKey`;
   const [preferenceId, setPreferenceId] = useState(null);
@@ -72,7 +85,20 @@ function Cart() {
   );
 
   const handleEmptyCart = () => {
-    dispatch(clearCart());
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¿Quieres vaciar el carrito?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#fccf83",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+      confirmButtonText: "Vaciar carrito",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearCart());
+      }
+    });
   };
 
   return (

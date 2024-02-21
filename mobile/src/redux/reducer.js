@@ -5,6 +5,8 @@ import {
   CLEAN_CART,
   GET_MY_BOLICHE,
   POST_USER,
+  INITIALIZE_CART_FROM_LOCAL_STORAGE,
+  SET_CART_FROM_LOCAL_STORAGE, // Agregar esta importación
 } from "./actionsTypes";
 
 const initialState = {
@@ -36,6 +38,12 @@ const reducer = (state = initialState, action) => {
         cart: updatedCart,
       };
 
+    case INITIALIZE_CART_FROM_LOCAL_STORAGE: // Nuevo case para inicializar el carrito desde localStorage
+      return {
+        ...state,
+        cart: payload,
+      };
+
     case CLEAN_CART:
       return {
         ...state,
@@ -51,6 +59,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         myUser: payload,
+      };
+
+    case SET_CART_FROM_LOCAL_STORAGE:
+      return {
+        ...state,
+        cart: payload,
       };
 
     default:

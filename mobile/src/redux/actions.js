@@ -7,6 +7,8 @@ import {
   CLEAN_CART,
   GET_MY_BOLICHE,
   POST_USER,
+  INITIALIZE_CART_FROM_LOCAL_STORAGE,
+  SET_CART_FROM_LOCAL_STORAGE,
 } from "./actionsTypes";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -14,9 +16,7 @@ const URL_API = import.meta.env.VITE_URL_API;
 export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `${URL_API}/${clubName}/product`
-      );
+      const { data } = await axios.get(`${URL_API}/${clubName}/product`);
       dispatch({
         type: GET_PRODUCTS,
         payload: data,
@@ -100,6 +100,7 @@ export const clearCart = () => {
       dispatch({
         type: CLEAN_CART,
       });
+      localStorage.removeItem("cart");
     } catch (error) {
       Swal.fire({
         title: "Error",
@@ -111,6 +112,16 @@ export const clearCart = () => {
     }
   };
 };
+
+export const initializeCartFromLocalStorage = (cart) => ({
+  type: INITIALIZE_CART_FROM_LOCAL_STORAGE,
+  payload: cart,
+});
+
+export const setCartFromLocalStorage = (cart) => ({
+  type: SET_CART_FROM_LOCAL_STORAGE,
+  payload: cart,
+});
 
 //! -------------------------------------- BOLICHE ----------------------------------------
 export const getMyBoliche = (clubName) => {

@@ -4,11 +4,12 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const CLEAN_CART = "CLEAN_CART";
-
+export const INITIALIZE_CART_FROM_LOCAL_STORAGE =
+  "INITIALIZE_CART_FROM_LOCAL_STORAGE";
+export const SET_CART_FROM_LOCAL_STORAGE = "SET_CART_FROM_LOCAL_STORAGE";
 
 //! --------BOLICHE ----------------
 export const GET_MY_BOLICHE = "GET_MY_BOLICHE";
-
 
 //! -------- USERS -----------------
 export const POST_USER = "POST_USER";
