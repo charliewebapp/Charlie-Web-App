@@ -35,14 +35,14 @@ function App() {
 
 
 //!Ruta de prueba para el Profile
-        {/* <Route
-  path="/:clubName/profile"
-  element={<Profile />}
-/> */}
         <Route
-          path="/profile"
+          path="/:clubName/profile"
           element={<Profile />}
         />
+        {/* <Route
+          path="/profile"
+          element={<Profile />}
+        /> */}
 
 
 

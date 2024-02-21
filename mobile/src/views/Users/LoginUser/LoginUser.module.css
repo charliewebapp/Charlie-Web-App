@@ -1,42 +1,69 @@
-@media only screen and (max-width: 767px) {
-    .loginUser {
-        height: 100%;
-        width: 100%;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
+/* @media only screen and (max-width: 767px) { */
+.loginUser {
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
 
-    .circleLogo {
-        margin-top: 70px;
-        margin-bottom: 15px;
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 50%;
-        background-color: rgba(231, 183, 110, 0.4);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
+.containerLogos {
+    margin-top: 70px;
+    margin-bottom: 15px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid gray;
 
-    }
+}
 
-    .loginButton {
+.circleLogo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(231, 183, 110, 0.4);
+    border: 2px solid #fccf83;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 
-        width: 150px;
-        height: 70px;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 15px;
-        background-color: #444545;
-        color: white;
-        font-size: 20px;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        outline: none;
-    }
+}
+
+.byLetras {
+    margin: 10px;
+    margin-top: 8px;
+    margin-left: 80px;
+    align-self: flex-start;
+
+}
+
+.logoLetras {
+    margin-bottom: 50px;
+    width: 120px;
+    height: 50px;
+    align-self: center;
+}
+
+.loginButton {
+    margin-top: 50px;
+    width: 290px;
+    height: 70px;
+    padding: 10px;
+    border-radius: 25px;
+    /* background-color: #444545; */
+    background-color: #fccf83;
+    /* background-color: #45ede7; */
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
