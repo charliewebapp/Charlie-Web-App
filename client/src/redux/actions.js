@@ -32,6 +32,7 @@ import {
   COLLABORATOR_ID_LOGGED,
   SELECT_CLIENT_COLLABORATOR,
   GET_ALL_COLLABORATORS,
+  SET_STATUS_BOLICHE,
 } from "./actions-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -138,9 +139,7 @@ export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
       console.log("clubName es array", clubName);
-      const { data } = await axios.get(
-        `${URL_API}/${clubName}/product`
-      );
+      const { data } = await axios.get(`${URL_API}/${clubName}/product`);
       dispatch({
         type: GET_PRODUCTS,
         payload: data,
@@ -288,6 +287,20 @@ export const deleteBoliche = (clubName) => {
       }
     } catch (error) {
       window.alert(error.message);
+    }
+  };
+};
+
+//? //////////////////////// STATUS BOLICHE ////////////////////////////
+export const setStatusClub = (clubName, status) => {
+  const endpoint = `${URL_API}/${clubName}/status`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, status);
+      return data;
+    } catch (error) {
+      console.error(error);
     }
   };
 };
@@ -507,9 +520,7 @@ export const getSales = (clubName) => {
 export const deleteBolicheAdmins = (clubName, id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(
-        `${URL_API}/${clubName}/${id}`
-      );
+      const { data } = await axios.delete(`${URL_API}/${clubName}/${id}`);
       if (data) {
         dispatch({
           type: DELETE_BOLICHE_ADMINS,
@@ -595,7 +606,7 @@ export const selectClientColaboratorName = (collaborator) => {
 //! cambio contraseña colaborador
 
 export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
-  console.log(newPassword, clubname, colabname, "data")
+  console.log(newPassword, clubname, colabname, "data");
   const endpoint = `${URL_API}/${clubname}/collaborator/${colabname}`;
 
   const password = {

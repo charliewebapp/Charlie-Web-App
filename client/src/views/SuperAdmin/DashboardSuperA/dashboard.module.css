@@ -181,6 +181,23 @@
   color: white;
   transition: ease 0.1s;
 }
+.accionStatus {
+  border: 2px solid #380036;
+  color: #380036;
+  border-radius: 5px;
+  height: 30px;
+  width: 80px;
+  font-weight: 400;
+  font-style: italic;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.accionStatus:hover {
+  background-color: #380036;
+  color: white;
+  transition: ease 0.1s;
+}
 
 .accionDelete {
   border: 2px solid #c30000;

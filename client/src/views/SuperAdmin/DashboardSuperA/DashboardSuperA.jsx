@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
+
 import { useDispatch } from "react-redux";
 import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
 import DashboardSuperAclubs from "../DashboardSuperA/DashboardSuperAclubs";
-import { setClubID,logOutSadmin} from "../../../redux/actions";
+import { setClubID, logOutSadmin, setStatusClub } from "../../../redux/actions";
 import style from "./dashboard.module.css";
 import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
@@ -27,6 +28,25 @@ function DashboardAdmin() {
     setClubs(false);
     setAdmins(true);
   };
+
+  const handleStatus = (row) => {
+    const clubName = row.name;
+
+    let status;
+    if (row.status === "active") {
+      status = {
+        status: "inactive",
+      };
+    } else {
+      status = {
+        status: "active",
+      };
+    }
+
+    dispatch(setStatusClub(clubName, status));
+    window.location.reload();
+  };
+
   const openConfirmationLogOut = () => {
     Swal.fire({
       title: "¿Estás seguro?",
@@ -42,7 +62,7 @@ function DashboardAdmin() {
         dispatch(logOutSadmin());
       }
     });
-  }
+  };
   return (
     <div className={style.bg}>
       <div className={style.container}>
@@ -72,7 +92,12 @@ function DashboardAdmin() {
             {
               <div>
                 {admins && <DashboardSuperAadmins />}
-                {clubs && <DashboardSuperAclubs handleAdmins={handleAdmins} />}
+                {clubs && (
+                  <DashboardSuperAclubs
+                    handleAdmins={handleAdmins}
+                    handleStatus={handleStatus}
+                  />
+                )}
                 {!admins && !clubs && <h1>Seleccione sección</h1>}
               </div>
             }

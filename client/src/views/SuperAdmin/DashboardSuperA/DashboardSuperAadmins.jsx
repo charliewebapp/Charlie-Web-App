@@ -71,7 +71,7 @@ function DashboardSuperAadmins() {
     }).then((result) => {
       if (result.isConfirmed) {
         const clubId = row.club;
-        const id = allBolichesState.find((club) => club.id === clubId).name;
+        const id = allBolichesState.find((club) => club.id === clubId);
         const clubName = row.id;
 
         // Si se confirma la eliminación, despachamos la acción deleteBolicheAdmins
