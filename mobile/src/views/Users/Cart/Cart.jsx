@@ -13,6 +13,7 @@ const URL_API = import.meta.env.VITE_URL_API;
 
 function Cart() {
   const { clubName } = useParams();
+ const  clubNameLC = clubName.toLowerCase()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
@@ -32,11 +33,11 @@ function Cart() {
   const urlKey = `${URL_API}/search-apiKey`;
   const [preferenceId, setPreferenceId] = useState(null);
   const [apiKey, setapiKey] = useState(null);
-  localStorage.setItem("pathname", clubName);
+  localStorage.setItem("pathname", clubNameLC);
 
   const keyData = async () => {
     try {
-      const { data } = await axios.post(urlKey, { clubName });
+      const { data } = await axios.post(urlKey, { clubName : clubNameLC });
       setapiKey(data);
     } catch (error) {
       console.error("Error al enviar la solicitud al servidor:", error);
@@ -57,7 +58,7 @@ function Cart() {
       console.log("post purchase");
       const response = await axios.post(`${URL_API}/create_preference`, {
         products: newArray,
-        path: clubName,
+        path: clubNameLC,
       });
 
       const { id } = response.data;
