@@ -626,12 +626,13 @@ export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
 
 ////////////////////////QR ACTIONS ///////////////////////////
 
-export const acceptOrder = () => {
+export const acceptOrder = (status) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/:client/collaborator/qr/:uuid/accept`
-      );
+        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
+      console.log(status, "status")
+      // `${URL_API}/:client/purchase/status/:PurchaseId`, status);
       // console.log(data)
       // if (data) {
       //     dispatch({
@@ -647,12 +648,13 @@ export const acceptOrder = () => {
   };
 };
 
-export const rejectOrder = () => {
+export const rejectOrder = (status) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/:client/collaborator/qr/:uuid/reject`
-      );
+        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
+      console.log(status, "status")
+      // `${URL_API}/:client/purchase/status/:PurchaseId`, status);
       // console.log(data)
       // if (data) {
       //     dispatch({

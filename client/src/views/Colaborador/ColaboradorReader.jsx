@@ -16,6 +16,7 @@ function ColaboradorReader() {
     const [scanResult, setScanResult] = useState(null)
 
     const handleRefresh = () => {
+        setButtons(true);
         setRefresh(prevRefresh => !prevRefresh);
     }
 
@@ -51,8 +52,17 @@ function ColaboradorReader() {
 
     console.log(scanResultObj, "este es el scanResultObj");
 
+    const [buttons, setButtons] = useState(true);
+
 
     const processOrder = (e) => {
+
+        let accepted = {
+            status: "approved"
+        };
+        let rejected = {
+            status: "rejected"
+        };
 
         if (e.target.value === "aceptar") {
             try {
@@ -66,7 +76,8 @@ function ColaboradorReader() {
                     confirmButtonText: "confirmar",
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
-                        // dispatch(acceptOrder())
+                        setButtons(false);
+                        dispatch(acceptOrder(accepted))
                         return Promise.resolve();
                     }
                 }).then((result) => {
@@ -98,7 +109,8 @@ function ColaboradorReader() {
                     confirmButtonText: "confirmar",
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
-                        // dispatch(rejectOrder());
+                        setButtons(false);
+                        dispatch(rejectOrder(rejected));
                         return Promise.resolve();
                     }
                 }).then((result) => {
@@ -144,7 +156,7 @@ function ColaboradorReader() {
                 </div>
             ))}
 
-            {scanResultObj0 && scanResultObj0.status === "pending" && (
+            {scanResultObj0 && scanResultObj0.status === "pending" && buttons === true && (
                 <>
                     <button className={style.button} value="aceptar" onClick={processOrder}>Aceptar</button>
                     <button className={style.button} value="rechazar" onClick={processOrder}>Rechazar</button>
