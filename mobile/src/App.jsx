@@ -54,9 +54,9 @@ function App() {
 
 
         //!Ruta de prueba para el OrderConfirmation
-        {/* <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} /> */}
+        <Route path="/:clubName/orderConfirmation" element={<OrderConfirmation />} />
 
-        <Route path="/orderConfirmation" element={<OrderConfirmation />} />
+        {/* <Route path="/orderConfirmation" element={<OrderConfirmation />} /> */}
 
 
 

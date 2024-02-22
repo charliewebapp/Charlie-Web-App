@@ -8,15 +8,14 @@ const URL_API = import.meta.env.VITE_URL_API;
 function DashboardAdminConfig() {
   const { clubName } = useParams();
   const URL_ADMIN = import.meta.env.VITE_URL_ADMIN;
-  // const urlDeploy = "https://admin-charlie.onrender.com/";
   const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;
   const [expire, setExpire] = useState(0);
-  const [nuevaFecha, setNuevaFecha] = useState('');
+  const [dateTime, setDateTime] = useState("");
+  const [nuevaFecha, setNuevaFecha] = useState("");
 
   const authorization = () => {
     console.log("iniciando autorizacion");
     const clientId = import.meta.env.VITE_CLIENTID;
-    // console.log(clubName);
     localStorage.setItem("pathname", clubName);
     const state = uuidv4();
     const authorizationUrl = `https://auth.mercadopago.com/authorization?client_id=${clientId}&response_type=code&platform_id=mp&state=${state}&redirect_uri=${urlSuccess}`;
@@ -25,12 +24,16 @@ function DashboardAdminConfig() {
 
   const date = async () => {
     try {
-      const segPorDias = 86400;
       const { data } = await axios.post(`${URL_API}/set-date-expire`, {
         clubName,
       });
-      const time = data / segPorDias;
-      setExpire(time);
+      const expiresInSeconds = data.expires_in;
+      const expiresInDays = expiresInSeconds / 86400; // Convertir segundos a días
+      const dateTime = new Date(data.dateTime);
+      const newDateTime = new Date(dateTime.getTime() + expiresInSeconds * 1000); // Sumar segundos a la fecha
+  
+      setExpire(expiresInDays);
+      setDateTime(newDateTime.toISOString()); // Guardar la fecha final como string en formato ISO
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -50,17 +53,30 @@ function DashboardAdminConfig() {
     }
   };
 
+  const formatDateTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    };
+    return dateTime.toLocaleString(undefined, options);
+  };
+  const formatHourTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      hour: "numeric",
+      minute: "numeric"
+    };
+    return dateTime.toLocaleString(undefined, options);
+  };
 
-  
+  const updateDate = () => {};
+
   useEffect(() => {
     date();
-    const timeInSeconds = 15552000; 
-    const timeInMillis = timeInSeconds * 1000;
-    const dateTime = new Date(timeInMillis);
-    dateTime.setDate(dateTime.getDate() + 180); 
-    const nuevaFechaFormateada = formatDateTime(dateTime);
-    setNuevaFecha(nuevaFechaFormateada);
   }, []);
+  
 
   return (
     <div className={style.containerMP}>
@@ -70,7 +86,7 @@ function DashboardAdminConfig() {
           {" "}
           Conectar Mercado Pago
         </button>
-        <p>Su conexion a Mercado Pago caduca el {nuevaFecha}</p>
+        <p>Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las {formatHourTime(dateTime)}</p>
         <button className={style.buttonConfig} onClick={updateMP}>
           {" "}
           Actualizar Conexión a Mercado Pago
