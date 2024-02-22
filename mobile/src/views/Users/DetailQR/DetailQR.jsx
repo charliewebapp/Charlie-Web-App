@@ -15,12 +15,12 @@ function DetailQR() {
     console.log(detail, "este es el detail")
     console.log(cart, "este es el cart")
 
-    useEffect(() => {
-        dispatch(getDetailQrCode());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getDetailQrCode());
+    // }, [dispatch]);
 
     useEffect(() => {
-        if (cart.length !== 0 || detail.length !== 0) {
+        if (cart.length !== 0 || detail) {
             setIsLoading(false);
         }
     }, [cart, detail]);
@@ -39,7 +39,6 @@ function DetailQR() {
         cartString = JSON.stringify(mappedData);
 
     } else if (detail) {
-        console.log(detail, "este es el detail en la fn")
         mappedData2 = {
             status: detail.status,
             cart: detail.cart.map(product => ({

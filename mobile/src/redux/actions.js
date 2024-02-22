@@ -135,13 +135,23 @@ export const getMyBoliche = (clubName) => {
       const myBoliche = data.find(
         (boliche) => boliche.name.toLowerCase() === clubName.toLowerCase()
       );
+      if (myBoliche) {
+        return dispatch({
+          type: GET_MY_BOLICHE,
+          payload: myBoliche,
+        });
+      } else {
+        throw new Error("No existe el boliche")
 
-      return dispatch({
-        type: GET_MY_BOLICHE,
-        payload: myBoliche,
-      });
+      }
+
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "Consulte en barra por el correcto código QR para ingresar",
+        icon: "error",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -257,7 +267,7 @@ export const getDetailQrCode = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3001/detailPurchase/9a127436-c95b-4c3a-a00c-3a62899a4bed"
+        "http://localhost:3001/detailPurchase/b87f25a2-11b6-4efa-9670-f985125a3e1b"
       );
       dispatch({ type: GET_DETAIL_QR, payload: data });
     } catch (error) {
