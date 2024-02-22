@@ -147,7 +147,7 @@ function LandingAdmin() {
   return (
     <div className={style.container}>
       <div className={style.formContainer}>
-        <h2 className={style.h2}>Bienvenido al Sitio Administrador</h2>
+        <h2 className={style.h2}> Acceso al Backoffice </h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className={style.label}>
