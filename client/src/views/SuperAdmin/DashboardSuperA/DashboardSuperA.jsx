@@ -1,10 +1,15 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
 import DashboardSuperAclubs from "../DashboardSuperA/DashboardSuperAclubs";
-import { setClubID, logOutSadmin, setStatusClub } from "../../../redux/actions";
+import {
+  setClubID,
+  logOutSadmin,
+  setStatusClub,
+  getBoliches,
+} from "../../../redux/actions";
 import style from "./dashboard.module.css";
 import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
@@ -17,6 +22,9 @@ function DashboardAdmin() {
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatch(getBoliches());
+  // }, [handleStatus]);
   const handleClubs = () => {
     setAdmins(false);
     setClubs(true);
@@ -29,7 +37,7 @@ function DashboardAdmin() {
     setAdmins(true);
   };
 
-  const handleStatus = (row) => {
+  const handleStatus = async (row) => {
     const clubName = row.name;
 
     let status;
@@ -43,9 +51,49 @@ function DashboardAdmin() {
       };
     }
 
-    dispatch(setStatusClub(clubName, status));
-    window.location.reload();
+    await dispatch(setStatusClub(clubName, status));
+    dispatch(getBoliches());
   };
+
+  function handleStatusAlert(rowBoliche) {
+    if (rowBoliche.status === "active") {
+      Swal.fire({
+        title: `¿Quieres desactivar el boliche ${rowBoliche.name}?`,
+        text: "Esta acción deshabilitará a los colaboradores y administradores",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+        confirmButtonText: "Desactivar boliche",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleStatus(rowBoliche);
+          if (rowBoliche.status === "inactive") {
+            Swal.fire("Éxito!", "El boliche ha sido desactivado.", "success");
+          }
+        }
+      });
+    } else if (rowBoliche.status !== "active") {
+      Swal.fire({
+        title: `¿Quieres activar el boliche ${rowBoliche.name}?`,
+        text: "Esta acción habilitará a los colaboradores y administradores",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+        confirmButtonText: "Activar boliche",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleStatus(rowBoliche);
+          if (rowBoliche.status === "active") {
+            Swal.fire("Éxito!", "El boliche ha sido activado.", "success");
+          }
+        }
+      });
+    }
+  }
 
   const openConfirmationLogOut = () => {
     Swal.fire({
@@ -95,7 +143,7 @@ function DashboardAdmin() {
                 {clubs && (
                   <DashboardSuperAclubs
                     handleAdmins={handleAdmins}
-                    handleStatus={handleStatus}
+                    handleStatusAlert={handleStatusAlert}
                   />
                 )}
                 {!admins && !clubs && <h1>Seleccione sección</h1>}

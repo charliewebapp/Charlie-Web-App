@@ -6,7 +6,7 @@ import { deleteBoliche, getBoliches } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import style from "./dashboard.module.css";
 import Swal from "sweetalert2";
-function DashboardSuperAclubs({ handleAdmins, handleStatus }) {
+function DashboardSuperAclubs({ handleAdmins, handleStatusAlert }) {
   const dispatch = useDispatch();
 
   const allBolichesState = useSelector((state) => state.allBoliches);
@@ -15,7 +15,7 @@ function DashboardSuperAclubs({ handleAdmins, handleStatus }) {
   useEffect(() => {
     dispatch(getBoliches());
   }, []);
-  console.log(getBoliches, "ACA");
+
   function handleDelete(row) {
     dispatch(deleteBoliche(row.name));
   }
@@ -66,7 +66,7 @@ function DashboardSuperAclubs({ handleAdmins, handleStatus }) {
 
           <button
             className={style.accionStatus}
-            onClick={() => handleStatus(params.row)}
+            onClick={() => handleStatusAlert(params.row)}
           >
             {params.row.status === "active" ? "Desactivar" : "Activar"}
           </button>
