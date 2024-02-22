@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrderInDB } from "../../../redux/actions";
+import { clearCart, postOrderInDB } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
@@ -90,6 +90,7 @@ const OrderConfirmation = () => {
     } else {
       console.log("Faltan datos en postData");
     }
+    //aca escribir la funcion del qr
   }, []);
 
   // const orders = [
