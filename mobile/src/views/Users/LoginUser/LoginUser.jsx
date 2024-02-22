@@ -5,25 +5,26 @@ import { useAuth0 } from "@auth0/auth0-react"
 import { getMyBoliche } from '../../../redux/actions';
 import styles from "./LoginUser.module.css"
 import charlieLetras from "../../../assets/img/charlie-blanco.png"
+import logoCharlie from "../../../assets/img/logo-blanco.png"
+
 
 function LoginUser() {
-    //ingresa a charlie.ar/:clubName/login -> saco clubName || apreto boton login y redirige a auth0 ||
     const { clubName } = useParams()
     const dispatch = useDispatch()
     const { loginWithRedirect, isAuthenticated } = useAuth0();
     const navigate = useNavigate();
 
-    //traer data del boliche para renderizar logo
+    //traer data del boliche -> si no error no deja ingresar
     useEffect(() => {
         dispatch(getMyBoliche(clubName))
 
     }, [])
 
-    const handleLogin = () => {
-        // Guardar la ruta dinámica actual en el estado local
-        const returnTo = `/${clubName}/home`;
+    const myBolicheState = useSelector(state => state.myBoliche)
 
-        // Iniciar el inicio de sesión con Auth0
+
+    const handleLogin = () => {
+        const returnTo = `/${clubName}/home`;
         loginWithRedirect({
             appState: { returnTo }
         });
@@ -33,32 +34,48 @@ function LoginUser() {
         navigate(`/${clubName}/home`)
     }
 
-    return (
-        <div className={styles.loginUser}>
-            <div className={styles.containerLogos}>
-                <div className={styles.circleLogo}>
-                    <p>LOGO</p>
-                </div>
-                <div className={styles.byLetras}>by</div>
-                <img src={charlieLetras} alt="Charlie" className={styles.logoLetras} />
 
+
+    //! Render condicional si no existe boliche
+    if (!myBolicheState.name && !myBolicheState.image) {
+        return (
+            <div className={styles.loginUser}>
+                <img src={logoCharlie} alt="Charlie Logo" className={styles.logoRedirect} />
+                <img src={charlieLetras} alt="Charlie" className={styles.logoLetrasRedirect} />
+                <p>Para volver a ingresar, <br /> escaneá nuevamente el QR del boliche</p>
             </div>
+        )
+    }
+
+    //! Render condicional si existe boliche
+    if (myBolicheState) {
+        return (
+            <div className={styles.loginUser}>
+                <div className={styles.containerLogos}>
+
+                    <img className={styles.circleLogo} src={myBolicheState.image} alt="Logo" />
+
+                    <div className={styles.byLetras}>by</div>
+                    <img src={charlieLetras} alt="Charlie" className={styles.logoLetras} />
+
+                </div>
 
 
 
-            {
-                !isAuthenticated && (
-                    <button className={styles.loginButton} onClick={handleLogin}>Log In</button>)
-            }
+                {
+                    !isAuthenticated && (
+                        <button className={styles.loginButton} onClick={handleLogin}>Log In</button>)
+                }
 
-            { //si está logueado -> lleva a la carta
-                isAuthenticated && (
-                    <button className={styles.loginButton} onClick={handleClickCart}>Ver Carta</button>
-                )
-            }
-        </div>
+                { //si está logueado -> lleva a la carta
+                    isAuthenticated && (
+                        <button className={styles.loginButton} onClick={handleClickCart}>Ver Carta</button>
+                    )
+                }
+            </div>
+        )
+    }
 
-    )
 }
 
 export default LoginUser
