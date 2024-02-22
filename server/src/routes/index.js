@@ -41,10 +41,10 @@ const setPurchase = require("../controllers/MercadoPago/setPurchase");
 const postPurchases = require("../controllers/Purchases/postPurchases");
 const setDetail = require("../controllers/MercadoPago/setDetail");
 const putClientStatusHandler = require("../handlers/Clients/putClientStatusHandler");
-// const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
+const refreshToken = require("../controllers/MercadoPago/refreshToken");
+const setRefund = require("../controllers/MercadoPago/setRefund");
+const expires = require("../controllers/MercadoPago/expires");
 
-// const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
-// const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
 
 const putPurchases = require("../controllers/Purchases/putPurchases");
 
@@ -57,6 +57,9 @@ router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
 router.post("/setPurchase", setPurchase);
 router.get("/detailPurchase/:id", setDetail);
+router.post("/refresh-token", refreshToken);
+router.post("/refundPurchase", setRefund);
+router.post("/set-date-expire", expires);
 
 // //history
 
@@ -71,6 +74,7 @@ router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
 router.put("/:client", upload.single("image"), putClientsHandler); //pendiente cambiar esta ruta
 router.put("/:client/status", putClientStatusHandler);
+
 //admins
 
 router.get("/administrator", getAllAdminsHandler);

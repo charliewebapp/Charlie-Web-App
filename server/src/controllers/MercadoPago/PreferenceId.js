@@ -1,6 +1,7 @@
 const { Preference, default: MercadoPagoConfig } = require("mercadopago");
 const { Client, Authorizations } = require("../../db");
 const { URL_CHARLIE } = process.env;
+const mercadopago = require("mercadopago");
 
 const PreferenceId = async (req, res) => {
   try {
@@ -25,6 +26,9 @@ const PreferenceId = async (req, res) => {
       items: products,
       back_urls: {
         success: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
+        pending: `${URL_CHARLIE}/${clubName}/cart`,
+        failure: `${URL_CHARLIE}/${clubName}/cart`,
+
       },
       notification_url: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
     };
