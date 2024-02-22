@@ -139,6 +139,7 @@ function FormPostClubSuperA() {
                   onChange={handleImageChange}
                   style={fileInputStyle}
                   className={style.buttonStyle}
+                  enctype="multipart/form-data"
                 />
               </label>
 

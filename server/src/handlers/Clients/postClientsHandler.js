@@ -1,19 +1,21 @@
 const postClients = require("../../controllers/Clients/postClients");
-const fs = require("node:fs");
+const cloudinary = require("cloudinary").v2;
+// const fs = require("node:fs");
 
-function saveImage(file) {
-  const newPath = `./uploads/${file.originalname}`;
-  fs.renameSync(file.path, newPath);
-  return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
-}
+// function saveImage(file) {
+//   const newPath = `./uploads/${file.originalname}`;
+//   fs.renameSync(file.path, newPath);
+//   return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
+// }
 
 const postClientsHandler = async function (req, res) {
   try {
+    const image = await cloudinary.uploader.upload(req.file.path);
+    const imageUrl = image.url;
     const { name, adress, city } = req.body;
-    const imagePath = req.file ? saveImage(req.file) : null;
-    console.log(imagePath);
+    console.log(name, adress, city, "Estos son los datos");
     const nameMinus = name.toLowerCase();
-    const response = await postClients(nameMinus, adress, city, imagePath);
+    const response = await postClients(nameMinus, adress, city, imageUrl);
     res.status(201).json(response);
   } catch (error) {
     console.error(error);

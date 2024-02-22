@@ -1,9 +1,9 @@
 const { Client } = require("../../db");
 
-const postClients = async function (name, adress, city, imagePath) {
+const postClients = async function (name, adress, city, image) {
   const newClient = await Client.create({
     name,
-    image: imagePath,
+    image: image,
     adress,
     city,
     // Puedes agregar otros campos según sea necesario
