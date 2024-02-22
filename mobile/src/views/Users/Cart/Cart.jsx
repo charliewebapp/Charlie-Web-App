@@ -24,12 +24,10 @@ function Cart() {
     }
   }, [dispatch]);
 
-  console.log("cart en carrito: ", cartFromLocalStorage);
-  console.log("cart de estado global: ", cart);
+  console.log("cart de localStorage", cartFromLocalStorage);
 
   let arrayString = JSON.stringify(cart);
   // Guardar la cadena en localStorage
-  console.log("cart de Brian: ", arrayString);
 
   const urlKey = `${URL_API}/search-apiKey`;
   const [preferenceId, setPreferenceId] = useState(null);
@@ -111,7 +109,6 @@ function Cart() {
             <GoTrash className={styles.trashIcon} onClick={handleEmptyCart} />
           </h1>
         </div>
-
         {cart.map((product) => (
           <CardCart
             key={product.id}
@@ -130,9 +127,24 @@ function Cart() {
             </Link>
           </div>
         </div>
-        <button className={styles.button} onClick={goCheckout}>
-          Pagar ${total}
-        </button>
+        {preferenceId ? (
+          <Wallet
+            initialization={{
+              preferenceId: preferenceId,
+              redirectMode: "self",
+            }}
+          />
+        ) : (
+          <button className={styles.button} onClick={goCheckout}>
+            Confirmar pedido ${total}
+          </button>
+        )}
+        //*Si rompe el renderizado de arriba, cambiar a este
+        {/* {preferenceId ? null : (
+          <button className={styles.button} onClick={goCheckout}>
+            Confirmar pedido ${total}
+          </button>
+        )}
         {preferenceId && (
           <Wallet
             initialization={{
@@ -140,7 +152,7 @@ function Cart() {
               redirectMode: "self",
             }}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

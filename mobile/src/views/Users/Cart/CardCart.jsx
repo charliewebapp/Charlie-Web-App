@@ -6,6 +6,7 @@ import {
   removeProductFromCart,
   clearCart,
 } from "../../../redux/actions";
+import Swal from "sweetalert2";
 
 function CardCart({ name, price, totalPrice, id }) {
   const dispatch = useDispatch();
@@ -20,12 +21,30 @@ function CardCart({ name, price, totalPrice, id }) {
   };
 
   const handleDecrement = () => {
-    if (quantity > 0) {
+    console.log("entre al decrement");
+    if (quantity > 1) {
+      console.log("primer if");
       dispatch(
         removeProductFromCart({ id, name, price, quantity: quantity - 1 })
       );
-    } else {
-      dispatch(removeProductFromCart({ id }));
+      console.log("final primer if");
+    } else if (quantity === 1) {
+      console.log("entre al if de === 1");
+      // Mostrar SweetAlert si la cantidad es igual a 1
+      Swal.fire({
+        title: "Atención",
+        text: "¿Quieres eliminar este producto?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#003651",
+        cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+        confirmButtonText: "Eliminar producto",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(removeProductFromCart({ id }));
+        }
+      });
     }
   };
 
