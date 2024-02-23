@@ -2,11 +2,11 @@ const { Purchase } = require("../../db");
 
 const setDetail = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { paymentId } = req.params;
 
     const detailPurchase = await Purchase.findOne({
       where: {
-        id: id,
+        paymentId: paymentId,
       },
     });
     return res.status(201).json(detailPurchase);

@@ -56,7 +56,7 @@ router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
 router.post("/setPurchase", setPurchase);
-router.get("/detailPurchase/:id", setDetail);
+router.get("/detailPurchase/:paymentId", setDetail);
 router.post("/refresh-token", refreshToken);
 router.post("/refundPurchase", setRefund);
 router.post("/set-date-expire", expires);
