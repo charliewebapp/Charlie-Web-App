@@ -44,13 +44,14 @@ const putClientStatusHandler = require("../handlers/Clients/putClientStatusHandl
 const refreshToken = require("../controllers/MercadoPago/refreshToken");
 const setRefund = require("../controllers/MercadoPago/setRefund");
 const expires = require("../controllers/MercadoPago/expires");
-
+const paymentAutorizations = require("../handlers/Controls/paymentAutorizations")
 
 const putPurchases = require("../controllers/Purchases/putPurchases");
 
 const router = Router();
 
 //mercado-pago
+router.get ("/validations/:client", paymentAutorizations)
 router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
