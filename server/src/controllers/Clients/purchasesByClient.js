@@ -3,11 +3,11 @@ const { Client, Purchase } = require("../../db");
 const purchaseByClient = async (req, res) => {
   try {
     
-    const { idClient } = req.body; 
+    const { ClientId } = req.body; 
    
     const validClient = await Client.findOne({
       where: {
-        id: idClient,
+        id: ClientId,
       },
     })
 
@@ -15,7 +15,7 @@ const purchaseByClient = async (req, res) => {
    
     const QrCodesByClient = await Purchase.findAll({
       where: {
-        ClientId: idClient
+        ClientId: ClientId
       },
     });
 
