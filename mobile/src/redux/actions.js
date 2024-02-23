@@ -207,53 +207,7 @@ export const getOrderQRCode = (paymentId) => {
       const { data } = await axios.get(
         `${URL_API}/detailPurchase/${paymentId}`
       );
-
-
-      // const data = [
-      //   {
-      //     "ClientId": "87d03f75-42d5-4279-8228-926f6f79c8c5",
-      //     "UserId": "auth0|65cfa8efa259fd3e778d8e3a",
-      //     "amount": 80,
-      //     "cart": [
-      //       {
-      //         "id": "7477daa0-7a68-4607-9109-9b9ec5e9a98c",
-      //         "name": "RON",
-      //         "price": 10,
-      //         "quantity": 2
-      //       },
-      //       {
-      //         "id": "42c38886-f827-4bf4-9ebd-fabaccf95b6e",
-      //         "name": "TEQUILA",
-      //         "price": 12,
-      //         "quantity": 2
-      //       },
-      //       {
-      //         "id": "1ef8cb11-844b-4dca-9270-dd339d790ccb",
-      //         "name": "QUILMES",
-      //         "price": 5,
-      //         "quantity": 2
-      //       },
-      //       {
-      //         "id": "243cc08d-1081-4af7-b6c7-b9316a126a85",
-      //         "name": "VODKA",
-      //         "price": 7,
-      //         "quantity": 2
-      //       },
-      //       {
-      //         "id": "1587ea1e-fa18-48c2-8813-771f9d532e64",
-      //         "name": "MALBEC",
-      //         "price": 6,
-      //         "quantity": 2
-      //       }
-      //     ],
-      //     "dateTime": "2024-02-19T18:15:28.080Z",
-      //     "id": "9a127436-c95b-4c3a-a00c-3a62899a4bed",
-      //     "paymentId": "72725009048",
-      //     "status": "accepted"
-      //   },
-
-      // ]
-
+      console.log(data, "data en el acion")
       dispatch({ type: GET_ORDER_QR, payload: data });
     } catch (error) {
       console.error(error); // Log the error to the console
@@ -261,6 +215,52 @@ export const getOrderQRCode = (paymentId) => {
     }
   };
 };
+
+
+// const data = [
+//   {
+//     "ClientId": "87d03f75-42d5-4279-8228-926f6f79c8c5",
+//     "UserId": "auth0|65cfa8efa259fd3e778d8e3a",
+//     "amount": 80,
+//     "cart": [
+//       {
+//         "id": "7477daa0-7a68-4607-9109-9b9ec5e9a98c",
+//         "name": "RON",
+//         "price": 10,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "42c38886-f827-4bf4-9ebd-fabaccf95b6e",
+//         "name": "TEQUILA",
+//         "price": 12,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "1ef8cb11-844b-4dca-9270-dd339d790ccb",
+//         "name": "QUILMES",
+//         "price": 5,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "243cc08d-1081-4af7-b6c7-b9316a126a85",
+//         "name": "VODKA",
+//         "price": 7,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "1587ea1e-fa18-48c2-8813-771f9d532e64",
+//         "name": "MALBEC",
+//         "price": 6,
+//         "quantity": 2
+//       }
+//     ],
+//     "dateTime": "2024-02-19T18:15:28.080Z",
+//     "id": "9a127436-c95b-4c3a-a00c-3a62899a4bed",
+//     "paymentId": "72725009048",
+//     "status": "accepted"
+//   },
+
+// ]
 
 
 export const getDetailQrCode = () => {
