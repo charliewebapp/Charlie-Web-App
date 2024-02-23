@@ -24,6 +24,8 @@ export const SET_CLUB_ID = "SET_CLUB_ID";
 export const DELETE_BOLICHE_ADMINS = "DELETE_BOLICHE_ADMINS";
 
 export const SET_STATUS_BOLICHE = "SET_STATUS_BOLICHE";
+
+export const SELECT_CLIENT_IMAGE = "SELECT_CLIENT_IMAGE";
 //! login super admin
 
 export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";

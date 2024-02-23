@@ -159,6 +159,24 @@
   width: 400px;
 }
 
+.containerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  margin: 10px 0 0 0;
+}
+
+.containerTitle h2 {
+  margin: 0 !important;
+}
+
+.containerTitle img {
+  width: auto;
+  height: 60px;
+}
+
 /*  //! ///////////////////////// DATAGRID STYLES ///////////////////////////////////////  */
 .DataGrid {
   z-index: 1;
@@ -239,13 +257,19 @@
   align-items: center;
   gap: 20px;
   text-decoration: none;
+  position: relative;
 }
 
-.linkContainer h2 {
-  font-size: 28px;
-  margin: 20px 0 0 0 !important;
-  font-weight: 700;
-  font-style: normal;
+.logoBoliche {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 0 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
 }
 
 /*  //! ///////////////////////// FORMULARIOS STYLES ///////////////////////////////////////  */

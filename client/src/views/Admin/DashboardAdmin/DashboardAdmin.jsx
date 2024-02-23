@@ -23,6 +23,8 @@ import Swal from "sweetalert2";
 function DashboardAdmin() {
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
+
+  const image = useSelector((state) => state.selectClientImage);
   const productsActive = useSelector((state) => state.productsActive);
   const collaboratorsActive = useSelector((state) => state.collaboratorsActive);
   const salesActive = useSelector((state) => state.salesActive);
@@ -33,6 +35,8 @@ function DashboardAdmin() {
   }, []);
 
   const [loading, setLoading] = useState(false);
+
+  console.log(clubName, "clubName");
 
   const handleStock = () => {
     if (!loading) {
@@ -96,6 +100,7 @@ function DashboardAdmin() {
               COLABORADORES
             </button>
           </div>
+
           <div className={style.config}>
             <button className={style.btnCfg} onClick={handleConfig}>
               <IoSettingsSharp />
@@ -112,6 +117,7 @@ function DashboardAdmin() {
             <h1 className={style.h1}>DASHBOARD ADMINISTRADOR</h1>
           </div>
           <div className={style.dashboard}>
+            <img src={image} alt="logo-boliche" className={style.logoBoliche} />
             {
               <div>
                 {productsActive && <DashboardAdminStock />}

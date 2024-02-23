@@ -30,6 +30,7 @@ import {
   COLLABORATOR_STATUS_LOGOUT,
   GET_ORDER_QR,
   GET_ALL_COLLABORATORS,
+  SELECT_CLIENT_IMAGE,
 } from "./actions-types";
 
 const initialState = {
@@ -49,6 +50,8 @@ const initialState = {
   currentClubId: "",
 
   salesActive: false,
+
+  selectClientImage: "", //!Imagen del boliche seleccionado
 
   //! login admin
   getAllAdmins: [], //!Los admins de todos los boliches.
@@ -163,17 +166,7 @@ const reducer = (state = initialState, action) => {
       };
 
     //! ///////////////BORRAR BOLICHES////////////////////
-    // case DELETE_BOLICHE:
-    //   console.log(`Reducer deleting club: ${action.payload}`);
-    //   return {
-    //     ...state,
-    //     boliches: state.boliches.filter(
-    //       (boliche) => boliche.name !== action.payload
-    //     ),
-    //     allBoliches: state.allBoliches.filter(
-    //       (boliche) => boliche.name !== action.payload
-    //     ),
-    //   };
+
     case DELETE_BOLICHE:
       const remainingBoliches = state.boliches.filter(
         (boliche) => boliche.name !== action.payload
@@ -212,6 +205,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         getAllAdmins: payload,
+      };
+
+    case SELECT_CLIENT_IMAGE:
+      return {
+        ...state,
+        selectClientImage: payload,
       };
 
     case SELECT_CLIENT_ADMIN: //!Declarar el cliente del admin logueado como estado global
