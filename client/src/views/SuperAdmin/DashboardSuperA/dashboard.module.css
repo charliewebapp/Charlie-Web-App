@@ -399,3 +399,160 @@
   margin: 10px 0 5px 0;
   text-align: center;
 }
+
+/*  //! ///////////////////////// LOGIN SUPER A STYLES ///////////////////////////////////////  */
+
+.containerSAA {
+  background: red;
+  display: flex;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.container1SA {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #380036;
+  color: white;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+  padding: 0 20px;
+}
+
+.container1SA img {
+  width: 400px;
+  height: auto;
+}
+
+.container2SA {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.container2SALogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  gap: 20px;
+}
+
+.container2SALogin h2 {
+  color: #000000;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 800;
+  margin: 0;
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 400px;
+  height: auto;
+}
+.formLogin label {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px 0 0px 0;
+  font-weight: 500;
+  font-style: normal;
+  display: flex;
+  align-items: start;
+  margin-bottom: 5px;
+}
+.formLogin input {
+  width: 350px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid rgb(214, 214, 214);
+  margin: 0 0 10px 0;
+  padding: 0 10px;
+  outline: none;
+}
+
+.formLogin input:focus {
+  border: 1px solid #380036;
+}
+
+.btnLogin {
+  width: 370px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  margin: 10px 0;
+  padding: 0 10px;
+  outline: none;
+  background: #380036;
+  color: white;
+  cursor: pointer;
+}
+
+.btnLogin:hover {
+  background-color: #6d196a;
+  transition: ease 0.1s;
+}
+
+.togglePasswordVisibility {
+  cursor: pointer;
+  color: #1e1e1e;
+  margin-left: 5px;
+  font-size: 12px;
+}
+.error {
+  height: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c30000;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.charlie {
+  font-style: italic;
+  background: linear-gradient(
+    320deg,
+    rgba(56, 0, 54, 1) 0%,
+    rgba(109, 25, 106, 1) 51%,
+    rgba(173, 54, 169, 1) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text; /* Para compatibilidad con navegadores basados en Webkit */
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .containerSAA {
+    flex-direction: column-reverse;
+  }
+
+  .container1SA {
+    width: 100%;
+    height: 40%;
+    padding: 0;
+  }
+  .container1SA img {
+    width: 300px;
+  }
+  .container2SA {
+    width: 100%;
+    height: 60%;
+  }
+}
