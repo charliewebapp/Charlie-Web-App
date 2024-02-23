@@ -1,15 +1,33 @@
 import React, { useEffect } from 'react'
 import { Html5QrcodeScanner } from 'html5-qrcode'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { acceptOrder, rejectOrder } from '../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { acceptOrder, rejectOrder, getBoliches } from '../../redux/actions'
 import style from './colaboradorreader.module.css';
 import Swal from "sweetalert2"
 
 
 function ColaboradorReader() {
 
+
     const dispatch = useDispatch()
+
+    // const handleDispatch = () => {
+    //     dispatch(getBoliches())
+    // }
+
+    // const allClubs = useSelector((state) => state.allBoliches);
+    // const cartState = useSelector(state => state.orderqrdata);
+
+    // console.log(allClubs, cartState, "este es el allClubs y el cartState")
+
+    // const actualClient = allClubs.find((boliche) => boliche.id === cartState[0].ClientId);
+
+    // console.log(actualClient, "este es el actualClient")
+
+    // const clientName = actualClient.name
+
+    // const purchaseId = cartState[0].ClientId;
 
     const [refresh, setRefresh] = useState(false)
 
@@ -77,7 +95,7 @@ function ColaboradorReader() {
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
                         setButtons(false);
-                        dispatch(acceptOrder(accepted))
+                        dispatch(acceptOrder(accepted, clientName, purchaseId))
                         return Promise.resolve();
                     }
                 }).then((result) => {
@@ -110,7 +128,7 @@ function ColaboradorReader() {
                     showLoaderOnConfirm: true,
                     preConfirm: () => {
                         setButtons(false);
-                        dispatch(rejectOrder(rejected));
+                        dispatch(rejectOrder(rejected, clientName, purchaseId));
                         return Promise.resolve();
                     }
                 }).then((result) => {
@@ -171,6 +189,7 @@ function ColaboradorReader() {
                 <button className={style.button} onClick={handleRefresh}>Refresh</button>)}
 
             <div id="reader">
+                {/* <button className={style.button} onClick={handleDispatch}>Get Boliches</button> */}
             </div>
         </div>
     );

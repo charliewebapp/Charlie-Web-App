@@ -88,7 +88,7 @@ const OrderConfirmation = () => {
       postData.clubName &&
       postData.cart
     ) {
-      postPurchase().then(() => dispatch(getOrderQRCode(postData.paymentId))).finally(() => navigate("/orderdetail"));
+      postPurchase().then(() => dispatch(getOrderQRCode(postData.paymentId)));
     } else {
       console.log("Faltan datos en postData");
     }
@@ -147,6 +147,9 @@ const OrderConfirmation = () => {
           </ul>
           <p>Estado: {status(purchaseData.status)}</p>
           <h5> Número de transacción: {purchaseData.paymentId}</h5>
+          <Link to="/orderdetail">
+            <button>Generar mi QR</button>
+          </Link>
           <button className={styles.button}>Volver a home</button>
         </div>
       ) : (

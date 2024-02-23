@@ -30,7 +30,7 @@ function App() {
         />
         <Route path="/:clubName/cart" element={<Cart />} />
 
-        <Route path="/orderdetail" element={<OrderDetail />} />
+        <Route path="/orderdetail/" element={<OrderDetail />} />
 
 
 

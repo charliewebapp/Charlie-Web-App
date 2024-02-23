@@ -9,7 +9,7 @@ import style from './detailqr.module.css';
 function DetailQR() {
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch()
-    const cartState = useSelector(state => state.orderqrdata)
+    const cartState = useSelector(state => state.orderqrdata);
     const detail = useSelector((state) => state.detailQrCode);
     const cart = [cartState];
 
@@ -32,9 +32,11 @@ function DetailQR() {
         mappedData = cart.map(item => ({
             cart: item.cart.map(product => ({
                 name: product.name,
-                quantity: product.quantity
+                quantity: product.quantity,
+                id: product.id,
             })),
-            status: item.status
+            status: item.status,
+            club: item.client.name
         }));
 
         cartString = JSON.stringify(mappedData);
