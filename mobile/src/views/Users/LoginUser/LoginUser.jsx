@@ -36,7 +36,7 @@ function LoginUser() {
 
 
 
-    //! Render condicional si no existe boliche
+    // Render condicional si no existe boliche
     if (!myBolicheState.name && !myBolicheState.image) {
         return (
             <div className={styles.loginUser}>
@@ -47,7 +47,18 @@ function LoginUser() {
         )
     }
 
-    //! Render condicional si existe boliche
+    // Render condicional si boliche está inactivado
+    if (myBolicheState.status !== "active") {
+        return (
+            <div className={styles.loginUser}>
+                <img src={logoCharlie} alt="Charlie Logo" className={styles.logoRedirect} />
+                <img src={charlieLetras} alt="Charlie" className={styles.logoLetrasRedirect} />
+                <p>Este boliche se encuentra temporalmente <br /> inhabilitado </p>
+            </div>
+        )
+    }
+
+    // Render condicional si existe boliche
     if (myBolicheState) {
         return (
             <div className={styles.loginUser}>

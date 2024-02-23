@@ -29,6 +29,7 @@ function Profile() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.clear()
         logout();
       }
     });
