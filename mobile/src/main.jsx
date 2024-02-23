@@ -31,3 +31,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </Provider>,
 );
 
+// domain="dev-r2c57aspocton783.us.auth0.com"
+// clientId="41MHPY5l4dp0DHdXUiRot5oNAm2R7tnq"

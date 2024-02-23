@@ -10,8 +10,17 @@ import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
 import Swal from "sweetalert2";
 const URL_API = import.meta.env.VITE_URL_API;
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom'; // Utiliza useNavigate en lugar de useHistory
+
+
 
 function Cart() {
+  console.log (URL_API)
+  const history = useNavigate();
+  const myUserLogged = useSelector((state) => state.myUser.id);
+  
+  console.log(myUserLogged);
   const { clubName } = useParams();
  const  clubNameLC = clubName.toLowerCase()
   const dispatch = useDispatch();
@@ -68,15 +77,40 @@ function Cart() {
     }
   };
 
+  const mostrarAlerta = () => {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Debe loguearse primero',
+      showCancelButton: true,
+      confirmButtonText: 'Login',
+      cancelButtonText: 'Regresar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Acciones cuando se hace clic en "Login"
+        history(`/${clubName}/login`); // Reemplaza '/pagina-de-inicio' con tu ruta real de inicio de sesión
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }
+    });
+  };
+
   const goCheckout = async () => {
+   
+
+    if (!myUserLogged) {
+      // Muestra la alerta utilizando SweetAlert
+      mostrarAlerta();
+    } else{
+   
     localStorage.setItem("myArray", arrayString);
     await keyData();
     const preferenceId = await createProference();
+  
     if (preferenceId) {
       setPreferenceId(preferenceId);
     }
     console.log("preference id : ", preferenceId);
-  };
+  }};
 
   const total = cart.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
