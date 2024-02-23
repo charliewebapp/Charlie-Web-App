@@ -88,7 +88,7 @@ const OrderConfirmation = () => {
       postData.clubName &&
       postData.cart
     ) {
-      postPurchase().finally(() => getOrderQRCode(postData.paymentId));
+      postPurchase().finally(() => dispatch(getOrderQRCode(postData.paymentId)));
     } else {
       console.log("Faltan datos en postData");
     }
