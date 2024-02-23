@@ -33,6 +33,7 @@ import {
   SELECT_CLIENT_COLLABORATOR,
   GET_ALL_COLLABORATORS,
   SET_STATUS_BOLICHE,
+  SELECT_CLIENT_IMAGE,
 } from "./actions-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -423,6 +424,19 @@ export const handleAdminConfigView = () => {
     try {
       return dispatch({
         type: ADMIN_CONFIG_VIEW,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const selectClientImage = (image) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: SELECT_CLIENT_IMAGE,
+        payload: image,
       });
     } catch (error) {
       console.error(error);

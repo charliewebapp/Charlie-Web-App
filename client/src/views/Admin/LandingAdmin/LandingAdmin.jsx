@@ -14,6 +14,7 @@ import {
   selectClientColaboratorName,
   getAllColaborators,
   handleCollaboratorStatusLogin,
+  selectClientImage,
 } from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -84,7 +85,11 @@ function LandingAdmin() {
         );
 
         const client = clientFromAdmin.name;
+        const image = clientFromAdmin.image;
+
         dispatch(selectClientAdminName(client));
+        dispatch(selectClientImage(image));
+
         navigate(`/admin/${client}/dashboardAdmin`);
       } else if (adminLogin.status === "inactive") {
         Swal.fire({
