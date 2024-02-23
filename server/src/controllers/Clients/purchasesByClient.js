@@ -3,7 +3,7 @@ const { Client, Purchase } = require("../../db");
 const purchaseByClient = async (req, res) => {
   try {
     
-    const { ClientId } = req.body; 
+    const { ClientId } = req.params;
    
     const validClient = await Client.findOne({
       where: {

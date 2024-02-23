@@ -93,7 +93,7 @@ router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
 router.get("/purchasebyuser", purchaseByUser);
-router.get("/purchasebyclient", purchaseByClient);
+router.get("/:client/purchasebyclient/:ClientId", purchaseByClient);
 //colaborador
 router.get("/:client/collaborator/users", getCollaboratorHandler);
 router.get("/:client/collaborator/:user", getCollaboratorNameHandler);
