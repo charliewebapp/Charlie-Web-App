@@ -11,6 +11,8 @@ import {
 } from "../../../redux/actions";
 import { MdArrowBackIos } from "react-icons/md";
 import loadingGif from "../../../assets/img/loading2.gif";
+import { GiShoppingCart } from "react-icons/gi";
+import charlieLetras from "../../../assets/img/charlie-blanco.png"
 
 function NavBarUser() {
   const { clubName } = useParams();
@@ -25,11 +27,8 @@ function NavBarUser() {
       dispatch(setCartFromLocalStorage(cartFromLocalStorage));
     }
   }, [dispatch]);
-  //Conditional render nav bar items
-  const location = useLocation();
-  const currentPath = location.pathname;
-  // console.log(currentPath);
-  // const isHome = currentPath === `/${clubName}/home`;
+
+
 
   //* -------------------------------------------------- USER -----------------
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -45,10 +44,6 @@ function NavBarUser() {
     }
   };
   const userData = setUserToPost(user);
-  //* ------------------------------------------------- BOLICHE --------------
-  useEffect(() => {
-    dispatch(getMyBoliche(clubName));
-  }, []);
 
   useEffect(() => {
     // Verifica si user está cargado y no está en modo de carga
@@ -59,7 +54,15 @@ function NavBarUser() {
     }
   }, [user, isLoading, isUserLoaded, dispatch, userData]);
 
-  //* ---- GIF LOADING ----------------------------------------------------------
+
+  //* ------------------------------------------------- BOLICHE --------------
+  useEffect(() => {
+    dispatch(getMyBoliche(clubName));
+  }, []);
+
+  const myBolicheState = useSelector(state => state.myBoliche)
+
+  //* ---- GIF LOADING NAV BAR ----------------------------------------------------------
   if (isLoading) {
     return (
       <div className={styles.NavBarUser}>
@@ -68,6 +71,7 @@ function NavBarUser() {
     );
   }
 
+  //* RENDER NAV BAR CARGADA
   return (
     <div className={styles.NavBarUser}>
       {
@@ -98,23 +102,14 @@ function NavBarUser() {
           </div>
         )
       }
-      {/* { // FLECHA BACK NO HACER - render de flecha volver en donde NO sea home
 
-                !isHome && (
-                    <Link to={location.state?.from || '/'}>
-                        <div className={styles.circleIconBack}>
-                            <MdArrowBackIos />
-                        </div>
-                    </Link>
-                )
-            } */}
 
       <Link to={`/${clubName}/home`} style={{ textDecoration: "none" }}>
-        <div className={styles.circleLogo}>
-          <p>LOGO</p>
-          {/* aca iria el logo del boliche -> traer desde el server */}
-          {/* <img src="src\assets\logoBanana.jpg" alt="" /> */}
+        <div className={styles.containerLogos} >
+          <img className={styles.circleLogo} src={myBolicheState.image} alt="Logo" />
+          <div className={styles.byLetras}>by</div>
         </div>
+        <img src={charlieLetras} alt="Charlie" className={styles.logoLetras} />
       </Link>
 
       <Link to={`/${clubName}/cart`} className={styles.cartLink}>

@@ -1,105 +1,256 @@
 @media only screen and (max-width: 767px) {
 
-.loading {
-    width: 80px;
-    height: 80px;
-    align-self: center;
+    .loading {
+        width: 80px;
+        height: 80px;
+        align-self: center;
+    }
+
+
+    .NavBarUser {
+        width: 100vw;
+        height: 20vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: black;
+
+    }
+
+
+    .circleIcon {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #2e2e2e;
+        font-size: 50px;
+        font-weight: 100;
+        transform: scaleX(-1);
+        color: rgba(231, 183, 110, 0.8);
+
+        & svg {
+            stroke-width: 0.1;
+            /* Ajusta el grosor de las líneas según tus necesidades */
+        }
+    }
+
+    .circleIconBack {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        font-size: 60px;
+        padding-left: 5px;
+        font-weight: 900;
+        color: rgba(231, 183, 110, 0.8);
+    }
+
+
+    /* logos centrales boliche y charlie */
+    .containerLogos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+    }
+
+
+    .circleLogo {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #fccf83;
+
+    }
+
+    .byLetras {
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        color: white;
+        margin: 5px;
+        font-size: 15px;
+    }
+
+
+
+    .logoLetras {
+        margin-top: 5px;
+        width: 100px;
+        height: 30px;
+        align-self: center;
+    }
+
+    .circleImage {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .circleWithText {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .cartIconContainer {
+        position: relative;
+    }
+
+    .itemCount {
+        position: absolute;
+        bottom: -20px;
+        right: 10px;
+        /* Ajusta este valor según sea necesario para alinear el contador */
+        color: #030F01;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 19px;
+        background-color: #6CE93B;
+    }
+
 }
 
 
-.NavBarUser {
-    width: 100vw;
-    height: 20vh;
-    /* padding: 15px; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    /* padding: 20px; */
-    background-color: black;
 
-}
+/* Estilos para pantallas más grandes (mayor a 767px) */
+@media only screen and (min-width: 768px) {
 
+    .loading {
+        width: 120px;
+        height: 120px;
+        align-self: center;
+    }
 
-.circleIcon {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: grey;
-    font-size: 40px;
-    color: rgba(231, 183, 110, 0.8);
-}
+    .NavBarUser {
+        width: 100vw;
+        height: 30vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: black;
+        margin-bottom: 30px;
+    }
 
-.circleIconBack {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-    object-fit: cover;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    font-size: 60px;
-    padding-left: 5px;
-    font-weight: 900;
-    color: rgba(231, 183, 110, 0.8);
+    .circleIcon {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #2e2e2e;
+        font-size: 60px;
+        font-weight: 100;
+        transform: scaleX(-1);
+        color: rgba(231, 183, 110, 0.8);
 
-}
+        & svg {
+            stroke-width: 0.1;
+            /* Ajusta el grosor de las líneas según tus necesidades */
+        }
+    }
 
-.circleLogo {
-    width: 85px;
-    height: 85px;
-    object-fit: cover;
-    border-radius: 50%;
-    background-color: rgba(231, 183, 110, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+    .circleIconBack {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        font-size: 80px;
+        padding-left: 10px;
+        font-weight: 900;
+        color: rgba(231, 183, 110, 0.8);
+    }
 
-}
+    .containerLogos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
 
-.circleImage {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-left: 20px;
-}
+    .circleLogo {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #fccf83;
+    }
 
-.circleWithText {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .byLetras {
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        color: white;
+        margin: 8px;
+        font-size: 18px;
+    }
 
-}
+    .logoLetras {
+        margin-top: 10px;
+        width: 120px;
+        height: 40px;
+        align-self: center;
+    }
 
-.cartIconContainer {
-    position: relative;
-    margin-left: 20px;
-  }
-  
-  .itemCount {
-    position: absolute;
-    bottom: -20px; 
-    right: 10px; /* Ajusta este valor según sea necesario para alinear el contador */
-    color: #030F01;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 19px;
-    background-color:#6CE93B;
-  }
-  
+    .circleImage {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .circleWithText {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cartIconContainer {
+        position: relative;
+    }
+
+    .itemCount {
+        position: absolute;
+        bottom: -30px;
+        right: 15px;
+        color: #030F01;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        background-color: #6CE93B;
+    }
 }
