@@ -4,12 +4,12 @@ import { clearCart, postOrderInDB, getOrderQRCode } from "../../../redux/actions
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./OrderConfirmation.module.css";
-import DetailQR from "../DetailQR/DetailQR";
 const URL_API = import.meta.env.VITE_URL_API;
 
 const OrderConfirmation = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   let storedArrayString = localStorage.getItem("myArray");
   let storedArray = JSON.parse(storedArrayString);
@@ -88,7 +88,7 @@ const OrderConfirmation = () => {
       postData.clubName &&
       postData.cart
     ) {
-      postPurchase().finally(() => dispatch(getOrderQRCode(postData.paymentId)));
+      postPurchase().then(() => dispatch(getOrderQRCode(postData.paymentId))).finally(() => navigate("/orderdetail"));
     } else {
       console.log("Faltan datos en postData");
     }
@@ -145,7 +145,6 @@ const OrderConfirmation = () => {
               </li>
             ))}
           </ul>
-          <DetailQR />
           <p>Estado: {status(purchaseData.status)}</p>
           <h5> Número de transacción: {purchaseData.paymentId}</h5>
           <button className={styles.button}>Volver a home</button>

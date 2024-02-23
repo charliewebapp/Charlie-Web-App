@@ -9,18 +9,19 @@ function OrderDetail() {
 
     const dispatch = useDispatch();
 
-    const handlegetOrderQRCode = () => {
-        dispatch(getOrderQRCode());
-    }
+    // const handlegetOrderQRCode = () => {
+    //     dispatch(getOrderQRCode());
+    // }
 
     const detail = useSelector((state) => state.detailQrCode);
-    // console.log(detail, "este es el detail")
+    const cart = useSelector(state => state.orderqrdata)
+
 
     return (
         <div>
             <h1>OrderDetail</h1>
 
-            {detail ? (
+            {detail || cart ? (
                 <>
                     <DetailQR />
                     <Link to="/profile">
@@ -30,7 +31,7 @@ function OrderDetail() {
             ) : (
                 <h2>No hay ordenes pendientes</h2>
             )}
-            <button onClick={handlegetOrderQRCode}>getOrderQRCode</button>
+            {/* <button onClick={handlegetOrderQRCode}>getOrderQRCode</button> */}
         </div>
     )
 }
