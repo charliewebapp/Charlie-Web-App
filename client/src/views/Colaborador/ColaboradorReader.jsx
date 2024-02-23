@@ -12,22 +12,6 @@ function ColaboradorReader() {
 
     const dispatch = useDispatch()
 
-    // const handleDispatch = () => {
-    //     dispatch(getBoliches())
-    // }
-
-    // const allClubs = useSelector((state) => state.allBoliches);
-    // const cartState = useSelector(state => state.orderqrdata);
-
-    // console.log(allClubs, cartState, "este es el allClubs y el cartState")
-
-    // const actualClient = allClubs.find((boliche) => boliche.id === cartState[0].ClientId);
-
-    // console.log(actualClient, "este es el actualClient")
-
-    // const clientName = actualClient.name
-
-    // const purchaseId = cartState[0].ClientId;
 
     const [refresh, setRefresh] = useState(false)
 
@@ -70,10 +54,16 @@ function ColaboradorReader() {
 
     console.log(scanResultObj, "este es el scanResultObj");
 
+
+
+
     const [buttons, setButtons] = useState(true);
 
 
     const processOrder = (e) => {
+
+        let clientName = scanResultObj[0].club;
+        let purchaseId = scanResultObj[0].cart[0].id
 
         let accepted = {
             status: "approved"

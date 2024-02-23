@@ -33,10 +33,9 @@ function DetailQR() {
             cart: item.cart.map(product => ({
                 name: product.name,
                 quantity: product.quantity,
-                id: product.id,
             })),
             status: item.status,
-            club: item.client.name
+            club: item.id
         }));
 
         cartString = JSON.stringify(mappedData);
