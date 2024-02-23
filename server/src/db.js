@@ -73,7 +73,7 @@ Collaborator.belongsTo(Client);
 
 Client.hasOne(Authorizations);
 User.hasOne(Purchase);
-Client.hasOne(Purchase);
+Purchase.belongsTo(Client, { foreignKey: 'ClientId', as: 'client' });
 
 
 
