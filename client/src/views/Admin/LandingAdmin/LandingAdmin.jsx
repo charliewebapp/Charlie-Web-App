@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./landingAdmin.module.css";
+import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import validation from "./validation";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -23,6 +23,7 @@ import {
   faPersonWalkingDashedLineArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import loginimg from "../../../assets/img/logo-login.png";
 
 function LandingAdmin() {
   const dispatch = useDispatch();
@@ -150,59 +151,67 @@ function LandingAdmin() {
   };
 
   return (
-    <div className={style.container}>
-      <div className={style.formContainer}>
-        <h2 className={style.h2}> Acceso al Backoffice </h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email" className={style.label}>
-              Correo Electrónico:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={userData.email}
-              onChange={handleChange}
-              required
-              className={style.input}
-            />
-            {errors.email ? (
-              <p className={style.error}>{errors.email}</p>
-            ) : (
-              <p className={style.errorNot}> . </p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="password" className={style.label}>
-              Contraseña:
-            </label>
-            <div className={style.passwordInputContainer}>
+    <div className={style.containerSAA}>
+      <div className={style.container1SA}>
+        <img src={loginimg} alt="Logo-login" />
+      </div>
+      <div className={style.container2SA}>
+        <div className={style.container2SALogin}>
+          <h2 className={style.h2}>
+            Acceso al <span className={style.charlie}>BACKOFFICE</span>
+          </h2>
+
+          <form onSubmit={handleSubmit} className={style.formLogin}>
+            <div>
+              <label htmlFor="email" className={style.label}>
+                Correo electrónico
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                value={userData.password}
+                type="email"
+                id="email"
+                name="email"
+                value={userData.email}
                 onChange={handleChange}
                 required
                 className={style.input}
               />
-              <FontAwesomeIcon
-                icon={showPassword ? faEye : faEyeSlash}
-                className={style.togglePasswordVisibility}
-                onClick={togglePasswordVisibility}
-              />
-              {errors.password ? (
-                <p className={style.error}>{errors.password}</p>
+              {errors.email ? (
+                <span className={style.error}>{errors.email}</span>
               ) : (
-                <p className={style.errorNot}> . </p>
+                <span className={style.error}> </span>
               )}
             </div>
-          </div>
-          <button type="submit" className={style.button}>
-            Iniciar Sesión
-          </button>
-        </form>
+            <div>
+              <label htmlFor="password" className={style.label}>
+                Contraseña
+              </label>
+              <div className={style.passwordInputContainer}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                  required
+                  className={style.input}
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? faEye : faEyeSlash}
+                  className={style.togglePasswordVisibility}
+                  onClick={togglePasswordVisibility}
+                />
+                {errors.password ? (
+                  <span className={style.error}>{errors.password}</span>
+                ) : (
+                  <span className={style.error}> </span>
+                )}
+              </div>
+            </div>
+            <button type="submit" className={style.btnLogin}>
+              Iniciar Sesión
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
