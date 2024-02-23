@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, postOrderInDB } from "../../../redux/actions";
+import { clearCart, postOrderInDB, getOrderQRCode } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./OrderConfirmation.module.css";
+import DetailQR from "../DetailQR/DetailQR";
 const URL_API = import.meta.env.VITE_URL_API;
 
 const OrderConfirmation = () => {
@@ -86,7 +88,7 @@ const OrderConfirmation = () => {
       postData.clubName &&
       postData.cart
     ) {
-      postPurchase();
+      postPurchase().finally(() => getOrderQRCode(postData.paymentId));
     } else {
       console.log("Faltan datos en postData");
     }
@@ -143,6 +145,7 @@ const OrderConfirmation = () => {
               </li>
             ))}
           </ul>
+          <DetailQR />
           <p>Estado: {status(purchaseData.status)}</p>
           <h5> Número de transacción: {purchaseData.paymentId}</h5>
           <button className={styles.button}>Volver a home</button>
