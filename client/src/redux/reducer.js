@@ -67,6 +67,8 @@ const initialState = {
   selectClientCollaborator: [], //? El boliche asignado a ese colaborador
 
   orderqrdata: [],
+
+  allSales: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -283,6 +285,7 @@ const reducer = (state = initialState, action) => {
     case GET_SALES:
       return {
         ...state,
+        allSales: payload,
         productsActive: false,
         collaboratorsActive: false,
         adminConfigActive: false,

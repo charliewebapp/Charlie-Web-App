@@ -17,6 +17,31 @@
   width: 100%;
 }
 
+
+.buttonClose{
+  border: 2px solid #380036;
+  color: #380036;
+  border-radius: 5px;
+  height: 30px;
+  font-weight: 400;
+  font-style: italic;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.buttonClose:hover {
+  background-color: #380036;
+  color: white;
+  transition: ease 0.1s;
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+
 .aside {
   background: #4e094b;
   display: flex;
@@ -177,6 +202,34 @@
   height: 60px;
 }
 
+.p{
+  font-family: "Roboto", sans-serif;
+  font-weight: lighter;
+  margin: 15px;
+}
+
+.li{
+  font-family: "Roboto", sans-serif;
+  font-weight: lighter;
+  margin-top: 30px;
+  font-style: normal;
+}
+
+.h3{
+  font-style: normal;
+  color: #380036;
+}
+
+.Detail {
+  z-index: 1;
+  height: 311px;
+  width: 900px;
+  font-family: "Roboto", sans-serif;
+  margin: 15px;
+}
+.ul{
+  margin: 20px;
+}
 /*  //! ///////////////////////// DATAGRID STYLES ///////////////////////////////////////  */
 .DataGrid {
   z-index: 1;
@@ -555,4 +608,7 @@
     width: 100%;
     height: 60%;
   }
+
+
+
 }

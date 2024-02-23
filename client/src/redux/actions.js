@@ -515,16 +515,27 @@ export const setClubID = (clubID) => {
   };
 };
 
-//!Ventas temporario para DEMO
+//!Ventas
 
-export const getSales = (clubName) => {
+export const getSales = (clubName, clientId) => {
   return async (dispatch) => {
     try {
-      return dispatch({
+      console.log("ID cliente", clientId);
+      const { data } = await axios.get(
+        `${URL_API}/${clubName}/purchasebyclient/${clientId}`
+      );
+      dispatch({
         type: GET_SALES,
+        payload: data,
       });
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: `Error al cargar las ventas. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -644,8 +655,10 @@ export const acceptOrder = (status) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-      console.log(status, "status")
+        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`,
+        status
+      );
+      console.log(status, "status");
       // `${URL_API}/:client/purchase/status/:PurchaseId`, status);
       // console.log(data)
       // if (data) {
@@ -666,8 +679,10 @@ export const rejectOrder = (status) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-      console.log(status, "status")
+        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`,
+        status
+      );
+      console.log(status, "status");
       // `${URL_API}/:client/purchase/status/:PurchaseId`, status);
       // console.log(data)
       // if (data) {
