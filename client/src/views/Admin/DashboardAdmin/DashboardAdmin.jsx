@@ -29,7 +29,10 @@ function DashboardAdmin() {
   const collaboratorsActive = useSelector((state) => state.collaboratorsActive);
   const salesActive = useSelector((state) => state.salesActive);
   const adminConfigActive = useSelector((state) => state.adminConfigActive);
+  const allBoliches = useSelector((state) => state.allBoliches);
 
+  const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
+  const clientId = actualClient.id; //* Para enviar al reducer
   useEffect(() => {
     dispatch(getProducts(clubName));
   }, []);
@@ -48,7 +51,7 @@ function DashboardAdmin() {
   const handleSales = () => {
     if (!loading) {
       setLoading(true);
-      dispatch(getSales(clubName)).finally(() => setLoading(false));
+      dispatch(getSales(clubName, clientId)).finally(() => setLoading(false));
     }
   };
 

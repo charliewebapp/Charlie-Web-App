@@ -1,91 +1,79 @@
-// import * as React from "react";
-// import { DataGrid } from "@mui/x-data-grid";
-// import style from "./dashboardAdmin.module.css";
-
-// const rows = [
-//   { id: 1, Orden: "#324", Usuario: "Maria Merie", Total: "$1900" },
-//   { id: 2, Orden: "#234", Usuario: "Pepe Cosme", Total: "$4059" },
-//   { id: 3, Orden: "#984", Usuario: "Fulano Tal", Total: "$2398" },
-// ];
-
-// const columns = [
-//   { field: "Orden", headerName: "Orden", width: 250 },
-//   { field: "Usuario", headerName: "Usuario", width: 250 },
-//   { field: "Total", headerName: "Total", width: 250 },
-//   {
-//     field: "actions",
-//     headerName: "Acciones",
-//     width: 350,
-//     renderCell: (params) => (
-//       <div>
-//         <button
-//           className={style.button}
-//           onClick={() => handleDetail(params.row)}
-//         >
-//           Ver detalle
-//         </button>
-//       </div>
-//     ),
-//   },
-// ];
-
-// function handleDetail(row) {
-//   console.log("Editar:", row);
-//   // Aquí puedes implementar la lógica para editar la fila
-// }
-
-// function DashboardAdminSales() {
-//   return (
-//     <>
-//       <div className={style.container}>
-//         <h2>Ventas</h2>
-//         <div className={style.DataGrid}>
-//           <DataGrid rows={rows} columns={columns} autoWidth />
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default DashboardAdminSales;
-
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
-
-const rows = [
-  { id: 1, Orden: "#324", Usuario: "Maria Merie", Total: "$1900" },
-  { id: 2, Orden: "#234", Usuario: "Pepe Cosme", Total: "$4059" },
-  { id: 3, Orden: "#984", Usuario: "Fulano Tal", Total: "$2398" },
-];
-
-const columns = [
-  { field: "Orden", headerName: "Orden", width: 225 },
-  { field: "Usuario", headerName: "Usuario", width: 225 },
-  { field: "Total", headerName: "Total", width: 225 },
-  {
-    field: "actions",
-    headerName: "Acciones",
-    width: 220,
-    renderCell: (params) => (
-      <div>
-        <button
-          className={style.acciones}
-          onClick={() => handleDetail(params.row)}
-        >
-          Ver detalle
-        </button>
-      </div>
-    ),
-  },
-];
-
-function handleDetail(row) {
-  console.log("Editar:", row);
-  // Aquí puedes implementar la lógica para editar la fila
-}
+import { useSelector, useDispatch } from "react-redux";
+import { getSales } from "../../../redux/actions";
 
 function DashboardAdminSales() {
+  console.log("estoy en dashboard sales");
+
+  const clubName = useSelector((state) => state.selectClientAdmin);
+  const allBoliches = useSelector((state) => state.allBoliches);
+  const allSales = useSelector((state) => state.allSales);
+
+  console.log("all boliches", allBoliches);
+
+  const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
+  const clientId = actualClient.id; //* Para enviar al reducer
+
+  console.log("clientId", clientId);
+  console.log("all sales", allSales);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSales(clubName, clientId));
+  }, []);
+
+  const rows = allSales
+    ? allSales.map((sale, index) => {
+        return {
+          id: index + 1,
+          usuario: sale.UserId,
+          fecha: sale.dateTime,
+          IDMP: sale.paymentId,
+          estado: sale.status,
+          cart: sale.cart, // Agregamos el cart a cada fila
+        };
+      })
+    : [];
+
+  const [selectedSale, setSelectedSale] = useState(null);
+
+  const handleDetail = (row) => {
+    setSelectedSale(row);
+  };
+
+  const columns = [
+    // { field: "usuario", headerName: "Usuario", width: 225 },
+    { field: "fecha", headerName: "Fecha", width: 225 },
+    { field: "IDMP", headerName: "ID MercadoPago", width: 225 },
+    { field: "estado", headerName: "Estado", width: 225 },
+    {
+      field: "actions",
+      headerName: "Acciones",
+      width: 220,
+      renderCell: (params) => (
+        <div>
+          <button
+            className={style.acciones}
+            onClick={() => handleDetail(params.row)}
+          >
+            Ver detalle
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  function calculateTotal(cart) {
+    let total = 0;
+    cart.forEach((product) => {
+      total += product.price * product.quantity;
+    });
+    return total;
+  }
+
   return (
     <>
       <div className={style.linkContainer}>
@@ -93,6 +81,40 @@ function DashboardAdminSales() {
         <div className={style.DataGrid}>
           <DataGrid rows={rows} columns={columns} autoPageSize rowHeight={40} />
         </div>
+        {selectedSale && (
+          <div className={style.Detail}>
+            <h3 className={style.h3}>Detalle de la venta</h3>
+            <ul className={style.ul}>
+              {selectedSale.cart.map((product) => (
+                <li
+                  className={style.li}
+                  key={product.id}
+                  style={{ marginBottom: "10px" }}
+                >
+                  {" "}
+                  {/* Agrega un margen inferior */}
+                  {product.name}
+                  <div>
+                    <p className={style.p}>
+                      Cantidad {product.quantity} - Precio unitario $
+                      {product.price}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className={style.total}>
+              Total: ${calculateTotal(selectedSale.cart)}
+            </p>
+
+            <button
+              className={style.buttonClose}
+              onClick={() => setSelectedSale(null)}
+            >
+              Cerrar
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
