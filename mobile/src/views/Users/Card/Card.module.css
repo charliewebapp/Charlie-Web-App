@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   margin: 10px;
+  margin-bottom: 15px;
   padding: 5px;
   border-radius: 13px;
   height: 80px; /* Cambiar la altura según sea necesario */
@@ -39,7 +40,7 @@
 .price {
   color: white;
   font-size: 18px;
-  font-weight: lighter;
+  /* font-weight: lighter; */
 }
 
 .description {
@@ -47,6 +48,7 @@
   width: 100%;
   text-align: left;
   font-size: 16px;
+  font-weight: lighter;
 }
 
 .buttonSelection {
@@ -60,15 +62,16 @@
 }
 
 .subtractButton{
-  background-color: #63B5B6;
+  background-color: transparent;
   padding: 5px;
   padding-left: 19px;
-  padding-right: 19px;
+  padding-right: 1px;
   border-radius: 50%;
-  color: #1A1D22;
-  border: #1DDDE4 1px solid;
+  color: #1DDDE4;
+  border: none;
   width: 100%;
   font-size: 30px;
+  height:38px;
 }
 
 .addButton{
@@ -79,9 +82,11 @@
   padding-right: 15px;
   border-radius: 50%;
   color: #1A1D22;
-  border: #1DDDE4 1px solid;
+  border: #1DDDE4 2px solid;
   width: 100%;
   font-size: 30px;
+  font-weight: lighter;
+  margin-left: 6px;
 }
 
 .quantity{

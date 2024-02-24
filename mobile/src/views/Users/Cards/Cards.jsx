@@ -85,6 +85,13 @@ function Cards() {
     0
   );
 
+  function capitalizeFirstLetter(string) {
+    return string
+      .split(" ") // Dividir el string en un array de palabras
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalizar la primera letra de cada palabra
+      .join(" "); // Unir las palabras nuevamente en un string
+  }
+
   return (
     <div className={styles.container}>
       <NavBarUser />
@@ -116,16 +123,18 @@ function Cards() {
           {categories[nextCategoryIndex]}
         </Link>
       </div>
-      {orderedFilteredProducts.map((product, index) => (
-        <Card
-          key={index}
-          id={product.id}
-          stock={product.stock}
-          name={product.name.toUpperCase()}
-          price={product.price}
-          description={product.description}
-        />
-      ))}
+      <div className={styles.cardCartContainer}>
+        {orderedFilteredProducts.map((product, index) => (
+          <Card
+            key={index}
+            id={product.id}
+            stock={product.stock}
+            name={capitalizeFirstLetter(product.name)}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
+      </div>
       <div className={styles.cart}>
         <Link to={`/${clubName}/cart`} className={styles.cartLink}>
           <TiShoppingCart size={24} />

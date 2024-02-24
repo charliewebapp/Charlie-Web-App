@@ -6,6 +6,7 @@ import {
   removeProductFromCart,
   clearCart,
 } from "../../../redux/actions";
+import { CgMathMinus } from "react-icons/cg";
 
 function Card({ id, name, price, description, cart, setCart, stock }) {
   const cartGlobal = useSelector((state) => state.cart); //El carrito que voy cargando.
@@ -34,7 +35,7 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
       className={styles.container}
       style={{
         backgroundColor: stock === "available" ? "#002D46" : "#00111D",
-        border: stock === "available" ? "#63B5B6 1px solid" : "none",
+        border: stock === "available" ? "#63B5B6 2px solid" : "none",
       }}
     >
       {stock === "available" ? (
@@ -54,7 +55,7 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
           </div>
           <div className={styles.buttonSelection}>
             <button className={styles.subtractButton} onClick={handleDecrement}>
-              -
+              <CgMathMinus />
             </button>
             <p className={styles.quantity}>{quantity}</p>
             <button className={styles.addButton} onClick={handleIncrement}>
