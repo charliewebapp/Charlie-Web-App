@@ -9,8 +9,8 @@ import style from './detailqr.module.css';
 function DetailQR() {
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch()
-    const cartState = useSelector(state => state.orderqrdata);
     const detail = useSelector((state) => state.detailQrCode);
+    const cartState = useSelector(state => state.orderqrdata);
     const cart = [cartState];
 
     console.log(detail, "este es el detail")
