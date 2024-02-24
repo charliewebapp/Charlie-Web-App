@@ -1,20 +1,39 @@
-import React from 'react'
-import DetailQR from '../DetailQR/DetailQR'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { getOrderQRCode } from "../../../redux/actions";
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react';
+import DetailQR from '../DetailQR/DetailQR';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrderQRCode, getDetailQrCode } from '../../../redux/actions';
 
 function OrderDetail() {
 
     const dispatch = useDispatch();
 
-    // const handlegetOrderQRCode = () => {
-    //     dispatch(getOrderQRCode());
-    // }
+    // useEffect(() => {
+    //     dispatch(getOrderQRCode("73047715220"))
+    // }, [dispatch]);
 
     const detail = useSelector((state) => state.detailQrCode);
-    const cart = useSelector(state => state.orderqrdata)
+    const cartState = useSelector(state => state.orderqrdata);
+    const cart = [cartState];
+
+    console.log(cart, "cart en OD")
+
+
+    useEffect(() => {
+        let paymentId;
+        if (cart && cart.length > 0) {
+            paymentId = cart[0].paymentId;
+        }
+        const intervalId = setInterval(() => {
+            if (paymentId) {
+                dispatch(getOrderQRCode(paymentId));
+            }
+        }, 10000);
+
+        return () => clearInterval(intervalId);
+    }, [dispatch, detail, cart]);
+
+
 
 
     return (
@@ -24,14 +43,14 @@ function OrderDetail() {
             {detail || cart ? (
                 <>
                     <DetailQR />
-                    <Link to="/profile">
-                        <button>Back</button>
+                    <Link to="/:clubName/home">
+                        <button>Home</button>
                     </Link>
                 </>
             ) : (
                 <h2>No hay ordenes pendientes</h2>
             )}
-            {/* <button onClick={handlegetOrderQRCode}>getOrderQRCode</button> */}
+            {/*<button onClick={handlegetOrderQRCode}>getOrderQRCode</button> */}
         </div>
     )
 }
