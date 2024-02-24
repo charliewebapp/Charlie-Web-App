@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from "react-redux";
 import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
@@ -17,6 +18,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 function DashboardAdmin() {
+  const navigate = useNavigate()
   const [clubs, setClubs] = useState(true);
   const [admins, setAdmins] = useState(false);
 
@@ -107,7 +109,9 @@ function DashboardAdmin() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(logOutSadmin());
+        dispatch(logOutSadmin())
+        localStorage.removeItem("sadminStatusLogin")
+        navigate("/superadmin");;
       }
     });
   };
