@@ -11,11 +11,12 @@ const PreferenceId = async (req, res) => {
       where: { name: clubName },
     });
     const clientId = clientSearched.dataValues.id;
+   
     const auth = await Authorizations.findOne({
       where: { ClientId: clientId },
     });
     const token = auth.dataValues.access_token;
-
+    console.log ("El token seg Emi es : "+ token)
     const client = new MercadoPagoConfig({
       accessToken: token,
     });
