@@ -656,8 +656,7 @@ export const acceptOrder = (status, clientName, purchaseId) => {
     try {
       const { data } = await axios.put(
         // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-        console.log(status, "status")
-          `${URL_API}/${clientName}/purchase/status/${purchaseId}`, status);
+        `${URL_API}/${clientName}/purchase/status/${purchaseId}`, status);
       // console.log(data)
       // if (data) {
       //     dispatch({
@@ -677,9 +676,8 @@ export const rejectOrder = (status, clientName, purchaseId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-      console.log(status, "status")
-      // `${URL_API}/:client/purchase/status/:PurchaseId`, status);
+        // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
+        `${URL_API}/${clientName}/purchase/status/${purchaseId}`, status);
       // console.log(data)
       // if (data) {
       //     dispatch({

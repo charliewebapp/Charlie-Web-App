@@ -10,8 +10,8 @@ import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
 import Swal from "sweetalert2";
 const URL_API = import.meta.env.VITE_URL_API;
-import { useNavigate } from 'react-router-dom'; // Utiliza useNavigate en lugar de useHistory
 import { paymentValidationnw } from "../../../redux/actions";
+import { useNavigate } from 'react-router-dom'; // Utiliza useNavigate en lugar de useHistory
 
 
 
@@ -41,10 +41,10 @@ function Cart() {
   console.log (URL_API)
   const history = useNavigate();
   const myUserLogged = useSelector((state) => state.myUser.id);
-  
+
   console.log(myUserLogged);
   const { clubName } = useParams();
- const  clubNameLC = clubName.toLowerCase()
+  const clubNameLC = clubName.toLowerCase();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
@@ -68,7 +68,7 @@ function Cart() {
 
   const keyData = async () => {
     try {
-      const { data } = await axios.post(urlKey, { clubName : clubNameLC });
+      const { data } = await axios.post(urlKey, { clubName: clubNameLC });
       setapiKey(data);
     } catch (error) {
       console.error("Error al enviar la solicitud al servidor:", error);
@@ -101,17 +101,16 @@ function Cart() {
 
   const mostrarAlerta = () => {
     Swal.fire({
-      icon: 'warning',
-      title: 'Debe loguearse primero',
+      icon: "warning",
+      title: "Debe loguearse primero",
       showCancelButton: true,
-      confirmButtonText: 'Login',
-      cancelButtonText: 'Regresar',
+      confirmButtonText: "Login",
+      cancelButtonText: "Regresar",
     }).then((result) => {
       if (result.isConfirmed) {
         // Acciones cuando se hace clic en "Login"
         history(`/${clubName}/login`); // Reemplaza '/pagina-de-inicio' con tu ruta real de inicio de sesión
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        
       }
     });
   };
@@ -129,17 +128,17 @@ function Cart() {
     if (!myUserLogged) {
       // Muestra la alerta utilizando SweetAlert
       mostrarAlerta();
-    } else{
-   
-    localStorage.setItem("myArray", arrayString);
-    await keyData();
-    const preferenceId = await createProference();
-  
-    if (preferenceId) {
-      setPreferenceId(preferenceId);
+    } else {
+      localStorage.setItem("myArray", arrayString);
+      await keyData();
+      const preferenceId = await createProference();
+
+      if (preferenceId) {
+        setPreferenceId(preferenceId);
+      }
+      console.log("preference id : ", preferenceId);
     }
-    console.log("preference id : ", preferenceId);
-  }};
+  };
 
   const total = cart.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
@@ -163,6 +162,13 @@ function Cart() {
     });
   };
 
+  function capitalizeFirstLetter(string) {
+    return string
+      .split(" ") // Dividir el string en un array de palabras
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalizar la primera letra de cada palabra
+      .join(" "); // Unir las palabras nuevamente en un string
+  }
+
   return (
     <div className={styles.container}>
       <NavBarUser />
@@ -173,16 +179,18 @@ function Cart() {
             <GoTrash className={styles.trashIcon} onClick={handleEmptyCart} />
           </h1>
         </div>
-        {cart.map((product) => (
-          <CardCart
-            key={product.id}
-            id={product.id}
-            name={product.name.toUpperCase()}
-            price={product.price}
-            quantity={product.quantity}
-            totalPrice={product.price * product.quantity}
-          />
-        ))}
+        <div className={styles.cardCartContainer}>
+          {cart.map((product) => (
+            <CardCart
+              key={product.id}
+              id={product.id}
+              name={capitalizeFirstLetter(product.name)}
+              price={product.price}
+              quantity={product.quantity}
+              totalPrice={product.price * product.quantity}
+            />
+          ))}
+        </div>
         <div className={styles.moreItemContainer}>
           <span className={styles.moreItemText}>Agregar Item</span>
           <div className={styles.moreItemButton}>
@@ -203,7 +211,7 @@ function Cart() {
             Confirmar pedido ${total}
           </button>
         )}
-        //*Si rompe el renderizado de arriba, cambiar a este
+
         {/* {preferenceId ? null : (
           <button className={styles.button} onClick={goCheckout}>
             Confirmar pedido ${total}

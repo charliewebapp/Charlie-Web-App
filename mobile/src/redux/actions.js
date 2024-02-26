@@ -226,7 +226,7 @@ export const getOrderQRCode = (paymentId) => {
       dispatch({ type: GET_ORDER_QR, payload: data });
     } catch (error) {
       console.error(error); // Log the error to the console
-      window.alert("No se ha creado la orden. " + error.message);
+      window.alert("No se ha encontrado la orden. " + error.message);
     }
   };
 };

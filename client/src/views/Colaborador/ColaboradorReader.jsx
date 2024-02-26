@@ -54,10 +54,10 @@ function ColaboradorReader() {
 
     console.log(scanResultObj, "este es el scanResultObj");
 
-    if (scanResultObj) {
-        console.log(scanResultObj[0].club, "este es el club")
-        console.log(scanResultObj[0].cart[0].id, "este es el id")
-    }
+    // if (scanResultObj) {
+    //     console.log(scanResultObj[0].club, "este es el club")
+    //     console.log(scanResultObj[0].id, "este es el id")
+    // }
 
 
     const [buttons, setButtons] = useState(true);
@@ -66,7 +66,7 @@ function ColaboradorReader() {
     const processOrder = (e) => {
 
         let clientName = scanResultObj[0].club;
-        let purchaseId = scanResultObj[0].cart[0].id
+        let purchaseId = scanResultObj[0].id
 
         let accepted = {
             status: "approved"

@@ -4,9 +4,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center; /* Centra los elementos horizontalmente */
-    border-color: #fccf83 2px solid;
+    border-color: #fccf83 3px solid;
     position: relative; /* Para el posicionamiento absoluto del icono */
     margin: 10px;
+
     
   }
 
@@ -46,15 +47,7 @@
     margin-right: 10px;
   }
 
-  .storeIcon{
-      color: #fccf83;
-      position: absolute;
-      top: 50%; /* Coloca el ícono en el centro vertical */
-      left: 10px; /* Ajusta el ícono a la derecha */
-      transform: translateY(-50%); /* Centra verticalmente el ícono */
-      cursor: pointer;
-      margin-right: 10px;
-  }
+ 
 
   .button {
     border-radius: 20px;
@@ -79,7 +72,7 @@
       border: none;
       padding: 5px;
       border-radius: 13px;
-      height: 70px;
+      height: 40px;
   }
 
   .moreItemButton{
@@ -113,5 +106,24 @@
     font-weight: lighter;
     font-size: 20px;
 
+  }
+  .cardCartContainer {
+    max-height: 400px; /* Altura máxima para activar la barra de desplazamiento */
+    min-width: 100%;
+    overflow-y: auto; /* Agrega barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+    margin-left: 5px;
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 6px; /* Borde redondeado del pulgar */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo de la barra de desplazamiento */
   }
 }
