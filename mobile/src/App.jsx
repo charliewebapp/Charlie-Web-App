@@ -7,6 +7,7 @@ import Cards from "./views/Users/Cards/Cards";
 import Profile from "./views/Users/Profile/Profile";
 import Cart from "./views/Users/Cart/Cart";
 import DetailQR from "./views/Users/DetailQR/DetailQR";
+import OrderRejected from './views/Users/Profile/OrderRejected';
 import OrderConfirmation from "./views/Users/OrderConfirmation/OrderConfirmation";
 import RedirectLogOut from "./views/Users/RedirectLogOut/RedirectLogOut";
 import OrderDetail from "./views/Users/Profile/OrderDetail"
@@ -59,7 +60,7 @@ function App() {
         {/* <Route path="/orderConfirmation" element={<OrderConfirmation />} /> */}
 
 
-
+        <Route path="/orderrejected" element={<OrderRejected />} />
 
 
         <Route path="/logout" element={<RedirectLogOut />} />

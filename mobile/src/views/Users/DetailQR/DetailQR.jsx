@@ -55,8 +55,6 @@ function DetailQR() {
 
     }
 
-    console.log(mappedData2, "este es el mappedData2")
-    console.log(cartString2, "este es el cartString2")
 
     return (
 
