@@ -14,8 +14,7 @@ export const validateFormProductAdmin = (dataP) => {
         if (!regExpImage.test(dataP.image)) errors.image = "Si ingresa imagen, debe ser un link que comience con http"
     }
     //DESCRIPTION
-    if (!dataP.description.length) errors.description = "Debe ingresar la descipción del producto"
-    else {
+    if (dataP.description.length > 0) {
         if (dataP.description.length > 70) errors.description = "Debe contener como máximo 70 caracteres"
     }
     //PRICE

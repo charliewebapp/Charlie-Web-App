@@ -25,11 +25,11 @@ function FormPostEmployee() {
 
   //local state errors
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre",
-    lastname: "Ingrese el apellido",
-    password: "Asigne una contraseña",
-    mail: "Ingrese el email",
-    status: "Ingrese el estado",
+    name: "*",
+    lastname: "*",
+    password: "*",
+    mail: "*",
+    status: "*",
   });
 
   //onChange inputs
@@ -80,7 +80,7 @@ function FormPostEmployee() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>
