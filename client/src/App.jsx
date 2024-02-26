@@ -42,37 +42,40 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-
   function login(userData) {
-    if (userData.password === URL_PASSWORD && userData.email === URL_EMAIL) {
-      dispatch(handleSAdminStatusLogin());
+    if
+    (userData.password === URL_PASSWORD && userData.email === URL_EMAIL) {
+      dispatch(handleSAdminStatusLogin())
+      localStorage.setItem(
+        "sadminStatusLogin",
+        true);
       navigate("/superadmin/dashboard");
     }
   }
 
-  // useEffect(() => {
-  //   !access && navigate('/superadmin');
-  // }, [access]);
-
-  //!Login ADMIN
-
   const sadminStatusLogin = useSelector((state) => state.sadminStatusLogin);
-
-  //! ///////////////////////////////////////// LOCAL STORAGE /////////////////////////////////////////
   useEffect(() => {
-    const storedStatus = localStorage.getItem("sadminStatusLogin");
-    if (storedStatus) {
-      const statusStorage = JSON.parse(storedStatus);
-      dispatch(handleSAdminStatusLogin(statusStorage));
-    }
+    localStorage.getItem( "sadminStatusLogin")
+
+   ;
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "sadminStatusLogin",
-      JSON.stringify(sadminStatusLogin)
-    );
-  }, [sadminStatusLogin]);
+  // // useEffect(() => {
+  // //   !access && navigate('/superadmin');
+  // // }, [access]);
+
+  // //!Login ADMIN
+
+console.log ("asi es antes de entrar al logion",sadminStatusLogin)
+  //! ///////////////////////////////////////// LOCAL STORAGE /////////////////////////////////////////
+  // useEffect(() => {
+  //   const storedStatus = localStorage.getItem("sadminStatusLogin");
+  //   if (storedStatus) {
+  //     const statusStorage = JSON.parse(storedStatus);
+  //     dispatch(handleSAdminStatusLogin(statusStorage));
+  //   }
+  // }, []);
+
 
   //! ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,7 +86,8 @@ const App = () => {
   );
 
   const requireSAdminLogin = (component) => {
-    return sadminStatusLogin ? component : <Navigate to="/superadmin" />;
+    console.log("el sadminStatus es :" , sadminStatusLogin)
+    return sadminStatusLogin ||  localStorage.getItem("sadminStatusLogin") ? component : <Navigate to="/superadmin" />;
   };
 
   const requireAdminLogin = (component) => {
