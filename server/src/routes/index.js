@@ -63,7 +63,7 @@ router.get("/detailPurchase/:paymentId", setDetail);
 router.post("/refresh-token", refreshToken);
 router.post("/refundPurchase", setRefund);
 router.post("/set-date-expire", expires);
-router.delete("/deleteAuth", deleteAuth);
+router.post("/deleteAuth", deleteAuth);
 router.post('/getAuth', getAuth)
 
 // //history

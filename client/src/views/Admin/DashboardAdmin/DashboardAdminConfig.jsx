@@ -14,7 +14,7 @@ function DashboardAdminConfig() {
   const [nuevaFecha, setNuevaFecha] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [isDisable, setIsDisable] = useState(false);
-  const [existing, setExisting ] = useState(false);
+  const [existing, setExisting] = useState(false);
 
   const authorization = () => {
     console.log("iniciando autorizacion");
@@ -39,8 +39,9 @@ function DashboardAdminConfig() {
 
       setExpire(expiresInDays);
       setDateTime(newDateTime.toISOString());
+      console.log("funciona date finaliza");
     } catch (error) {
-      return res.status(500).json({ error: error.message });
+      console.log("error en date: ", error.message);
     }
   };
 
@@ -60,26 +61,27 @@ function DashboardAdminConfig() {
 
   const deleteConexion = async () => {
     try {
-      const { data } = await axios.delete(`${URL_API}/deleteAuth`, {
+      const { data } = await axios.post(`${URL_API}/deleteAuth`, {
         clubName,
       });
+      console.log(data);
       if (data) {
         window.alert("Se ha eliminado exitosamente");
       }
+      existingConection();
     } catch (error) {
       window.alert("no se pudo eliminar");
       return res.status(500).json({ error: error.message });
     }
   };
 
-
   const existingConection = async () => {
     try {
       const { data } = await axios.post(`${URL_API}/getAuth`, {
         clubName,
       });
-      console.log(data);
-      if(data){
+      // console.log('data: ', data);
+      if (data) {
         setExisting(true);
       }
     } catch {
@@ -97,6 +99,9 @@ function DashboardAdminConfig() {
     return dateTime.toLocaleString(undefined, options);
   };
   const formatHourTime = (dateTimeString) => {
+    if (!dateTimeString) {
+      return;
+    }
     const dateTime = new Date(dateTimeString);
     const options = {
       hour: "numeric",
@@ -106,6 +111,9 @@ function DashboardAdminConfig() {
   };
 
   const disableButton = (dateTimeString) => {
+    if (!dateTimeString) {
+      return setIsDisable(true);
+    }
     const currentDate = new Date();
     const dateTime = new Date(dateTimeString);
     const differenceInDays =
@@ -119,39 +127,52 @@ function DashboardAdminConfig() {
   };
 
   useEffect(() => {
-    date();
-    disableButton(dateTime);
-    existingConection()
+    const fetchData = async () => {
+      await date();
+      disableButton(dateTime);
+      existingConection();
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div className={style.containerMP}>
       <h2 className={style.h2}>Metodos de pago</h2>
       <div className={style.containerButton}>
-        <button className={style.buttonConfig} onClick={authorization}>
+        <button className={style.buttonConfig} onClick={authorization} disabled={existing}>
           {" "}
           Conectar Mercado Pago
         </button>
-        <p>
-          Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las{" "}
-          {formatHourTime(dateTime)}
-        </p>
-
-        <button
-          className={style.buttonConfig}
-          onClick={updateMP}
-          disabled={isDisable}
-        >
-          {" "}
-          Actualizar Conexión a Mercado Pago
-        </button>
-        <span>
-          Este boton se habilitará 30 dias antes de caducar la conexion
-        </span>
-       { existing && <button className={style.buttonConfig} onClick={deleteConexion}>
-          {" "}
-          Eliminar Conexión a Mercado Pago
-        </button>}
+        {dateTime ? (
+          <p>
+            Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a
+            las {formatHourTime(dateTime)}
+          </p>
+        ) : (
+          "Mercado Pago aún no fue conectado"
+        )}
+        {existing && (
+          <button
+            className={style.buttonConfig}
+            onClick={updateMP}
+            disabled={isDisable}
+          >
+            {" "}
+            Actualizar Conexión a Mercado Pago
+          </button>
+        )}
+        {existing && (
+          <span>
+            Este boton se habilitará 30 dias antes de caducar la conexion
+          </span>
+        )}
+        {existing && (
+          <button className={style.buttonConfigDelete} onClick={deleteConexion}>
+            {" "}
+            Eliminar Conexión a Mercado Pago
+          </button>
+        )}
       </div>
       <FormUpdatePasswordAdmin />
     </div>
