@@ -33,9 +33,9 @@ function DashboardAdmin() {
 
   const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
   const clientId = actualClient.id; //* Para enviar al reducer
-  useEffect(() => {
-    dispatch(getProducts(clubName));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProducts(clubName));
+  // }, []);
 
   const [loading, setLoading] = useState(false);
 

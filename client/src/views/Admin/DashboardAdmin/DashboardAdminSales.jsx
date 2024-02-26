@@ -5,19 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSales } from "../../../redux/actions";
 
 function DashboardAdminSales() {
-  console.log("estoy en dashboard sales");
-
   const clubName = useSelector((state) => state.selectClientAdmin);
   const allBoliches = useSelector((state) => state.allBoliches);
   const allSales = useSelector((state) => state.allSales);
-
-  console.log("all boliches", allBoliches);
+  const [sortedSales, setSortedSales] = useState([]);
 
   const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
-  const clientId = actualClient.id; //* Para enviar al reducer
-
-  console.log("clientId", clientId);
-  console.log("all sales", allSales);
+  const clientId = actualClient.id;
 
   const dispatch = useDispatch();
 
@@ -25,15 +19,22 @@ function DashboardAdminSales() {
     dispatch(getSales(clubName, clientId));
   }, []);
 
+  useEffect(() => {
+    const sorted = [...allSales].sort(
+      (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
+    );
+    setSortedSales(sorted);
+  }, [allSales]);
+
   const rows = allSales
-    ? allSales.map((sale, index) => {
+    ? sortedSales.map((sale, index) => {
         const total = calculateTotal(sale.cart);
         return {
           id: index + 1,
           usuario: sale.UserId,
           fecha: formatFecha(sale.dateTime),
           IDMP: sale.paymentId,
-          estado: sale.status,
+          estado: renderStatus(sale.status),
           cart: sale.cart,
           total: total,
         };
@@ -84,14 +85,28 @@ function DashboardAdminSales() {
 
   function formatFecha(fecha) {
     const date = new Date(fecha);
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
+    const formattedDate = `${date.toLocaleDateString("es-ES", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
-    };
-    return date.toLocaleDateString("es-ES", options);
+    })} - ${date.toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+    return formattedDate;
+  }
+
+  function renderStatus(status) {
+    switch (status) {
+      case "approved":
+        return "Aprobado";
+      case "rejected":
+        return "Rechazado";
+      case "pending":
+        return "Pendiente";
+      default:
+        return "Desconocido";
+    }
   }
 
   return (
