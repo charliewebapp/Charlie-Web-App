@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { changeColaboradorPassword, getBoliches } from "../../redux/actions";
 import { useSelector } from "react-redux";
-import styles from "./ColaboradorProfile.module.css";
+import style from "../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { validateFormUpdateColaborador } from "../../utils/validateFormUpdateColaborador";
 
 const ColaboradorProfile = () => {
@@ -111,7 +111,7 @@ const ColaboradorProfile = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={style.containerColab}>
       <h2>Cambio de contraseña</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="oldPassword">Contraseña anterior:</label>
@@ -121,7 +121,7 @@ const ColaboradorProfile = () => {
           value={oldPassword}
           onChange={handleChangeOldPassword}
         />
-        <span className={styles.span}>
+        <span className={style.error}>
           {oldPassError ? oldPassError : null}{" "}
         </span>
 
@@ -140,7 +140,7 @@ const ColaboradorProfile = () => {
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
         />
-        <span className={styles.span}>{error}</span>
+        <span className={style.error}>{error}</span>
 
         <button
           type="submit"

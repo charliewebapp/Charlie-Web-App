@@ -17,8 +17,7 @@
   width: 100%;
 }
 
-
-.buttonClose{
+.buttonClose {
   border: 2px solid #380036;
   color: #380036;
   border-radius: 5px;
@@ -40,7 +39,6 @@
   font-style: italic;
   font-weight: lighter;
 }
-
 
 .aside {
   background: #4e094b;
@@ -202,20 +200,20 @@
   height: 60px;
 }
 
-.p{
+.p {
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
   margin: 15px;
 }
 
-.li{
+.li {
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
   margin-top: 30px;
   font-style: normal;
 }
 
-.h3{
+.h3 {
   font-style: normal;
   color: #380036;
 }
@@ -227,7 +225,7 @@
   font-family: "Roboto", sans-serif;
   margin: 15px;
 }
-.ul{
+.ul {
   margin: 20px;
 }
 /*  //! ///////////////////////// DATAGRID STYLES ///////////////////////////////////////  */
@@ -608,7 +606,201 @@
     width: 100%;
     height: 60%;
   }
+}
 
+/*  //! ///////////////////////// COLABORADOR STYLES ///////////////////////////////////////  */
 
+.navColaborador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #380036;
+  color: white;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
 
+  font-family: "Roboto", sans-serif;
+}
+
+.colaboradorTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  height: 60px;
+  background-color: #380036;
+
+  padding: 0 20px;
+}
+
+.colaboradorTitle h2 {
+  margin: 0;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 32px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+  padding: 0 20px;
+  font-family: "Roboto", sans-serif;
+
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(181, 181, 181, 1);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(181, 181, 181, 1);
+  box-shadow: 0px 2px 3px 0px rgba(181, 181, 181, 1);
+}
+
+.nav ul {
+  display: flex;
+  text-decoration: none;
+  list-style-type: none;
+  gap: 20px;
+  width: 100%;
+  font-size: 12px;
+  padding: 0;
+  justify-content: space-evenly;
+  margin: 0;
+  position: relative;
+  height: 40px;
+  gap: 120px;
+}
+
+.nav li {
+  display: flex;
+  align-items: center;
+}
+
+.a {
+  text-decoration: none;
+  color: #000000;
+  font-style: normal;
+}
+
+.qrButton {
+  background-color: #6d196a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  border: 3px solid #a74aa4;
+  position: absolute;
+  margin: 5px 0 0 0;
+}
+
+.qrImg {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.btnC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 5px;
+  flex-direction: column;
+  cursor: pointer;
+  color: rgb(48, 48, 48);
+  border: none;
+}
+
+.btnC p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/*  //? ///////////////////////// LOGIN COLABORADOR STYLES ///////////////////////////////////////  */
+.containerColab {
+  width: 100%;
+  background: #fafafa;
+  font-family: "Roboto", sans-serif;
+}
+
+.containerColab h2 {
+  font-size: 25px;
+  font-weight: 700;
+  font-style: normal;
+  margin: 30px 0 5px 0;
+  text-align: center;
+}
+
+.containerColab form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+
+  background: #ffffff;
+}
+
+.containerColab label {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px 0 0px 0;
+  font-style: normal;
+  display: flex;
+  align-items: start;
+  width: 100%;
+}
+
+.containerColab input {
+  width: 100%;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid rgb(214, 214, 214);
+  margin: 0 0 10px 0;
+  padding: 0 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.containerColab button {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  margin: 10px 0;
+  padding: 0 10px;
+  outline: none;
+  background: #380036;
+  color: white;
+  cursor: pointer;
+}
+
+.containerColab button:hover {
+  background-color: #6d196a;
+  transition: ease 0.1s;
+}
+.error {
+  height: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c30000;
+  display: block;
+  margin-bottom: 5px;
 }
