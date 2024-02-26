@@ -27,13 +27,15 @@ function DashboardAdminSales() {
 
   const rows = allSales
     ? allSales.map((sale, index) => {
+        const total = calculateTotal(sale.cart);
         return {
           id: index + 1,
           usuario: sale.UserId,
-          fecha: sale.dateTime,
+          fecha: formatFecha(sale.dateTime),
           IDMP: sale.paymentId,
           estado: sale.status,
-          cart: sale.cart, // Agregamos el cart a cada fila
+          cart: sale.cart,
+          total: total,
         };
       })
     : [];
@@ -46,13 +48,19 @@ function DashboardAdminSales() {
 
   const columns = [
     // { field: "usuario", headerName: "Usuario", width: 225 },
-    { field: "fecha", headerName: "Fecha", width: 225 },
-    { field: "IDMP", headerName: "ID MercadoPago", width: 225 },
-    { field: "estado", headerName: "Estado", width: 225 },
+    { field: "fecha", headerName: "Fecha", width: 200 },
+    { field: "IDMP", headerName: "ID MercadoPago", width: 200 },
+    { field: "estado", headerName: "Estado", width: 150 },
+    {
+      field: "total",
+      headerName: "Total",
+      width: 150,
+      renderCell: (params) => <div>$ {params.value}</div>,
+    },
     {
       field: "actions",
       headerName: "Acciones",
-      width: 220,
+      width: 200,
       renderCell: (params) => (
         <div>
           <button
@@ -72,6 +80,18 @@ function DashboardAdminSales() {
       total += product.price * product.quantity;
     });
     return total;
+  }
+
+  function formatFecha(fecha) {
+    const date = new Date(fecha);
+    const options = {
+      hour: "2-digit",
+      minute: "2-digit",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("es-ES", options);
   }
 
   return (
