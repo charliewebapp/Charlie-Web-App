@@ -47,6 +47,8 @@ const expires = require("../controllers/MercadoPago/expires");
 const paymentAutorizations = require("../handlers/Controls/paymentAutorizations")
 
 const putPurchases = require("../controllers/Purchases/putPurchases");
+const deleteAuth = require("../controllers/MercadoPago/deleteAuth");
+const getAuth = require("../controllers/MercadoPago/getAuth");
 
 const router = Router();
 
@@ -61,6 +63,8 @@ router.get("/detailPurchase/:paymentId", setDetail);
 router.post("/refresh-token", refreshToken);
 router.post("/refundPurchase", setRefund);
 router.post("/set-date-expire", expires);
+router.delete("/deleteAuth", deleteAuth);
+router.post('/getAuth', getAuth)
 
 // //history
 

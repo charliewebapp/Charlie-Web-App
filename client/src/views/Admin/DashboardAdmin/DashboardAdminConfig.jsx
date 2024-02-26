@@ -14,6 +14,7 @@ function DashboardAdminConfig() {
   const [nuevaFecha, setNuevaFecha] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [isDisable, setIsDisable] = useState(false);
+  const [existing, setExisting ] = useState(false);
 
   const authorization = () => {
     console.log("iniciando autorizacion");
@@ -30,19 +31,19 @@ function DashboardAdminConfig() {
         clubName,
       });
       const expiresInSeconds = data.expires_in;
-      const expiresInDays = expiresInSeconds / 86400; 
+      const expiresInDays = expiresInSeconds / 86400;
       const dateTime = new Date(data.dateTime);
-      const newDateTime = new Date(dateTime.getTime() + expiresInSeconds * 1000); 
-  
+      const newDateTime = new Date(
+        dateTime.getTime() + expiresInSeconds * 1000
+      );
+
       setExpire(expiresInDays);
-      setDateTime(newDateTime.toISOString()); 
+      setDateTime(newDateTime.toISOString());
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
   };
 
-
-  
   const updateMP = async () => {
     try {
       const { data } = await axios.post(`${URL_API}/refresh-token`, {
@@ -53,6 +54,35 @@ function DashboardAdminConfig() {
       }
     } catch (error) {
       window.alert("hubo un error");
+      return res.status(500).json({ error: error.message });
+    }
+  };
+
+  const deleteConexion = async () => {
+    try {
+      const { data } = await axios.delete(`${URL_API}/deleteAuth`, {
+        clubName,
+      });
+      if (data) {
+        window.alert("Se ha eliminado exitosamente");
+      }
+    } catch (error) {
+      window.alert("no se pudo eliminar");
+      return res.status(500).json({ error: error.message });
+    }
+  };
+
+
+  const existingConection = async () => {
+    try {
+      const { data } = await axios.post(`${URL_API}/getAuth`, {
+        clubName,
+      });
+      console.log(data);
+      if(data){
+        setExisting(true);
+      }
+    } catch {
       return res.status(500).json({ error: error.message });
     }
   };
@@ -70,7 +100,7 @@ function DashboardAdminConfig() {
     const dateTime = new Date(dateTimeString);
     const options = {
       hour: "numeric",
-      minute: "numeric"
+      minute: "numeric",
     };
     return dateTime.toLocaleString(undefined, options);
   };
@@ -78,20 +108,21 @@ function DashboardAdminConfig() {
   const disableButton = (dateTimeString) => {
     const currentDate = new Date();
     const dateTime = new Date(dateTimeString);
-    const differenceInDays = Math.abs(currentDate - dateTime) / (1000 * 60 * 60 * 24);
-    
+    const differenceInDays =
+      Math.abs(currentDate - dateTime) / (1000 * 60 * 60 * 24);
+
     if (differenceInDays < 30) {
-      setIsDisable(false); 
-  } else {
-      setIsDisable(true); 
-  }
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
   };
 
   useEffect(() => {
     date();
     disableButton(dateTime);
+    existingConection()
   }, []);
-  
 
   return (
     <div className={style.containerMP}>
@@ -101,13 +132,26 @@ function DashboardAdminConfig() {
           {" "}
           Conectar Mercado Pago
         </button>
-        <p>Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las {formatHourTime(dateTime)}</p>
-        
-        <button className={style.buttonConfig} onClick={() => window.alert("Actualizando")} disabled={isDisable}>
+        <p>
+          Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las{" "}
+          {formatHourTime(dateTime)}
+        </p>
+
+        <button
+          className={style.buttonConfig}
+          onClick={updateMP}
+          disabled={isDisable}
+        >
           {" "}
           Actualizar Conexión a Mercado Pago
         </button>
-        <span>Este boton se habilitará 30 dias antes de caducar la conexion</span>
+        <span>
+          Este boton se habilitará 30 dias antes de caducar la conexion
+        </span>
+       { existing && <button className={style.buttonConfig} onClick={deleteConexion}>
+          {" "}
+          Eliminar Conexión a Mercado Pago
+        </button>}
       </div>
       <FormUpdatePasswordAdmin />
     </div>
