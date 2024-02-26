@@ -36,17 +36,17 @@ export const getProducts = (clubName) => {
 };
 
 // VALIDACIONES
-export const paymentValidationnw = async(clubName) => {
+export const paymentValidationnw = async (clubName) => {
   const endpoint = `${URL_API}/validations/${clubName}`;
 
-try {
-  const response = await axios.get(endpoint);
-  
-  return response.data;
-} catch (error) {
-  console.error(error);
-  throw error; // Re-lanzar el error para que pueda ser manejado en el lugar donde llamas a la función
-}
+  try {
+    const response = await axios.get(endpoint);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error; // Re-lanzar el error para que pueda ser manejado en el lugar donde llamas a la función
+  }
 };
 
 
