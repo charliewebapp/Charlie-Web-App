@@ -22,6 +22,7 @@ const categories = [
 
 function FormUpdateProductAdmin() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const clubName = useSelector((state) => state.selectClientAdmin);
   const allProductsState = useSelector((state) => state.allProducts);
 
@@ -52,8 +53,8 @@ function FormUpdateProductAdmin() {
     image: "",
     description: "",
     price: "",
-    stock: "Seleccione el stock",
-    category: "Seleccione una categoría",
+    stock: "*",
+    category: "*",
   });
 
   //onChange inputs
@@ -97,6 +98,7 @@ function FormUpdateProductAdmin() {
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
       });
+      navigate(`/admin/${clubName}/dashboardAdmin`)
     } catch (error) {
       //El sweet de error viene de actions
       console.log(error.message);
@@ -113,7 +115,7 @@ function FormUpdateProductAdmin() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>

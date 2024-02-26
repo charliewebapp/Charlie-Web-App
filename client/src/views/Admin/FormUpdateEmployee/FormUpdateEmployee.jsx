@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { validateFormEmployeeAdmin } from "../../../utils/validateFormEmployeeAdmin";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { updateCollaborator } from "../../../redux/actions";
 import Swal from "sweetalert2";
 import logotype from "../../../assets/img/charlielogo.png";
@@ -11,6 +11,7 @@ import { FaArrowLeft } from "react-icons/fa";
 function FormUpdateEmployee() {
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
+  const navigate = useNavigate();
 
   // CON ESTADO GOBAL REDUX
   const allCollaboratorsState = useSelector((state) => state.allCollaborators);
@@ -29,11 +30,11 @@ function FormUpdateEmployee() {
 
   //local state errors
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre",
-    lastname: "Ingrese el apellido",
-    password: "Asigne una contraseña",
-    mail: "Ingrese el email",
-    status: "Ingrese el estado",
+    name: "*",
+    lastname: "*",
+    // password: "Asigne una contraseña",
+    mail: "*",
+    status: "*",
   });
 
   //onChange inputs
@@ -67,6 +68,7 @@ function FormUpdateEmployee() {
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
       });
+      navigate(`/admin/${clubName}/dashboardAdmin`)
     } catch (error) {
       //El sweet de error viene de actions
       console.log(error.message);
@@ -83,7 +85,7 @@ function FormUpdateEmployee() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>
@@ -120,7 +122,7 @@ function FormUpdateEmployee() {
               />
               <span>{errors.lastname ? errors.lastname : null} </span>
 
-              <label htmlFor="password"> Password: </label>
+              {/* <label htmlFor="password"> Password: </label>
               <input
                 type="text"
                 id="password"
@@ -129,7 +131,7 @@ function FormUpdateEmployee() {
                 value={collaboratorData.password}
                 onChange={handleChange}
               />
-              <span>{errors.password ? errors.password : null} </span>
+              <span>{errors.password ? errors.password : null} </span> */}
 
               <label htmlFor="mail"> E-mail: </label>
               <input

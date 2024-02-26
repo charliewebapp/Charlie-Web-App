@@ -38,13 +38,13 @@ function FormPostProductAdmin() {
 
   //local state errors
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre del producto",
+    name: "*",
     brand: "",
     image: "",
-    description: "Ingrese una descripción del producto",
-    price: "Ingrese el precio",
-    stock: "Seleccione el stock",
-    category: "Seleccione una categoría",
+    description: "",
+    price: "*",
+    stock: "*",
+    category: "*",
   });
 
   //onChange inputs
@@ -105,7 +105,7 @@ function FormPostProductAdmin() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>
