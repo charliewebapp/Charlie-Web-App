@@ -1,0 +1,74 @@
+CREAR (siempre en developer)
+- git branch name =>  crear rama 'feature/test'
+- git checkout -b feature/filtros =>crear rama nueva y moverse a ella
+
+MOVERSE
+- git branch => en que rama estoy
+- git checkout developer => mover a rama developer
+
+ACTUALIZAR RAMAS
+git fetch => actualiza las ramas eliminadas en el remoto
+
+ACTUALIZAR CONTENIDO DE LAS RAMAS
+git pull => actualizar desde develop
+
+ELIMINAR RAMA
+1.a git branch -d nombre_de_la_rama = ELIMINAR
+1.b git branch -D nombre_de_la_rama => FORZAR ELIMINADO
+2.a git push origin --delete nombre_de_la_rama => eliminas la rama en github
+
+ACTUALIZAR RAMA CON DEVELOP
+git rebase develop
+
+ORDEN DE LAS RAMAS
+- MAIN
+	- DEVELOP
+		-- FEATURES/FILTROS
+		-- FEATURES/BUTTONS
+		-- FEATURES/MONOS
+
+NOTAS VIDEO => 
+
+- Todos los feature se crean desde develop
+- Siempre, antes de comenzar a codear, actualizar el develop y si estas avanzado en la rama, actualizar la rama tambien.
+- Para crear una rama:
+	1. git pull de develop (siempre)
+	2. crear rama feature/
+	3. git add . / git commit / git push origin name_branch
+	4. verificar el sentido y a que rama (main/develop) quiero hacer el merge
+	5. como title establecer el nombre de la rama y agregar detalles (que se agrego, que se elimino, etc)
+
+- si mi develop no esta actualizado al momento de hacer el pull request, pero ya hice el commit
+	1. actualizar el develop con git pull
+	2. regreso a mi rama feature y hago: git rebase develop (traigo los nuevos datos de develop a mi rama para actualizarlo)
+	3. git add . / git commit --amend (sobreescribir el commit para no tener mas de 1) + ctrl O + ctrl X / git push -f
+
+- git stash => guarda temporalmente los cambios (probar diferentes variabes de codigo) 
+- git stash apply => para revertir los cambios
+
+- para actualizar main:
+	1. crear una nueva rama desde develop llamada release v1.0.0 (modificar versiones segun el tipo de cambio)
+	2. probar todas las funcionalidades que no tengan ningun error
+	3. hacer push a main
+
+- issues: problemas encontrados, alli es donde se anotaran para solucionar.
+- eliminar ramas: luego de hacer el pull request, lo eliminamos del github (nube).
+
+- nombre del commit, se debe agregar antes del nombre: 	
+	1. ADD => funcionalidad nueva
+	2. MOD => modificacion
+	3. IMP => mejora
+	4. FIX => correccion de un error
+	5. DEL => eliminar 
+	git commit -m "ADD filtros por colores" 
+
+
+
+
+actualizar rama
+
+- git add .
+- git stash
+- git rebase develop
+- git stash apply
+
