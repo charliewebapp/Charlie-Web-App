@@ -10,11 +10,35 @@ import styles from "./Cart.module.css";
 import { GoTrash } from "react-icons/go";
 import Swal from "sweetalert2";
 const URL_API = import.meta.env.VITE_URL_API;
-// import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom"; // Utiliza useNavigate en lugar de useHistory
+import { paymentValidationnw } from "../../../redux/actions";
+import { useNavigate } from 'react-router-dom'; // Utiliza useNavigate en lugar de useHistory
+
+
 
 function Cart() {
-  console.log(URL_API);
+  const bolicheName = useParams().clubName
+  const [status,setStatus] = useState(false)
+  const handleStatusUpdate = async () => {
+    try {
+      const { status, autorizacion } = await paymentValidationnw(bolicheName);
+      if (status === "active" & autorizacion=== true ) {setStatus(true)}
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
+
+
+  useEffect(() => {
+    handleStatusUpdate();
+  }, []);
+
+
+ 
+  console.log("nombre del boliche", bolicheName)
+ 
+  console.log (URL_API)
   const history = useNavigate();
   const myUserLogged = useSelector((state) => state.myUser.id);
 
@@ -92,6 +116,15 @@ function Cart() {
   };
 
   const goCheckout = async () => {
+    console.log(status)
+   if (!status )  return  Swal.fire({
+    icon: 'warning',
+    title: 'Este boliche no tiene las configuraciones para recibir pagos.',
+    
+    confirmButtonText: 'Volver',
+   
+  })
+
     if (!myUserLogged) {
       // Muestra la alerta utilizando SweetAlert
       mostrarAlerta();
