@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import DashboardSuperAadmins from "../DashboardSuperA/DashboardSuperAadmins";
@@ -18,7 +18,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 function DashboardAdmin() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [clubs, setClubs] = useState(true);
   const [admins, setAdmins] = useState(false);
 
@@ -103,15 +103,15 @@ function DashboardAdmin() {
       text: `¿Quieres cerrar sesión?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "rgb(187, 131, 43)",
+      confirmButtonColor: "#3085d6",
       cancelButtonColor: "rgba(221, 51, 51, 0.9)",
       confirmButtonText: "Cerrar sesión",
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(logOutSadmin())
-        localStorage.removeItem("sadminStatusLogin")
-        navigate("/superadmin");;
+        dispatch(logOutSadmin());
+        localStorage.removeItem("sadminStatusLogin");
+        navigate("/superadmin");
       }
     });
   };
@@ -130,7 +130,7 @@ function DashboardAdmin() {
             </button>
           </div>
           <div className={style.config}>
-            <button className={style.btnCfg} onClick={openConfirmationLogOut}>
+            <button className={style.btnCfgLg} onClick={openConfirmationLogOut}>
               <RiLogoutBoxLine />
               Cerrar sesion
             </button>
