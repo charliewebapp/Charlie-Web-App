@@ -19,7 +19,12 @@ function FormPostClubSuperA() {
     city: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "*",
+    image: "*",
+    adress: "*",
+    city: "*",
+  });
 
   const dispatch = useDispatch();
 
