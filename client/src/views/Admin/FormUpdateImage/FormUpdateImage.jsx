@@ -8,9 +8,12 @@ const FormUpdateImage = () => {
 
     const [image, setImage] = useState(null);  // Solo mantén el archivo de la imagen en el estado
 
-    const clubName = JSON.parse((localStorage.getItem("clientName")));
-    const imageBoliche = localStorage.getItem("bolicheimagen");
+    const clubName = useSelector((state) => state.selectClientAdmin);
+    const clubImage = useSelector((state) => state.selectClientImage);
 
+    useEffect(() => {
+        dispatch(selectClientImage(clubImage));
+    }, []);
 
 
     const handleImageChange = (e) => {
@@ -33,23 +36,10 @@ const FormUpdateImage = () => {
         }
     }
 
-    console.log(imageBoliche, "imageBoliche")
-
-    const handlerSubmit = async (e) => {
+    const handlerSubmit = (e) => {
         e.preventDefault();
-
-        try {
-            await sendFormData();
-            localStorage.setItem("bolicheimagen", JSON.stringify(imageBoliche));
-            Swal.fire({
-                icon: "warning",
-                title: "Advertencia!",
-                text: "Debe loguearse nuevamente para ver los cambios",
-            });
-        } catch (error) {
-            console.error("Error during form submission:", error);
-        }
-    };
+        sendFormData();
+    }
 
     return (
         <form onSubmit={handlerSubmit} encType="multipart/form-data">
