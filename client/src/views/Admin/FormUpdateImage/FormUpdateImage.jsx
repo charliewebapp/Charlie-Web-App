@@ -67,6 +67,10 @@ const FormUpdateImage = () => {
     display: "none", // Oculta el input
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+};
+
   return (
     <div className={style.changeImage}>
       <h2 className={style.h2}>Cambiar logo del boliche</h2>

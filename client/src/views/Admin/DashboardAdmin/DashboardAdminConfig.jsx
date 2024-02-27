@@ -199,22 +199,6 @@ function DashboardAdminConfig() {
                 Eliminar Conexión a Mercado Pago
               </button>
             )}
-            <p>
-              Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a
-              las {formatHourTime(dateTime)}
-            </p>
-
-            <button
-              className={style.buttonConfig}
-              onClick={updateMP}
-              disabled={isDisable}
-            >
-              {" "}
-              Actualizar Conexión a Mercado Pago
-            </button>
-            <span>
-              Este boton se habilitará 30 dias antes de caducar la conexion
-            </span>
             {existing && (
               <button className={style.buttonConfig} onClick={deleteConexion}>
                 {" "}
