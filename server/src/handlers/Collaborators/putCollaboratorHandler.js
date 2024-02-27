@@ -3,12 +3,17 @@ const putCollaborators = require("../../controllers/Collaborators/putCollaborato
 const putCollaboratorsHandler = async (req, res) => {
   try {
     const { client, user } = req.params;
-    const clientMinus = client.toLowerCase()
-    const newData = req.body
-    console.log(newData, 'newData')
+    console.log(client, user, "client and user");
+    const clientMinus = client.toLowerCase();
+    const newData = req.body;
+    console.log(newData, "newData");
 
-    const updateProduct = await putCollaborators(clientMinus, user, newData);
-    return res.status(201).json(updateProduct);
+    const updateCollaborator = await putCollaborators(
+      clientMinus,
+      user,
+      newData
+    );
+    return res.status(201).json(updateCollaborator);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
