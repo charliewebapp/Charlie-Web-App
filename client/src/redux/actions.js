@@ -729,15 +729,13 @@ export const getOrderQRCode = () => {
   };
 };
 
-export const putImage = (client, newImage) => {
+export const putImage = (clubName, formData) => {
 
-  const endpoint = `${URL_API}/${client}/image`;
-  console.log(client, newImage.path, "data");
+  const endpoint = `${URL_API}/${clubName}/image`;
+
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(endpoint, newImage);
-
-      console.log(data, "dataAxios");
+      const { data } = await axios.put(endpoint, formData);
 
       dispatch({ type: PUT_IMAGE, payload: data });
     } catch (error) {
@@ -745,16 +743,3 @@ export const putImage = (client, newImage) => {
     }
   }
 }
-
-// export const updateAdmin = (adminData, idAdmin, clubName) => {
-//   const endpoint = `${URL_API}/${clubName}/${idAdmin}`;
-
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.put(endpoint, adminData);
-//       return data;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-// };
