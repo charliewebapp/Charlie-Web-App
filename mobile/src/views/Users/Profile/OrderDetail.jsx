@@ -1,63 +1,58 @@
-import React, { useEffect } from 'react';
-import DetailQR from '../DetailQR/DetailQR';
-import OrderRejected from './OrderRejected';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getOrderQRCode, getDetailQrCode } from '../../../redux/actions';
+import React, { useEffect } from "react";
+import DetailQR from "../DetailQR/DetailQR";
+import OrderRejected from "./OrderRejected";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrderQRCode, getDetailQrCode } from "../../../redux/actions";
+import "./OrderDetail.module.css";
 
 function OrderDetail() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  // useEffect(() => {
+  //     dispatch(getOrderQRCode("73047715220"))
+  // }, [dispatch]);
 
-    // useEffect(() => {
-    //     dispatch(getOrderQRCode("73047715220"))
-    // }, [dispatch]);
+  const detail = useSelector((state) => state.detailQrCode);
+  const cartState = useSelector((state) => state.orderqrdata);
+  const cart = [cartState];
 
+  console.log(cart, "cart en OD");
+  console.log(detail, "detail en OD");
 
-    const detail = useSelector((state) => state.detailQrCode);
-    const cartState = useSelector(state => state.orderqrdata);
-    const cart = [cartState];
+  useEffect(() => {
+    let paymentId;
+    if (cart && cart.length > 0) {
+      paymentId = cart[0].paymentId;
+    }
+    const intervalId = setInterval(() => {
+      if (paymentId) {
+        dispatch(getOrderQRCode(paymentId));
+      }
+    }, 1000 * 800);
 
-    console.log(cart, "cart en OD")
-    console.log(detail, "detail en OD")
+    return () => clearInterval(intervalId);
+  }, [dispatch, detail, cart]);
 
+  console.log(cart[0].status, "este es el status de cart");
 
-    useEffect(() => {
-        let paymentId;
-        if (cart && cart.length > 0) {
-            paymentId = cart[0].paymentId;
-        }
-        const intervalId = setInterval(() => {
-            if (paymentId) {
-                dispatch(getOrderQRCode(paymentId));
-            }
-        }, 10000);
-
-        return () => clearInterval(intervalId);
-    }, [dispatch, detail, cart]);
-
-    console.log(cart[0].status, "este es el status de cart")
-
-
-    return (
-        <div>
-            <h1>OrderDetail</h1>
-
-            {(detail.length > 0 && detail[0].status !== "rejected") || (cart.length > 0 && cart[0].status !== "rejected") ? (
-                <>
-                    <DetailQR />
-                    <Link to="/:clubName/home">
-                        <button>Home</button>
-                    </Link>
-                </>
-            ) : (cart.length > 0 && cart[0].status === "rejected") ? (
-                <>
-                    <OrderRejected />
-                </>
-            ) : null}
-
-        </div>
-    )
+  return (
+    <div className="container">
+      {(detail.length > 0 && detail[0].status !== "rejected") ||
+      (cart.length > 0 && cart[0].status !== "rejected") ? (
+        <>
+          <DetailQR />
+          <Link to="/:clubName/home">
+            <button>Home</button>
+          </Link>
+        </>
+      ) : cart.length > 0 && cart[0].status === "rejected" ? (
+        <>
+          <OrderRejected />
+        </>
+      ) : null}
+    </div>
+  );
 }
 
-export default OrderDetail
+export default OrderDetail;
