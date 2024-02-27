@@ -12,7 +12,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 function FormPostEmployee() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
 
   //local state for input
   const [collaboratorData, setCollaboratorData] = useState({
