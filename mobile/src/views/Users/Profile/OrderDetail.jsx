@@ -34,7 +34,6 @@ function OrderDetail() {
     return () => clearInterval(intervalId);
   }, [dispatch, detail, cart]);
 
-  console.log(cart[0].status, "este es el status de cart");
 
   return (
     <div className="container">

@@ -8,6 +8,7 @@ import {
   getMyBoliche,
   postUser,
   setCartFromLocalStorage,
+  getMyBolicheID,
 } from "../../../redux/actions";
 import { MdArrowBackIos } from "react-icons/md";
 import loadingGif from "../../../assets/img/loading2.gif";
@@ -50,6 +51,7 @@ function NavBarUser() {
     if (user && !isLoading && !isUserLoaded) {
       // Realiza el dispatch solo cuando user está cargado
       dispatch(postUser(userData));
+      dispatch(getMyBolicheID(clubName));
       setIsUserLoaded(true);
     }
   }, [user, isLoading, isUserLoaded, dispatch, userData]);

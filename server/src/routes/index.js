@@ -50,11 +50,12 @@ const putPurchases = require("../controllers/Purchases/putPurchases");
 const deleteAuth = require("../controllers/MercadoPago/deleteAuth");
 const getAuth = require("../controllers/MercadoPago/getAuth");
 const putClientImageHandler = require("../handlers/Administrator/putClientImageHandler");
+const getPurchases = require("../controllers/Purchases/getPurchases");
 
 const router = Router();
 
 //mercado-pago
-router.get ("/validations/:client", paymentAutorizations)
+router.get("/validations/:client", paymentAutorizations)
 router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
@@ -112,6 +113,7 @@ router.get("/collaborator", getAllCollaboratorHandler);
 //--------------colaborador
 
 router.put("/:client/purchase/status/:PurchaseId", putPurchases);
+router.get("/:clientId/sales/:userId", getPurchases);
 
 //--------------consumidor
 

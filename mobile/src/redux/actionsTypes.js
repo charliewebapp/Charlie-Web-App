@@ -17,3 +17,7 @@ export const POST_USER = "POST_USER";
 export const GET_ORDER_QR = "GET_ORDER_QR";
 
 export const GET_DETAIL_QR = "GET_DETAIL_QR";
+
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+
+export const GET_MY_BOLICHEID = "GET_MY_BOLICHEID";

@@ -9,15 +9,19 @@ import {
   SET_CART_FROM_LOCAL_STORAGE, // Agregar esta importación
   GET_ORDER_QR,
   GET_DETAIL_QR,
+  GET_ALL_ORDERS,
+  GET_MY_BOLICHEID,
 } from "./actionsTypes";
 
 const initialState = {
   allProducts: [],
   cart: [],
   myBoliche: {},
+  myBolicheID: {},
   myUser: {},
   orderqrdata: [],
   detailQrCode: [],
+  allOrders: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,6 +91,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: payload,
+      };
+
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrders: payload,
+      };
+
+    case GET_MY_BOLICHEID:
+      return {
+        ...state,
+        myBolicheID: payload,
       };
 
     default:

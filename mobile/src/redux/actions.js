@@ -11,6 +11,8 @@ import {
   SET_CART_FROM_LOCAL_STORAGE,
   GET_ORDER_QR,
   GET_DETAIL_QR,
+  GET_ALL_ORDERS,
+  GET_MY_BOLICHEID,
 } from "./actionsTypes";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -171,6 +173,36 @@ export const getMyBoliche = (clubName) => {
   };
 };
 
+export const getMyBolicheID = (clubName) => {
+  const endpoint = `${URL_API}/client`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      const myBoliche = data.find(
+        (boliche) => boliche.name.toLowerCase() === clubName.toLowerCase()
+      );
+      if (myBoliche) {
+        return dispatch({
+          type: GET_MY_BOLICHEID,
+          payload: myBoliche.id,
+        });
+      } else {
+        throw new Error("No existe el boliche")
+
+      }
+
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Consulte en barra por el correcto código QR para ingresar",
+        icon: "error",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
+    }
+  };
+};
+
 //! -------------------------------------- SAVE CART IN DATABASE ----------------------------------------
 export const postOrderInDB = (cart, idMP, clubID) => {
   console.log("aqui inicia el order", cart, "aqui finaliza", idMP, clubID);
@@ -223,7 +255,7 @@ export const getOrderQRCode = (paymentId) => {
         `${URL_API}/detailPurchase/${paymentId}`
       );
       console.log(data, "data en el acion")
-      dispatch({ type: GET_ORDER_QR, payload: data });
+      dispatch({ type: GET_ORDER_QR, payload: [data] });
     } catch (error) {
       console.error(error); // Log the error to the console
       window.alert("No se ha encontrado la orden. " + error.message);
@@ -278,7 +310,7 @@ export const getOrderQRCode = (paymentId) => {
 // ]
 
 
-export const getDetailQrCode = () => {
+export const getDetailQrCode = (paymentId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
@@ -288,6 +320,19 @@ export const getDetailQrCode = () => {
     } catch (error) {
       console.error(error); // Log the error to the console
       window.alert("No se ha creado la orden. " + error.message);
+    }
+  };
+}
+
+
+export const getAllOrders = (bolicheID, myUserID) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_API}/${bolicheID}/sales/${myUserID}`);
+      dispatch({ type: GET_ALL_ORDERS, payload: data });
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha encontrado la orden. " + error.message);
     }
   };
 }
