@@ -13,6 +13,8 @@ function DetailQR() {
   const cartState = useSelector((state) => state.orderqrdata);
   const cart = [cartState];
 
+  console.log(cart, "cart en DQR");
+
   // States for managing the modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalProducts, setModalProducts] = useState([]);
@@ -32,13 +34,15 @@ function DetailQR() {
     // Check if 'cart' exists and has elements
     mappedData = {
       cart: cart.map((product) => ({
-        name: product.name,
-        quantity: product.quantity,
+        name: product.cart[0].name,
+        quantity: product.cart[0].quantity,
       })),
-      status: cartState.status,
-      club: cartState.client.name,
-      id: cartState.id,
+      status: cart[0].status,
+      club: cart[0].client.name,
+      id: cart[0].id,
     };
+
+    console.log(mappedData, "mappedData")
 
     cartString = JSON.stringify([mappedData]);
   } else if (detail) {

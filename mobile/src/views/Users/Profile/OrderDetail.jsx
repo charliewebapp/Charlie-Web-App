@@ -29,7 +29,7 @@ function OrderDetail() {
       if (paymentId) {
         dispatch(getOrderQRCode(paymentId));
       }
-    }, 1000 * 800);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   }, [dispatch, detail, cart]);
@@ -39,16 +39,19 @@ function OrderDetail() {
   return (
     <div className="container">
       {(detail.length > 0 && detail[0].status !== "rejected") ||
-      (cart.length > 0 && cart[0].status !== "rejected") ? (
+        (cart.length > 0 && cart[0].status !== "rejected") ? (
         <>
           <DetailQR />
           <Link to="/:clubName/home">
-            <button>Home</button>
+            <button>Regresar al comercio</button>
           </Link>
         </>
       ) : cart.length > 0 && cart[0].status === "rejected" ? (
         <>
           <OrderRejected />
+          <Link to="/:clubName/home">
+            <button>Regresar al comercio</button>
+          </Link>
         </>
       ) : null}
     </div>
