@@ -4,6 +4,7 @@ import FormUpdatePasswordAdmin from "../FormUpdatePasswordAdmin/FormUpdatePasswo
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import FormUpdateImage from "../FormUpdateImage/FormUpdateImage";
 const URL_API = import.meta.env.VITE_URL_API;
 function DashboardAdminConfig() {
   const { clubName } = useParams();
@@ -173,6 +174,27 @@ function DashboardAdminConfig() {
             Eliminar Conexión a Mercado Pago
           </button>
         )}
+        <p>
+          Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las{" "}
+          {formatHourTime(dateTime)}
+        </p>
+
+        <button
+          className={style.buttonConfig}
+          onClick={updateMP}
+          disabled={isDisable}
+        >
+          {" "}
+          Actualizar Conexión a Mercado Pago
+        </button>
+        <span>
+          Este boton se habilitará 30 dias antes de caducar la conexion
+        </span>
+       { existing && <button className={style.buttonConfig} onClick={deleteConexion}>
+          {" "}
+          Eliminar Conexión a Mercado Pago
+        </button>}
+        <FormUpdateImage />
       </div>
       <FormUpdatePasswordAdmin />
     </div>
