@@ -1,99 +1,150 @@
-import React, { useEffect, useState } from 'react';
-import '../DetailQR/detailqr.module.css';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal"; // Import the Modal component
 import QRCode from "react-qr-code";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getDetailQrCode } from "../../../redux/actions";
-import style from './detailqr.module.css';
+import style from "./detailqr.module.css";
 
 function DetailQR() {
-    const [isLoading, setIsLoading] = useState(true);
-    const dispatch = useDispatch()
-    const detail = useSelector((state) => state.detailQrCode);
-    const cartState = useSelector(state => state.orderqrdata);
-    const cart = [cartState];
+  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const detail = useSelector((state) => state.detailQrCode);
+  const cartState = useSelector((state) => state.orderqrdata);
+  const cart = [cartState];
 
-    console.log(detail, "este es el detail")
-    console.log(cart, "este es el cart")
+  // States for managing the modal
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalProducts, setModalProducts] = useState([]);
 
-    // useEffect(() => {
-    //     dispatch(getDetailQrCode());
-    // }, [dispatch]);
+  // useEffect(() => {
+  //     dispatch(getDetailQrCode());
+  // }, [dispatch]);
 
-    useEffect(() => {
-        if (cart.length !== 0 || detail) {
-            setIsLoading(false);
-        }
-    }, [cart, detail]);
-
-    let mappedData, cartString, mappedData2, cartString2;
-
-    if (cart.length > 0) {
-        mappedData = cart.map(item => ({
-            cart: item.cart.map(product => ({
-                name: product.name,
-                quantity: product.quantity,
-            })),
-            status: item.status,
-            club: item.client.name,
-            id: item.id
-        }));
-
-        cartString = JSON.stringify(mappedData);
-
-    } else if (detail) {
-        mappedData2 = {
-            status: detail.status,
-            cart: detail.cart.map(product => ({
-                name: product.name,
-                quantity: product.quantity
-            }))
-        };
-
-
-        cartString2 = JSON.stringify([mappedData2]);
-
+  useEffect(() => {
+    if (cart.length !== 0 || detail) {
+      setIsLoading(false);
     }
+  }, [cart, detail]);
+  let mappedData, cartString, mappedData2, cartString2;
 
+  if (cart && cart.length > 0) {
+    // Check if 'cart' exists and has elements
+    mappedData = {
+      cart: cart.map((product) => ({
+        name: product.name,
+        quantity: product.quantity,
+      })),
+      status: cartState.status,
+      club: cartState.client.name,
+      id: cartState.id,
+    };
 
-    return (
+    cartString = JSON.stringify([mappedData]);
+  } else if (detail) {
+    mappedData2 = {
+      status: detail.status,
+      cart: detail.cart.map((product) => ({
+        name: product.name,
+        quantity: product.quantity,
+      })),
+    };
 
+    cartString2 = JSON.stringify([mappedData2]);
+  }
 
-        // <div style={{ background: 'white', padding: '16px' }}>
+  // Function to open the modal and set the products to display
+  const openModal = (products) => {
+    setModalProducts(products);
+    setModalIsOpen(true);
+  };
 
+  // Function to close the modal
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
-        //     <QRCode value={cartString2} />
+  console.log(modalProducts, "modalProducts");
 
-        // </div>
+  return (
+    <div className={style.container}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : cart && cart.length > 0 ? (
+        <>
+          <h1 className={style.h1}>Detalle de la orden</h1>
+          <h2 className={style.h2}>Acercate a la barra con tu codigo</h2>
+          <div style={{ background: "white", padding: "16px" }}>
+            <QRCode value={cartString} />
+          </div>
+          {/* Button to open the modal */}
+          <button onClick={() => openModal(cart)}>Ver productos</button>
+        </>
+      ) : detail ? (
+        <>
+          <div style={{ background: "white", padding: "16px" }}>
+            <QRCode value={cartString2} />
+          </div>
+          {/* Button to open the modal */}
+          <button onClick={() => openModal(detail.cart)}>Ver productos</button>
+          {detail.cart.map((product, i) => (
+            <div key={i}>
+              <p>Producto: {product.name}</p>
+              <p>Cantidad: {product.quantity}</p>
+            </div>
+          ))}
+        </>
+      ) : null}
 
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className={style.modalContainer}
+        portalClassName={style.customReactModalPortal}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0,  0,  0,  0.90)",
+          },
+          content: {
+            color: "orange",
+          },
+        }}
+      >
+        <h2 className={style.h2}>Productos en la orden</h2>
+        {modalProducts.map((order, i) => (
+          <div key={i} className={style.orderContainer}>
+            <p>Fecha: {order.dateTime}</p>
+            {Array.isArray(order.cart) && order.cart.length > 0 ? (
+              order.cart.map((product, j) => (
+                <div key={j} className={style.productInfo}>
+                  <div className={style.productName}>
+                    <h5 className={style.h5}>{product.name}&nbsp; </h5>
 
-        <div className={style.container}>
-            {isLoading ? (
-                <div>Loading...</div>
-            ) : cart.length > 0 ? (
-                <>
-                    <h1 className={style.h1}>Detalle de la orden</h1>
-                    <h2 className={style.h2}>Acercate a la barra con tu codigo</h2>
-                    <div style={{ background: 'white', padding: '16px' }}>
-                        <QRCode value={cartString} />
-                    </div>
-                </>
-            ) : detail ? (
-                <>
-                    <div style={{ background: 'white', padding: '16px' }}>
-                        <QRCode value={cartString2} />
-                    </div>
-
-                    {detail.cart.map((product, i) => (
-                        <div key={i}>
-                            <p>Producto: {product.name}</p>
-                            <p>Cantidad: {product.quantity}</p>
-                        </div>
-                    ))}
-                </>
-            ) : null}
-        </div>
-    )
+                    <h5 className={style.h5}>x {product.quantity}</h5>
+                  </div>
+                  <div className={style.productPrice}>
+                    <h5 className={style.h5}>$ {product.price}</h5>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className={style.productInfo}>
+                <div>
+                  <span className={style.productName}>
+                    Producto: {order.cart.name}
+                  </span>
+                  <span>Cantidad: {order.cart.quantity}</span>
+                </div>
+                <span className={style.productPrice}>
+                  Precio: {order.cart.price}
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
+      </Modal>
+    </div>
+  );
 }
 
 export default DetailQR;
