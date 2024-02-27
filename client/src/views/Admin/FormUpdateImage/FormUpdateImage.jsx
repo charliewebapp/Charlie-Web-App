@@ -69,7 +69,7 @@ const FormUpdateImage = () => {
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
-};
+  };
 
   return (
     <div className={style.changeImage}>
@@ -86,7 +86,7 @@ const FormUpdateImage = () => {
             onChange={handleImageChange}
             style={fileInputStyle}
             className={style.buttonStyle}
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
           />
         </label>
 
