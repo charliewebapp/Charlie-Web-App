@@ -3,14 +3,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getSales } from "../../../redux/actions";
+import * as XLSX from "xlsx";
 
 function DashboardAdminSales() {
-  const clubName = JSON.parse((localStorage.getItem("clientName")));
+  const clubName = JSON.parse(localStorage.getItem("clientName"));
   const allBoliches = useSelector((state) => state.allBoliches);
   const allSales = useSelector((state) => state.allSales);
   const [sortedSales, setSortedSales] = useState([]);
 
-  const actualClient =JSON.parse((localStorage.getItem("clientName")));
+  const actualClient = JSON.parse(localStorage.getItem("clientName"));
   const clientId = localStorage.getItem("clientId");
 
   const dispatch = useDispatch();
@@ -109,11 +110,70 @@ function DashboardAdminSales() {
     }
   }
 
+  //! Excell
+  const exportToExcel = () => {
+    // Definir la estructura de datos para la exportación
+    const data = sortedSales.map((sale) => ({
+      Fecha: formatFecha(sale.dateTime),
+      "ID MercadoPago": sale.paymentId,
+      Estado: renderStatus(sale.status),
+      Total: `$${calculateTotal(sale.cart)}`,
+      Cart: sale.cart
+        .map(
+          (product) =>
+            `${product.name} - Precio: $${product.price}, Cantidad: ${product.quantity}`
+        )
+        .join("\n"),
+    }));
+
+    // Crear un objeto workbook de Excel
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data, {
+      header: ["Fecha", "ID MercadoPago", "Estado", "Total", "Cart"],
+    });
+
+    // Agregar la hoja al workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Ventas");
+
+    try {
+      // Escribir el archivo Excel
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+
+      // Convertir el buffer a un blob
+      const blob = new Blob([excelBuffer], {
+        type: "application/octet-stream",
+      });
+
+      // Crear una URL para el blob
+      const url = URL.createObjectURL(blob);
+
+      // Crear un enlace temporal y hacer clic en él para descargar el archivo
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "ventas.xlsx";
+      document.body.appendChild(link);
+      link.click();
+
+      // Liberar la URL creada para el blob
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error al escribir el archivo Excel:", error);
+    }
+  };
+
   return (
     <>
       <div className={style.linkContainer}>
         <h2>VENTAS</h2>
         <div className={style.DataGrid}>
+          {/* Excell */}
+          <button className={style.buttonClose} onClick={exportToExcel}>
+            Exportar
+          </button>
+          {/* Excell */}
           <DataGrid rows={rows} columns={columns} autoPageSize rowHeight={40} />
         </div>
         {selectedSale && (
