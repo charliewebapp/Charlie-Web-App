@@ -10,10 +10,11 @@ function DetailQR() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.detailQrCode);
-  const cartState = useSelector((state) => state.orderqrdata);
-  const cart = [cartState];
+  const cart = useSelector((state) => state.orderqrdata);
+
 
   console.log(cart, "cart en DQR");
+  console.log(detail, "detail en DQR")
 
   // States for managing the modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -84,21 +85,17 @@ function DetailQR() {
           {/* Button to open the modal */}
           <button onClick={() => openModal(cart)}>Ver productos</button>
         </>
-      ) : detail ? (
-        <>
-          <div style={{ background: "white", padding: "16px" }}>
-            <QRCode value={cartString2} />
-          </div>
-          {/* Button to open the modal */}
-          <button onClick={() => openModal(detail.cart)}>Ver productos</button>
-          {detail.cart.map((product, i) => (
-            <div key={i}>
-              <p>Producto: {product.name}</p>
-              <p>Cantidad: {product.quantity}</p>
+      )
+        : detail ? (
+          <>
+            <div style={{ background: "white", padding: "16px" }}>
+              <QRCode value={cartString2} />
             </div>
-          ))}
-        </>
-      ) : null}
+            {/* Button to open the modal */}
+            <button onClick={() => openModal(detail.cart)}>Ver productos</button>
+
+          </>
+        ) : null}
 
       <Modal
         isOpen={modalIsOpen}
@@ -117,7 +114,7 @@ function DetailQR() {
         <h2 className={style.h2}>Productos en la orden</h2>
         {modalProducts.map((order, i) => (
           <div key={i} className={style.orderContainer}>
-            <p>Fecha: {order.dateTime}</p>
+
             {Array.isArray(order.cart) && order.cart.length > 0 ? (
               order.cart.map((product, j) => (
                 <div key={j} className={style.productInfo}>
@@ -133,15 +130,17 @@ function DetailQR() {
               ))
             ) : (
               <div className={style.productInfo}>
-                <div>
-                  <span className={style.productName}>
-                    Producto: {order.cart.name}
+                <div className={style.productName}>
+                  <span className={style.h5}>
+                    {order.name}&nbsp;
                   </span>
-                  <span>Cantidad: {order.cart.quantity}</span>
+                  <span className={style.h5}>x {order.quantity}</span>
                 </div>
-                <span className={style.productPrice}>
-                  Precio: {order.cart.price}
-                </span>
+                <div className={style.productPrice}>
+                  <span className={style.h5}>
+                    $ {order.price}
+                  </span>
+                </div>
               </div>
             )}
           </div>

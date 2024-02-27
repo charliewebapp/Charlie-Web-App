@@ -17,6 +17,10 @@ function Home() {
 
   localStorage.setItem("myUser", JSON.stringify(myUser));
 
+  const bolicheID = useSelector((state) => state.myBolicheID);
+
+  console.log(bolicheID, "bolicheID")
+
   return (
     <>
       <NavBarUser />

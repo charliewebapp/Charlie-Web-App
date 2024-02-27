@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react"
-import { getMyBoliche } from '../../../redux/actions';
+import { getMyBoliche, getMyBolicheID } from '../../../redux/actions';
 import styles from "./LoginUser.module.css"
 import charlieLetras from "../../../assets/img/charlie-blanco.png"
 import logoCharlie from "../../../assets/img/logo-blanco.png"
@@ -16,8 +16,8 @@ function LoginUser() {
 
     //traer data del boliche -> si no error no deja ingresar
     useEffect(() => {
-        dispatch(getMyBoliche(clubName))
-
+        dispatch(getMyBoliche(clubName));
+        dispatch(getMyBolicheID(clubName));
     }, [])
 
     const myBolicheState = useSelector(state => state.myBoliche)
