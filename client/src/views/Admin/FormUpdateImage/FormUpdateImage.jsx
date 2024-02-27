@@ -6,14 +6,11 @@ import Swal from "sweetalert2";
 const FormUpdateImage = () => {
     const dispatch = useDispatch();
 
-    const [image, setImage] = useState(null);  // Solo mantén el archivo de la imagen en el estado
+    const [image, setImage] = useState(null);
 
-    const clubName = useSelector((state) => state.selectClientAdmin);
-    const clubImage = useSelector((state) => state.selectClientImage);
+    const clubName = JSON.parse((localStorage.getItem("clientName")));
+    const imageBoliche = localStorage.getItem("bolicheimagen");
 
-    useEffect(() => {
-        dispatch(selectClientImage(clubImage));
-    }, []);
 
 
     const handleImageChange = (e) => {
@@ -36,10 +33,23 @@ const FormUpdateImage = () => {
         }
     }
 
-    const handlerSubmit = (e) => {
+    console.log(imageBoliche, "imageBoliche")
+
+    const handlerSubmit = async (e) => {
         e.preventDefault();
-        sendFormData();
-    }
+
+        try {
+            await sendFormData();
+            localStorage.setItem("bolicheimagen", JSON.stringify(imageBoliche));
+            Swal.fire({
+                icon: "warning",
+                title: "Advertencia!",
+                text: "Debe loguearse nuevamente para ver los cambios",
+            });
+        } catch (error) {
+            console.error("Error during form submission:", error);
+        }
+    };
 
     return (
         <form onSubmit={handlerSubmit} encType="multipart/form-data">
