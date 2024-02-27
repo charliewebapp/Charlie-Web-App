@@ -8,7 +8,7 @@ import { validateFormPostClub } from "../../../utils/validateFormPostClub";
 import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { FaFileImage, FaReact } from "react-icons/fa"; // Importa el icono de React
+import { FaFileImage } from "react-icons/fa"; // Importa el icono de React
 
 function FormPostClubSuperA() {
   const navigate = useNavigate();

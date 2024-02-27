@@ -136,67 +136,94 @@ function DashboardAdminConfig() {
 
     fetchData();
   }, []);
+  const [activeButton, setActiveButton] = useState("container1");
 
   return (
-    <div className={style.containerMP}>
-      <h2 className={style.h2}>Metodos de pago</h2>
-      <div className={style.containerButton}>
-        <button className={style.buttonConfig} onClick={authorization} disabled={existing}>
-          {" "}
-          Conectar Mercado Pago
+    <div className={style.containerCONFIG}>
+      <div className={style.condicionalBtn}>
+        <button onClick={() => setActiveButton("container1")}>
+          CONFIGURAR PERFIL
         </button>
-        {dateTime ? (
-          <p>
-            Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a
-            las {formatHourTime(dateTime)}
-          </p>
-        ) : (
-          "Mercado Pago aún no fue conectado"
-        )}
-        {existing && (
-          <button
-            className={style.buttonConfig}
-            onClick={updateMP}
-            disabled={isDisable}
-          >
-            {" "}
-            Actualizar Conexión a Mercado Pago
-          </button>
-        )}
-        {existing && (
-          <span>
-            Este boton se habilitará 30 dias antes de caducar la conexion
-          </span>
-        )}
-        {existing && (
-          <button className={style.buttonConfigDelete} onClick={deleteConexion}>
-            {" "}
-            Eliminar Conexión a Mercado Pago
-          </button>
-        )}
-        <p>
-          Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a las{" "}
-          {formatHourTime(dateTime)}
-        </p>
-
-        <button
-          className={style.buttonConfig}
-          onClick={updateMP}
-          disabled={isDisable}
-        >
-          {" "}
-          Actualizar Conexión a Mercado Pago
+        <button onClick={() => setActiveButton("container2")}>
+          CONFIGURAR MERCADO PAGO
         </button>
-        <span>
-          Este boton se habilitará 30 dias antes de caducar la conexion
-        </span>
-       { existing && <button className={style.buttonConfig} onClick={deleteConexion}>
-          {" "}
-          Eliminar Conexión a Mercado Pago
-        </button>}
-        <FormUpdateImage />
       </div>
-      <FormUpdatePasswordAdmin />
+
+      {activeButton === "container1" && (
+        <div className={style.container1}>
+          <FormUpdateImage />
+          <FormUpdatePasswordAdmin />
+        </div>
+      )}
+      {activeButton === "container2" && (
+        <div className={style.container2}>
+          <h2 className={style.h2}>Metodos de pago</h2>
+          <div className={style.containerButton}>
+            <button
+              className={style.buttonConfig}
+              onClick={authorization}
+              disabled={existing}
+            >
+              {" "}
+              Conectar Mercado Pago
+            </button>
+            {dateTime ? (
+              <p>
+                Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)}{" "}
+                a las {formatHourTime(dateTime)}
+              </p>
+            ) : (
+              "Mercado Pago aún no fue conectado"
+            )}
+            {existing && (
+              <button
+                className={style.buttonConfig}
+                onClick={updateMP}
+                disabled={isDisable}
+              >
+                {" "}
+                Actualizar Conexión a Mercado Pago
+              </button>
+            )}
+            {existing && (
+              <span>
+                Este boton se habilitará 30 dias antes de caducar la conexion
+              </span>
+            )}
+            {existing && (
+              <button
+                className={style.buttonConfigDelete}
+                onClick={deleteConexion}
+              >
+                {" "}
+                Eliminar Conexión a Mercado Pago
+              </button>
+            )}
+            <p>
+              Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)} a
+              las {formatHourTime(dateTime)}
+            </p>
+
+            <button
+              className={style.buttonConfig}
+              onClick={updateMP}
+              disabled={isDisable}
+            >
+              {" "}
+              Actualizar Conexión a Mercado Pago
+            </button>
+            <span>
+              Este boton se habilitará 30 dias antes de caducar la conexion
+            </span>
+            {existing && (
+              <button className={style.buttonConfig} onClick={deleteConexion}>
+                {" "}
+                Eliminar Conexión a Mercado Pago
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

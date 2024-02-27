@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "./DashboardAdminConfigSuccess.module.css"
+import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 
 const URL_API = import.meta.env.VITE_URL_API;
 
 export default function DashboardAdminConfigSuccess({ location }) {
-  const url_admin = import.meta.env.VITE_URL_ADMIN
+  const url_admin = import.meta.env.VITE_URL_ADMIN;
   const path = localStorage.getItem("pathname");
-  const urlComeBack = `${url_admin}/admin/${path}/dashboardAdmin`
+  const urlComeBack = `${url_admin}/admin/${path}/dashboardAdmin`;
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -29,18 +29,22 @@ export default function DashboardAdminConfigSuccess({ location }) {
   };
 
   const backHome = () => {
-
-    window.location.href = urlComeBack
-  }
+    window.location.href = urlComeBack;
+  };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.navbar}>
-        <h1 className={styles.h1}>DASHBOARD ADMINISTRADOR</h1>
+    <div className={style.container}>
+      <div className={style.navbar}>
+        <h1 className={style.h1}>DASHBOARD ADMINISTRADOR</h1>
       </div>
-      <h2 className={styles.h2}>Su cuenta ha sido conectada correctamente!</h2>
-      <h3 className={styles.h2}>¡Gracias por confiar en Charlie!</h3>
-      <button onClick={backHome} className={styles.button}>Finalizar Conexión</button>
+
+      <div className={style.dashboard}>
+        <h2 className={style.h2}>Su cuenta ha sido conectada correctamente!</h2>
+        <h3 className={style.h2}>¡Gracias por confiar en Charlie!</h3>
+        <button onClick={backHome} className={style.btnCreate}>
+          Finalizar Conexión
+        </button>
+      </div>
     </div>
   );
 }

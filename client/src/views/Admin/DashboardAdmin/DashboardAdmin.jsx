@@ -25,13 +25,15 @@ import Swal from "sweetalert2";
 
 function DashboardAdmin() {
   const dispatch = useDispatch();
-  const clubName =JSON.parse((localStorage.getItem("clientName")));
+  const clubName = JSON.parse(localStorage.getItem("clientName"));
   const clientId = localStorage.getItem("clientId"); //* Se podria llegar a sacar del local storage.
   const image = JSON.parse(localStorage.getItem("bolicheimagen")); //* Se podria llegar a sacar del local storage.
-  console.log("SEGUN ESTO EL CLUB NAME es: ",clubName, "y el lenght es ", clubName.length)
-  
-  
-
+  console.log(
+    "SEGUN ESTO EL CLUB NAME es: ",
+    clubName,
+    "y el lenght es ",
+    clubName.length
+  );
 
   // useEffect(() => {
   //   if (clubName.length === 0) {
@@ -42,33 +44,24 @@ function DashboardAdmin() {
   //      setLoading(false);
   //   }
   // }, []);
-    
-   
-
-
 
   // if (loading) {
   //   // Muestra un indicador de carga o cualquier otro componente que desees mientras se están obteniendo los datos
   //   return <div>Cargando...</div>;
   // }
 
-
-  
-  const productsActive = useSelector((state) => state.productsActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
-  const collaboratorsActive = useSelector((state) => state.collaboratorsActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
-  const salesActive = useSelector((state) => state.salesActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
-  const adminConfigActive = useSelector((state) => state.adminConfigActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
-  const allBoliches = useSelector((state) => state.allBoliches);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const productsActive = useSelector((state) => state.productsActive); // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const collaboratorsActive = useSelector((state) => state.collaboratorsActive); // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const salesActive = useSelector((state) => state.salesActive); // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const adminConfigActive = useSelector((state) => state.adminConfigActive); // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const allBoliches = useSelector((state) => state.allBoliches); // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
 
   const actualClient = clubName; // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
 
-
-  console.log(clientId)
-    // useEffect(() => {
+  console.log(clientId);
+  // useEffect(() => {
   //   dispatch(getProducts(clubName));
   // }, []);
-
-  
 
   console.log(clubName, "clubName");
   const [loading, setLoading] = useState(false);
@@ -103,13 +96,13 @@ function DashboardAdmin() {
       text: `¿Quieres cerrar sesión?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "rgb(187, 131, 43)",
+      confirmButtonColor: "#3085d6",
       cancelButtonColor: "rgba(221, 51, 51, 0.9)",
       confirmButtonText: "Cerrar sesión",
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.clear()
+        localStorage.clear();
         dispatch(logOut());
       }
     });
@@ -141,7 +134,7 @@ function DashboardAdmin() {
               <IoSettingsSharp />
               Configuración
             </button>
-            <button className={style.btnCfg} onClick={openConfirmationLogOut}>
+            <button className={style.btnCfgLg} onClick={openConfirmationLogOut}>
               <RiLogoutBoxLine />
               Cerrar Sesión
             </button>
@@ -152,9 +145,9 @@ function DashboardAdmin() {
             <h1 className={style.h1}>DASHBOARD ADMINISTRADOR</h1>
           </div>
           <div className={style.dashboard}>
-            <img src={image} alt="logo-boliche" className={style.logoBoliche} />
+            {/* <img src={image} alt="logo-boliche" className={style.logoBoliche} /> */}
             {
-              <div>
+              <div className={style.dashboard2}>
                 {productsActive && <DashboardAdminStock />}
                 {salesActive && <DashboardAdminSales />}
                 {collaboratorsActive && <DashboardAdminEmployee />}
@@ -162,7 +155,12 @@ function DashboardAdmin() {
                 {!productsActive &&
                   !salesActive &&
                   !collaboratorsActive &&
-                  !adminConfigActive && <h3>Seleccione sección</h3>}
+                  !adminConfigActive && (
+                    <h3>
+                      Bienvenido a{" "}
+                      <span className={style.charlie}>{clubName}</span>!
+                    </h3>
+                  )}
               </div>
             }
             <img src={imgCharlie} className={style.imgCharlie}></img>
