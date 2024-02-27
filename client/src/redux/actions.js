@@ -34,6 +34,7 @@ import {
   GET_ALL_COLLABORATORS,
   SET_STATUS_BOLICHE,
   SELECT_CLIENT_IMAGE,
+  PUT_IMAGE
 } from "./actions-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -727,3 +728,33 @@ export const getOrderQRCode = () => {
     }
   };
 };
+
+export const putImage = (client, newImage) => {
+
+  const endpoint = `${URL_API}/${client}/image`;
+  console.log(client, newImage.path, "data");
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, newImage);
+
+      console.log(data, "dataAxios");
+
+      dispatch({ type: PUT_IMAGE, payload: data });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+// export const updateAdmin = (adminData, idAdmin, clubName) => {
+//   const endpoint = `${URL_API}/${clubName}/${idAdmin}`;
+
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.put(endpoint, adminData);
+//       return data;
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// };

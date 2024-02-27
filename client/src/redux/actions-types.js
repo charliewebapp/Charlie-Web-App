@@ -54,3 +54,5 @@ export const GET_SALES = "GET_SALES";
 export const POST_ORDER = "POST_ORDER";
 
 export const GET_ORDER_QR = "GET_ORDER_QR";
+
+export const PUT_IMAGE = "PUT_IMAGE";

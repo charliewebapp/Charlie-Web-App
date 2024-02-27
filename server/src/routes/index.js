@@ -49,6 +49,7 @@ const paymentAutorizations = require("../handlers/Controls/paymentAutorizations"
 const putPurchases = require("../controllers/Purchases/putPurchases");
 const deleteAuth = require("../controllers/MercadoPago/deleteAuth");
 const getAuth = require("../controllers/MercadoPago/getAuth");
+const putClientImageHandler = require("../handlers/Administrator/putClientImageHandler");
 
 const router = Router();
 
@@ -85,6 +86,7 @@ router.put("/:client/status", putClientStatusHandler);
 router.get("/administrator", getAllAdminsHandler);
 router.get("/:client/administrator", getAdminsClientsHandler);
 router.post("/:client/administrator", postAdminsHandler);
+router.put("/:client/image", upload.single("image"), putClientImageHandler);
 router.put("/:client/:administrator", putAdminsHandler);
 router.delete("/:client/:administratorId", deleteAdminsHandler);
 

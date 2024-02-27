@@ -34,6 +34,7 @@ import { handleSAdminStatusLogin } from "./redux/actions";
 //no borrar esto
 import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
+import FormUpdateImage from "./views/Admin/FormUpdateImage/FormUpdateImage";
 
 const URL_EMAIL = import.meta.env.VITE_EMAIL;
 const URL_PASSWORD = import.meta.env.VITE_PASSWORD;
@@ -214,6 +215,7 @@ console.log ("asi es antes de entrar al logion",sadminStatusLogin)
 
         <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
 
+        <Route path="/updateimage" element={requireAdminLogin(<FormUpdateImage />)} />
 
       </Routes>
     </>

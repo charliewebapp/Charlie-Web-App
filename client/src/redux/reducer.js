@@ -31,6 +31,7 @@ import {
   GET_ORDER_QR,
   GET_ALL_COLLABORATORS,
   SELECT_CLIENT_IMAGE,
+  PUT_IMAGE
 } from "./actions-types";
 
 const initialState = {
@@ -369,6 +370,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         orderqrdata: payload,
       };
+
+    case PUT_IMAGE:
+      return {
+        ...state,
+        selectClientImage: payload,
+      }
 
     default:
       return { ...state };
