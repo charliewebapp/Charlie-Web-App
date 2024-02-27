@@ -23,7 +23,7 @@ const categories = [
 function FormUpdateProductAdmin() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
   const allProductsState = useSelector((state) => state.allProducts);
 
   //Traer data del producto a editar

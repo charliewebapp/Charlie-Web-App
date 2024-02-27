@@ -22,7 +22,7 @@ const categories = [
 
 function FormPostProductAdmin() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
   const allProductsState = useSelector((state) => state.allProducts);
 
   //local state for input

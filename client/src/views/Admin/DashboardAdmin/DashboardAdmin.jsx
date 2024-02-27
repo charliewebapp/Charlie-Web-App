@@ -6,6 +6,9 @@ import {
   getProducts,
   getCollaborators,
   getSales,
+  getAdmins,
+  getBoliches,
+  getAllColaborators,
   logOut,
   handleAdminConfigView,
 } from "../../../redux/actions";
@@ -22,25 +25,53 @@ import Swal from "sweetalert2";
 
 function DashboardAdmin() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName =JSON.parse((localStorage.getItem("clientName")));
+  const clientId = localStorage.getItem("clientId"); //* Se podria llegar a sacar del local storage.
+  const image = JSON.parse(localStorage.getItem("bolicheimagen")); //* Se podria llegar a sacar del local storage.
+  console.log("SEGUN ESTO EL CLUB NAME es: ",clubName, "y el lenght es ", clubName.length)
+  
+  
 
-  const image = useSelector((state) => state.selectClientImage);
-  const productsActive = useSelector((state) => state.productsActive);
-  const collaboratorsActive = useSelector((state) => state.collaboratorsActive);
-  const salesActive = useSelector((state) => state.salesActive);
-  const adminConfigActive = useSelector((state) => state.adminConfigActive);
-  const allBoliches = useSelector((state) => state.allBoliches);
 
-  const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
-  const clientId = actualClient.id; //* Para enviar al reducer
   // useEffect(() => {
+  //   if (clubName.length === 0) {
+  //    console.log("Entro al useefect...")
+  //     fetchData();
+  //   } else {
+  //     console.log("Entro a la instancia false del USefect")
+  //      setLoading(false);
+  //   }
+  // }, []);
+    
+   
+
+
+
+  // if (loading) {
+  //   // Muestra un indicador de carga o cualquier otro componente que desees mientras se están obteniendo los datos
+  //   return <div>Cargando...</div>;
+  // }
+
+
+  
+  const productsActive = useSelector((state) => state.productsActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const collaboratorsActive = useSelector((state) => state.collaboratorsActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const salesActive = useSelector((state) => state.salesActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const adminConfigActive = useSelector((state) => state.adminConfigActive);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+  const allBoliches = useSelector((state) => state.allBoliches);// Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+
+  const actualClient = clubName; // Esta informacion es dinamica NO PUEDO PONERLA EN EL LOCAL STORAGE
+
+
+  console.log(clientId)
+    // useEffect(() => {
   //   dispatch(getProducts(clubName));
   // }, []);
 
-  const [loading, setLoading] = useState(false);
+  
 
   console.log(clubName, "clubName");
-
+  const [loading, setLoading] = useState(false);
   const handleStock = () => {
     if (!loading) {
       setLoading(true);
@@ -78,6 +109,7 @@ function DashboardAdmin() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.clear()
         dispatch(logOut());
       }
     });

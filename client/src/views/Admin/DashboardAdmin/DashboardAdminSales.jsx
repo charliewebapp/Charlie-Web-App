@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSales } from "../../../redux/actions";
 
 function DashboardAdminSales() {
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
   const allBoliches = useSelector((state) => state.allBoliches);
   const allSales = useSelector((state) => state.allSales);
   const [sortedSales, setSortedSales] = useState([]);
 
-  const actualClient = allBoliches.find((boliche) => boliche.name === clubName);
-  const clientId = actualClient.id;
+  const actualClient =JSON.parse((localStorage.getItem("clientName")));
+  const clientId = localStorage.getItem("clientId");
 
   const dispatch = useDispatch();
 

@@ -79,14 +79,20 @@ function LandingAdmin() {
 
       if (adminLogin.status === "active") {
         dispatch(handleAdminStatusLogin());
-        dispatch(adminIdLogged(adminLogin));
-
+        dispatch(adminIdLogged(adminLogin))
+       
+        ;
+        
         const clientFromAdmin = allBoliches.find(
           (boliche) => boliche.id === adminClient
-        );
-
-        const client = clientFromAdmin.name;
-        const image = clientFromAdmin.image;
+          );
+          
+          const client = clientFromAdmin.name;
+          const clientid = clientFromAdmin.id;
+          localStorage.setItem("clientName", JSON.stringify(client));
+          localStorage.setItem("clientId", clientid);
+        const image = clientFromAdmin.image
+        localStorage.setItem("bolicheimagen",  JSON.stringify(image));
 
         dispatch(selectClientAdminName(client));
         dispatch(selectClientImage(image));

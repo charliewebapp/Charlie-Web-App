@@ -161,7 +161,7 @@ import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 
 function DashboardAdminStock() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName =JSON.parse((localStorage.getItem("clientName")));
 
   const [productToDelete, setProductToDelete] = useState(null);
 

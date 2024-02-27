@@ -135,7 +135,7 @@ import Swal from "sweetalert2";
 
 function DashboardAdminEmployee() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName =JSON.parse((localStorage.getItem("clientName")));
   const allCollaboratorsState = useSelector((state) => state.allCollaborators);
 
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
