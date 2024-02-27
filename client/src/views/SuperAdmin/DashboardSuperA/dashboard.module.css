@@ -348,10 +348,57 @@
   padding: 10px;
 }
 
+.pMP{
+  font-size: 18px;
+  font-weight: 700;
+  margin: 10px;
+  margin-bottom: 60px;
+  font-style: normal;
+  display: flex;
+  align-items: start;
+}
+
+
+.buttonMP{
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px;
+  margin-bottom: 50px;
+  font-style: normal;
+  display: flex;
+  align-items: start;
+}
+
+
+.changePasswordAdmin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  /* border: 1px solid rgb(214, 214, 214); */
+  padding: 10px;
+}
+
 .FormPostAdminSA {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid rgb(214, 214, 214);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+.FormPutPssAdmin {
+  padding: 10px;
+  border-radius: 5px;
+  /* border: 1px solid rgb(214, 214, 214); */
   height: auto;
   display: flex;
   flex-direction: column;
@@ -710,16 +757,62 @@
   transition: ease 0.1s;
 }
 
+.condicionalBtnConfig {
+  display: flex;
+  justify-content: space-evenly;
+  height: 40px;
+  width: 100%;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.condicionalBtnConfig button {
+  width: 250px;
+  height: 40px;
+  border: none;
+  color: white;
+  background-color: #6d196a;
+  text-align: center;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 10px;
+}
+
+.condicionalBtnConfig button:hover {
+  background-color: #380036;
+  transition: ease 0.1s;
+}
+
 .container1 {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 100px;
   justify-content: center;
   width: 100%;
   font-weight: 700;
   font-style: italic;
   font-size: 20px;
 }
+
+.container2 {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+}
+
+
+
 
 .changeImage {
   padding: 10px;
