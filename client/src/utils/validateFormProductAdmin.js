@@ -18,8 +18,10 @@ export const validateFormProductAdmin = (dataP) => {
         if (dataP.description.length > 70) errors.description = "Debe contener como máximo 70 caracteres"
     }
     //PRICE
-    if (!dataP.price.length) errors.price = "Debe ingresar el precio del producto"
-    else {
+    // if (dataP.price.length === 0) errors.price = "Debe ingresar el precio del producto"
+    if (dataP.price === undefined || dataP.price === null) {
+        errors.price = "Debe ingresar el precio del producto";
+    } else {
         if (!regExpNumbers.test(dataP.price)) errors.price = "Debe contener solo números enteros"
         if (dataP.price <= 0) errors.price = "Debe ser mayor a 0"
     }

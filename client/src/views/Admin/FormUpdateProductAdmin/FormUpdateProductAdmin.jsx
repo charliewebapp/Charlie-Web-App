@@ -37,8 +37,8 @@ function FormUpdateProductAdmin() {
     image: productToUpdate.image,
     description: productToUpdate.description,
     price: productToUpdate.price,
-    stock: productToUpdate.stock,
-    category: productToUpdate.category,
+    stock: productToUpdate.stock || "",
+    category: productToUpdate.category || "",
   });
 
   //para verificar nombre no repetidos salvo producto a editar

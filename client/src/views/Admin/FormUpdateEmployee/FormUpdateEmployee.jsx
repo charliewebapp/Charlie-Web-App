@@ -28,6 +28,7 @@ function FormUpdateEmployee() {
     status: collaboratorToUpdate.status,
   });
 
+
   //local state errors
   const [errors, setErrors] = useState({
     name: "*",
@@ -48,6 +49,8 @@ function FormUpdateEmployee() {
       return updatedData;
     });
   };
+
+
 
   //! SUBMIT
   const handleSubmit = (event) => {
@@ -122,16 +125,6 @@ function FormUpdateEmployee() {
               />
               <span>{errors.lastname ? errors.lastname : null} </span>
 
-              {/* <label htmlFor="password"> Password: </label>
-              <input
-                type="text"
-                id="password"
-                key="password"
-                name="password"
-                value={collaboratorData.password}
-                onChange={handleChange}
-              />
-              <span>{errors.password ? errors.password : null} </span> */}
 
               <label htmlFor="mail"> E-mail: </label>
               <input
