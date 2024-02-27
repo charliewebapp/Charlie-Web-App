@@ -39,11 +39,11 @@ function FormUpdateClub() {
   }, [clubToUpdate]);
 
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre del club",
-    adress: "Ingrese la dirección del club",
-    city: "Ingrese la ciudad del club",
-    country: "Ingrese el país del club",
-    status: "Seleccione el estado del club",
+    name: "*",
+    adress: "*",
+    city: "*",
+    country: "*",
+    status: "*",
   });
 
   const handleChange = (event) => {

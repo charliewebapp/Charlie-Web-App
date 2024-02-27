@@ -45,10 +45,10 @@ function FormUpdateAdmin() {
   console.log(clubName, "clubName");
 
   const [errors, setErrors] = useState({
-    name_client: "Ingrese el nombre",
-    password: "Asigne una contraseña",
-    mail: "Ingrese el email",
-    status: "Ingrese el estado",
+    name_client: "*",
+    password: "*",
+    mail: "*",
+    status: "*",
   });
 
   const handleChange = (event) => {
@@ -123,7 +123,7 @@ function FormUpdateAdmin() {
               />
               <span>{errors.name_client ? errors.name_client : null} </span>
 
-              <label htmlFor="password"> Password: </label>
+              {/* <label htmlFor="password"> Password: </label>
               <input
                 type="text"
                 id="password"
@@ -132,7 +132,7 @@ function FormUpdateAdmin() {
                 value={adminData.password}
                 onChange={handleChange}
               />
-              <span>{errors.password ? errors.password : null} </span>
+              <span>{errors.password ? errors.password : null} </span> */}
 
               <label htmlFor="mail"> E-mail: </label>
               <input

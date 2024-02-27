@@ -24,7 +24,12 @@ function FormPostAdminSA() {
     ClientId: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name_client: "*",
+    password: "*",
+    mail: "*",
+    ClientId: "*",
+  });
 
   useEffect(() => {
     dispatch(getBoliches());
