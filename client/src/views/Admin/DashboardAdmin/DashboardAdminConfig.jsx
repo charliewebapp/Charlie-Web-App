@@ -199,12 +199,6 @@ function DashboardAdminConfig() {
                 Eliminar Conexión a Mercado Pago
               </button>
             )}
-            {existing && (
-              <button className={style.buttonConfig} onClick={deleteConexion}>
-                {" "}
-                Eliminar Conexión a Mercado Pago
-              </button>
-            )}
           </div>
         </div>
       )}
