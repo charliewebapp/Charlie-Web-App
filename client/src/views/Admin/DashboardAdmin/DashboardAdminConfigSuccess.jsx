@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
+import style from "./DashboardAdminConfigSuccess.module.css";
 
 const URL_API = import.meta.env.VITE_URL_API;
 
@@ -60,7 +60,9 @@ export default function DashboardAdminConfigSuccess({ location }) {
           <h2 className={style.h2}>
             Ha ocurrido un error al conectar mercadopago!
           </h2>
-          <h3 className={style.h2}>¡Intente en un par de minutos nuevamente!</h3>
+          <h3 className={style.h2}>
+            ¡Intente en un par de minutos nuevamente!
+          </h3>
           <button onClick={backHome} className={style.btnCreate}>
             Volver al Home
           </button>

@@ -140,7 +140,7 @@ function DashboardAdminConfig() {
 
   return (
     <div className={style.containerCONFIG}>
-      <div className={style.condicionalBtn}>
+      <div className={style.condicionalBtnConfig}>
         <button onClick={() => setActiveButton("container1")}>
           CONFIGURAR PERFIL
         </button>
@@ -150,9 +150,9 @@ function DashboardAdminConfig() {
       </div>
 
       {activeButton === "container1" && (
-        <div className={style.container1}>
-          <FormUpdateImage />
+        <div className={style.container2}>
           <FormUpdatePasswordAdmin />
+          <FormUpdateImage />
         </div>
       )}
       {activeButton === "container2" && (
@@ -168,7 +168,7 @@ function DashboardAdminConfig() {
               Conectar Mercado Pago
             </button>
             {dateTime ? (
-              <p>
+              <p className={style.pMP}>
                 Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)}{" "}
                 a las {formatHourTime(dateTime)}
               </p>
@@ -186,7 +186,7 @@ function DashboardAdminConfig() {
               </button>
             )}
             {existing && (
-              <span>
+              <span className={style.pMP}>
                 Este boton se habilitará 30 dias antes de caducar la conexion
               </span>
             )}

@@ -119,7 +119,7 @@ function FormUpdatePasswordAdmin() {
   };
 
   return (
-    <div className={style.changePassword}>
+    <div className={style.changePasswordAdmin}>
       <h2>Cambiar Contraseña</h2>
 
       <form onSubmit={handleSubmit} className={style.FormPostAdminSA}>
