@@ -828,6 +828,7 @@
 
 .changeImage h2 {
   margin-bottom: 9px;
+  margin-top: -5px; /* ACA */
 }
 
 .container2 {
@@ -849,11 +850,12 @@
 }
 
 .divImg {
-  width: 150px;
-  height: 150px;
+  width: 80px; /* ACA */
+  height: 80px; /* ACA */
   background-color: rgb(255, 255, 255);
   border-radius: 50%;
   border: 2px solid #380036;
+  margin: 5px; /* ACA */
 }
 .logoBoliche {
   border-radius: 50%;
