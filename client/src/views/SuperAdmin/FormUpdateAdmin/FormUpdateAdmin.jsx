@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getAdministrators, getBoliches } from "../../../redux/actions";
 import { validateFormAdmin } from "../../../utils/validateFormUpdateAdmin";
 import { updateAdmin } from "../../../redux/actions";
@@ -13,14 +13,16 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 function FormUpdateAdmin() {
   const dispatch = useDispatch();
   const [adminData, setAdminData] = useState({});
+  const navigate = useNavigate();
 
   const allAdmins = useSelector((state) => state.allAdministrators);
   const allBoliches = useSelector((state) => state.allBoliches);
-  console.log(allBoliches, "allBoliches");
+  // console.log(allBoliches, "allBoliches");
   const { idAdmin } = useParams();
 
   const adminToUpdate = allAdmins.find((admin) => admin.id === idAdmin);
-  console.log(adminToUpdate, "adminToUpdate");
+  // console.log(adminToUpdate, "adminToUpdate");
+  const adminsNOTToUpdate = allAdmins.filter((admin) => admin.id !== idAdmin);
 
   useEffect(() => {
     dispatch(getAdministrators());
@@ -41,8 +43,8 @@ function FormUpdateAdmin() {
 
   const club = allBoliches.find((club) => club.id === adminToUpdate.ClientId);
   const clubName = club.name;
-  console.log(club, "club");
-  console.log(clubName, "clubName");
+  // console.log(club, "club");
+  // console.log(clubName, "clubName");
 
   const [errors, setErrors] = useState({
     name_client: "*",
@@ -57,6 +59,15 @@ function FormUpdateAdmin() {
     setAdminData((prevData) => {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormAdmin(updatedData));
+
+      //No repita emails 
+      const repetedEmail = adminsNOTToUpdate.find(
+        (admin) =>
+          admin.mail.toLowerCase() === updatedData.mail.toLowerCase()
+      );
+      if (repetedEmail !== undefined) {
+        setErrors({ ...errors, mail: "Este email ya está registrado" });
+      }
 
       return updatedData;
     });
@@ -77,6 +88,9 @@ function FormUpdateAdmin() {
         text: "El administrador se editó correctamente",
         icon: "success",
         timer: "3000",
+        didClose: () => {
+          navigate("/superadmin/dashboard");
+        },
       });
     } catch (error) {
       console.log(error.message);

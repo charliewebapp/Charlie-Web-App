@@ -97,8 +97,10 @@ function FormUpdateProductAdmin() {
         icon: "success",
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
+        didClose: () => {
+          navigate(`/admin/${clubName}/dashboardAdmin`);
+        },
       });
-      navigate(`/admin/${clubName}/dashboardAdmin`)
     } catch (error) {
       //El sweet de error viene de actions
       console.log(error.message);
