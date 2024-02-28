@@ -201,7 +201,7 @@ function Profile() {
           <div key={item.id}>
             <p>Fecha: {formatDateTime(item.dateTime)}</p>
 
-            <button onClick={() => renderQr(item.paymentId)}>Ver Detalle de Compra</button>
+            <button className={styles.button} onClick={() => renderQr(item.paymentId)}>Ver Detalle de Compra</button>
           </div>
         ))}
       </div>

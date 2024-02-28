@@ -1,35 +1,4 @@
 @media only screen and (max-width: 767px) {
-.Profile {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    height: 100vh;
-    /* 100% del alto de la ventana */
-}
-
-.profileContainer {
-    background-color: #001625;
-    border: #fccf83 2px solid;
-    width: 300px;
-    height: 500px;
-    border-radius: 15px;
-}
-
-.profileButton {
-    width: 300px;
-    height: 50px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 15px;
-    background-color: #001625;
-    color: white;
-    cursor: pointer;
-    border: none;
-    outline: none;
-}
-}
-@media only screen and (min-width: 768px) {
     .Profile {
         display: flex;
         flex-direction: column;
@@ -38,7 +7,7 @@
         height: 100vh;
         /* 100% del alto de la ventana */
     }
-    
+
     .profileContainer {
         background-color: #001625;
         border: #fccf83 2px solid;
@@ -46,7 +15,7 @@
         height: 500px;
         border-radius: 15px;
     }
-    
+
     .profileButton {
         width: 300px;
         height: 50px;
@@ -59,4 +28,46 @@
         border: none;
         outline: none;
     }
+}
+
+@media only screen and (min-width: 768px) {
+    .Profile {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        height: 100vh;
+        /* 100% del alto de la ventana */
+    }
+
+    .profileContainer {
+        background-color: #001625;
+        border: #fccf83 2px solid;
+        width: 300px;
+        height: 500px;
+        border-radius: 15px;
+    }
+
+    .profileButton {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+        background-color: #001625;
+        color: white;
+        cursor: pointer;
+        border: none;
+        outline: none;
+    }
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
 }

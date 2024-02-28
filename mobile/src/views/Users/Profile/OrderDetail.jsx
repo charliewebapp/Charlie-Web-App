@@ -4,7 +4,7 @@ import OrderRejected from "./OrderRejected";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrderQRCode, getDetailQrCode } from "../../../redux/actions";
-import "./OrderDetail.module.css";
+import style from "./OrderDetail.module.css";
 
 function OrderDetail() {
   const dispatch = useDispatch();
@@ -37,31 +37,30 @@ function OrderDetail() {
 
   return (
     <div className="container">
-      {(detail.length > 0 && detail[0].status !== "rejected") ||
-        (cart.length > 0 && cart[0].status !== "rejected") ? (
+      {(cart.length > 0 && cart[0].status === "pending" || detail.length > 0 && detail[0].status === "pending") ? (
         <>
           <DetailQR />
-          <Link to={`/${clubName}/home`}>
-            <button>Regresar al comercio</button>
-          </Link>
         </>
       ) : cart.length > 0 && cart[0].status === "rejected" ? (
         <>
           <OrderRejected />
-          <Link to={`/${clubName}/home`}>
-            <button>Regresar al comercio</button>
-          </Link>
         </>
       ) : detail.length > 0 && detail[0].status === "rejected" ? (
         <>
-          <div className="h1">
+          <div className={style.h1}>
             <h1>Esta orden fue rechazada</h1>
-            <Link to={`/${clubName}/home`}>
-              <button>Regresar al comercio</button>
-            </Link>
+          </div>
+        </>
+      ) : detail.length > 0 && detail[0].status === "approved" ? (
+        <>
+          <div className={style.approved}>
+            <h1>Esta orden ya fue entregada</h1>
           </div>
         </>
       ) : null}
+      <Link to={`/${clubName}/home`}>
+        <button className={style.button}>Regresar al comercio</button>
+      </Link>
     </div>
   );
 }
