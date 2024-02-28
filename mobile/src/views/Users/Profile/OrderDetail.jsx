@@ -10,8 +10,8 @@ function OrderDetail() {
   const dispatch = useDispatch();
 
   const detail = useSelector((state) => state.detailQrCode);
-  const cartState = useSelector((state) => state.orderqrdata);
-  const cart = [cartState];
+  const cart = useSelector((state) => state.orderqrdata);
+
 
   console.log(cart, "cart en OD");
   console.log(detail, "detail en OD");
