@@ -4,13 +4,16 @@ const putPurchases = async (req, res) => {
     try {
         const { status } = req.body;
         const { PurchaseId } = req.params;
+        const { clientId } = req.params;
+        console.log("status: ",status,"PurchaseID: ",PurchaseId,"ClientId: ",clientId)
 
         const purchaseToUpdate = await Purchase.findOne({
             where: {
                 id: PurchaseId,
+                ClientId: clientId,
             },
         });
-
+console.log("purchase to update", purchaseToUpdate  )
         if (!purchaseToUpdate) {
             return res.status(404).json({ error: "Compra no encontrada" });
         }

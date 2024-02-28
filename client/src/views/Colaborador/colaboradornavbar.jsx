@@ -21,6 +21,7 @@ const ColaboradorNavbar = () => {
       confirmButtonText: "confirmar",
       showLoaderOnConfirm: true,
       preConfirm: () => {
+        localStorage.clear()
         dispatch(handleCollaboratorStatusLogout());
         return Promise.resolve();
       },

@@ -658,12 +658,12 @@ export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
 
 ////////////////////////QR ACTIONS ///////////////////////////
 
-export const acceptOrder = (status, clientName, purchaseId) => {
+export const acceptOrder = (status, clientName, purchaseId,bolicheid) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
         // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-        `${URL_API}/${clientName}/purchase/status/${purchaseId}`,
+        `${URL_API}/${clientName}/purchase/status/${bolicheid}/${purchaseId}`,
         status
       );
       // console.log(data)
@@ -681,12 +681,12 @@ export const acceptOrder = (status, clientName, purchaseId) => {
   };
 };
 
-export const rejectOrder = (status, clientName, purchaseId) => {
+export const rejectOrder = (status, clientName, purchaseId,bolicheid) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
         // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-        `${URL_API}/${clientName}/purchase/status/${purchaseId}`,
+        `${URL_API}/${clientName}/purchase/status/${bolicheid}/${purchaseId}`,
         status
       );
       // console.log(data)

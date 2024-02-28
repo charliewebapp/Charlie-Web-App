@@ -114,6 +114,8 @@ function LandingAdmin() {
       }
     } else if (collaboratorLogin) {
       const collaboratorClient = collaboratorLogin.ClientId;
+      localStorage.setItem("ColabClubId",JSON.stringify(collaboratorClient))
+
 
       if (collaboratorLogin.status === "active") {
         dispatch(handleCollaboratorStatusLogin());

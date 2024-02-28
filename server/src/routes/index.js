@@ -112,7 +112,7 @@ router.get("/collaborator", getAllCollaboratorHandler);
 
 //--------------colaborador
 
-router.put("/:client/purchase/status/:PurchaseId", putPurchases);
+router.put("/:client/purchase/status/:clientId/:PurchaseId", putPurchases);
 router.get("/:clientId/sales/:userId", getPurchases);
 
 //--------------consumidor

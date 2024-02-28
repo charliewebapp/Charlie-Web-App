@@ -6,24 +6,24 @@ import { changeColaboradorPassword, getBoliches } from "../../redux/actions";
 import { useSelector } from "react-redux";
 import style from "../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { validateFormUpdateColaborador } from "../../utils/validateFormUpdateColaborador";
+import { all } from "axios";
 
 const ColaboradorProfile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBoliches());
-  }, [dispatch]);
+  }, []);
 
   const allBoliches = useSelector((state) => state.allBoliches);
-
+console.log("estos son los boliches",allBoliches)
   const selectedColaborador = useSelector(
     (state) => state.selectColaboratorLogin
   );
   const colaboradorPassword = selectedColaborador.password;
   const colabClientID = selectedColaborador.ClientId;
   const colabname = selectedColaborador.name;
-
-  console.log(colaboradorPassword, "contraseña del colaborador");
+ 
 
   const club = allBoliches.find((boliche) => boliche.id === colabClientID);
 
