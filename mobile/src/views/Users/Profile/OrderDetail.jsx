@@ -15,11 +15,12 @@ function OrderDetail() {
 
   console.log(cart, "cart en OD");
   console.log(detail, "detail en OD");
+  console.log(cart[0].paymentId, "paymentId en OD");
 
   useEffect(() => {
-    let paymentId;
+    let paymentId = cart[0].paymentId;
     if (cart && cart.length > 0) {
-      paymentId = cart[0].paymentId;
+      paymentId
     }
     const intervalId = setInterval(() => {
       if (paymentId) {

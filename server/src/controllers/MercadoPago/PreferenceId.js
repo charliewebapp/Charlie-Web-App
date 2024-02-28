@@ -11,12 +11,12 @@ const PreferenceId = async (req, res) => {
       where: { name: clubName },
     });
     const clientId = clientSearched.dataValues.id;
-   
+
     const auth = await Authorizations.findOne({
       where: { ClientId: clientId },
     });
     const token = auth.dataValues.access_token;
-    console.log ("El token seg Emi es : "+ token)
+    console.log("El token seg Emi es : " + token)
     const client = new MercadoPagoConfig({
       accessToken: token,
     });
@@ -32,6 +32,7 @@ const PreferenceId = async (req, res) => {
 
       },
       notification_url: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
+      auto_return: "approved",
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });
