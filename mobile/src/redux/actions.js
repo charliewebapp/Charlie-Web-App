@@ -316,7 +316,7 @@ export const getDetailQrCode = (paymentId) => {
       const { data } = await axios.get(
         `${URL_API}/detailPurchase/${paymentId}`
       );
-      dispatch({ type: GET_DETAIL_QR, payload: data });
+      dispatch({ type: GET_DETAIL_QR, payload: [data] });
     } catch (error) {
       console.error(error); // Log the error to the console
       window.alert("No se ha creado la orden. " + error.message);
