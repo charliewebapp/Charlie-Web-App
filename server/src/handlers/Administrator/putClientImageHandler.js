@@ -7,12 +7,12 @@ const putClientImageHandler = async (req, res) => {
 
         const newImage = await cloudinary.uploader.upload(req.file.path);
         const newData = newImage.url;  // Utiliza solo la URL de la imagen
-
+        console.log(newData);
         const { client } = req.params;
         const clientMinus = client.toLowerCase();
 
         const updateImage = await putImageClient(clientMinus, newData);
-
+        console.log(updateImage);
         return res.status(201).json(updateImage);
     } catch (error) {
         return res.status(500).json({ error: error.message });

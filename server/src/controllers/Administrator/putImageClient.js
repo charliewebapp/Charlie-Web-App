@@ -10,6 +10,7 @@ const putClientImage = async (client, newImageUrl) => {
 
     const clientId = clientSearched.dataValues.id;
 
+    console.log("clientid", clientId);
     await Client.update({
         image: newImageUrl,
     }, {
@@ -17,7 +18,7 @@ const putClientImage = async (client, newImageUrl) => {
             id: clientId
         }
     });
-
+    
     // Actualizar el objeto clientSearched con el nuevo valor de la imagen
     clientSearched.dataValues.image = newImageUrl;
 
