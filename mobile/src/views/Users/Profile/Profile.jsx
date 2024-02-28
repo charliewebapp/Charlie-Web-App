@@ -29,7 +29,7 @@ function Profile() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.clear()
+        localStorage.clear();
         logout();
       }
     });
@@ -41,11 +41,10 @@ function Profile() {
   const usuario = useSelector((state) => state.myUser);
   const myUserID = usuario.id;
 
-  console.log(allOrders, "allOrders")
+  console.log(allOrders, "allOrders");
 
-  console.log(bolicheID, "bolicheID")
-  console.log(myUserID, "myUserID")
-
+  console.log(bolicheID, "bolicheID");
+  console.log(myUserID, "myUserID");
 
   const [history, setHistory] = useState([]);
 
@@ -76,7 +75,7 @@ function Profile() {
 
   useEffect(() => {
     searchHistory();
-    dispatch(getAllOrders(bolicheID, myUserID))
+    dispatch(getAllOrders(bolicheID, myUserID));
   }, [window.location.href]);
 
   const formatDateTime = (dateTimeString) => {
@@ -111,10 +110,11 @@ function Profile() {
   const renderQr = (paymentId) => {
     console.log(paymentId, "paymentId");
     setIsLoading(true);
-    dispatch(getDetailQrCode(paymentId)).finally(() => navigate("/orderdetail"));
+    dispatch(getDetailQrCode(paymentId)).finally(() =>
+      navigate("/orderdetail")
+    );
     //!pasar el id de la orden
   };
-
 
   // const historyHarc = [
   //   {
@@ -197,13 +197,18 @@ function Profile() {
         {isLoading ? <div>Loading...</div> : null}
         <h2>HISTORIAL DE PEDIDOS </h2>
 
-        {allOrders.map((item) => (
-          <div key={item.id}>
-            <p>Fecha: {formatDateTime(item.dateTime)}</p>
+        <div className={styles.scroll}>
+          {allOrders.map((item) => (
+            <div key={item.id}>
+              <p>Fecha: {formatDateTime(item.dateTime)}</p>
 
-            <button className={styles.button} onClick={() => renderQr(item.paymentId)}>Ver Detalle de Compra</button>
-          </div>
-        ))}
+              <button onClick={() => renderQr(item.paymentId)}>
+                Ver Detalle de Compra
+              </button>
+            </div>
+          ))}
+        </div>
+
       </div>
       <button
         className={styles.profileButton}

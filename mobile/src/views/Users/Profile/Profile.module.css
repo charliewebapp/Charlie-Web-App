@@ -16,18 +16,27 @@
         border-radius: 15px;
     }
 
-    .profileButton {
-        width: 300px;
-        height: 50px;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 15px;
-        background-color: #001625;
-        color: white;
-        cursor: pointer;
-        border: none;
-        outline: none;
-    }
+
+.scroll {
+    max-height: 431px; /* Altura máxima para activar la barra de desplazamiento */
+    min-width: 100%;
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+.profileButton {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    background-color: #001625;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
 }
 
 @media only screen and (min-width: 768px) {
