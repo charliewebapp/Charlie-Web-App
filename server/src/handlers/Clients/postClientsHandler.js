@@ -10,6 +10,14 @@ const cloudinary = require("cloudinary").v2;
 
 const postClientsHandler = async function (req, res) {
   try {
+    if (!req.file) { const { name, adress, city } = req.body;
+    console.log(name, adress, city, "Estos son los datos");
+    const nameMinus = name.toLowerCase();
+    const response = await postClients(nameMinus, adress, city);
+    res.status(201).json(response);
+  
+      
+    } 
     const image = await cloudinary.uploader.upload(req.file.path);
     const imageUrl = image.url;
     const { name, adress, city } = req.body;
