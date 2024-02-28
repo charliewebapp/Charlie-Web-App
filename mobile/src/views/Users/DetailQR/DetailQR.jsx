@@ -55,6 +55,8 @@ function DetailQR() {
         x: product.quantity,
       })),
       status: detail[0].status,
+      club: detail[0].client.name,
+      id: detail[0].id,
     };
 
     cartString2 = JSON.stringify([mappedData2]);

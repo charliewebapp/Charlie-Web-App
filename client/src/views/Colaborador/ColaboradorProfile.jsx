@@ -21,7 +21,7 @@ const ColaboradorProfile = () => {
   );
   const colaboradorPassword = selectedColaborador.password;
   const colabClientID = selectedColaborador.ClientId;
-  const colabname = selectedColaborador.name;
+  const colabID = selectedColaborador.id;
 
   console.log(colaboradorPassword, "contraseña del colaborador");
 
@@ -31,7 +31,7 @@ const ColaboradorProfile = () => {
 
   console.log(clubname, "club name");
 
-  console.log(colabname, "nombre del colaborador");
+  console.log(colabID, "nombre del colaborador");
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -91,7 +91,7 @@ const ColaboradorProfile = () => {
         confirmButtonText: "confirmar",
         showLoaderOnConfirm: true,
         preConfirm: () => {
-          dispatch(changeColaboradorPassword(clubname, colabname, newPassword));
+          dispatch(changeColaboradorPassword(clubname, colabID, newPassword));
           return Promise.resolve();
         },
       }).then((result) => {
