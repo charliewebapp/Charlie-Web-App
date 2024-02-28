@@ -151,8 +151,8 @@ function DashboardAdminConfig() {
 
       {activeButton === "container1" && (
         <div className={style.container2}>
-          <FormUpdatePasswordAdmin />
           <FormUpdateImage />
+          <FormUpdatePasswordAdmin />
         </div>
       )}
       {activeButton === "container2" && (

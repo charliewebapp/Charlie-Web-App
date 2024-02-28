@@ -56,6 +56,8 @@ function LandingAdmin() {
     );
   };
 
+  const selectAdminID = useSelector((state) => state.selectAdminLogin);
+  const adminID = selectAdminID.id;
   const getAllAdmins = useSelector((state) => state.getAllAdmins);
   const allBoliches = useSelector((state) => state.allBoliches);
   const getCollaborators = useSelector((state) => state.collaborators);
@@ -89,6 +91,8 @@ function LandingAdmin() {
         const clientid = clientFromAdmin.id;
         localStorage.setItem("clientName", JSON.stringify(client));
         localStorage.setItem("clientId", clientid);
+
+        localStorage.setItem("adminID", adminID);
         const image = clientFromAdmin.image;
         localStorage.setItem("bolicheimagen", JSON.stringify(image));
 

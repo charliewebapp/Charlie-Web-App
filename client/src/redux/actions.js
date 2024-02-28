@@ -34,7 +34,8 @@ import {
   GET_ALL_COLLABORATORS,
   SET_STATUS_BOLICHE,
   SELECT_CLIENT_IMAGE,
-  PUT_IMAGE
+  PUT_IMAGE,
+  UPDATE_ADMIN,
 } from "./actions-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -356,7 +357,12 @@ export const updateAdmin = (adminData, idAdmin, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(endpoint, adminData);
-      return data;
+      console.log("data update admin", data); //llega null
+
+      return dispatch({
+        type: UPDATE_ADMIN,
+        payload: data,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -657,7 +663,9 @@ export const acceptOrder = (status, clientName, purchaseId) => {
     try {
       const { data } = await axios.put(
         // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-        `${URL_API}/${clientName}/purchase/status/${purchaseId}`, status);
+        `${URL_API}/${clientName}/purchase/status/${purchaseId}`,
+        status
+      );
       // console.log(data)
       // if (data) {
       //     dispatch({
@@ -678,7 +686,9 @@ export const rejectOrder = (status, clientName, purchaseId) => {
     try {
       const { data } = await axios.put(
         // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
-        `${URL_API}/${clientName}/purchase/status/${purchaseId}`, status);
+        `${URL_API}/${clientName}/purchase/status/${purchaseId}`,
+        status
+      );
       // console.log(data)
       // if (data) {
       //     dispatch({
@@ -730,18 +740,17 @@ export const getOrderQRCode = () => {
 };
 
 export const putImage = (clubName, formData) => {
-
   const endpoint = `${URL_API}/${clubName}/image`;
   console.log(endpoint);
   return async (dispatch) => {
     try {
-      console.log('entrando al axios');
+      console.log("entrando al axios");
       const { data } = await axios.put(endpoint, formData);
-      console.log('axios correcto');
+      console.log("axios correcto");
       dispatch({ type: PUT_IMAGE, payload: data });
     } catch (error) {
-      console.log('fallo el axios');
+      console.log("fallo el axios");
       console.error(error);
     }
-  }
-}
+  };
+};
