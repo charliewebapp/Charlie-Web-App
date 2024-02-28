@@ -196,6 +196,7 @@ function Profile() {
       <div className={styles.profileContainer}>
         {isLoading ? <div>Loading...</div> : null}
         <h2>HISTORIAL DE PEDIDOS </h2>
+
         <div className={styles.scroll}>
           {allOrders.map((item) => (
             <div key={item.id}>
@@ -207,6 +208,7 @@ function Profile() {
             </div>
           ))}
         </div>
+
       </div>
       <button
         className={styles.profileButton}

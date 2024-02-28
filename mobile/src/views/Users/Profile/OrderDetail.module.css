@@ -9,13 +9,19 @@
   background-color: #f5f5f5;
 }
 
-h1 {
+.h1 {
   color: #ee4a44;
   font-size: 30px;
   text-align: center;
 }
 
-button {
+.approved {
+  color: #43F85E;
+  font-size: 30px;
+  text-align: center;
+}
+
+.button {
   padding: 10px 20px;
   border: none;
   background-color: #007bff;
@@ -25,15 +31,15 @@ button {
   font-size: 1em;
 }
 
-button:hover {
+.button:hover {
   background-color: #0056b3;
 }
 
-button:active {
+.button:active {
   background-color: #003d80;
 }
 
-button:disabled {
+.button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
