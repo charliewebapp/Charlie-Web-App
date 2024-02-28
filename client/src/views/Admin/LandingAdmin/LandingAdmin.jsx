@@ -91,6 +91,7 @@ function LandingAdmin() {
         const clientid = clientFromAdmin.id;
         localStorage.setItem("clientName", JSON.stringify(client));
         localStorage.setItem("clientId", clientid);
+
         localStorage.setItem("adminID", adminID);
         const image = clientFromAdmin.image;
         localStorage.setItem("bolicheimagen", JSON.stringify(image));
@@ -157,6 +158,14 @@ function LandingAdmin() {
     loginUsers(userData);
   };
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={style.containerSAA}>
       <div className={style.container1SA}>
@@ -214,7 +223,11 @@ function LandingAdmin() {
                 )}
               </div>
             </div>
-            <button type="submit" className={style.btnLogin}>
+            <button
+              type="submit"
+              className={style.btnLogin}
+              disabled={isButtonDisabled}
+            >
               Iniciar Sesión
             </button>
           </form>

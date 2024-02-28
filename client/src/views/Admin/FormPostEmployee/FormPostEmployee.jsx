@@ -13,6 +13,8 @@ import { IoSettingsSharp } from "react-icons/io5";
 function FormPostEmployee() {
   const dispatch = useDispatch();
   const clubName = JSON.parse((localStorage.getItem("clientName")));
+  // trae los collabs de todos los boliches
+  const collaboratorsState = useSelector(state => state.collaborators)
 
   //local state for input
   const [collaboratorData, setCollaboratorData] = useState({
@@ -39,6 +41,15 @@ function FormPostEmployee() {
     setCollaboratorData((prevData) => {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormEmployeeAdmin(updatedData));
+
+      //No repita emails
+      const repetedEmail = collaboratorsState.find(
+        (collab) =>
+          collab.mail.toLowerCase() === updatedData.mail.toLowerCase()
+      );
+      if (repetedEmail !== undefined) {
+        setErrors({ ...errors, mail: "Este email ya está registrado" });
+      }
 
       return updatedData;
     });
