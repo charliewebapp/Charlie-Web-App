@@ -79,20 +79,18 @@ function LandingAdmin() {
 
       if (adminLogin.status === "active") {
         dispatch(handleAdminStatusLogin());
-        dispatch(adminIdLogged(adminLogin))
-       
-        ;
-        
+        dispatch(adminIdLogged(adminLogin));
+
         const clientFromAdmin = allBoliches.find(
           (boliche) => boliche.id === adminClient
-          );
-          
-          const client = clientFromAdmin.name;
-          const clientid = clientFromAdmin.id;
-          localStorage.setItem("clientName", JSON.stringify(client));
-          localStorage.setItem("clientId", clientid);
-        const image = clientFromAdmin.image
-        localStorage.setItem("bolicheimagen",  JSON.stringify(image));
+        );
+
+        const client = clientFromAdmin.name;
+        const clientid = clientFromAdmin.id;
+        localStorage.setItem("clientName", JSON.stringify(client));
+        localStorage.setItem("clientId", clientid);
+        const image = clientFromAdmin.image;
+        localStorage.setItem("bolicheimagen", JSON.stringify(image));
 
         dispatch(selectClientAdminName(client));
         dispatch(selectClientImage(image));
@@ -156,6 +154,14 @@ function LandingAdmin() {
     loginUsers(userData);
   };
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={style.containerSAA}>
       <div className={style.container1SA}>
@@ -213,7 +219,11 @@ function LandingAdmin() {
                 )}
               </div>
             </div>
-            <button type="submit" className={style.btnLogin}>
+            <button
+              type="submit"
+              className={style.btnLogin}
+              disabled={isButtonDisabled}
+            >
               Iniciar Sesión
             </button>
           </form>
