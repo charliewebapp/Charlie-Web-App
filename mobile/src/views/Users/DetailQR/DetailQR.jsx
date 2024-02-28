@@ -10,11 +10,13 @@ function DetailQR() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.detailQrCode);
-  const cart = useSelector((state) => state.orderqrdata);
+  const cartArray = useSelector((state) => state.orderqrdata);
 
 
-  console.log(cart, "cart en DQR");
+  console.log(cartArray, "cartArray en DQR");
   console.log(detail, "detail en DQR")
+
+  console.log(cartArray[0].cart, "cartArray[0] en DQR")
 
   // States for managing the modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -25,22 +27,22 @@ function DetailQR() {
   // }, [dispatch]);
 
   useEffect(() => {
-    if (cart.length !== 0 || detail) {
+    if (cartArray.length !== 0 || detail) {
       setIsLoading(false);
     }
-  }, [cart, detail]);
+  }, [cartArray, detail]);
   let mappedData, cartString, mappedData2, cartString2;
 
-  if (cart && cart.length > 0) {
+  if (cartArray && cartArray.length > 0) {
     // Check if 'cart' exists and has elements
     mappedData = {
-      cart: cart.map((product) => ({
-        name: product.cart[0].name,
-        quantity: product.cart[0].quantity,
+      cart: cartArray[0].cart.map((product) => ({
+        name: product.name,
+        quantity: product.quantity,
       })),
-      status: cart[0].status,
-      club: cart[0].client.name,
-      id: cart[0].id,
+      status: cartArray[0].status,
+      club: cartArray[0].client.name,
+      id: cartArray[0].id,
     };
 
     console.log(mappedData, "mappedData")
@@ -51,7 +53,7 @@ function DetailQR() {
       status: detail.status,
       cart: detail.cart.map((product) => ({
         name: product.name,
-        quantity: product.quantity,
+        x: product.quantity,
       })),
     };
 
@@ -75,7 +77,7 @@ function DetailQR() {
     <div className={style.container}>
       {isLoading ? (
         <div>Loading...</div>
-      ) : cart && cart.length > 0 ? (
+      ) : cartArray && cartArray.length > 0 ? (
         <>
           <h1 className={style.h1}>Detalle de la orden</h1>
           <h2 className={style.h2}>Acercate a la barra con tu codigo</h2>
@@ -83,7 +85,7 @@ function DetailQR() {
             <QRCode value={cartString} />
           </div>
           {/* Button to open the modal */}
-          <button onClick={() => openModal(cart)}>Ver productos</button>
+          <button onClick={() => openModal(cartArray)}>Ver productos</button>
         </>
       )
         : detail ? (
