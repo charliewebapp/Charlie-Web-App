@@ -348,7 +348,7 @@
   padding: 10px;
 }
 
-.pMP{
+.pMP {
   font-size: 18px;
   font-weight: 700;
   margin: 10px;
@@ -358,8 +358,7 @@
   align-items: start;
 }
 
-
-.buttonMP{
+.buttonMP {
   font-size: 14px;
   font-weight: 700;
   margin: 15px;
@@ -368,7 +367,6 @@
   display: flex;
   align-items: start;
 }
-
 
 .changePasswordAdmin {
   display: flex;
@@ -502,7 +500,7 @@
 
 .buttonConfig:disabled {
   background-color: #a0a0a0;
-  cursor: not-allowed; 
+  cursor: not-allowed;
 }
 
 .buttonConfigDelete {
@@ -816,9 +814,6 @@
   font-size: 20px;
 }
 
-
-
-
 .changeImage {
   padding: 10px;
   display: flex;
@@ -985,6 +980,102 @@
   margin: 0;
   font-size: 12px;
   font-weight: 500;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #1b1b2f;
+  color: #a3bcb6;
+  margin-top: 20px;
+  width: 80%;
+  font-size: 20px;
+}
+
+.status {
+  color: #f7a1a5;
+  font-size: 25px;
+}
+
+.btnColab {
+  background-color: #229116 !important;
+  color: #fff;
+  font-size: 16px !important;
+
+  padding: 10px !important;
+  border: none !important;
+  cursor: pointer !important;
+  width: 40% !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  box-sizing: border-box !important;
+  height: 40px;
+}
+.btnColabR {
+  color: #fff !important;
+  font-size: 14px !important;
+  padding: 5px !important;
+  border: none !important;
+  cursor: pointer !important;
+  width: 40% !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  box-sizing: border-box !important;
+  background-color: #c30000 !important;
+  height: 40px;
+}
+.containerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.btnColabRefresh {
+  color: #fff !important;
+  font-size: 14px !important;
+  margin: 10px 0 20px 0 !important;
+  padding: 5px !important;
+  border: none !important;
+  cursor: pointer !important;
+  width: 83% !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  box-sizing: border-box !important;
+  background-color: #380036 !important;
+  height: 40px;
+}
+
+.containerColab {
+  width: 100%;
+  background: #fafafa;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.divRefresh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.productsContainer {
+  width: 100%;
+  min-height: 300px;
+  justify-content: center;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.products {
+  font-size: 18px;
 }
 
 /*  //? ///////////////////////// LOGIN COLABORADOR STYLES ///////////////////////////////////////  */

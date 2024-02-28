@@ -11,7 +11,9 @@ function OrderDetail() {
 
   const detail = useSelector((state) => state.detailQrCode);
   const cart = useSelector((state) => state.orderqrdata);
+  const clubName = useSelector((state) => state.myBoliche);
 
+  console.log(clubName, "clubName en OD");
 
   console.log(cart, "cart en OD");
   console.log(detail, "detail en OD");
@@ -20,7 +22,7 @@ function OrderDetail() {
   useEffect(() => {
     let paymentId = cart[0].paymentId;
     if (cart && cart.length > 0) {
-      paymentId
+      paymentId;
     }
     const intervalId = setInterval(() => {
       if (paymentId) {
@@ -31,21 +33,20 @@ function OrderDetail() {
     return () => clearInterval(intervalId);
   }, []);
 
-
   return (
     <div className="container">
       {(detail.length > 0 && detail[0].status !== "rejected") ||
-        (cart.length > 0 && cart[0].status !== "rejected") ? (
+      (cart.length > 0 && cart[0].status !== "rejected") ? (
         <>
           <DetailQR />
-          <Link to="/:clubName/home">
+          <Link to={`/${clubName}/home`}>
             <button>Regresar al comercio</button>
           </Link>
         </>
       ) : cart.length > 0 && cart[0].status === "rejected" ? (
         <>
           <OrderRejected />
-          <Link to="/:clubName/home">
+          <Link to={`/${clubName}/home`}>
             <button>Regresar al comercio</button>
           </Link>
         </>
