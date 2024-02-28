@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import FormUpdatePasswordAdmin from "../FormUpdatePasswordAdmin/FormUpdatePasswordAdmin";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import FormUpdateImage from "../FormUpdateImage/FormUpdateImage";
+import Swal from "sweetalert2";
 const URL_API = import.meta.env.VITE_URL_API;
+
+
+
 function DashboardAdminConfig() {
   const { clubName } = useParams();
+  const navigate = useNavigate();
   const URL_ADMIN = import.meta.env.VITE_URL_ADMIN;
   const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;
   const [expire, setExpire] = useState(0);
@@ -23,7 +28,8 @@ function DashboardAdminConfig() {
     localStorage.setItem("pathname", clubName);
     const state = uuidv4();
     const authorizationUrl = `https://auth.mercadopago.com/authorization?client_id=${clientId}&response_type=code&platform_id=mp&state=${state}&redirect_uri=${urlSuccess}`;
-    window.open(authorizationUrl);
+    // window.open(authorizationUrl);
+    window.location.href = authorizationUrl;
   };
 
   const date = async () => {
@@ -59,6 +65,23 @@ function DashboardAdminConfig() {
       return res.status(500).json({ error: error.message });
     }
   };
+  const deleteConexionAlert = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: `¿Quieres eliminar la conexión a Mercado Pago?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "rgba(221, 51, 51, 0.9)",
+      confirmButtonText: "Eliminar conexión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteConexion()
+      }
+    })
+  }
+
 
   const deleteConexion = async () => {
     try {
@@ -67,11 +90,23 @@ function DashboardAdminConfig() {
       });
       console.log(data);
       if (data) {
-        window.alert("Se ha eliminado exitosamente");
+        Swal.fire({
+          title: "Éxito",
+          text: "La conexión se eliminó correctamente. Aguarde unos instantes para ver los cambios",
+          icon: "success",
+          timer: "5000",
+          confirmButtonColor: "rgb(187, 131, 43)",
+        })
       }
-      existingConection();
+
     } catch (error) {
-      window.alert("no se pudo eliminar");
+      Swal.fire({
+        title: "Error",
+        text: `No se pudo eliminar la conexión de Mercado Pago.`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
       return res.status(500).json({ error: error.message });
     }
   };
@@ -157,8 +192,8 @@ function DashboardAdminConfig() {
       )}
       {activeButton === "container2" && (
         <div className={style.container2}>
-          <h2 className={style.h2}>Metodos de pago</h2>
-          <div className={style.containerButton}>
+          <h2 className={style.h2}>Métodos de pago</h2>
+          <div className={style.containerButtonMP}>
             <button
               className={style.buttonConfig}
               onClick={authorization}
@@ -169,7 +204,7 @@ function DashboardAdminConfig() {
             </button>
             {dateTime ? (
               <p className={style.pMP}>
-                Su conexion a Mercado Pago caduca el {formatDateTime(dateTime)}{" "}
+                Su conexión a Mercado Pago caduca el {formatDateTime(dateTime)}{" "}
                 a las {formatHourTime(dateTime)}
               </p>
             ) : (
@@ -187,13 +222,13 @@ function DashboardAdminConfig() {
             )}
             {existing && (
               <span className={style.pMP}>
-                Este boton se habilitará 30 dias antes de caducar la conexion
+                Este botón se habilitará 30 dias antes de caducar la conexión
               </span>
             )}
             {existing && (
               <button
                 className={style.buttonConfigDelete}
-                onClick={deleteConexion}
+                onClick={deleteConexionAlert}
               >
                 {" "}
                 Eliminar Conexión a Mercado Pago
