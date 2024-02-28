@@ -41,6 +41,7 @@ function Profile() {
   const usuario = useSelector((state) => state.myUser);
   const myUserID = usuario.id;
 
+  console.log(allOrders, "allOrders")
 
   console.log(bolicheID, "bolicheID")
   console.log(myUserID, "myUserID")
@@ -67,7 +68,6 @@ function Profile() {
         `${URL_API}/${clubName}/searchHistory`,
         body
       );
-      console.log(data);
       setHistory(data);
     } catch (error) {
       console.error("Error al enviar la solicitud al servidor:", error);

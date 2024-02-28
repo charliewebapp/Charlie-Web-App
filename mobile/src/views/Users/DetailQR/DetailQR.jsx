@@ -16,7 +16,7 @@ function DetailQR() {
   console.log(cartArray, "cartArray en DQR");
   console.log(detail, "detail en DQR")
 
-  console.log(cartArray[0].cart, "cartArray[0] en DQR")
+  // console.log(cartArray[0].cart, "cartArray[0] en DQR")
 
   // States for managing the modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -50,11 +50,11 @@ function DetailQR() {
     cartString = JSON.stringify([mappedData]);
   } else if (detail) {
     mappedData2 = {
-      status: detail.status,
-      cart: detail.cart.map((product) => ({
+      cart: detail[0].cart.map((product) => ({
         name: product.name,
         x: product.quantity,
       })),
+      status: detail.status,
     };
 
     cartString2 = JSON.stringify([mappedData2]);
@@ -94,7 +94,7 @@ function DetailQR() {
               <QRCode value={cartString2} />
             </div>
             {/* Button to open the modal */}
-            <button onClick={() => openModal(detail.cart)}>Ver productos</button>
+            <button onClick={() => openModal(detail[0].cart)}>Ver productos</button>
 
           </>
         ) : null}
