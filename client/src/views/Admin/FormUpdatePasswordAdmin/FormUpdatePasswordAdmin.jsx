@@ -4,17 +4,29 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { useParams } from "react-router-dom";
-import { updateAdmin } from "../../../redux/actions";
+import { updateAdmin, adminIdLogged } from "../../../redux/actions";
 import Swal from "sweetalert2";
 function FormUpdatePasswordAdmin() {
   const dispatch = useDispatch();
   const selectAdminID = useSelector((state) => state.selectAdminLogin);
   const { clubName } = useParams();
 
-  const adminID = selectAdminID.id;
+  console.log("selectedAdminLogin ", selectAdminID);
+
+  const adminID = localStorage.getItem("adminID");
+  console.log("selected admin id ", adminID);
+
+  const adminGlobal = selectAdminID.id;
+  console.log("admin global ", adminGlobal);
+
+  // const idAdminTernario = adminID ? adminID : adminGlobal;
+
+  // useEffect(() => {
+  //   adminIdLogged(idAdminTernario);
+  // }, [selectAdminID]);
 
   const currentPassword = selectAdminID.password;
-  console.log(adminID, "adminID", clubName, "clubName");
+
   const [currentPasswordInput, setCurrentPasswordInput] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");

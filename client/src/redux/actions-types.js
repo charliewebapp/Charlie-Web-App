@@ -37,6 +37,7 @@ export const ADMIN_STATUS_LOGIN = "ADMIN_STATUS_LOGIN";
 export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 export const ADMIN_CONFIG_VIEW = "ADMIN_CONFIG_VIEW";
 export const ADMIN_ID_LOGGED = "ADMIN_ID_LOGGED";
+export const UPDATE_ADMIN = "UPDATE_ADMIN";
 
 //! login colaborador
 export const COLLABORATOR_STATUS_LOGIN = "COLLABORATOR_STATUS_LOGIN";
