@@ -11,15 +11,19 @@ import { FaArrowLeft } from "react-icons/fa";
 function FormUpdateEmployee() {
   const dispatch = useDispatch();
   const clubName = useSelector((state) => state.selectClientAdmin);
+  // trae los collabs de TODOS los boliches
+  const collaboratorsState = useSelector(state => state.collaborators)
   const navigate = useNavigate();
 
-  // CON ESTADO GOBAL REDUX
+  // AllCollaborators del mismo boliche
   const allCollaboratorsState = useSelector((state) => state.allCollaborators);
   const { idCollaborator } = useParams();
+
 
   const collaboratorToUpdate = allCollaboratorsState.find(
     (collaborator) => collaborator.id === idCollaborator
   );
+
   const [collaboratorData, setCollaboratorData] = useState({
     name: collaboratorToUpdate.name,
     lastname: collaboratorToUpdate.lastname,
@@ -38,6 +42,10 @@ function FormUpdateEmployee() {
     status: "*",
   });
 
+  const collaboratorsNOTToUpdate = collaboratorsState.filter(
+    (collaborator) => collaborator.id !== idCollaborator
+  );
+
   //onChange inputs
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -45,6 +53,15 @@ function FormUpdateEmployee() {
     setCollaboratorData((prevData) => {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormEmployeeAdmin(updatedData));
+
+      const repetedEmail = collaboratorsNOTToUpdate.find(
+        (collab) =>
+          collab.mail.toLowerCase() === updatedData.mail.toLowerCase()
+      );
+      if (repetedEmail !== undefined) {
+        setErrors({ ...errors, mail: "Este email ya está registrado" });
+      }
+
 
       return updatedData;
     });
@@ -70,8 +87,11 @@ function FormUpdateEmployee() {
         icon: "success",
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
+        didClose: () => {
+          navigate(`/admin/${clubName}/dashboardAdmin`);
+        },
       });
-      navigate(`/admin/${clubName}/dashboardAdmin`)
+
     } catch (error) {
       //El sweet de error viene de actions
       console.log(error.message);

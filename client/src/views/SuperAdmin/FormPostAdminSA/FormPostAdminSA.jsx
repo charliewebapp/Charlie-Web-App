@@ -13,6 +13,7 @@ function FormPostAdminSA() {
   const navigate = useNavigate();
   const [clientId, setClientId] = useState("");
   const [selectedName, setSelectedName] = useState("");
+  const administratorsState = useSelector(state => state.administrators)
 
   const dispatch = useDispatch();
   const boliches = useSelector((state) => state.boliches);
@@ -58,6 +59,15 @@ function FormPostAdminSA() {
     });
     setErrors(validationErrors);
 
+    //No repita emails
+    const repetedEmail = administratorsState.find(
+      (admin) =>
+        admin.mail.toLowerCase() === { ...createAdmin, [name]: value }.mail.toLowerCase()
+    );
+    if (repetedEmail !== undefined) {
+      setErrors({ ...errors, mail: "Este email ya está registrado" });
+    }
+
     setSelectedBoliche(value);
   };
 
@@ -99,7 +109,7 @@ function FormPostAdminSA() {
     }
   };
 
-  console.log(errors, "errors");
+  // console.log(errors, "errors");
 
   return (
     <div className={style.bg}>
