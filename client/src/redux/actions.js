@@ -637,9 +637,9 @@ export const selectClientColaboratorName = (collaborator) => {
 
 //! cambio contraseña colaborador
 
-export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
-  console.log(newPassword, clubname, colabname, "data");
-  const endpoint = `${URL_API}/${clubname}/collaborator/${colabname}`;
+export const changeColaboradorPassword = (clubname, colabID, newPassword) => {
+  console.log(newPassword, clubname, colabID, "data");
+  const endpoint = `${URL_API}/${clubname}/collaborator/${colabID}`;
 
   const password = {
     password: newPassword,
