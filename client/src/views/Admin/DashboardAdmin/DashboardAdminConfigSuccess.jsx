@@ -9,7 +9,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
   const url_admin = import.meta.env.VITE_URL_ADMIN;
   const path = localStorage.getItem("pathname");
   const urlComeBack = `${url_admin}/admin/${path}/dashboardAdmin`;
-  const [conection, setConection] = useState(false);
+  const [conection, setConection] = useState(null);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -30,6 +30,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
       }
       console.log("respuesta del back: ", data);
     } catch (error) {
+      setConection(false);
       console.error("Error:", error.request);
     }
   };
@@ -44,7 +45,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
         <h1 className={style.h1}>DASHBOARD ADMINISTRADOR</h1>
       </div>
 
-      {conection && ( //conexion exitosa
+      {conection === true && ( //conexion exitosa
         <div className={style.dashboard}>
           <h2 className={style.h2}>
             Su cuenta ha sido conectada correctamente!
@@ -55,7 +56,7 @@ export default function DashboardAdminConfigSuccess({ location }) {
           </button>
         </div>
       )}
-      {!conection && ( //conexion fallida
+      {conection === false && ( //conexion fallida
         <div className={style.dashboard}>
           <h2 className={style.h2}>
             Ha ocurrido un error al conectar mercadopago!
@@ -66,6 +67,11 @@ export default function DashboardAdminConfigSuccess({ location }) {
           <button onClick={backHome} className={style.btnCreate}>
             Volver al Home
           </button>
+        </div>
+      )}
+       {conection === null && ( //conexion fallida
+        <div className={style.dashboard}>
+          <h2>Cargando...</h2>
         </div>
       )}
     </div>

@@ -7,7 +7,6 @@ const { Client, Authorizations } = require("../../db");
 const AuthMercadoPago = async (req, res) => {
   try {
     const { code, path } = req.body;
-    console.log(code, path);
     const searchClient = await Client.findOne({
       where: { name: path },
     });
@@ -42,11 +41,9 @@ const AuthMercadoPago = async (req, res) => {
       defaults: data,
     });
 
-    console.log(newAutorization);
 
     return res.status(201).json(data);
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };

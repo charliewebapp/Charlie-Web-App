@@ -732,13 +732,15 @@ export const getOrderQRCode = () => {
 export const putImage = (clubName, formData) => {
 
   const endpoint = `${URL_API}/${clubName}/image`;
-
+  console.log(endpoint);
   return async (dispatch) => {
     try {
+      console.log('entrando al axios');
       const { data } = await axios.put(endpoint, formData);
-
+      console.log('axios correcto');
       dispatch({ type: PUT_IMAGE, payload: data });
     } catch (error) {
+      console.log('fallo el axios');
       console.error(error);
     }
   }
