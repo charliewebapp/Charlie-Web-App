@@ -9,10 +9,6 @@ import "./OrderDetail.module.css";
 function OrderDetail() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //     dispatch(getOrderQRCode("73047715220"))
-  // }, [dispatch]);
-
   const detail = useSelector((state) => state.detailQrCode);
   const cartState = useSelector((state) => state.orderqrdata);
   const cart = [cartState];
@@ -29,10 +25,10 @@ function OrderDetail() {
       if (paymentId) {
         dispatch(getOrderQRCode(paymentId));
       }
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [dispatch, detail, cart]);
+  }, []);
 
 
   return (
