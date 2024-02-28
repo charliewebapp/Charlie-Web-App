@@ -52,6 +52,15 @@ function OrderDetail() {
             <button>Regresar al comercio</button>
           </Link>
         </>
+      ) : detail.length > 0 && detail[0].status === "rejected" ? (
+        <>
+          <div className="h1">
+            <h1>Esta orden fue rechazada</h1>
+            <Link to={`/${clubName}/home`}>
+              <button>Regresar al comercio</button>
+            </Link>
+          </div>
+        </>
       ) : null}
     </div>
   );
