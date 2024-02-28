@@ -6,16 +6,17 @@ import { changeColaboradorPassword, getBoliches } from "../../redux/actions";
 import { useSelector } from "react-redux";
 import style from "../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { validateFormUpdateColaborador } from "../../utils/validateFormUpdateColaborador";
+import { all } from "axios";
 
 const ColaboradorProfile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBoliches());
-  }, [dispatch]);
+  }, []);
 
   const allBoliches = useSelector((state) => state.allBoliches);
-
+console.log("estos son los boliches",allBoliches)
   const selectedColaborador = useSelector(
     (state) => state.selectColaboratorLogin
   );

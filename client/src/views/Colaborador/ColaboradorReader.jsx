@@ -14,6 +14,8 @@ function ColaboradorReader() {
     setButtons(true);
     setRefresh((prevRefresh) => !prevRefresh);
   };
+  const bolicheid = JSON.parse(localStorage.getItem("ColabClubId"))
+  console.log("El boliche id para la action es ",bolicheid)
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       qrbox: {
@@ -67,7 +69,7 @@ function ColaboradorReader() {
           showLoaderOnConfirm: true,
           preConfirm: () => {
             setButtons(false);
-            dispatch(acceptOrder(accepted, clientName, purchaseId));
+            dispatch(acceptOrder(accepted, clientName, purchaseId,bolicheid));
             return Promise.resolve();
           },
         }).then((result) => {
@@ -97,7 +99,7 @@ function ColaboradorReader() {
           showLoaderOnConfirm: true,
           preConfirm: () => {
             setButtons(false);
-            dispatch(rejectOrder(rejected, clientName, purchaseId));
+            dispatch(rejectOrder(rejected, clientName, purchaseId,bolicheid));
             return Promise.resolve();
           },
         }).then((result) => {
