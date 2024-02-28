@@ -163,7 +163,7 @@ function DashboardAdmin() {
                   )}
               </div>
             }
-            <img src={imgCharlie} className={style.imgCharlie}></img>
+            {/* <img src={imgCharlie} className={style.imgCharlie}></img> */}
           </div>
 
           <div className={style.footer}>© Charlie</div>

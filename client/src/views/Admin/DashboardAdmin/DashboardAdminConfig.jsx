@@ -173,7 +173,7 @@ function DashboardAdminConfig() {
                 a las {formatHourTime(dateTime)}
               </p>
             ) : (
-              "Mercado Pago aún no fue conectado"
+              <p className={style.pMP}> Mercado Pago aún no fue conectado</p>
             )}
             {existing && (
               <button
