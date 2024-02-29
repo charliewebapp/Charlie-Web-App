@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, postOrderInDB, getOrderQRCode } from "../../../redux/actions";
+import { clearCart, postOrderInDB, getOrderQRCode, getMyBoliche } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
@@ -16,10 +16,14 @@ const OrderConfirmation = () => {
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
 
+
+  const { clubName } = useParams();
+
   //* Limpia carrito luego del pago exitoso
   useEffect(() => {
     // Dispatch clearCart() cuando el componente se monta
     dispatch(clearCart());
+    dispatch(getMyBoliche(clubName));
   }, [dispatch]);
 
   const myUser = JSON.parse(localStorage.getItem("myUser"));
@@ -34,9 +38,10 @@ const OrderConfirmation = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paymentId = urlParams.get("payment_id");
   const params = Object.fromEntries(urlParams.entries());
-  const { clubName } = useParams();
+
   console.log(clubName, "clubName de MP")
   const [purchaseData, setPurchaseData] = useState(null);
+
   const sendToDB = () => {
     dispatch(postOrderInDB(storedArray, paymentId, clubName));
   };
