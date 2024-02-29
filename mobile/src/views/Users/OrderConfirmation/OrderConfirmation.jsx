@@ -35,6 +35,7 @@ const OrderConfirmation = () => {
   const paymentId = urlParams.get("payment_id");
   const params = Object.fromEntries(urlParams.entries());
   const { clubName } = useParams();
+  console.log(clubName, "clubName de MP")
   const [purchaseData, setPurchaseData] = useState(null);
   const sendToDB = () => {
     dispatch(postOrderInDB(storedArray, paymentId, clubName));
