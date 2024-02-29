@@ -10,7 +10,7 @@
 }
 
 .DetailContainerSales {
-  max-height: 270px; /* Altura máxima para el contenedor de detalle */
+  max-height: 350px; /* Altura máxima para el contenedor de detalle */
   overflow-y: auto; /* Agrega scroll vertical si el contenido es demasiado largo */
   padding-right: 20px; /* Agrega un relleno derecho para compensar el scroll */
   margin-top: 20px;

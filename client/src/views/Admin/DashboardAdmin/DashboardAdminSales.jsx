@@ -202,16 +202,15 @@ function DashboardAdminSales() {
                   </li>
                 ))}
               </ul>
+              <button
+                className={style.buttonClose}
+                onClick={() => setSelectedSale(null)}
+              >
+                Cerrar
+              </button>
             </div>
           </div>
         )}
-
-        <button
-          className={style.buttonClose}
-          onClick={() => setSelectedSale(null)}
-        >
-          Cerrar
-        </button>
       </div>
     </>
   );
