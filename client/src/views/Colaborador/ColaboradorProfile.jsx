@@ -4,24 +4,25 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { changeColaboradorPassword, getBoliches } from "../../redux/actions";
 import { useSelector } from "react-redux";
-import styles from "./ColaboradorProfile.module.css";
+import style from "../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { validateFormUpdateColaborador } from "../../utils/validateFormUpdateColaborador";
+import { all } from "axios";
 
 const ColaboradorProfile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBoliches());
-  }, [dispatch]);
+  }, []);
 
   const allBoliches = useSelector((state) => state.allBoliches);
-
+console.log("estos son los boliches",allBoliches)
   const selectedColaborador = useSelector(
     (state) => state.selectColaboratorLogin
   );
   const colaboradorPassword = selectedColaborador.password;
   const colabClientID = selectedColaborador.ClientId;
-  const colabname = selectedColaborador.name;
+  const colabID = selectedColaborador.id;
 
   console.log(colaboradorPassword, "contraseña del colaborador");
 
@@ -31,7 +32,7 @@ const ColaboradorProfile = () => {
 
   console.log(clubname, "club name");
 
-  console.log(colabname, "nombre del colaborador");
+  console.log(colabID, "nombre del colaborador");
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -91,7 +92,7 @@ const ColaboradorProfile = () => {
         confirmButtonText: "confirmar",
         showLoaderOnConfirm: true,
         preConfirm: () => {
-          dispatch(changeColaboradorPassword(clubname, colabname, newPassword));
+          dispatch(changeColaboradorPassword(clubname, colabID, newPassword));
           return Promise.resolve();
         },
       }).then((result) => {
@@ -111,7 +112,7 @@ const ColaboradorProfile = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={style.containerColab}>
       <h2>Cambio de contraseña</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="oldPassword">Contraseña anterior:</label>
@@ -121,7 +122,7 @@ const ColaboradorProfile = () => {
           value={oldPassword}
           onChange={handleChangeOldPassword}
         />
-        <span className={styles.span}>
+        <span className={style.error}>
           {oldPassError ? oldPassError : null}{" "}
         </span>
 
@@ -140,7 +141,7 @@ const ColaboradorProfile = () => {
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
         />
-        <span className={styles.span}>{error}</span>
+        <span className={style.error}>{error}</span>
 
         <button
           type="submit"

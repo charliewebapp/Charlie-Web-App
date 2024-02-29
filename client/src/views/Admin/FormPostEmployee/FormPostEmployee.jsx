@@ -12,7 +12,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 function FormPostEmployee() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
+  // trae los collabs de todos los boliches
+  const collaboratorsState = useSelector(state => state.collaborators)
 
   //local state for input
   const [collaboratorData, setCollaboratorData] = useState({
@@ -25,11 +27,11 @@ function FormPostEmployee() {
 
   //local state errors
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre",
-    lastname: "Ingrese el apellido",
-    password: "Asigne una contraseña",
-    mail: "Ingrese el email",
-    status: "Ingrese el estado",
+    name: "*",
+    lastname: "*",
+    password: "*",
+    mail: "*",
+    status: "*",
   });
 
   //onChange inputs
@@ -39,6 +41,15 @@ function FormPostEmployee() {
     setCollaboratorData((prevData) => {
       const updatedData = { ...prevData, [name]: value };
       setErrors(validateFormEmployeeAdmin(updatedData));
+
+      //No repita emails
+      const repetedEmail = collaboratorsState.find(
+        (collab) =>
+          collab.mail.toLowerCase() === updatedData.mail.toLowerCase()
+      );
+      if (repetedEmail !== undefined) {
+        setErrors({ ...errors, mail: "Este email ya está registrado" });
+      }
 
       return updatedData;
     });
@@ -80,7 +91,7 @@ function FormPostEmployee() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>

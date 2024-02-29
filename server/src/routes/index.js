@@ -31,9 +31,6 @@ const putClientsHandler = require("../handlers/Clients/putClientsHandler");
 const purchaseByUser = require("../controllers/Users/purchaseByUser");
 const purchaseByClient = require("../controllers/Clients/purchasesByClient");
 
-const postQrHandler = require("../handlers/Qrs/postQrHandler");
-const getQrHandler = require("../handlers/Qrs/getQrHandler");
-const putQrHandler = require("../handlers/Qrs/putQrHandler");
 
 const AuthMercadoPago = require("../controllers/MercadoPago/AuthMercadoPago");
 const apiKey = require("../controllers/MercadoPago/apiKey");
@@ -41,59 +38,56 @@ const PreferenceId = require("../controllers/MercadoPago/PreferenceId");
 const webhook = require("../controllers/MercadoPago/webhook");
 const getAllCollaboratorHandler = require("../handlers/Collaborators/getAllCollaboratorHandler");
 const setPurchase = require("../controllers/MercadoPago/setPurchase");
-// const deleteQrHandler = require("../handlers/Qrs/deleteQrHandler");
+const postPurchases = require("../controllers/Purchases/postPurchases");
+const setDetail = require("../controllers/MercadoPago/setDetail");
+const putClientStatusHandler = require("../handlers/Clients/putClientStatusHandler");
+const refreshToken = require("../controllers/MercadoPago/refreshToken");
+const setRefund = require("../controllers/MercadoPago/setRefund");
+const expires = require("../controllers/MercadoPago/expires");
+const paymentAutorizations = require("../handlers/Controls/paymentAutorizations")
 
-// const getAllClientsHandler = require("../handlers/Clients/getAllClientsHandler");
-// const deleteClientHandler = require("../handlers/Clients/deleteClientHandler");
+const putPurchases = require("../controllers/Purchases/putPurchases");
+const deleteAuth = require("../controllers/MercadoPago/deleteAuth");
+const getAuth = require("../controllers/MercadoPago/getAuth");
+const putClientImageHandler = require("../handlers/Administrator/putClientImageHandler");
+const getPurchases = require("../controllers/Purchases/getPurchases");
 
 const router = Router();
 
 //mercado-pago
+router.get("/validations/:client", paymentAutorizations)
 router.post("/mercadopago-authorization/success", AuthMercadoPago);
 router.post("/search-apiKey", apiKey);
 router.post("/create_preference", PreferenceId);
 router.post("/paymentsuccess", webhook);
 router.post("/setPurchase", setPurchase);
+router.get("/detailPurchase/:paymentId", setDetail);
+router.post("/refresh-token", refreshToken);
+router.post("/refundPurchase", setRefund);
+router.post("/set-date-expire", expires);
+router.post("/deleteAuth", deleteAuth);
+router.post('/getAuth', getAuth)
 
+// //history
+
+router.post("/:client/searchHistory", postPurchases);
 
 //boliche
 //! /////////////////////////////////////////////////
 router.post("/client", upload.single("image"), postClientsHandler);
-//   try {
-//     const { name, adress, city } = req.body;
-//     const imagePath = req.file ? saveImage(req.file) : null;
 
-//     const newClient = await Client.create({
-//       name,
-//       image: imagePath,
-//       adress,
-//       city,
-//       // Puedes agregar otros campos según sea necesario
-//     });
-
-//     res.status(201).json({ success: true, data: newClient });
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(500)
-//       .json({ success: false, error: "Error al crear el cliente" });
-//   }
-// });
-
-// function saveImage(file) {
-//   const newPath = `./uploads/${file.originalname}`;
-//   fs.renameSync(file.path, newPath);
-//   return newPath; // Devuelve la ruta del archivo en lugar del objeto req.file
-// }
 //! /////////////////////////////////////////////////
 router.get("/client", getAllClientsHandler); //pendiente cambiar esta ruta
 router.delete("/:client", deleteClientHandler); //pendiente cambiar esta ruta
 router.put("/:client", upload.single("image"), putClientsHandler); //pendiente cambiar esta ruta
+router.put("/:client/status", putClientStatusHandler);
+
 //admins
 
 router.get("/administrator", getAllAdminsHandler);
 router.get("/:client/administrator", getAdminsClientsHandler);
 router.post("/:client/administrator", postAdminsHandler);
+router.put("/:client/image", upload.single("image"), putClientImageHandler);
 router.put("/:client/:administrator", putAdminsHandler);
 router.delete("/:client/:administratorId", deleteAdminsHandler);
 
@@ -107,7 +101,7 @@ router.delete("/:client/product/:id", deleteProductHandler);
 router.post("/user", postUserHandler);
 router.get("/user", getUsersHandler);
 router.get("/purchasebyuser", purchaseByUser);
-router.get("/purchasebyclient", purchaseByClient);
+router.get("/:client/purchasebyclient/:ClientId", purchaseByClient);
 //colaborador
 router.get("/:client/collaborator/users", getCollaboratorHandler);
 router.get("/:client/collaborator/:user", getCollaboratorNameHandler);
@@ -117,10 +111,9 @@ router.delete("/:client/collaborator/:user", deleteControllerHandler);
 router.get("/collaborator", getAllCollaboratorHandler);
 
 //--------------colaborador
-router.post("/:client/collaborator/qr/:idMP", postQrHandler);
-router.get("/:client/collaborator/qr/:idMP", getQrHandler);
-router.put("/:client/collaborator/qr/:idMP", putQrHandler);
-// router.delete("/:client/collaborator/qr", deleteQrHandler);
+
+router.put("/:client/purchase/status/:clientId/:PurchaseId", putPurchases);
+router.get("/:clientId/sales/:userId", getPurchases);
 
 //--------------consumidor
 

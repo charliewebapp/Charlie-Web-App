@@ -1,31 +1,26 @@
-
-
-const { QrCode } = require("../../db");
-const { Client } = require("../../db");
-
+const { Client, Purchase } = require("../../db");
 
 const purchaseByClient = async (req, res) => {
   try {
     
-    const { idClient } = req.body; 
+    const { ClientId } = req.params;
    
     const validClient = await Client.findOne({
       where: {
-        id: idClient,
+        id: ClientId,
       },
     })
-    console.log(validClient)
+
     if (!validClient) return res.status(400).json({ error: "Error en información suministrada" });
    
-    const QrCodesByClient = await QrCode.findAll({
+    const QrCodesByClient = await Purchase.findAll({
       where: {
-         // Asume que hay una columna userId en tu modelo QrCode
-        ClientId:idClient
+        ClientId: ClientId
       },
     });
 
-  
     return res.status(201).json(QrCodesByClient);
+    
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

@@ -4,18 +4,29 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 import { useParams } from "react-router-dom";
-import { updateAdmin } from "../../../redux/actions";
+import { updateAdmin, adminIdLogged } from "../../../redux/actions";
 import Swal from "sweetalert2";
 function FormUpdatePasswordAdmin() {
   const dispatch = useDispatch();
   const selectAdminID = useSelector((state) => state.selectAdminLogin);
   const { clubName } = useParams();
 
-  const adminID = selectAdminID.id;
-  const adminName = selectAdminID.name;
+  console.log("selectedAdminLogin ", selectAdminID);
+
+  const adminID = localStorage.getItem("adminID");
+  console.log("selected admin id ", adminID);
+
+  const adminGlobal = selectAdminID.id;
+  console.log("admin global ", adminGlobal);
+
+  // const idAdminTernario = adminID ? adminID : adminGlobal;
+
+  // useEffect(() => {
+  //   adminIdLogged(idAdminTernario);
+  // }, [selectAdminID]);
 
   const currentPassword = selectAdminID.password;
-  console.log(adminID, "adminID", clubName, "clubName");
+
   const [currentPasswordInput, setCurrentPasswordInput] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -75,31 +86,7 @@ function FormUpdatePasswordAdmin() {
   const formData = {
     password: newPassword,
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
 
-  //   if (currentPasswordInput !== currentPassword) {
-  //     setCurrentPasswordError("La contraseña actual es incorrecta.");
-  //   }
-
-  //   if (newPassword !== confirmNewPassword) {
-  //     setNewPasswordError("Las contraseñas nuevas no coinciden.");
-  //   }
-
-  //   if (
-  //     currentPasswordInput === currentPassword &&
-  //     newPassword === confirmNewPassword
-  //   ) {
-  //     //! Agregar sweet alert
-  //     dispatch(updateAdmin(formData, adminID, clubName));
-  //     setCurrentPasswordInput("");
-  //     setNewPassword("");
-  //     setConfirmNewPassword("");
-  //     setCurrentPasswordError("");
-  //     setNewPasswordError("");
-  //     setConfirmNewPasswordError("");
-  //   }
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -142,15 +129,13 @@ function FormUpdatePasswordAdmin() {
       });
     }
   };
-  console.log("id", adminID);
-  console.log("nueva contraseña", newPassword);
 
   return (
-    <div className={style.changePassword}>
+    <div className={style.changePasswordAdmin}>
       <h2>Cambiar Contraseña</h2>
 
       <form onSubmit={handleSubmit} className={style.FormPostAdminSA}>
-        <label htmlFor="currentPassword">Contraseña Actual:</label>
+        <label htmlFor="currentPassword">Contraseña Actual</label>
         <div className={style.passwordInput}>
           <input
             type={showCurrentPassword ? "text" : "password"}
@@ -170,7 +155,7 @@ function FormUpdatePasswordAdmin() {
           <span className={style.error}>{currentPasswordError}</span>
         )}
 
-        <label htmlFor="newPassword">Nueva Contraseña:</label>
+        <label htmlFor="newPassword">Nueva Contraseña</label>
         <div className={style.passwordInput}>
           <input
             type={showNewPassword ? "text" : "password"}
@@ -190,7 +175,7 @@ function FormUpdatePasswordAdmin() {
           <span className={style.error}>{newPasswordError}</span>
         )}
 
-        <label htmlFor="confirmNewPassword">Confirmar Nueva Contraseña:</label>
+        <label htmlFor="confirmNewPassword">Confirmar Nueva Contraseña</label>
         <div className={style.passwordInput}>
           <input
             type={showConfirmNewPassword ? "text" : "password"}
@@ -219,7 +204,7 @@ function FormUpdatePasswordAdmin() {
             currentPasswordError || newPasswordError || confirmNewPasswordError
           }
         >
-          Actualizar Contraseña
+          Actualizar contraseña
         </button>
       </form>
     </div>

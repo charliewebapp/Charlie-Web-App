@@ -1,96 +1,217 @@
 @media only screen and (max-width: 767px) {
 
-.container {
-    background-color: #181C21;
-    width: 94%;
-    color: black;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    padding: 5px;
-    border-radius: 13px;
-    height: 100px; /* Cambiar la altura según sea necesario */
-    border: none;
+  .container {
+      background-color: #181C21;
+      width: 92%;
+      color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      padding: 5px;
+      border-radius: 13px;
+      height: 80px; /* Cambiar la altura según sea necesario */
+      border: none;
+      margin-bottom: 13px;
+    }
+    
+    .text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 20px;
+      width: 90%;
+    }
+    
+    .nameAndPrice {
+  
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; /* Alineación desde la izquierda */
+      align-items: center; /* Alineación vertical */
+      /* background-color: #2e5e60; */
+      height: 10%;
+      /* font-weight: lighter; */
+    }
+    
+    .name {
+      color: #1DDDE4;
+      margin-right: 15px;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+    
+    .price {
+      color: white;
+      font-size: 18px;
+    }
+    
+    .description {
+      color: white;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      height: 50%;
+      /* background-color: aquamarine; */
+      height: 30%;
+      /* font-weight: lighter; */
+    }
+    
+    .buttonSelection {
+      padding: 5px;
+      display: flex;
+      justify-content: right; /* Centrar horizontalmente */
+      align-self: center;
+      align-items: center; /* Centrar verticalmente */
+      width: 25%;
+      height: 50%;
+    }
+    
+    .subtractButton{
+      padding: 5px;
+      border-radius: 50%;
+      color: #FCCF83;
+      border: none;
+      width: 100%;
+      background-color:#181C21;
+      font-size: 70px;
+      margin-left: 15px;
+      font-weight: lighter;
+  
+    }
+    
+    .addButton{
+      padding: 5px;
+      border-radius: 50%;
+      color: #FCCF83;
+      border: none;
+      width: 100%;
+      background-color:#181C21;
+      font-size: 50px;
+      margin-left: 15px;
+      font-weight: lighter;
+    }
+    
+    .quantity{
+      background-color: black;
+      color: #1DDDE4;
+      border-radius: 10px;
+      margin-left: 10px;
+      padding: 10px;
+      width: 100%;
+      font-size: 18px;
+      padding-left: 14px;
+      padding-right: 14px;
+      font-weight: lighter;
+    }
   }
   
-  .text {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 20px;
-    width: 90%;
-  }
+  /* Estilos para pantallas más grandes (mayor a 767px) */
+  @media only screen and (min-width: 768px) {
+    .container {
+      background-color: #181C21;
+      width: 92%;
+      color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      padding: 5px;
+      border-radius: 13px;
+      height: 80px; /* Cambiar la altura según sea necesario */
+      border: none;
+      margin-bottom: 13px;
+    }
+    
+    .text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 20px;
+      width: 90%;
+    }
+    
+    .nameAndPrice {
   
-  .nameAndPrice {
-    padding: 5px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start; /* Alineación desde la izquierda */
-    align-items: center; /* Alineación vertical */
-    /* background-color: #2e5e60; */
-    height: 10%;
-  }
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; /* Alineación desde la izquierda */
+      align-items: center; /* Alineación vertical */
+      /* background-color: #2e5e60; */
+      height: 10%;
+      /* font-weight: lighter; */
+    }
+    
+    .name {
+      color: #1DDDE4;
+      margin-right: 15px;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+    
+    .price {
+      color: white;
+      font-size: 18px;
+    }
+    
+    .description {
+      color: white;
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      height: 50%;
+      /* background-color: aquamarine; */
+      height: 30%;
+      /* font-weight: lighter; */
+    }
+    
+    .buttonSelection {
+      padding: 5px;
+      display: flex;
+      justify-content: right; /* Centrar horizontalmente */
+      align-self: center;
+      align-items: center; /* Centrar verticalmente */
+      width: 25%;
+      height: 50%;
+    }
+    
+    .subtractButton{
+      padding: 5px;
+      border-radius: 50%;
+      color: #FCCF83;
+      border: none;
+      width: 100%;
+      background-color:#181C21;
+      font-size: 70px;
+      margin-left: 15px;
+      font-weight: lighter;
   
-  .name {
-    color: #1DDDE4;
-    margin-right: 15px;
-    font-size: 18px;
-  }
-  
-  .price {
-    color: white;
-    font-size: 18px;
-  }
-  
-  .description {
-    color: white;
-    width: 100%;
-    text-align: left;
-    font-size: 15px;
-    height: 50%;
-    /* background-color: aquamarine; */
-    height: 30%;
-  }
-  
-  .buttonSelection {
-    padding: 5px;
-    display: flex;
-    justify-content: right; /* Centrar horizontalmente */
-    align-self: center;
-    align-items: center; /* Centrar verticalmente */
-    width: 25%;
-    height: 50%;
-  }
-  
-  .subtractButton{
-    padding: 5px;
-    border-radius: 50%;
-    color: #FCCF83;
-    border: none;
-    width: 100%;
-    background-color:#181C21;
-    font-size: 60px;
-  }
-  
-  .addButton{
-    padding: 5px;
-    border-radius: 50%;
-    color: #FCCF83;
-    border: none;
-    width: 100%;
-    background-color:#181C21;
-    font-size: 35px;
-  }
-  
-  .quantity{
-    background-color: black;
-    color: #1DDDE4;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 10px;
-    width: 100%;
-  }
-}
+    }
+    
+    .addButton{
+      padding: 5px;
+      border-radius: 50%;
+      color: #FCCF83;
+      border: none;
+      width: 100%;
+      background-color:#181C21;
+      font-size: 50px;
+      margin-left: 15px;
+      font-weight: lighter;
+    }
+    
+    .quantity{
+      background-color: black;
+      color: #1DDDE4;
+      border-radius: 10px;
+      margin-left: 10px;
+      padding: 10px;
+      width: 100%;
+      font-size: 18px;
+      padding-left: 14px;
+      padding-right: 14px;
+      font-weight: lighter;
+    }
+   }

@@ -1,21 +1,34 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrderInDB } from "../../../redux/actions";
+import { clearCart, postOrderInDB, getOrderQRCode, getMyBoliche } from "../../../redux/actions";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./OrderConfirmation.module.css";
 const URL_API = import.meta.env.VITE_URL_API;
 
 const OrderConfirmation = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   let storedArrayString = localStorage.getItem("myArray");
   let storedArray = JSON.parse(storedArrayString);
   // const {myUser} = useSelector((state) => state.myUser);
   // console.log("myUser: ", myUser);
 
+
+  const { clubName } = useParams();
+
+  //* Limpia carrito luego del pago exitoso
+  useEffect(() => {
+    // Dispatch clearCart() cuando el componente se monta
+    dispatch(clearCart());
+    dispatch(getMyBoliche(clubName));
+  }, [dispatch]);
+
   const myUser = JSON.parse(localStorage.getItem("myUser"));
 
-  console.log("myUser: ", myUser);
+  // console.log("myUser: ", myUser);
 
   const amount = storedArray.reduce(
     (acc, curr) => acc + parseFloat(curr.price) * parseInt(curr.quantity),
@@ -25,9 +38,10 @@ const OrderConfirmation = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paymentId = urlParams.get("payment_id");
   const params = Object.fromEntries(urlParams.entries());
-  const { clubName } = useParams();
-  const dispatch = useDispatch();
+
+  console.log(clubName, "clubName de MP")
   const [purchaseData, setPurchaseData] = useState(null);
+
   const sendToDB = () => {
     dispatch(postOrderInDB(storedArray, paymentId, clubName));
   };
@@ -66,10 +80,7 @@ const OrderConfirmation = () => {
 
   const postPurchase = async () => {
     try {
-      const { data } = await axios.post(
-        `${URL_API}/setPurchase`,
-        postData
-      );
+      const { data } = await axios.post(`${URL_API}/setPurchase`, postData);
       setPurchaseData(data);
     } catch (error) {
       console.log(error.message);
@@ -83,10 +94,11 @@ const OrderConfirmation = () => {
       postData.clubName &&
       postData.cart
     ) {
-      postPurchase();
+      postPurchase().then(() => dispatch(getOrderQRCode(postData.paymentId)));
     } else {
       console.log("Faltan datos en postData");
     }
+    //aca escribir la funcion del qr
   }, []);
 
   // const orders = [
@@ -141,6 +153,9 @@ const OrderConfirmation = () => {
           </ul>
           <p>Estado: {status(purchaseData.status)}</p>
           <h5> Número de transacción: {purchaseData.paymentId}</h5>
+          <Link to="/orderdetail">
+            <button>Generar mi QR</button>
+          </Link>
           <button className={styles.button}>Volver a home</button>
         </div>
       ) : (

@@ -4,20 +4,32 @@ import styles from "./NavBarUser.module.css";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { TiShoppingCart } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyBoliche, postUser } from "../../../redux/actions";
+import {
+  getMyBoliche,
+  postUser,
+  setCartFromLocalStorage,
+  getMyBolicheID,
+} from "../../../redux/actions";
 import { MdArrowBackIos } from "react-icons/md";
+import loadingGif from "../../../assets/img/loading2.gif";
+import { GiShoppingCart } from "react-icons/gi";
+import charlieLetras from "../../../assets/img/charlie-blanco.png"
 
 function NavBarUser() {
   const { clubName } = useParams();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
   const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  //Conditional render nav bar items
-  const location = useLocation();
-  const currentPath = location.pathname;
-  console.log(currentPath);
-  const isHome = currentPath === `/${clubName}/home`;
+  useEffect(() => {
+    // Recuperar el carrito del localStorage al montar el componente
+    if (cartFromLocalStorage) {
+      dispatch(setCartFromLocalStorage(cartFromLocalStorage));
+    }
+  }, [dispatch]);
+
+
 
   //* -------------------------------------------------- USER -----------------
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -33,37 +45,39 @@ function NavBarUser() {
     }
   };
   const userData = setUserToPost(user);
-  //* ------------------------------------------------- BOLICHE --------------
-  useEffect(() => {
-    dispatch(getMyBoliche(clubName));
-  }, []);
 
   useEffect(() => {
     // Verifica si user está cargado y no está en modo de carga
     if (user && !isLoading && !isUserLoaded) {
       // Realiza el dispatch solo cuando user está cargado
       dispatch(postUser(userData));
+      dispatch(getMyBolicheID(clubName));
       setIsUserLoaded(true);
     }
   }, [user, isLoading, isUserLoaded, dispatch, userData]);
 
+
+  //* ------------------------------------------------- BOLICHE --------------
+  useEffect(() => {
+    dispatch(getMyBoliche(clubName));
+  }, []);
+
+  const myBolicheState = useSelector(state => state.myBoliche)
+
+  //* ---- GIF LOADING NAV BAR ----------------------------------------------------------
   if (isLoading) {
     return (
       <div className={styles.NavBarUser}>
-        <img
-          src="\src\assets\loading2.gif"
-          alt="Loading..."
-          className={styles.loading}
-        />
+        <img src={loadingGif} alt="Loading..." className={styles.loading} />
       </div>
     );
   }
 
+  //* RENDER NAV BAR CARGADA
   return (
     <div className={styles.NavBarUser}>
       {
         // render de foto perfil o iniciales en home
-        // isAuthenticated && isHome && ( //! descomentar al arreglar la flecha back
         isAuthenticated && (
           <div>
             {user.picture && (
@@ -90,23 +104,14 @@ function NavBarUser() {
           </div>
         )
       }
-      {/* { //! ARREGLAR LA FLECHA BACK - render de flecha volver en donde NO sea home
 
-                !isHome && (
-                    <Link to={location.state?.from || '/'}>
-                        <div className={styles.circleIconBack}>
-                            <MdArrowBackIos />
-                        </div>
-                    </Link>
-                )
-            } */}
 
       <Link to={`/${clubName}/home`} style={{ textDecoration: "none" }}>
-        <div className={styles.circleLogo}>
-          <p>LOGO</p>
-          {/* aca iria el logo del boliche -> traer desde el server */}
-          {/* <img src="src\assets\logoBanana.jpg" alt="" /> */}
+        <div className={styles.containerLogos} >
+          <img className={styles.circleLogo} src={myBolicheState.image} alt="Logo" />
+          <div className={styles.byLetras}>by</div>
         </div>
+        <img src={charlieLetras} alt="Charlie" className={styles.logoLetras} />
       </Link>
 
       <Link to={`/${clubName}/cart`} className={styles.cartLink}>

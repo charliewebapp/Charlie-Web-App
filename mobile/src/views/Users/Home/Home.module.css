@@ -54,6 +54,52 @@
         /* margin-left: 25px; */
         margin-top: 20px;
 
-        /* Espacio entre el ícono y el texto */
+    }
+}
+
+
+/* Estilos para dispositivos más grandes */
+@media only screen and (min-width: 768px) {
+    .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 20px;
+    }
+
+    .card {
+        height: 300px;
+        width: 250px;
+        background-color: #444545;
+        border-radius: 15%;
+        margin: 10px;
+
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .cardTitle {
+        background-color: #2e2e2e;
+        color: #e3bc7b;
+        padding: 15px;
+        font-size: 40px;
+        text-decoration: none;
+    }
+
+    .cardContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .icon {
+        font-size: 130px;
+        color: #45ede7;
+        text-align: center;
+        justify-content: center;
+        align-self: center;
+        margin-top: 30px;
+
     }
 }

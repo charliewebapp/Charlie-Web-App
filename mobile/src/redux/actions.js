@@ -7,6 +7,12 @@ import {
   CLEAN_CART,
   GET_MY_BOLICHE,
   POST_USER,
+  INITIALIZE_CART_FROM_LOCAL_STORAGE,
+  SET_CART_FROM_LOCAL_STORAGE,
+  GET_ORDER_QR,
+  GET_DETAIL_QR,
+  GET_ALL_ORDERS,
+  GET_MY_BOLICHEID,
 } from "./actionsTypes";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -14,9 +20,7 @@ const URL_API = import.meta.env.VITE_URL_API;
 export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `${URL_API}/${clubName}/product`
-      );
+      const { data } = await axios.get(`${URL_API}/${clubName}/product`);
       dispatch({
         type: GET_PRODUCTS,
         payload: data,
@@ -32,6 +36,21 @@ export const getProducts = (clubName) => {
     }
   };
 };
+
+// VALIDACIONES
+export const paymentValidationnw = async (clubName) => {
+  const endpoint = `${URL_API}/validations/${clubName}`;
+
+  try {
+    const response = await axios.get(endpoint);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error; // Re-lanzar el error para que pueda ser manejado en el lugar donde llamas a la función
+  }
+};
+
 
 //* CARRITO
 
@@ -100,6 +119,7 @@ export const clearCart = () => {
       dispatch({
         type: CLEAN_CART,
       });
+      localStorage.removeItem("cart");
     } catch (error) {
       Swal.fire({
         title: "Error",
@@ -112,6 +132,16 @@ export const clearCart = () => {
   };
 };
 
+export const initializeCartFromLocalStorage = (cart) => ({
+  type: INITIALIZE_CART_FROM_LOCAL_STORAGE,
+  payload: cart,
+});
+
+export const setCartFromLocalStorage = (cart) => ({
+  type: SET_CART_FROM_LOCAL_STORAGE,
+  payload: cart,
+});
+
 //! -------------------------------------- BOLICHE ----------------------------------------
 export const getMyBoliche = (clubName) => {
   const endpoint = `${URL_API}/client`;
@@ -122,13 +152,53 @@ export const getMyBoliche = (clubName) => {
       const myBoliche = data.find(
         (boliche) => boliche.name.toLowerCase() === clubName.toLowerCase()
       );
+      if (myBoliche) {
+        return dispatch({
+          type: GET_MY_BOLICHE,
+          payload: myBoliche,
+        });
+      } else {
+        throw new Error("No existe el boliche")
 
-      return dispatch({
-        type: GET_MY_BOLICHE,
-        payload: myBoliche,
-      });
+      }
+
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: "Consulte en barra por el correcto código QR para ingresar",
+        icon: "error",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
+    }
+  };
+};
+
+export const getMyBolicheID = (clubName) => {
+  const endpoint = `${URL_API}/client`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(endpoint);
+      const myBoliche = data.find(
+        (boliche) => boliche.name.toLowerCase() === clubName.toLowerCase()
+      );
+      if (myBoliche) {
+        return dispatch({
+          type: GET_MY_BOLICHEID,
+          payload: myBoliche.id,
+        });
+      } else {
+        throw new Error("No existe el boliche")
+
+      }
+
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Consulte en barra por el correcto código QR para ingresar",
+        icon: "error",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -176,3 +246,93 @@ export const postUser = (userData) => {
     }
   };
 };
+
+
+export const getOrderQRCode = (paymentId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `${URL_API}/detailPurchase/${paymentId}`
+      );
+      console.log(data, "data en el acion")
+      dispatch({ type: GET_ORDER_QR, payload: [data] });
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha encontrado la orden. " + error.message);
+    }
+  };
+};
+
+
+// const data = [
+//   {
+//     "ClientId": "87d03f75-42d5-4279-8228-926f6f79c8c5",
+//     "UserId": "auth0|65cfa8efa259fd3e778d8e3a",
+//     "amount": 80,
+//     "cart": [
+//       {
+//         "id": "7477daa0-7a68-4607-9109-9b9ec5e9a98c",
+//         "name": "RON",
+//         "price": 10,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "42c38886-f827-4bf4-9ebd-fabaccf95b6e",
+//         "name": "TEQUILA",
+//         "price": 12,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "1ef8cb11-844b-4dca-9270-dd339d790ccb",
+//         "name": "QUILMES",
+//         "price": 5,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "243cc08d-1081-4af7-b6c7-b9316a126a85",
+//         "name": "VODKA",
+//         "price": 7,
+//         "quantity": 2
+//       },
+//       {
+//         "id": "1587ea1e-fa18-48c2-8813-771f9d532e64",
+//         "name": "MALBEC",
+//         "price": 6,
+//         "quantity": 2
+//       }
+//     ],
+//     "dateTime": "2024-02-19T18:15:28.080Z",
+//     "id": "9a127436-c95b-4c3a-a00c-3a62899a4bed",
+//     "paymentId": "72725009048",
+//     "status": "accepted"
+//   },
+
+// ]
+
+
+export const getDetailQrCode = (paymentId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `${URL_API}/detailPurchase/${paymentId}`
+      );
+      dispatch({ type: GET_DETAIL_QR, payload: [data] });
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha creado la orden. " + error.message);
+    }
+  };
+}
+
+
+export const getAllOrders = (bolicheID, myUserID) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_API}/${bolicheID}/sales/${myUserID}`);
+      dispatch({ type: GET_ALL_ORDERS, payload: data });
+    } catch (error) {
+      console.error(error); // Log the error to the console
+      window.alert("No se ha encontrado la orden. " + error.message);
+    }
+  };
+}

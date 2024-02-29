@@ -13,6 +13,7 @@ export const DELETE_COLLABORATOR = "DELETE_COLLABORATOR";
 //! /////////////// SUPER ADMIN ///////////////////////
 export const POST_BOLICHE = "POST_BOLICHE";
 export const POST_ADMIN = "POST_ADMIN";
+export const LOG_OUT_SADMIN = "LOG_OUT_SADMIN";
 
 export const GET_BOLICHES = "GET_BOLICHES";
 
@@ -21,6 +22,10 @@ export const DELETE_ADMINISTRATORS = "DELETE_ADMINISTRATORS";
 
 export const SET_CLUB_ID = "SET_CLUB_ID";
 export const DELETE_BOLICHE_ADMINS = "DELETE_BOLICHE_ADMINS";
+
+export const SET_STATUS_BOLICHE = "SET_STATUS_BOLICHE";
+
+export const SELECT_CLIENT_IMAGE = "SELECT_CLIENT_IMAGE";
 //! login super admin
 
 export const SADMIN_STATUS_LOGIN = "SADMIN_STATUS_LOGIN";
@@ -32,6 +37,7 @@ export const ADMIN_STATUS_LOGIN = "ADMIN_STATUS_LOGIN";
 export const LOG_OUT_ADMIN = "LOG_OUT_ADMIN";
 export const ADMIN_CONFIG_VIEW = "ADMIN_CONFIG_VIEW";
 export const ADMIN_ID_LOGGED = "ADMIN_ID_LOGGED";
+export const UPDATE_ADMIN = "UPDATE_ADMIN";
 
 //! login colaborador
 export const COLLABORATOR_STATUS_LOGIN = "COLLABORATOR_STATUS_LOGIN";
@@ -49,3 +55,5 @@ export const GET_SALES = "GET_SALES";
 export const POST_ORDER = "POST_ORDER";
 
 export const GET_ORDER_QR = "GET_ORDER_QR";
+
+export const PUT_IMAGE = "PUT_IMAGE";

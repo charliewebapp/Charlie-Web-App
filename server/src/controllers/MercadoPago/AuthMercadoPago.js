@@ -7,13 +7,13 @@ const { Client, Authorizations } = require("../../db");
 const AuthMercadoPago = async (req, res) => {
   try {
     const { code, path } = req.body;
-    console.log(code, path);
     const searchClient = await Client.findOne({
       where: { name: path },
     });
-    const clientId = searchClient.dataValues.id; //agregar control de error si no encuentra el cliente
+    const clientId = searchClient.dataValues.id; 
 
-    // const urlDeploy = 'https://admin-charlie.onrender.com'
+    if(!clientId) throw new Error("El cliente no existe");
+
     const urlSuccess = `${URL_ADMIN}/admin/dashboardAdmin/mercadopago-authorization/success`;
 
     const postData = {
@@ -23,8 +23,6 @@ const AuthMercadoPago = async (req, res) => {
       grant_type: "authorization_code",
       redirect_uri: urlSuccess,
     };
-    console.log(postData)
-
 
     const { data } = await axios.post(
       "https://api.mercadopago.com/oauth/token",
@@ -36,20 +34,6 @@ const AuthMercadoPago = async (req, res) => {
       }
     );
 
-
-
-    // const data = {
-    //   access_token:
-    //     "APP_USR-7378685924902197-021209-90fc5433314244028aefc252ce86ea53-1672284877",
-    //   token_type: "Bearer",
-    //   expires_in: 15552000,
-    //   scope: "offline_access read write",
-    //   user_id: 1572284882,
-    //   refresh_token: "TG-65ca21f08b82b10001674275-1672284877",
-    //   public_key: "APP_USR-1f5e5952-6698-49c2-9b19-af32ab29dece",
-    //   live_mode: true,
-    // };
-
     data.ClientId = clientId;
 
     const newAutorization = await Authorizations.findOrCreate({
@@ -57,11 +41,9 @@ const AuthMercadoPago = async (req, res) => {
       defaults: data,
     });
 
-    console.log(newAutorization);
 
     return res.status(201).json(data);
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };

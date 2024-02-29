@@ -14,6 +14,7 @@ import {
   GET_ADMINS,
   SELECT_CLIENT_ADMIN,
   SADMIN_STATUS_LOGIN,
+  LOG_OUT_SADMIN,
   ADMIN_STATUS_LOGIN,
   GET_ADMINISTRATORS,
   DELETE_COLLABORATOR,
@@ -31,6 +32,10 @@ import {
   COLLABORATOR_ID_LOGGED,
   SELECT_CLIENT_COLLABORATOR,
   GET_ALL_COLLABORATORS,
+  SET_STATUS_BOLICHE,
+  SELECT_CLIENT_IMAGE,
+  PUT_IMAGE,
+  UPDATE_ADMIN,
 } from "./actions-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -137,9 +142,7 @@ export const getProducts = (clubName) => {
   return async (dispatch) => {
     try {
       console.log("clubName es array", clubName);
-      const { data } = await axios.get(
-        `${URL_API}/${clubName}/product`
-      );
+      const { data } = await axios.get(`${URL_API}/${clubName}/product`);
       dispatch({
         type: GET_PRODUCTS,
         payload: data,
@@ -291,6 +294,20 @@ export const deleteBoliche = (clubName) => {
   };
 };
 
+//? //////////////////////// STATUS BOLICHE ////////////////////////////
+export const setStatusClub = (clubName, status) => {
+  const endpoint = `${URL_API}/${clubName}/status`;
+
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, status);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 //? //////////////////////// CREAR ADMIN ////////////////////////////
 export const postAdmin = (admin, params, navigate) => {
   const endpoint = `${URL_API}/${params}/administrator`;
@@ -340,7 +357,12 @@ export const updateAdmin = (adminData, idAdmin, clubName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(endpoint, adminData);
-      return data;
+      console.log("data update admin", data); //llega null
+
+      return dispatch({
+        type: UPDATE_ADMIN,
+        payload: data,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -392,11 +414,36 @@ export const logOut = () => {
   };
 };
 
+export const logOutSadmin = () => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: LOG_OUT_SADMIN,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 export const handleAdminConfigView = () => {
   return async (dispatch) => {
     try {
       return dispatch({
         type: ADMIN_CONFIG_VIEW,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const selectClientImage = (image) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({
+        type: SELECT_CLIENT_IMAGE,
+        payload: image,
       });
     } catch (error) {
       console.error(error);
@@ -475,16 +522,27 @@ export const setClubID = (clubID) => {
   };
 };
 
-//!Ventas temporario para DEMO
+//!Ventas
 
-export const getSales = (clubName) => {
+export const getSales = (clubName, clientId) => {
   return async (dispatch) => {
     try {
-      return dispatch({
+      console.log("ID cliente", clientId);
+      const { data } = await axios.get(
+        `${URL_API}/${clubName}/purchasebyclient/${clientId}`
+      );
+      dispatch({
         type: GET_SALES,
+        payload: data,
       });
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        title: "Error",
+        text: `Error al cargar las ventas. ${error.message}`,
+        icon: "error",
+        timer: "3000",
+        confirmButtonColor: "rgb(187, 131, 43)",
+      });
     }
   };
 };
@@ -494,9 +552,7 @@ export const getSales = (clubName) => {
 export const deleteBolicheAdmins = (clubName, id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(
-        `${URL_API}/${clubName}/${id}`
-      );
+      const { data } = await axios.delete(`${URL_API}/${clubName}/${id}`);
       if (data) {
         dispatch({
           type: DELETE_BOLICHE_ADMINS,
@@ -581,9 +637,9 @@ export const selectClientColaboratorName = (collaborator) => {
 
 //! cambio contraseña colaborador
 
-export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
-  console.log(newPassword, clubname, colabname, "data")
-  const endpoint = `${URL_API}/${clubname}/collaborator/${colabname}`;
+export const changeColaboradorPassword = (clubname, colabID, newPassword) => {
+  console.log(newPassword, clubname, colabID, "data");
+  const endpoint = `${URL_API}/${clubname}/collaborator/${colabID}`;
 
   const password = {
     password: newPassword,
@@ -602,11 +658,13 @@ export const changeColaboradorPassword = (clubname, colabname, newPassword) => {
 
 ////////////////////////QR ACTIONS ///////////////////////////
 
-export const acceptOrder = () => {
+export const acceptOrder = (status, clientName, purchaseId,bolicheid) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/:client/collaborator/qr/:uuid/accept`
+        // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
+        `${URL_API}/${clientName}/purchase/status/${bolicheid}/${purchaseId}`,
+        status
       );
       // console.log(data)
       // if (data) {
@@ -623,11 +681,13 @@ export const acceptOrder = () => {
   };
 };
 
-export const rejectOrder = () => {
+export const rejectOrder = (status, clientName, purchaseId,bolicheid) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `${URL_API}/:client/collaborator/qr/:uuid/reject`
+        // `${URL_API}/beerlab/purchase/status/b87f25a2-11b6-4efa-9670-f985125a3e1b`, status);
+        `${URL_API}/${clientName}/purchase/status/${bolicheid}/${purchaseId}`,
+        status
       );
       // console.log(data)
       // if (data) {
@@ -675,6 +735,22 @@ export const getOrderQRCode = () => {
     } catch (error) {
       console.error(error); // Log the error to the console
       window.alert("No se ha creado la orden. " + error.message);
+    }
+  };
+};
+
+export const putImage = (clubName, formData) => {
+  const endpoint = `${URL_API}/${clubName}/image`;
+  console.log(endpoint);
+  return async (dispatch) => {
+    try {
+      console.log("entrando al axios");
+      const { data } = await axios.put(endpoint, formData);
+      console.log("axios correcto");
+      dispatch({ type: PUT_IMAGE, payload: data });
+    } catch (error) {
+      console.log("fallo el axios");
+      console.error(error);
     }
   };
 };

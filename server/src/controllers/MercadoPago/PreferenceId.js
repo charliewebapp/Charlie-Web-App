@@ -1,8 +1,7 @@
 const { Preference, default: MercadoPagoConfig } = require("mercadopago");
 const { Client, Authorizations } = require("../../db");
-const mercadopago = require("mercadopago");
 const { URL_CHARLIE } = process.env;
-
+const mercadopago = require("mercadopago");
 
 const PreferenceId = async (req, res) => {
   try {
@@ -12,29 +11,28 @@ const PreferenceId = async (req, res) => {
       where: { name: clubName },
     });
     const clientId = clientSearched.dataValues.id;
+
     const auth = await Authorizations.findOne({
       where: { ClientId: clientId },
     });
     const token = auth.dataValues.access_token;
-
+    console.log("El token seg Emi es : " + token)
     const client = new MercadoPagoConfig({
       accessToken: token,
     });
 
     const products = req.body.products;
 
-    // console.log(products);
-
-    // const urlDeploy ="https://admin-charlie.onrender.com/";
-
     const body = {
       items: products,
       back_urls: {
         success: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
-        // failure: "https://www.youtube.com",
-        // pending: "https://www.youtube.com",
+        pending: `${URL_CHARLIE}/${clubName}/cart`,
+        failure: `${URL_CHARLIE}/${clubName}/cart`,
+
       },
       notification_url: `${URL_CHARLIE}/${clubName}/orderConfirmation`,
+      auto_return: "approved",
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });

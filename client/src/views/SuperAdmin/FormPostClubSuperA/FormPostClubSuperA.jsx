@@ -8,7 +8,7 @@ import { validateFormPostClub } from "../../../utils/validateFormPostClub";
 import logotype from "../../../assets/img/charlielogo.png";
 import imgCharlie from "../../../assets/img/charlie.png";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { FaFileImage, FaReact } from "react-icons/fa"; // Importa el icono de React
+import { FaFileImage } from "react-icons/fa"; // Importa el icono de React
 
 function FormPostClubSuperA() {
   const navigate = useNavigate();
@@ -19,7 +19,12 @@ function FormPostClubSuperA() {
     city: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "*",
+    image: "*",
+    adress: "*",
+    city: "*",
+  });
 
   const dispatch = useDispatch();
 
@@ -139,6 +144,7 @@ function FormPostClubSuperA() {
                   onChange={handleImageChange}
                   style={fileInputStyle}
                   className={style.buttonStyle}
+                  enctype="multipart/form-data"
                 />
               </label>
 

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getProducts } from "../../../redux/actions";
+import {
+  getProducts,
+  initializeCartFromLocalStorage,
+} from "../../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./Cards.module.css";
 import NavBarUser from "../NavBarUser/NavBarUser";
@@ -15,6 +18,9 @@ function Cards() {
   const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
+    // Cargar el carrito desde localStorage al cargar la página por primera vez
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    dispatch(initializeCartFromLocalStorage(savedCart));
     dispatch(getProducts(clubName));
   }, [clubName, dispatch]);
 
@@ -25,6 +31,21 @@ function Cards() {
   const filteredProducts = allProducts.filter(
     (product) => product.category.toLowerCase() === category.toLowerCase()
   );
+
+  const productsWithAvailableStock = filteredProducts.filter(
+    (product) => product.stock === "available"
+  );
+
+  // Filtrar productos sin stock disponible
+  const productsWithoutAvailableStock = filteredProducts.filter(
+    (product) => product.stock !== "available"
+  );
+
+  // Concatenar los productos con stock disponible seguidos de los productos sin stock disponible
+  const orderedFilteredProducts = [
+    ...productsWithAvailableStock,
+    ...productsWithoutAvailableStock,
+  ];
 
   // Lógica para mostrar solo tres botones a la vez
   const categories = [
@@ -64,6 +85,13 @@ function Cards() {
     0
   );
 
+  function capitalizeFirstLetter(string) {
+    return string
+      .split(" ") // Dividir el string en un array de palabras
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalizar la primera letra de cada palabra
+      .join(" "); // Unir las palabras nuevamente en un string
+  }
+
   return (
     <div className={styles.container}>
       <NavBarUser />
@@ -95,16 +123,18 @@ function Cards() {
           {categories[nextCategoryIndex]}
         </Link>
       </div>
-      {filteredProducts.map((product, index) => (
-        <Card
-          key={index}
-          id={product.id}
-          stock={product.stock}
-          name={product.name.toUpperCase()}
-          price={product.price}
-          description={product.description}
-        />
-      ))}
+      <div className={styles.cardCartContainer}>
+        {orderedFilteredProducts.map((product, index) => (
+          <Card
+            key={index}
+            id={product.id}
+            stock={product.stock}
+            name={capitalizeFirstLetter(product.name)}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
+      </div>
       <div className={styles.cart}>
         <Link to={`/${clubName}/cart`} className={styles.cartLink}>
           <TiShoppingCart size={24} />

@@ -4,9 +4,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center; /* Centra los elementos horizontalmente */
-    border-color: #fccf83 2px solid;
+    border-color: #fccf83 3px solid;
     position: relative; /* Para el posicionamiento absoluto del icono */
     margin: 10px;
+
+    
   }
 
   .tuPedido{
@@ -14,7 +16,139 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: #00121E;
+      background-color: #001625;
+      border: #fccf83 2px solid;
+      border-radius: 25px;
+      width: 100%;
+      margin: 10px;
+  }
+
+  .h1 {
+    color: white;
+    font-style: italic;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0; /* Ajusta el margen derecho */
+    margin-bottom: 20px; /* Añade espacio entre el título y los elementos siguientes */
+    text-transform: uppercase;
+  }
+
+  .pedidoTrash {
+    width: 100%;
+    position: relative; /* Para el posicionamiento absoluto del icono */
+  }
+
+  .trashIcon {
+    color: #fccf83;
+    position: absolute;
+    top: 50%; /* Coloca el ícono en el centro vertical */
+    right: 10px; /* Ajusta el ícono a la derecha */
+    transform: translateY(-50%); /* Centra verticalmente el ícono */
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+ 
+
+  .button {
+    border-radius: 20px;
+    width: 80%;
+    padding: 10px;
+    border: none;
+    margin: 17px;
+    background-color: #43F85E;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #001625;
+  }
+
+  .moreItemContainer{
+      background-color:#005E65;
+      width: 94%;
+      color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      border: none;
+      padding: 5px;
+      border-radius: 13px;
+      height: 40px;
+  }
+
+  .moreItemButton{
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    align-self: center;
+    align-items: center; /* Centrar verticalmente */
+    width: 25%;
+    height: 50%;
+  }
+
+  .buttonItem{
+    background-color: transparent;
+    color:#00F6EC;
+    border: none;
+    padding: 5px;
+    font-size: 50px;
+    font-weight: lighter;
+    
+  }
+  .moreItemText{
+    color:#00F6EC;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    font-weight: lighter;
+    font-size: 20px;
+
+  }
+  .cardCartContainer {
+    max-height: 400px; /* Altura máxima para activar la barra de desplazamiento */
+    min-width: 100%;
+    overflow-y: auto; /* Agrega barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+    margin-left: 5px;
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 6px; /* Borde redondeado del pulgar */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo de la barra de desplazamiento */
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    border-color: #fccf83 3px solid;
+    position: relative; /* Para el posicionamiento absoluto del icono */
+    margin: 10px;
+
+    
+  }
+
+  .tuPedido{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #001625;
       border: #fccf83 2px solid;
       border-radius: 25px;
       width: 100%;
@@ -45,21 +179,84 @@
     margin-right: 10px;
   }
 
-  .storeIcon{
-      color: #fccf83;
-      position: absolute;
-      top: 50%; /* Coloca el ícono en el centro vertical */
-      left: 10px; /* Ajusta el ícono a la derecha */
-      transform: translateY(-50%); /* Centra verticalmente el ícono */
-      cursor: pointer;
-      margin-right: 10px;
-  }
+ 
 
   .button {
     border-radius: 20px;
+    width: 80%;
     padding: 10px;
     border: none;
     margin: 17px;
     background-color: #43F85E;
+    font-size: 22px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
+
+  .moreItemContainer{
+      background-color:#005E65;
+      width: 94%;
+      color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      border: none;
+      padding: 5px;
+      border-radius: 13px;
+      height: 40px;
+  }
+
+  .moreItemButton{
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    align-self: center;
+    align-items: center; /* Centrar verticalmente */
+    width: 25%;
+    height: 50%;
+  }
+
+  .buttonItem{
+    background-color: transparent;
+    color:#00F6EC;
+    border: none;
+    padding: 5px;
+    font-size: 50px;
+    font-weight: lighter;
+    
+  }
+  .moreItemText{
+    color:#00F6EC;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    display: flex;
+    justify-content: right; /* Centrar horizontalmente */
+    font-weight: lighter;
+    font-size: 20px;
+
+  }
+  .cardCartContainer {
+    max-height: 400px; /* Altura máxima para activar la barra de desplazamiento */
+    min-width: 100%;
+    overflow-y: auto; /* Agrega barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+    margin-left: 5px;
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 6px; /* Borde redondeado del pulgar */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo de la barra de desplazamiento */
+  }
+
 }

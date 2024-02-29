@@ -1,7 +1,13 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import FormUpdateProductAdmin from "./views/Admin/FormUpdateProductAdmin/FormUpdateProductAdmin";
 import DashboardAdmin from "./views/Admin/DashboardAdmin/DashboardAdmin";
 import FormPostEmployee from "./views/Admin/FormPostEmployee/FormPostEmployee";
@@ -18,11 +24,9 @@ import FormUpdateClub from "./views/SuperAdmin/FormUpdateClub/FormUpdateClub";
 import Profile from "./views/Users/Profile/Profile";
 
 import ColaboradorNavbar from "./views/Colaborador/colaboradornavbar";
-import DetailQR
-  from "./views/Users/DetailQR/DetailQR";
-import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile"
-import ColaboradorReader from "./views/Colaborador/ColaboradorReader"
-
+import DetailQR from "./views/Users/DetailQR/DetailQR";
+import ColaboradorProfile from "./views/Colaborador/ColaboradorProfile";
+import ColaboradorReader from "./views/Colaborador/ColaboradorReader";
 
 import LoginSuperA from "./views/SuperAdmin/LoginSuperA/LoginSuperA";
 import { handleSAdminStatusLogin } from "./redux/actions";
@@ -30,36 +34,61 @@ import { handleSAdminStatusLogin } from "./redux/actions";
 //no borrar esto
 import FormClubProfile from "./views/Admin/FormClubProfile/FormClubProfile";
 import DashboardAdminConfigSuccess from "./views/Admin/DashboardAdmin/DashboardAdminConfigSuccess";
+import FormUpdateImage from "./views/Admin/FormUpdateImage/FormUpdateImage";
 
-const EMAIL = "charlieapp@gmail.com";
-const PASSWORD = "charlie123";
+const URL_EMAIL = import.meta.env.VITE_EMAIL;
+const URL_PASSWORD = import.meta.env.VITE_PASSWORD;
 
 const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-
   function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      dispatch(handleSAdminStatusLogin());
+    if
+    (userData.password === URL_PASSWORD && userData.email === URL_EMAIL) {
+      dispatch(handleSAdminStatusLogin())
+      localStorage.setItem(
+        "sadminStatusLogin",
+        true);
       navigate("/superadmin/dashboard");
     }
   }
 
-  // useEffect(() => {
-  //   !access && navigate('/superadmin');
-  // }, [access]);
-
-  //!Login ADMIN
-
   const sadminStatusLogin = useSelector((state) => state.sadminStatusLogin);
+  useEffect(() => {
+    localStorage.getItem( "sadminStatusLogin")
+
+   ;
+  }, []);
+
+  // // useEffect(() => {
+  // //   !access && navigate('/superadmin');
+  // // }, [access]);
+
+  // //!Login ADMIN
+
+console.log ("asi es antes de entrar al logion",sadminStatusLogin)
+  //! ///////////////////////////////////////// LOCAL STORAGE /////////////////////////////////////////
+  // useEffect(() => {
+  //   const storedStatus = localStorage.getItem("sadminStatusLogin");
+  //   if (storedStatus) {
+  //     const statusStorage = JSON.parse(storedStatus);
+  //     dispatch(handleSAdminStatusLogin(statusStorage));
+  //   }
+  // }, []);
+
+
+  //! ///////////////////////////////////////////////////////////////////////////////////////////////////
 
   const adminStatusLogin = useSelector((state) => state.adminStatusLogin);
 
-  const colaboradorStatusLogin = useSelector((state) => state.colaboradorStatusLogin);
+  const colaboradorStatusLogin = useSelector(
+    (state) => state.colaboradorStatusLogin
+  );
 
   const requireSAdminLogin = (component) => {
-    return sadminStatusLogin ? component : <Navigate to="/superadmin" />;
+    console.log("el sadminStatus es :" , sadminStatusLogin)
+    return sadminStatusLogin ||  localStorage.getItem("sadminStatusLogin") ? component : <Navigate to="/superadmin" />;
   };
 
   const requireAdminLogin = (component) => {
@@ -71,10 +100,9 @@ const App = () => {
   };
 
   return (
-
     <>
 
-      {location.pathname === "/colaboradorqr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
+      {location.pathname === "/colaborador/qr" || location.pathname === "/colaborador/perfil" ? <ColaboradorNavbar /> : null}
 
       <Routes>
         {/* //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RUTAS SUPERADMIN - agregar SuperA a cada component */}
@@ -145,7 +173,9 @@ const App = () => {
         />
         <Route
           path="/admin/dashboardAdmin/mercadopago-authorization/success"
-          element={requireAdminLogin(<DashboardAdminConfigSuccess location={window.location} />)}
+          element={requireAdminLogin(
+            <DashboardAdminConfigSuccess location={window.location} />
+          )}
         />
         <Route
           path="/admin/:clubName/addproduct"
@@ -179,15 +209,13 @@ const App = () => {
         ...FALTAN DEMAS RUTAS
         
         */}
-
-
-
         <Route path="/qrcode" element={<DetailQR />} />
 
-        <Route path="/colaboradorqr" element={requireColaboradorLogin(<ColaboradorReader />)} />
+        <Route path="/colaborador/qr" element={requireColaboradorLogin(<ColaboradorReader />)} />
 
         <Route path="/colaborador/perfil" element={requireColaboradorLogin(<ColaboradorProfile />)} />
 
+        <Route path="/updateimage" element={requireAdminLogin(<FormUpdateImage />)} />
 
       </Routes>
     </>

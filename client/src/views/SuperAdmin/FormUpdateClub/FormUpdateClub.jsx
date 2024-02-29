@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getBoliches, updateClub } from "../../../redux/actions";
 import { validateFormUpdateClub } from "../../../utils/validateFormUpdateClub";
 import Swal from "sweetalert2";
@@ -12,14 +12,15 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 function FormUpdateClub() {
   const dispatch = useDispatch();
   const [clubData, setClubData] = useState({});
+  const navigate = useNavigate();
 
   const allClubs = useSelector((state) => state.allBoliches);
   const { idClub } = useParams();
 
   const clubToUpdate = allClubs.find((club) => club.id === idClub);
 
-  console.log(clubToUpdate, "clubToUpdate");
-  console.log(idClub, "idClub");
+  // console.log(clubToUpdate, "clubToUpdate");
+  // console.log(idClub, "idClub");
 
   useEffect(() => {
     dispatch(getBoliches());
@@ -39,11 +40,11 @@ function FormUpdateClub() {
   }, [clubToUpdate]);
 
   const [errors, setErrors] = useState({
-    name: "Ingrese el nombre del club",
-    adress: "Ingrese la dirección del club",
-    city: "Ingrese la ciudad del club",
-    country: "Ingrese el país del club",
-    status: "Seleccione el estado del club",
+    name: "*",
+    adress: "*",
+    city: "*",
+    country: "*",
+    status: "*",
   });
 
   const handleChange = (event) => {
@@ -74,6 +75,9 @@ function FormUpdateClub() {
         text: "El club se editó correctamente",
         icon: "success",
         timer: "3000",
+        didClose: () => {
+          navigate("/superadmin/dashboard");
+        },
       });
     } catch (error) {
       console.log(error.message);

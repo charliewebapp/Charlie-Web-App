@@ -24,25 +24,29 @@
   padding: 5px 10px;
   text-decoration: none;
   color: rgb(165, 165, 165);
+  font-size: 20px;
 }
 
 .carrousel{
   font-style: italic;
   text-transform: uppercase;
   padding: 15px;
+  font-size: 20px;
 }
 
 .active {
-  font-weight: bold; /* O cualquier otro estilo que desees para la categoría activa */
   color: #00FDF3;
   font-style: italic;
   text-transform: uppercase;
+  font-size: 20px;
 }
 
 .span{
-  font-style: italic;
+  /* font-style: italic; */
   text-transform: uppercase;
   color: #EEAE44;
+  font-size: 25px;
+  font-weight: lighter;
 }
 
 .cart {
@@ -86,4 +90,138 @@
 }
 
 
+.cardCartContainer {
+  max-height: 430px; /* Altura máxima para activar la barra de desplazamiento */
+  min-width: 100%;
+  overflow-y: auto; /* Agrega barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+}
+
+.cardCartContainer::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+  margin-left: 5px;
+}
+
+.cardCartContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 6px; /* Borde redondeado del pulgar */
+}
+
+.cardCartContainer::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); /* Color de fondo de la barra de desplazamiento */
+}
+
+}
+
+@media only screen and (min-width: 768px) {
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00121E;
+  }
+  
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+    margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+    font-style: italic;
+    text-transform: uppercase;
+  }
+  
+  .button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: rgb(165, 165, 165);
+    font-size: 20px;
+  }
+  
+  .carrousel{
+    font-style: italic;
+    text-transform: uppercase;
+    padding: 15px;
+    font-size: 20px;
+  }
+  
+  .active {
+    color: #00FDF3;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  
+  .span{
+    /* font-style: italic; */
+    text-transform: uppercase;
+    color: #EEAE44;
+    font-size: 25px;
+    font-weight: lighter;
+  }
+  
+  .cart {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
+    border-radius: 25px;
+    background-color:#43F85E;
+    padding: 10px 20px;
+    margin-left: 70%; /* Empuja el contenedor del carrito hacia la derecha */
+    margin-bottom: 15px;
+    margin-right: 75px;
+    overflow-x: auto; /* Permitir desplazamiento horizontal */
+    white-space: nowrap; /* Evitar el retorno de línea */
+  }
+  
+  .cartLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .cartLink:hover {
+    color: #333333; /* Cambiar color al pasar el cursor */
+  }
+  
+  .cartItemCount {
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+  }
+  
+  .cartItemTotalContainer {
+    display: flex;
+    align-items: center;
+    margin-left:4px; /* Ajusta el margen izquierdo según sea necesario */
+  }
+  
+  .cartTotalPrice {
+    font-weight: italic; /* Ajusta el estilo según sea necesario */
+  }
+  
+  
+  .cardCartContainer {
+    max-height: 430px; /* Altura máxima para activar la barra de desplazamiento */
+    min-width: 100%;
+    overflow-y: auto; /* Agrega barra de desplazamiento vertical cuando el contenido excede la altura máxima */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+    margin-left: 5px;
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Color del pulgar de la barra de desplazamiento */
+    border-radius: 6px; /* Borde redondeado del pulgar */
+  }
+  
+  .cardCartContainer::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo de la barra de desplazamiento */
+  }
+  
 }

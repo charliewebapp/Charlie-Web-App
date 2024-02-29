@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "./DashboardAdminConfigSuccess.module.css"
+import style from "./DashboardAdminConfigSuccess.module.css";
 
 const URL_API = import.meta.env.VITE_URL_API;
 
 export default function DashboardAdminConfigSuccess({ location }) {
-  const url_admin = import.meta.env.VITE_URL_ADMIN
+  const url_admin = import.meta.env.VITE_URL_ADMIN;
   const path = localStorage.getItem("pathname");
-  const urlComeBack = `${url_admin}/admin/${path}/dashboardAdmin`
+  const urlComeBack = `${url_admin}/admin/${path}/dashboardAdmin`;
+  const [conection, setConection] = useState(null);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -18,29 +19,61 @@ export default function DashboardAdminConfigSuccess({ location }) {
 
   const exchangeAuthorizationCodeForToken = async (code) => {
     try {
+      console.log("conection: ", conection);
       const { data } = await axios.post(
         `${URL_API}/mercadopago-authorization/success`,
         { code, path }
       );
+      if (data) {
+        setConection(true);
+        console.log("conection: ", conection);
+      }
       console.log("respuesta del back: ", data);
     } catch (error) {
+      setConection(false);
       console.error("Error:", error.request);
     }
   };
 
   const backHome = () => {
-
-    window.location.href = urlComeBack
-  }
+    window.location.href = urlComeBack;
+  };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.navbar}>
-        <h1 className={styles.h1}>DASHBOARD ADMINISTRADOR</h1>
+    <div className={style.container}>
+      <div className={style.navbar}>
+        <h1 className={style.h1}>DASHBOARD ADMINISTRADOR</h1>
       </div>
-      <h2 className={styles.h2}>Su cuenta ha sido conectada correctamente!</h2>
-      <h3 className={styles.h2}>¡Gracias por confiar en Charlie!</h3>
-      <button onClick={backHome} className={styles.button}>Finalizar Conexión</button>
+
+      {conection === true && ( //conexion exitosa
+        <div className={style.dashboard}>
+          <h2 className={style.h2}>
+            Su cuenta ha sido conectada correctamente!
+          </h2>
+          <h3 className={style.h2}>¡Gracias por confiar en Charlie!</h3>
+          <button onClick={backHome} className={style.btnCreate}>
+            Finalizar Conexión
+          </button>
+        </div>
+      )}
+      {conection === false && ( //conexion fallida
+        <div className={style.dashboard}>
+          <h2 className={style.h2}>
+            Ha ocurrido un error al conectar mercadopago!
+          </h2>
+          <h3 className={style.h2}>
+            ¡Intente en un par de minutos nuevamente!
+          </h3>
+          <button onClick={backHome} className={style.btnCreate}>
+            Volver al Home
+          </button>
+        </div>
+      )}
+       {conection === null && ( //conexion fallida
+        <div className={style.dashboard}>
+          <h2>Cargando...</h2>
+        </div>
+      )}
     </div>
   );
 }

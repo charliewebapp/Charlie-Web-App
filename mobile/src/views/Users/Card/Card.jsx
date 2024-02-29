@@ -6,16 +6,14 @@ import {
   removeProductFromCart,
   clearCart,
 } from "../../../redux/actions";
+import { CgMathMinus } from "react-icons/cg";
 
 function Card({ id, name, price, description, cart, setCart, stock }) {
   const cartGlobal = useSelector((state) => state.cart); //El carrito que voy cargando.
   const dispatch = useDispatch();
 
-  // Encontrar el producto correspondiente en el carrito global
   const productInCart = cartGlobal.find((product) => product.id === id);
-  console.log(cartGlobal); //!Se fue estado localll y set cuantity abajo.
 
-  // Si el producto está en el carrito global, obtener su cantidad, de lo contrario, es cero
   const quantity = productInCart ? productInCart.quantity : 0;
 
   const handleIncrement = () => {
@@ -31,42 +29,59 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
   };
 
   return (
-    <div className={styles.container}>
-      {stock === "available" ? (
-        <>
-          <div className={styles.text}>
-            <div className={styles.nameAndPrice}>
-              <div className={styles.name}>
-                <p>{name}</p>
+    <div className={styles.flexContainer}>
+      <div className={styles.quantityContainer}>
+        {Array.from({ length: quantity }).map((_, index) => (
+          <div key={index} className={styles.sphere}></div>
+        ))}
+      </div>
+
+      <div
+        className={styles.container}
+        style={{
+          backgroundColor: stock === "available" ? "#002D46" : "#00111D",
+          border: stock === "available" ? "#63B5B6 2px solid" : "none",
+        }}
+      >
+        {stock === "available" ? (
+          <>
+            <div className={styles.text}>
+              <div className={styles.nameAndPrice}>
+                <div className={styles.name}>
+                  <p>{name}</p>
+                </div>
+                <div className={styles.price}>
+                  <p>$ {price}</p>
+                </div>
               </div>
-              <div className={styles.price}>
-                <p>{price}</p>
+              <div className={styles.description}>
+                <p>{description}</p>
               </div>
             </div>
-            <div className={styles.description}>
-              <p>{description}</p>
+            <div className={styles.buttonSelection}>
+              <button
+                className={styles.subtractButton}
+                onClick={handleDecrement}
+              >
+                <CgMathMinus />
+              </button>
+              {/* <p className={styles.quantity}>{quantity}</p> */}
+              <button className={styles.addButton} onClick={handleIncrement}>
+                +
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className={styles.containerSoldout}>
+            <div className={styles.nameSO}>
+              <p>{name}</p>
+            </div>
+            <div className={styles.descriptionSO}>
+              <p>Sold Out</p>
             </div>
           </div>
-          <div className={styles.buttonSelection}>
-            <button className={styles.subtractButton} onClick={handleDecrement}>
-              -
-            </button>
-            <p className={styles.quantity}>{quantity}</p>
-            <button className={styles.addButton} onClick={handleIncrement}>
-              +
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className={styles.text}>
-          <div className={styles.name}>
-            <p>{name}</p>
-          </div>
-          <div className={styles.description}>
-            <p>Sold Out</p>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

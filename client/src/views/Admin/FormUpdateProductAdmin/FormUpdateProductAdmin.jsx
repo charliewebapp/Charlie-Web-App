@@ -22,7 +22,8 @@ const categories = [
 
 function FormUpdateProductAdmin() {
   const dispatch = useDispatch();
-  const clubName = useSelector((state) => state.selectClientAdmin);
+  const navigate = useNavigate()
+  const clubName = JSON.parse((localStorage.getItem("clientName")));
   const allProductsState = useSelector((state) => state.allProducts);
 
   //Traer data del producto a editar
@@ -36,8 +37,8 @@ function FormUpdateProductAdmin() {
     image: productToUpdate.image,
     description: productToUpdate.description,
     price: productToUpdate.price,
-    stock: productToUpdate.stock,
-    category: productToUpdate.category,
+    stock: productToUpdate.stock || "",
+    category: productToUpdate.category || "",
   });
 
   //para verificar nombre no repetidos salvo producto a editar
@@ -52,8 +53,8 @@ function FormUpdateProductAdmin() {
     image: "",
     description: "",
     price: "",
-    stock: "Seleccione el stock",
-    category: "Seleccione una categoría",
+    stock: "*",
+    category: "*",
   });
 
   //onChange inputs
@@ -96,6 +97,9 @@ function FormUpdateProductAdmin() {
         icon: "success",
         timer: "3000",
         confirmButtonColor: "rgb(187, 131, 43)",
+        didClose: () => {
+          navigate(`/admin/${clubName}/dashboardAdmin`);
+        },
       });
     } catch (error) {
       //El sweet de error viene de actions
@@ -113,7 +117,7 @@ function FormUpdateProductAdmin() {
             CHARLIE
           </div>
           <div className={style.buttones}>
-            <Link to={`/admin/test/dashboardAdmin`}>
+            <Link to={`/admin/${clubName}/dashboardAdmin`}>
               <button className={style.button}>
                 <FaArrowLeft />
               </button>
