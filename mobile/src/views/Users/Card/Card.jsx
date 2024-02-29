@@ -12,10 +12,8 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
   const cartGlobal = useSelector((state) => state.cart); //El carrito que voy cargando.
   const dispatch = useDispatch();
 
-  // Encontrar el producto correspondiente en el carrito global
   const productInCart = cartGlobal.find((product) => product.id === id);
 
-  // Si el producto está en el carrito global, obtener su cantidad, de lo contrario, es cero
   const quantity = productInCart ? productInCart.quantity : 0;
 
   const handleIncrement = () => {
