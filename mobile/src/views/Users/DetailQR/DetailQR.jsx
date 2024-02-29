@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getDetailQrCode } from "../../../redux/actions";
 import style from "./detailqr.module.css";
+import { GiShoppingCart } from "react-icons/gi";
 
 function DetailQR() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,9 +13,8 @@ function DetailQR() {
   const detail = useSelector((state) => state.detailQrCode);
   const cartArray = useSelector((state) => state.orderqrdata);
 
-
   console.log(cartArray, "cartArray en DQR");
-  console.log(detail, "detail en DQR")
+  console.log(detail, "detail en DQR");
 
   // console.log(cartArray[0].cart, "cartArray[0] en DQR")
 
@@ -45,7 +45,7 @@ function DetailQR() {
       id: cartArray[0].id,
     };
 
-    console.log(mappedData, "mappedData")
+    console.log(mappedData, "mappedData");
 
     cartString = JSON.stringify([mappedData]);
   } else if (detail) {
@@ -83,23 +83,43 @@ function DetailQR() {
         <>
           <h1 className={style.h1}>Detalle de la orden</h1>
           <h2 className={style.h2}>Acercate a la barra con tu codigo</h2>
+          <button
+            className={style.buttonCart}
+            onClick={() => openModal(cartArray[0].cart)}
+          >
+            <GiShoppingCart className={style.icon} />{" "}
+            {cartArray[0].cart.reduce(
+              (total, item) => total + item.quantity,
+              0
+            )}
+            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${cartArray[0].amount}
+          </button>
+          <br />
           <div style={{ background: "white", padding: "16px" }}>
             <QRCode value={cartString} />
           </div>
+          <br />
           {/* Button to open the modal */}
-          <button onClick={() => openModal(cartArray)}>Ver productos</button>
         </>
-      )
-        : detail ? (
-          <>
-            <div style={{ background: "white", padding: "16px" }}>
-              <QRCode value={cartString2} />
-            </div>
-            {/* Button to open the modal */}
-            <button onClick={() => openModal(detail[0].cart)}>Ver productos</button>
-
-          </>
-        ) : null}
+      ) : detail ? (
+        <>
+          <br />
+          <button
+            className={style.buttonCart}
+            onClick={() => openModal(detail[0].cart)}
+          >
+            <GiShoppingCart className={style.icon} />{" "}
+            {detail[0].cart.reduce((total, item) => total + item.quantity, 0)}
+            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${detail[0].amount}
+          </button>
+          <br />
+          <div className={style.qrCode}>
+            <QRCode className={style.qrCodeinterno} value={cartString2} />
+          </div>
+          <br />
+          {/* Button to open the modal */}
+        </>
+      ) : null}
 
       <Modal
         isOpen={modalIsOpen}
@@ -118,7 +138,6 @@ function DetailQR() {
         <h2 className={style.h2}>Productos en la orden</h2>
         {modalProducts.map((order, i) => (
           <div key={i} className={style.orderContainer}>
-
             {Array.isArray(order.cart) && order.cart.length > 0 ? (
               order.cart.map((product, j) => (
                 <div key={j} className={style.productInfo}>
@@ -135,15 +154,11 @@ function DetailQR() {
             ) : (
               <div className={style.productInfo}>
                 <div className={style.productName}>
-                  <span className={style.h5}>
-                    {order.name}&nbsp;
-                  </span>
+                  <span className={style.h5}>{order.name}&nbsp;</span>
                   <span className={style.h5}>x {order.quantity}</span>
                 </div>
                 <div className={style.productPrice}>
-                  <span className={style.h5}>
-                    $ {order.price}
-                  </span>
+                  <span className={style.h5}>$ {order.price}</span>
                 </div>
               </div>
             )}

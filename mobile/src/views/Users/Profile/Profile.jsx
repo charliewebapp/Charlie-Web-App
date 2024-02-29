@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getDetailQrCode, getAllOrders } from "../../../redux/actions";
-import OrderDetail from "./OrderDetail";
+import { BsQrCode } from "react-icons/bs";
 
 function Profile() {
   const { clubName } = useParams();
@@ -116,99 +116,74 @@ function Profile() {
     //!pasar el id de la orden
   };
 
-  // const historyHarc = [
-  //   {
-  //     ClientId: "87d03f75-42d5-4279-8228-926f6f79c8c5",
-  //     UserId: "auth0|65cfa8efa259fd3e778d8e3a",
-  //     amount: 80,
-  //     cart: [
-  //       {
-  //         id: "7477daa0-7a68-4607-9109-9b9ec5e9a98c",
-  //         name: "RON",
-  //         price: 10,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "42c38886-f827-4bf4-9ebd-fabaccf95b6e",
-  //         name: "TEQUILA",
-  //         price: 12,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "1ef8cb11-844b-4dca-9270-dd339d790ccb",
-  //         name: "QUILMES",
-  //         price: 5,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "243cc08d-1081-4af7-b6c7-b9316a126a85",
-  //         name: "VODKA",
-  //         price: 7,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "1587ea1e-fa18-48c2-8813-771f9d532e64",
-  //         name: "MALBEC",
-  //         price: 6,
-  //         quantity: 2,
-  //       },
-  //     ],
-  //     dateTime: "2024-02-19T18:15:28.080Z",
-  //     id: "9a127436-c95b-4c3a-a00c-3a62899a4bed",
-  //     paymentId: "72725009048",
-  //     status: "pending",
-  //   },
-  //   {
-  //     ClientId: "87d03f75-42d5-4279-8228-926f6f79c8c5",
-  //     UserId: "auth0|65cfa8efa259fd3e778d8e3a",
-  //     amount: 120,
-  //     cart: [
-  //       {
-  //         id: "7477daa0-7a68-4607-9109-9b9ec5e9a98c",
-  //         name: "RON",
-  //         price: 10,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "42c38886-f827-4bf4-9ebd-fabaccf95b6e",
-  //         name: "TEQUILA",
-  //         price: 12,
-  //         quantity: 2,
-  //       },
-  //       {
-  //         id: "1ef8cb11-844b-4dca-9270-dd339d790ccb",
-  //         name: "QUILMES",
-  //         price: 5,
-  //         quantity: 2,
-  //       },
-  //     ],
-  //     dateTime: "2024-02-19T18:15:28.080Z",
-  //     id: "9a127436-c95b-4c3a-a00c-3a62899a4b55",
-  //     paymentId: "72725009095",
-  //     status: "pending",
-  //   },
-  // ];
-
+  console.log(allOrders, "allOrders");
   return (
     <div className={styles.Profile}>
       <NavBarUser></NavBarUser>
 
       <div className={styles.profileContainer}>
         {isLoading ? <div>Loading...</div> : null}
-        <h2>HISTORIAL DE PEDIDOS </h2>
+        <h2 className={styles.title}>HISTORIAL DE PEDIDOS </h2>
 
         <div className={styles.scroll}>
           {allOrders.map((item) => (
-            <div key={item.id}>
-              <p>Fecha: {formatDateTime(item.dateTime)}</p>
+            <div
+              className={`${styles.history} ${
+                styles[item.status.toLowerCase()]
+              }`}
+              value={item.status}
+              key={item.id}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div className={styles.cartHistory}>
+                <div className={styles.cartHistoryleft}>
+                  <span>
+                    {item.cart.reduce(
+                      (total, product) => total + product.quantity,
+                      0
+                    )}
+                    &nbsp; unidades{" "}
+                  </span>
+                  <span className={styles.total}>${item.amount}</span>
+                </div>
 
-              <button onClick={() => renderQr(item.paymentId)}>
-                Ver Detalle de Compra
-              </button>
+                <div className={styles.cartHistoryCenter}>
+                  <span>Estado</span>
+                  <span className={styles.estado}>
+                    {item.status === "approved"
+                      ? "Entregado"
+                      : item.status === "rejected"
+                      ? "Rechazado"
+                      : item.status === "pending"
+                      ? "Pagado"
+                      : "Estado Desconocido"}
+                  </span>
+                </div>
+                {(item.status === "rejected" || item.status === "approved") && (
+                  <div className={styles.cartHistoryright}>
+                    <span>Hora</span>
+                    <span className={styles.hora}>
+                      {new Date(item.dateTime).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                )}
+
+                {item.status === "pending" && (
+                  <button
+                    className={styles.button}
+                    onClick={() => renderQr(item.paymentId)}
+                    style={{ marginRight: "10px" }} // Ajusta el margen a tu gusto
+                  >
+                    <BsQrCode className={styles.icon} />
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
-
       </div>
       <button
         className={styles.profileButton}
