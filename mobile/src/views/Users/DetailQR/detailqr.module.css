@@ -84,7 +84,6 @@
 }
 
 .orderContainer {
-
 }
 
 .productInfo {
@@ -117,4 +116,50 @@
 }
 .h2 {
   width: 80%;
+}
+
+.buttonCart {
+  background-color: #eeae44;
+  color: #000000;
+  border: none;
+
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* align-content: center; */
+  align-items: center;
+  gap: 10px;
+  height: 35px;
+  width: 160px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  padding: 1px;
+  width: 34.84px;
+  height: 38px;
+  font-weight: bold;
+}
+
+.qrCode {
+  border-radius: 15px;
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.qrCodeinterno {
+  height: 200px;
+  width: 200px;
 }

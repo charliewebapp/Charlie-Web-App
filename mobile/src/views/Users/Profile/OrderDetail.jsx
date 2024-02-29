@@ -20,9 +20,9 @@ function OrderDetail() {
   console.log(detail, "detail en OD");
   // console.log(cart[0].paymentId, "paymentId en OD");
 
-  let paymentId
+  let paymentId;
   useEffect(() => {
-    dispatch
+    dispatch;
     if (cart && cart.length > 0) {
       paymentId = cart[0].paymentId;
     }
@@ -35,16 +35,16 @@ function OrderDetail() {
     return () => clearInterval(intervalId);
   }, [cart]);
 
-
   return (
     <div className="container">
-      {(cart.length > 0 && cart[0].status === "pending" || detail.length > 0 && detail[0].status === "pending") ? (
+      {(cart.length > 0 && cart[0].status === "pending") ||
+      (detail.length > 0 && detail[0].status === "pending") ? (
         <>
           <DetailQR />
         </>
       ) : cart.length > 0 && cart[0].status === "rejected" ? (
         <>
-          <OrderRejected />
+          <OrderRejected className={style.OrderRejected} />
         </>
       ) : cart.length > 0 && cart[0].status === "approved" ? (
         <>
