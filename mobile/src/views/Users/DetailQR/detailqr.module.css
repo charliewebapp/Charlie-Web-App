@@ -5,10 +5,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-color: #fccf83 3px solid;
+    border: #fccf83 3px solid;
     position: relative;
-    margin: 80px 10px 10px 10px;
+    margin: 80px 10px 10px;
     background-color: #001625;
+    border-radius: 32px;
+    width: 280px;
   }
 
   .h1 {
@@ -79,12 +81,13 @@
 
 .modalContainer {
   font-family: Arial, sans-serif;
-  width: 70%; /* Ajusta el ancho del modal al 70% de la pantalla */
-  margin: 0 auto; /* Centra el modal horizontalmente */
+  width: 70%;
+  /* Ajusta el ancho del modal al 70% de la pantalla */
+  margin: 0 auto;
+  /* Centra el modal horizontalmente */
 }
 
-.orderContainer {
-}
+.orderContainer {}
 
 .productInfo {
   display: flex;
@@ -106,7 +109,8 @@
 }
 
 .productPrice {
-  color: #09fee2; /* Azul cielo */
+  color: #09fee2;
+  /* Azul cielo */
   /* font-size: 25px; */
   margin: 0;
 }
@@ -114,6 +118,7 @@
 .h5 {
   margin: 0;
 }
+
 .h2 {
   width: 80%;
 }

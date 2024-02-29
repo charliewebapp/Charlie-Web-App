@@ -36,9 +36,8 @@ function OrderDetail() {
   }, [cart]);
 
   return (
-    <div className="container">
-      {(cart.length > 0 && cart[0].status === "pending") ||
-      (detail.length > 0 && detail[0].status === "pending") ? (
+    <div className={style.containerOD}>
+      {(cart.length > 0 && cart[0].status === "pending" || detail.length > 0 && detail[0].status === "pending") ? (
         <>
           <DetailQR />
         </>
