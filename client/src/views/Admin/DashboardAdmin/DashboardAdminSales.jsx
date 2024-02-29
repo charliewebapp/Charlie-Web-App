@@ -177,39 +177,41 @@ function DashboardAdminSales() {
           <DataGrid rows={rows} columns={columns} autoPageSize rowHeight={40} />
         </div>
         {selectedSale && (
-          <div className={style.Detail}>
-            <h3 className={style.h3}>Detalle de la venta</h3>
-            <ul className={style.ul}>
-              {selectedSale.cart.map((product) => (
-                <li
-                  className={style.li}
-                  key={product.id}
-                  style={{ marginBottom: "10px" }}
-                >
-                  {" "}
-                  {/* Agrega un margen inferior */}
-                  {product.name}
-                  <div>
-                    <p className={style.p}>
-                      Cantidad {product.quantity} - Precio unitario $
-                      {product.price}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <p className={style.total}>
-              Total: ${calculateTotal(selectedSale.cart)}
-            </p>
-
-            <button
-              className={style.buttonClose}
-              onClick={() => setSelectedSale(null)}
-            >
-              Cerrar
-            </button>
+          <div className={style.DetailContainerSales}>
+            <div className={style.Detail}>
+              <h3 className={style.h3}>Detalle de la venta</h3>
+              <p className={style.total}>
+                Total: ${calculateTotal(selectedSale.cart)}
+              </p>
+              <ul className={style.ul}>
+                {selectedSale.cart.map((product) => (
+                  <li
+                    className={style.li}
+                    key={product.id}
+                    style={{ marginBottom: "10px" }}
+                  >
+                    {" "}
+                    {/* Agrega un margen inferior */}
+                    {product.name}
+                    <div>
+                      <p className={style.p}>
+                        Cantidad {product.quantity} - Precio unitario $
+                        {product.price}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
+
+        <button
+          className={style.buttonClose}
+          onClick={() => setSelectedSale(null)}
+        >
+          Cerrar
+        </button>
       </div>
     </>
   );
