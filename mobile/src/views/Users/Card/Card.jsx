@@ -32,11 +32,11 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
 
   return (
     <div className={styles.flexContainer}>
-      {/* <div className={styles.quantityContainer}>
+      <div className={styles.quantityContainer}>
         {Array.from({ length: quantity }).map((_, index) => (
           <div key={index} className={styles.sphere}></div>
         ))}
-      </div> */}
+      </div>
 
       <div
         className={styles.container}
@@ -67,7 +67,7 @@ function Card({ id, name, price, description, cart, setCart, stock }) {
               >
                 <CgMathMinus />
               </button>
-              <p className={styles.quantity}>{quantity}</p>
+              {/* <p className={styles.quantity}>{quantity}</p> */}
               <button className={styles.addButton} onClick={handleIncrement}>
                 +
               </button>
