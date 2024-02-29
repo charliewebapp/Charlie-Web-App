@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import DetailQR from "../DetailQR/DetailQR";
 import OrderRejected from "./OrderRejected";
+import OrderApproved from "./OrderApproved";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrderQRCode, getDetailQrCode } from "../../../redux/actions";
@@ -44,6 +45,10 @@ function OrderDetail() {
       ) : cart.length > 0 && cart[0].status === "rejected" ? (
         <>
           <OrderRejected />
+        </>
+      ) : cart.length > 0 && cart[0].status === "approved" ? (
+        <>
+          <OrderApproved />
         </>
       ) : detail.length > 0 && detail[0].status === "rejected" ? (
         <>
