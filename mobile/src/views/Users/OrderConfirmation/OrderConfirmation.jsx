@@ -101,40 +101,6 @@ const OrderConfirmation = () => {
     //aca escribir la funcion del qr
   }, []);
 
-  // const orders = [
-
-  //     {
-  //         id: "c91c7694-76ab-4c56-b57d-d4607651a36b",
-  //         productname: "fernet",
-  //         quantity: 2,
-  //         price: 3500,
-  //         idMP: "484698956"
-  //     },
-  //     {
-  //         id: "e83f9f32-7bf4-4f8d-97e7-255779561b58",
-  //         productname: "birra",
-  //         quantity: 2,
-  //         price: 3500,
-  //         idMP: "484698956"
-  //     },
-  //     {
-  //         id: "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
-  //         productname: "guaro",
-  //         quantity: 2,
-  //         price: 3500,
-  //         idMP: "484698956"
-  //     },
-  // ]
-
-  // {
-  //     totalPrice: 10500,
-  //     ClientId: "0db15a91-5308-4fe3-8a28-4083507a75af",
-  //     UserId: "facebook|10231414652610252",
-  // }
-
-  // useEffect(() => {
-  //     dispatch(postOrderInDB(orders, idMP, client));
-  // }, [dispatch, orders]);
 
   return (
     <div className={styles.container}>
@@ -154,9 +120,8 @@ const OrderConfirmation = () => {
           <p>Estado: {status(purchaseData.status)}</p>
           <h5> Número de transacción: {purchaseData.paymentId}</h5>
           <Link to="/orderdetail">
-            <button>Generar mi QR</button>
+            <button className={styles.button}>Generar mi QR</button>
           </Link>
-          <button className={styles.button}>Volver a home</button>
         </div>
       ) : (
         <p>Cargando...</p>
