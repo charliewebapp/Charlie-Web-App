@@ -9,6 +9,14 @@
   font-style: italic;
 }
 
+.DetailContainerSales {
+  max-height: 270px; /* Altura máxima para el contenedor de detalle */
+  overflow-y: auto; /* Agrega scroll vertical si el contenido es demasiado largo */
+  padding-right: 20px; /* Agrega un relleno derecho para compensar el scroll */
+  margin-top: 20px;
+  margin-left: 35px;
+}
+
 .container {
   background: rgb(0, 255, 76);
   background: rgb(0, 255, 76);
@@ -30,6 +38,7 @@
   font-style: italic;
   font-weight: lighter;
   margin-bottom: 10px;
+
 }
 
 .buttonClose:hover {

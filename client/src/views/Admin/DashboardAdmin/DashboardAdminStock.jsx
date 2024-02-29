@@ -161,7 +161,7 @@ import style from "../../SuperAdmin/DashboardSuperA/dashboard.module.css";
 
 function DashboardAdminStock() {
   const dispatch = useDispatch();
-  const clubName =JSON.parse((localStorage.getItem("clientName")));
+  const clubName = JSON.parse(localStorage.getItem("clientName"));
 
   const [productToDelete, setProductToDelete] = useState(null);
 
@@ -173,23 +173,26 @@ function DashboardAdminStock() {
 
   const rows = allProductsState
     ? allProductsState.map((prod) => {
+        const stockStatus =
+          prod.stock === "notavailable" ? "No disponible" : "Disponible";
+
         return {
           id: prod.id,
           name: prod.name.toUpperCase(),
           brand: prod.brand.toUpperCase(),
           description: prod.description,
-          price: prod.price,
-          stock: prod.stock,
+          price: ` $${prod.price}`,
+          stock: stockStatus,
           category: prod.category,
         };
       })
     : [];
 
   const columns = [
-    { field: "name", headerName: "Nombre", width: 150 },
-    { field: "description", headerName: "Descripción", width: 220 },
-    { field: "price", headerName: "Precio", width: 100 },
-    { field: "stock", headerName: "Stock", width: 100 },
+    { field: "name", headerName: "Nombre", width: 140 },
+    { field: "description", headerName: "Descripción", width: 210 },
+    { field: "price", headerName: "Precio", width: 80 },
+    { field: "stock", headerName: "Stock", width: 120 },
     { field: "category", headerName: "Categoría", width: 120 },
     {
       field: "actions",
