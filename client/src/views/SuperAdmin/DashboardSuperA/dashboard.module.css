@@ -670,10 +670,12 @@
 
 .charlie {
   font-style: italic;
-  background: linear-gradient(320deg,
-      rgba(56, 0, 54, 1) 0%,
-      rgba(109, 25, 106, 1) 51%,
-      rgba(173, 54, 169, 1) 100%);
+  background: linear-gradient(
+    320deg,
+    rgba(56, 0, 54, 1) 0%,
+    rgba(109, 25, 106, 1) 51%,
+    rgba(173, 54, 169, 1) 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   /* Para compatibilidad con navegadores basados en Webkit */
@@ -719,10 +721,12 @@
 
 .bgBienvenida span {
   font-style: italic;
-  background: linear-gradient(320deg,
-      rgba(56, 0, 54, 1) 0%,
-      rgba(109, 25, 106, 1) 51%,
-      rgba(173, 54, 169, 1) 100%);
+  background: linear-gradient(
+    320deg,
+    rgba(56, 0, 54, 1) 0%,
+    rgba(109, 25, 106, 1) 51%,
+    rgba(173, 54, 169, 1) 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   /* Para compatibilidad con navegadores basados en Webkit */
@@ -1063,13 +1067,6 @@
   gap: 10px;
 }
 
-
-
-
-
-
-
-
 .btnColabRefresh {
   color: #fff !important;
   font-size: 14px !important;
@@ -1101,18 +1098,29 @@
 
 .productsContainer {
   width: 100%;
-  min-height: 300px;
   justify-content: center;
   display: flex;
   align-content: center;
   align-items: center;
   padding: 5px;
+  border-bottom: 1px solid rgb(180, 180, 180);
+  gap: 20px;
+}
+
+.productsContainer p {
+  margin: 0;
 }
 
 .products {
   font-size: 18px;
+  color: #380036;
+  font-weight: bolder;
 }
 
+.products:first-child {
+  color: #000000;
+  font-weight: 500;
+}
 /*  //? ///////////////////////// LOGIN COLABORADOR STYLES ///////////////////////////////////////  */
 .containerColab {
   width: 100%;
